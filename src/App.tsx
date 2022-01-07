@@ -1,14 +1,28 @@
-import React from 'react';
 import './App.css';
-import { Button } from '@mui/material';
+import {
+  Button,
+  createTheme,
+  ThemeProvider,
+} from '@mui/material';
+
+import Header from './components/Header';
 
 const App = () => {
+  const theme = createTheme({
+    palette: {
+      mode: 'light',
+    },
+  });
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <Button variant="contained" color="success">Wallet Connect</Button> 
-      </header>
-    </div>
+    <ThemeProvider theme={theme}>
+      <Header />
+      <div className="App">
+        <header className="App-header">
+          <Button variant="contained" color="secondary">Wallet Connect</Button>
+        </header>
+      </div>
+    </ThemeProvider>
   );
 }
 
