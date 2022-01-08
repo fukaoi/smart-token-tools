@@ -5,7 +5,7 @@ import {makeStyles} from '@mui/styles';
 import Header from './components/Header';
 import Token from './pages/Token';
 import WellComeMessage from './components/WellComeMessage';
-
+import UsageGuide from './components/UsageGuide';
 import backImage from './assets/background-image.jpg';
 
 const useStyles = makeStyles({
@@ -47,6 +47,7 @@ const App = () => {
           ? <Token />
           : <div>
             <WellComeMessage />
+            <UsageGuide />
             <Button
               variant='contained'
               size='large'
