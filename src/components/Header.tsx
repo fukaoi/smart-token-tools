@@ -16,7 +16,7 @@ const Header = () => {
             {pages.map((page) => (
               <Button
                 key={page}
-                sx={{color: 'black'}}
+                sx={{my:1, color: 'black'}}
               >
                 {page}
               </Button>

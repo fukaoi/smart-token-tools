@@ -6,6 +6,7 @@ import {
 
 import Header from './components/Header';
 import Token from './pages/Token';
+import WellComeMessage from './components/WellComeMessage';
 
 
 const App = () => {
@@ -21,13 +22,17 @@ const App = () => {
       <main className='App-main'>
         {content == 'Token'
           ? <Token />
-          : <Button
-            variant='contained'
-            size='large'
-            color='secondary'
-            onClick={callWalletAdapter} >
-            Wallet Connect
-          </Button>
+          :
+          <div>
+            <WellComeMessage />
+            <Button
+              variant='contained'
+              size='large'
+              color='secondary'
+              onClick={callWalletAdapter} >
+              Wallet Connect
+            </Button>
+          </div>
         }
       </main>
     </div>
