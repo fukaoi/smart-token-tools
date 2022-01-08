@@ -20,7 +20,9 @@ const Header = () => {
       <Toolbar>
         <Grid container>
           <Grid item xs={2}>
-            <img src={headerLogo} />
+            <a href='https://atonoy.co'>
+              <img src={headerLogo} />
+            </a>
           </Grid>
           <Grid item xs={7}>
           </Grid>
