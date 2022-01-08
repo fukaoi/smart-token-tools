@@ -1,9 +1,20 @@
-import {AppBar, Toolbar, Grid} from '@mui/material';
+import {AppBar, Toolbar, Grid, Box} from '@mui/material';
 import Button from '@mui/material/Button';
+import {Twitter, TokenOutlined, PaidOutlined} from '@mui/icons-material';
 import headerLogo from '../assets/atonoy-logo.png';
+import {makeStyles} from '@mui/styles';
 
-const pages = ['Token', 'NFT', 'Contact'];
+const useStyles = makeStyles({
+  horizontal: {
+    marginTop: '0px',
+    display: 'flex',
+    alignItems: 'center',
+    flexWrap: 'wrap',
+  }
+});
+
 const Header = () => {
+  const styles = useStyles();
   return (
     <AppBar position='static' color='transparent'>
       <Toolbar>
@@ -14,14 +25,28 @@ const Header = () => {
           <Grid item xs={7}>
           </Grid>
           <Grid item xs={3}>
-            {pages.map((page) => (
+            <div className={styles.horizontal} >
+              <PaidOutlined />
               <Button
-                key={page}
-                sx={{my:1, color: 'black'}}
-              >
-                {page}
+                key='Token'
+                sx={{my: 1, color: 'black'}}
+              >Token
               </Button>
-            ))}
+              <Box sx={{m: 1}} />
+              <TokenOutlined />
+              <Button
+                key='NFT'
+                sx={{my: 1, color: 'black', minWidth: '10px'}}
+              >NFT
+              </Button>
+              <Box sx={{m: 1}} />
+              <Twitter />
+              <Button
+                key='Contact'
+                sx={{my: 1, color: 'black'}}
+              >Contact
+              </Button>
+            </div>
           </Grid>
         </Grid>
       </Toolbar>

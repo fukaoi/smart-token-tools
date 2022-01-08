@@ -51,8 +51,9 @@ const App = () => {
               variant='contained'
               size='large'
               color='secondary'
-              onClick={callWalletAdapter} >
-              Wallet Connect
+              style={{maxWidth: '250px', maxHeight: '50px', minWidth: '250px', minHeight: '50px'}}
+              onClick={callWalletAdapter} 
+            >Wallet Connect
             </Button>
           </div>
         }
