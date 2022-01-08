@@ -54,7 +54,7 @@ const App = () => {
               color='secondary'
               style={{maxWidth: '250px', maxHeight: '50px', minWidth: '250px', minHeight: '50px'}}
               onClick={callWalletAdapter} 
-            >Wallet Connect
+            >Create start
             </Button>
           </div>
         }
