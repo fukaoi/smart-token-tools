@@ -2,7 +2,7 @@
   text-align: center;
 }
 
-.App-header {
+.App-main {
   background-size: cover;
   background-image: url('./assets/background-image.jpg');
   min-height: 100vh;
@@ -14,7 +14,6 @@
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.Header-logo {
+  content: url('./assets/atonoy-logo.png');
 }
-
