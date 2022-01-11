@@ -12,14 +12,13 @@ import PhantomMarkLogo from '../assets/phantom-logo-mark.png'
 
 const useStyles = makeStyles({
   cardMedia: {
-    height: '80px',
-    width: '80px',
     textAlign: 'center',
   },
   cardContainer: {
     position: 'relative',
-    top: '5em',
+    top: '7em',
     maxWidth: 350,
+    height: '300px',
   },
 });
 
@@ -61,7 +60,6 @@ const UsageGuide = () => {
               Need2. Get Atonoy subscription token
             </Typography>
             <Typography variant="body2" color="text.secondary">
-              Lizards are a widespread group of squamate reptiles, with over 6,000
               Lizards are a widespread group of squamate reptiles, with over 6,000
             </Typography>
           </CardContent>
