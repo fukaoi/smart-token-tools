@@ -1,11 +1,9 @@
 import {useState} from 'react';
-import {Button} from '@mui/material';
 import {makeStyles} from '@mui/styles';
 
 import Header from './components/Header';
 import Token from './pages/Token';
-import WellComeMessage from './components/WellComeMessage';
-import UsageGuide from './components/UsageGuide';
+import Top from './pages/Top';
 import backImage from './assets/background-image.jpg';
 
 const useStyles = makeStyles({
@@ -37,21 +35,7 @@ const App = () => {
     <div className={styles.app}>
       <Header />
       <main className={styles.appMain}>
-        {content == 'Token'
-          ? <Token />
-          : <div>
-            <WellComeMessage />
-            <UsageGuide />
-            <Button
-              variant='contained'
-              size='large'
-              color='secondary'
-              style={{maxWidth: '250px', maxHeight: '50px', minWidth: '250px', minHeight: '50px'}}
-              onClick={callWalletAdapter} 
-            >Create start
-            </Button>
-          </div>
-        }
+        {content == 'Token' ? <Token /> : <Top parentFunc={callWalletAdapter} />}
       </main>
     </div>
   );
