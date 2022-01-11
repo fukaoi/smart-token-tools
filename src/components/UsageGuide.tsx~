@@ -7,19 +7,18 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import {Grid} from '@mui/material';
 
-import AtonoyMarkLogo from '../assets/atonoy-logo-mark.png';
-import PhantomMarkLogo from '../assets/phantom-logo-mark.png'
+import AtonoyMarkLogo from '../assets/atonoy-mark-logo.svg';
 
 const useStyles = makeStyles({
   cardMedia: {
-    height: '80px',
-    width: '80px',
-    textAlign: 'center',
+    height: '100px',
+    width: '150px'
   },
   cardContainer: {
     position: 'relative',
     top: '5em',
     maxWidth: 350,
+    alignItems: 'center'
   },
 });
 
@@ -33,7 +32,7 @@ const UsageGuide = () => {
           <CardMedia
             className={styles.cardMedia}
             component="img"
-            image={PhantomMarkLogo} />
+            image="https://phantom.app/img/phantom-logo.svg" />
           <CardContent>
             <Typography gutterBottom variant="h5" component="div">
               Need1. Install wallet
