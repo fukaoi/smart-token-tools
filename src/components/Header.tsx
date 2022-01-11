@@ -10,7 +10,13 @@ const useStyles = makeStyles({
     display: 'flex',
     alignItems: 'center',
     flexWrap: 'wrap',
-  }
+  },
+  logo: {
+    marginTop: '5px',
+    marginLeft: '-4em',
+    width: '180px',
+    height: '40px'
+  } 
 });
 
 const Header = () => {
@@ -21,7 +27,7 @@ const Header = () => {
         <Grid container>
           <Grid item xs={2}>
             <a href='https://atonoy.co'>
-              <img src={headerLogo} />
+              <img src={headerLogo} className={styles.logo} />
             </a>
           </Grid>
           <Grid item xs={7}>

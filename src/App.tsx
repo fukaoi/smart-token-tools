@@ -11,12 +11,6 @@ import backImage from './assets/background-image.jpg';
 const useStyles = makeStyles({
   app: {
     textAlign: 'center',
-    margin: 0,
-    fontFamily: `-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 
-    'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif`,
-    '-webkit-font-smoothing': 'antialiased',
-    '-moz-osx-font-smoothing': 'grayscale',
   },
   appMain: {
     backgroundSize: 'cover',
