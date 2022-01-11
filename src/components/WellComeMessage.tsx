@@ -4,7 +4,9 @@ import titleLogo from '../assets/title-logo.png';
 
 const useStyles = makeStyles({
   message: {
-    marginBottom: '15em',
+    position: 'relative',
+    top: '3em',
+    marginBottom: '1em',
   },
   wellCome: {
     fontSize: '1.8em',

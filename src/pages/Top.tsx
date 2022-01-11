@@ -1,11 +1,23 @@
 import {FC} from 'react';
-
+import {makeStyles} from '@mui/styles';
 import Button from '@mui/material/Button';
 import WellComeMessage from '../components/WellComeMessage';
 import UsageGuide from '../components/UsageGuide';
 
+const useStyles = makeStyles({
+  button: {
+    maxWidth: '250px',
+    minidth: '250px',
+    maxHeight: '50px',
+    minHeight: '50px',
+    position: 'relative',
+    top: '20em',
+    marginBottom: '1em',
+  },
+});
 
 const Top: FC<{parentFunc: () => void}> = ({parentFunc}) => {
+  const styles = useStyles();
   return (
     <div>
       <WellComeMessage />
@@ -14,7 +26,7 @@ const Top: FC<{parentFunc: () => void}> = ({parentFunc}) => {
         variant='contained'
         size='large'
         color='secondary'
-        style={{maxWidth: '250px', maxHeight: '50px', minWidth: '250px', minHeight: '50px'}}
+        className={styles.button}
         onClick={parentFunc}
       >Create start
       </Button>

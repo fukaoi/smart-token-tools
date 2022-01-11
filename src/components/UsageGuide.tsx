@@ -8,23 +8,16 @@ import Typography from '@mui/material/Typography';
 
 
 const useStyles = makeStyles({
-  message: {
-    marginBottom: '15em',
+  container: {
+    position: 'relative',
+    top: '5em',
   },
-  wellCome: {
-    fontSize: '1.8em',
-    fontWeight: 'bolder',
-    marginBottom: '0.2em'
-  },
-  title: {
-    fontSize: '3em',
-  }
 });
 
 const UsageGuide = () => {
   const styles = useStyles();
   return (
-    <Card sx={{ maxWidth: 350 }}>
+    <Card className={styles.container} sx={{ maxWidth: 350 }}>
       <CardMedia
         component="img"
         image="https://phantom.app/img/phantom-logo.svg" />
