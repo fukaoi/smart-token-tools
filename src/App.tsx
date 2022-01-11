@@ -14,6 +14,7 @@ const useStyles = makeStyles({
     backgroundSize: 'cover',
     backgroundImage: `url(${backImage})`,
     minHeight: '100vh',
+    maxHeight: '100vh',
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'ceter',
