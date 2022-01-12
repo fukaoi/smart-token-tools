@@ -1,3 +1,4 @@
+import React from 'react';
 import {makeStyles} from '@mui/styles';
 import titleLogo from '../assets/title-logo.png';
 

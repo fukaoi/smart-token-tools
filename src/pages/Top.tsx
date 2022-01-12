@@ -1,8 +1,9 @@
-import {FC} from 'react';
-import {makeStyles, withStyles} from '@mui/styles';
+import React, {FC} from 'react';
+import {withStyles} from '@mui/styles';
 import Button from '@mui/material/Button';
 import WellComeMessage from '../components/WellComeMessage';
 import UsageGuide from '../components/UsageGuide';
+import {useAutoConnect} from '../components/AutoConnectProvider';
 
 const StyledButton = withStyles({
   root: {
@@ -23,13 +24,15 @@ const StyledButton = withStyles({
 })(Button);
 
 const Top: FC<{parentFunc: () => void}> = ({parentFunc}) => {
+  const { autoConnect, setAutoConnect } = useAutoConnect();
   return (
     <div>
       <WellComeMessage />
       <UsageGuide />
       <StyledButton
         variant='contained'
-        onClick={parentFunc}
+        // onClick={parentFunc}
+        onClick={() => setAutoConnect(true)}
       >
         Getting Start 
       </StyledButton>

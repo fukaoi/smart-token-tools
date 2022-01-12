@@ -1,3 +1,4 @@
+import React from 'react';
 import {useState} from 'react';
 import {makeStyles} from '@mui/styles';
 
@@ -29,7 +30,7 @@ const App = () => {
   const [content, setContent] = useState('Main');
 
   const callWalletAdapter = () => {
-    // setContent('Token');
+    setContent('Token');
   }
 
   return (
