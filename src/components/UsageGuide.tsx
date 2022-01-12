@@ -72,5 +72,4 @@ const UsageGuide = () => {
   );
 }
 
-
 export default UsageGuide;
