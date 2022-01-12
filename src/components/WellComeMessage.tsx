@@ -9,7 +9,6 @@ const useStyles = makeStyles({
   },
   wellCome: {
     fontSize: '1.7em',
-    fontWeight: 'bolder',
     marginBottom: '0.2em',
     fontStyle: 'italic',
   },

@@ -26,6 +26,9 @@ const useStyles = makeStyles({
     marginLeft: '4em',
     marginRight: '4em'
   },
+  cardAction: {
+    justifyContent: 'center'
+  }
 });
 
 const UsageGuide = () => {
@@ -46,7 +49,7 @@ const UsageGuide = () => {
             species, ranging across all continents except Antarctica
           </Typography>
         </CardContent>
-        <CardActions>
+        <CardActions className={styles.cardAction}>
           <Button size="small">Learn More</Button>
         </CardActions>
       </Card>
