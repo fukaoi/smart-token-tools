@@ -29,7 +29,7 @@ const App = () => {
   const [content, setContent] = useState('Main');
 
   const callWalletAdapter = () => {
-    setContent('Token');
+    // setContent('Token');
   }
 
   return (

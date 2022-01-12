@@ -1,10 +1,12 @@
-import {AppBar, Toolbar, Grid} from '@mui/material';
-import Button from '@mui/material/Button';
+import Wallet from '../components/Wallet';
 
 
 const Token = () => {
   return (
-    <div>Token page</div>
+    <div>
+      Token page
+      <Wallet />
+    </div>
   );
 };
 export default Token;

@@ -4,18 +4,6 @@ import Button from '@mui/material/Button';
 import WellComeMessage from '../components/WellComeMessage';
 import UsageGuide from '../components/UsageGuide';
 
-const useStyles = makeStyles({
-  button: {
-    maxWidth: '250px',
-    minidth: '250px',
-    maxHeight: '50px',
-    minHeight: '50px',
-    position: 'relative',
-    top: '22em',
-    marginBottom: '1em',
-  },
-});
-
 const StyledButton = withStyles({
   root: {
     background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
