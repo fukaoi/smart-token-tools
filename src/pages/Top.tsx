@@ -1,4 +1,4 @@
-import {FC} from 'react';
+import {FC, useEffect, useState} from 'react';
 import {withStyles} from '@mui/styles';
 import Button from '@mui/material/Button';
 import WellComeMessage from '../components/WellComeMessage';
@@ -22,23 +22,60 @@ const StyledButton = withStyles({
   },
 })(Button);
 
-declare global { interface Window { solana: any } } 
+declare global {interface Window {solana: any}}
 
-const checkPhantomWallet = () => {
-  window.solana.connect();
+type Event = "connect" | "disconnect";
+
+interface Phantom {
+  on: (event: Event, callback: () => void) => void;
+  connect: () => Promise<void>;
+  disconnect: () => Promise<void>;
 }
 
 const Top: FC<{parentFunc: () => void}> = ({parentFunc}) => {
+  const [phantom, setPhantom] = useState<Phantom | null>(null);
+  const [connected, setConnected] = useState(false);
+
+  useEffect(() => {
+    if ("solana" in window) {
+      setPhantom(window["solana"]);
+    }
+  }, []);
+
+  console.log(phantom);
+
+  useEffect(() => {
+    phantom?.on("connect", () => {
+      console.log('connected');
+      setConnected(true);
+      // set cookie
+      parentFunc();
+    });
+
+    phantom?.on("disconnect", () => {
+      console.log('disconnected');
+      // delete cookie
+      setConnected(false);
+    });
+  }, [phantom]);
+
+  const connectHandler = () => {
+    phantom?.connect();
+  };
+
+  const disconnectHandler = () => {
+    phantom?.disconnect();
+  };
+
   return (
     <div>
       <WellComeMessage />
       <UsageGuide />
       <StyledButton
         variant='contained'
-        // onClick={parentFunc}
-        onClick={() => checkPhantomWallet()}
+        onClick={() => connectHandler()}
       >
-        Getting Start 
+        Getting Start
       </StyledButton>
     </div>
   );
