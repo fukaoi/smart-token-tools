@@ -28,7 +28,7 @@ const Header = () => {
         <Grid container>
           <Grid item xs={2}>
             <a href='https://atonoy.co'>
-              <img src={headerLogo} className={styles.logo} />
+              <img src={headerLogo} className={styles.logo} alt='atonoy.co' />
             </a>
           </Grid>
           <Grid item xs={7}>

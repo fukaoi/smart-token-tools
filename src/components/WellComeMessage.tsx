@@ -23,7 +23,7 @@ const WellComeMessage = () => {
   return (
     <div className={styles.message}>
       <div className={styles.wellCome}>Welcome ♥</div>
-      <img src={titleLogo} />
+      <img src={titleLogo} alt='smart token tool' />
     </div>
   );
 }

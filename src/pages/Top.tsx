@@ -4,6 +4,7 @@ import Button from '@mui/material/Button';
 import WellComeMessage from '../components/WellComeMessage';
 import UsageGuide from '../components/UsageGuide';
 import {useAutoConnect} from '../components/AutoConnectProvider';
+import { WalletMultiButton as MaterialUIWalletMultiButton, WalletMultiButton } from '@solana/wallet-adapter-material-ui';
 
 const StyledButton = withStyles({
   root: {
@@ -24,13 +25,14 @@ const StyledButton = withStyles({
 })(Button);
 
 const Top: FC<{parentFunc: () => void}> = ({parentFunc}) => {
-  const { autoConnect, setAutoConnect } = useAutoConnect();
-  console.log(setAutoConnect);
+  // const { autoConnect, setAutoConnect } = useAutoConnect();
+  // console.log(setAutoConnect);
   // console.log(useAutoConnect(), setAutoConnect(true));
   return (
     <div>
       <WellComeMessage />
       <UsageGuide />
+      <WalletMultiButton />
       <StyledButton
         variant='contained'
         // onClick={parentFunc}
