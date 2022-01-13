@@ -8,7 +8,7 @@ export interface AutoConnectContextState {
 
 export const AutoConnectContext = createContext<AutoConnectContextState>({} as AutoConnectContextState);
 
-export function useAutoConnect(): AutoConnectContextState {
+export const useAutoConnect = (): AutoConnectContextState => {
     return useContext(AutoConnectContext);
 }
 

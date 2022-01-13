@@ -25,6 +25,8 @@ const StyledButton = withStyles({
 
 const Top: FC<{parentFunc: () => void}> = ({parentFunc}) => {
   const { autoConnect, setAutoConnect } = useAutoConnect();
+  console.log(setAutoConnect);
+  // console.log(useAutoConnect(), setAutoConnect(true));
   return (
     <div>
       <WellComeMessage />
@@ -32,7 +34,7 @@ const Top: FC<{parentFunc: () => void}> = ({parentFunc}) => {
       <StyledButton
         variant='contained'
         // onClick={parentFunc}
-        onClick={() => setAutoConnect(true)}
+        // onClick={() => setAutoConnect(true)}
       >
         Getting Start 
       </StyledButton>

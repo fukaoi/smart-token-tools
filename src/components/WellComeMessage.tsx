@@ -22,7 +22,7 @@ const WellComeMessage = () => {
   const styles = useStyles();
   return (
     <div className={styles.message}>
-      <div className={styles.wellCome}>Well Come ♥</div>
+      <div className={styles.wellCome}>Welcome ♥</div>
       <img src={titleLogo} />
     </div>
   );
