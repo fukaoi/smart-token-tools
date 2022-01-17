@@ -24,47 +24,28 @@ const StyledButton = withStyles({
 
 declare global {interface Window {solana: any}}
 
-type Event = "connect" | "disconnect";
-
-interface Phantom {
-  on: (event: Event, callback: () => void) => void;
-  connect: () => Promise<void>;
-  disconnect: () => Promise<void>;
-}
-
 const Top: FC<{parentFunc: () => void}> = ({parentFunc}) => {
-  const [phantom, setPhantom] = useState<Phantom | null>(null);
-  const [connected, setConnected] = useState(false);
+  const [_, setConnected] = useState(false);
 
   useEffect(() => {
-    if ("solana" in window) {
-      setPhantom(window["solana"]);
-    }
-  }, []);
-
-  console.log(phantom);
-
-  useEffect(() => {
-    phantom?.on("connect", () => {
+    window.solana.on('connect', () => {
       console.log('connected');
       setConnected(true);
       // set cookie
       parentFunc();
     });
 
-    phantom?.on("disconnect", () => {
+    window.solana.on('disconnect', () => {
       console.log('disconnected');
       // delete cookie
       setConnected(false);
     });
-  }, [phantom]);
+  }, []);
 
   const connectHandler = () => {
-    phantom?.connect();
-  };
-
-  const disconnectHandler = () => {
-    phantom?.disconnect();
+    window.solana.connect().then((conn: any) => {
+      console.log(conn.publicKey.toString());
+    });
   };
 
   return (
