@@ -8,8 +8,7 @@
     "@mui/icons-material": "^5.2.5",
     "@mui/material": "^5.2.7",
     "@mui/styles": "^5.2.3",
-    "@solana/wallet-adapter-material-ui": "^0.16.2",
-    "@solana/wallet-adapter-react": "^0.15.2",
+    "@solana-suite/core": "^0.0.7",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "web-vitals": "^2.1.3"
