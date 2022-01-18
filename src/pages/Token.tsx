@@ -1,6 +1,6 @@
 import {useEffect} from 'react';
-// import * as core from '@solana-suite/core';
-// import * as shared from '@solana-suite/shared';
+import * as core from '@solana-suite/core';
+import * as shared from '@solana-suite/shared';
 import {
   TransactionInstruction,
   Transaction,
@@ -8,6 +8,8 @@ import {
   Connection,
   SystemProgram
 } from '@solana/web3.js';
+
+console.log(shared.Constants.API_URL);
 
 export const encode = (data: string): Buffer => Buffer.from(data);
 
