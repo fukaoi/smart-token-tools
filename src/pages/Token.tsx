@@ -13,22 +13,23 @@ export const encode = (data: string): Buffer => Buffer.from(data);
 
 const userPublicKey = new PublicKey('Gd5ThBjFzEbjfbJFGqwmBjDXR9grpAdqzb2L51viTqYV');
 const receiptPublicKey = new PublicKey('9vguAhFraAyv8QGukf8MvsLE3HHWKN3LqHMKMKtSirv3');
+const memoProgramId = new PublicKey('Memo1UhkJRfHyvLMcVucJwxXeuD728EqVDDwQDxFMNo');
 
-// const instruction = new TransactionInstruction({
-// programId: usrePublicKey,
-// data: encode('data'),
-// keys: [{
-// pubkey: new PublicKey('Gd5ThBjFzEbjfbJFGqwmBjDXR9grpAdqzb2L51viTqYV'),
-// isSigner: true,
-// isWritable: true
-// }]
-// });
-
-const instruction = SystemProgram.transfer({
-  fromPubkey: userPublicKey,
-  toPubkey: receiptPublicKey,
-  lamports: 10 //Investing 1 SOL. Remember 1 Lamport = 10^-9 SOL.
+const instruction = new TransactionInstruction({
+programId: memoProgramId,
+data: encode('data'),
+keys: [{
+pubkey: new PublicKey('Gd5ThBjFzEbjfbJFGqwmBjDXR9grpAdqzb2L51viTqYV'),
+isSigner: true,
+isWritable: true
+}]
 });
+
+// const instruction = SystemProgram.transfer({
+  // fromPubkey: userPublicKey,
+  // toPubkey: receiptPublicKey,
+  // lamports: 10 //Investing 1 SOL. Remember 1 Lamport = 10^-9 SOL.
+// });
 
 const Token = () => {
   useEffect(() => {
