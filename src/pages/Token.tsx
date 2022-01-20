@@ -6,11 +6,9 @@ import {
   Connection,
   SystemProgram
 } from '@solana/web3.js';
-import {Account, SplToken} from '@solana-suite/core';
-// import {toPubkey} from '@solana-suite/shared';
-const owner = 'Gd5ThBjFzEbjfbJFGqwmBjDXR9grpAdqzb2L51viTqYV'.toPublicKey();
-console.log(owner);
-Account.getBalance(owner).then(console.log);
+
+import { SplToken } from '../solanaSuites/spl-token';
+
 // export const encode = (data: string): Buffer => Buffer.from(data);
 
 // const instruction = new TransactionInstruction({
@@ -48,9 +46,11 @@ const Token = () => {
   
   useEffect(() => {
     window.solana.connect().then(async (wallet: any) => {
-      console.log(wallet.publicKey);
-      const inst1 = await SplToken.mint(wallet.publicKey, [], 1000, 1);
-      if (inst1.isErr) console.error(inst1);
+      SplToken.createMint(
+        wallet.publicKey,
+        1,
+        window.solana.signTransaction
+      );
     });
   });
 

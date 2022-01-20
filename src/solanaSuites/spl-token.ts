@@ -1,8 +1,8 @@
 import {
   MINT_SIZE,
   createInitializeMintInstruction,
-  getMinimumBalanceForRentExemptMint,
   TOKEN_PROGRAM_ID,
+  getMinimumBalanceForRentExemptMint,
 } from '@solana/spl-token';
 
 import {
@@ -10,12 +10,18 @@ import {
   SystemProgram,
   PublicKey,
   Keypair,
+  Connection,
 } from '@solana/web3.js';
 
-import {
-  Node,
-} from '@solana-suite/shared';
-
+namespace Node {
+  let connection: Connection;
+  
+  export const getConnection = () => {
+    if (connection) return connection;
+    connection = new Connection('http://api.devnet.solana.co');
+    return connection;
+  }
+}
 
 export namespace SplToken {
   export const createMint = async (
@@ -46,7 +52,7 @@ export namespace SplToken {
       )
     );
 
-    const signed = signTransaction(transaction);
+    const signed = await signTransaction(transaction);
     const sig = await connection.sendRawTransaction(signed.serialize());
     console.log(sig);
     return keypair.publicKey;
