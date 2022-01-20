@@ -9,30 +9,23 @@ import {
   Transaction,
   SystemProgram,
   PublicKey,
-  Signer,
-  sendAndConfirmRawTransaction,
+  Keypair,
 } from '@solana/web3.js';
 
 import {
   Node,
-  Constants
 } from '@solana-suite/shared';
 
 
 export namespace SplToken {
-
-  const NFT_AMOUNT = 1;
-  const NFT_DECIMALS = 0;
-
   export const createMint = async (
     owner: PublicKey,
-    signers: Signer[],
-    totalAmount: number,
     mintDecimal: number,
-    feePayer?: Signer,
+    signTransaction: (tx: Transaction) => any
     // ): Promise<Result<Instruction, Error>> => {
   ) => {
     const connection = Node.getConnection();
+    const keypair = Keypair.generate();
     const lamports = await getMinimumBalanceForRentExemptMint(connection);
 
     const transaction = new Transaction().add(
@@ -43,11 +36,19 @@ export namespace SplToken {
         lamports,
         programId: TOKEN_PROGRAM_ID,
       }),
-      createInitializeMintInstruction(keypair.publicKey, decimals, mintAuthority, freezeAuthority, programId)
+
+      createInitializeMintInstruction(
+        keypair.publicKey, 
+        mintDecimal, 
+        keypair.publicKey, 
+        keypair.publicKey, 
+        TOKEN_PROGRAM_ID
+      )
     );
 
-    await sendAndConfirmRawTransaction(connection, transaction, [payer, keypair], confirmOptions);
-
+    const signed = signTransaction(transaction);
+    const sig = await connection.sendRawTransaction(signed.serialize());
+    console.log(sig);
     return keypair.publicKey;
   }
 }
