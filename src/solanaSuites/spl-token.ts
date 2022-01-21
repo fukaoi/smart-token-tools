@@ -46,8 +46,8 @@ export namespace SplToken {
       createInitializeMintInstruction(
         keypair.publicKey,
         mintDecimal,
-        keypair.publicKey,
-        keypair.publicKey,
+        owner,
+        owner,
         TOKEN_PROGRAM_ID
       )
     );
@@ -55,11 +55,14 @@ export namespace SplToken {
     transaction.feePayer = owner;
     const blockhashObj = await connection.getRecentBlockhash();
     transaction.recentBlockhash = blockhashObj.blockhash;
+    transaction.partialSign(keypair)
 
     const signed = await signTransaction(transaction);
-    console.log(signed);
+
+    // const signed = await window.solana.signTransaction(transaction);
+    console.log('signed: ', signed.serialize());
     const sig = await connection.sendRawTransaction(signed.serialize());
-    console.log(sig);
+    console.log('sig: ', sig);
     return keypair.publicKey;
   }
 }
