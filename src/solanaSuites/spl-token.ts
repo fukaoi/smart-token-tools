@@ -57,6 +57,7 @@ export namespace SplToken {
     transaction.recentBlockhash = blockhashObj.blockhash;
 
     const signed = await signTransaction(transaction);
+    console.log(signed);
     const sig = await connection.sendRawTransaction(signed.serialize());
     console.log(sig);
     return keypair.publicKey;
