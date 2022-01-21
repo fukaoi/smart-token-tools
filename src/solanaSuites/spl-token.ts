@@ -15,10 +15,10 @@ import {
 
 namespace Node {
   let connection: Connection;
-  
+
   export const getConnection = () => {
     if (connection) return connection;
-    connection = new Connection('http://api.devnet.solana.co');
+    connection = new Connection('http://api.devnet.solana.com');
     return connection;
   }
 }
@@ -36,7 +36,7 @@ export namespace SplToken {
 
     const transaction = new Transaction().add(
       SystemProgram.createAccount({
-        fromPubkey: owner, 
+        fromPubkey: owner,
         newAccountPubkey: keypair.publicKey,
         space: MINT_SIZE,
         lamports,
@@ -44,13 +44,17 @@ export namespace SplToken {
       }),
 
       createInitializeMintInstruction(
-        keypair.publicKey, 
-        mintDecimal, 
-        keypair.publicKey, 
-        keypair.publicKey, 
+        keypair.publicKey,
+        mintDecimal,
+        keypair.publicKey,
+        keypair.publicKey,
         TOKEN_PROGRAM_ID
       )
     );
+
+    transaction.feePayer = owner;
+    const blockhashObj = await connection.getRecentBlockhash();
+    transaction.recentBlockhash = blockhashObj.blockhash;
 
     const signed = await signTransaction(transaction);
     const sig = await connection.sendRawTransaction(signed.serialize());
