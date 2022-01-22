@@ -58,4 +58,31 @@ export namespace SplToken {
     if (sig.isErr) return sig;
     return Result.ok(keypair.publicKey.toBase58());
   }
+
+  export const mint = async (
+    owner: PublicKey,
+    signers: Signer[],
+    totalAmount: number,
+    mintDecimal: number,
+    feePayer?: Signer,
+  // ): Promise<Result<Instruction, Error>> => {
+  ) => {
+    const tokenAssociated =
+      await token.getOrCreateAssociatedAccountInfo(owner)
+        .then(Result.ok)
+        .catch(Result.err);
+
+    if (tokenAssociated.isErr) {
+      return Result.err(tokenAssociated.error);
+    }
+
+    const inst = Token.createMintToInstruction(
+      TOKEN_PROGRAM_ID,
+      token.publicKey,
+      tokenAssociated.value.address,
+      owner,
+      signers,
+      totalAmount
+    );
+  }
 }
