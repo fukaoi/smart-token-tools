@@ -10,26 +10,19 @@ import {
   SystemProgram,
   PublicKey,
   Keypair,
-  Connection,
 } from '@solana/web3.js';
 
-namespace Node {
-  let connection: Connection;
-
-  export const getConnection = () => {
-    if (connection) return connection;
-    connection = new Connection('http://api.devnet.solana.com');
-    return connection;
-  }
-}
+import {
+  Node,
+  Result,
+} from '@solana-suite/shared';
 
 export namespace SplToken {
   export const createMint = async (
     owner: PublicKey,
     mintDecimal: number,
     signTransaction: (tx: Transaction) => any
-    // ): Promise<Result<Instruction, Error>> => {
-  ) => {
+  ): Promise<Result<string, Error>> => {
     const connection = Node.getConnection();
     const keypair = Keypair.generate();
     const lamports = await getMinimumBalanceForRentExemptMint(connection);
@@ -58,11 +51,11 @@ export namespace SplToken {
     transaction.partialSign(keypair)
 
     const signed = await signTransaction(transaction);
+    const sig = await connection.sendRawTransaction(signed.serialize())
+      .then(Result.ok)
+      .catch(Result.err);
 
-    // const signed = await window.solana.signTransaction(transaction);
-    console.log('signed: ', signed.serialize());
-    const sig = await connection.sendRawTransaction(signed.serialize());
-    console.log('sig: ', sig);
-    return keypair.publicKey;
+    if (sig.isErr) return sig;
+    return Result.ok(keypair.publicKey.toBase58());
   }
 }
