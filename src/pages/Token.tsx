@@ -30,6 +30,8 @@ const useStyles = makeStyles({
     minWidth: '25em',
     maxWidth: '25em',
     padding: '1.2em',
+    alignItems: 'center',
+    justifyItems: 'ceter',
   },
   radio: {
     '&$checked': {
@@ -43,29 +45,29 @@ const Token = () => {
   const styles = useStyles();
   const [walletAddress, setWalletAddress] = useState('');
   useEffect(() => {
-    
+
     // mint();
   }, []);
 
-    window.solana.connect().then((conn: any) => {
-      setWalletAddress(conn.publicKey.toString());
-    });
+  window.solana.connect().then((conn: any) => {
+    setWalletAddress(conn.publicKey.toString());
+  });
 
   return (
     <div>
       <PageTitle title='TOKEN' />
       <FormControl>
-        <Paper elevation={10} className={styles.root}>
+        <Paper className={styles.root}>
           <WalletAddress address={walletAddress} />
-          <Typography variant='h4' sx={{mb: 5}}>Select your using network cluster</Typography>
+          <Typography variant='h4'>Select your using network cluster</Typography>
           <RadioGroup
             aria-labelledby='cluster'
             defaultValue='devnet'
             name='cluster'
           >
-            <FormControlLabel color='secondary' value='mainnet-beta' control={<Radio />} label='Mainnet-beta' />
-            <FormControlLabel color='danger' value='devnet' control={<Radio />} label='Devnet' />
-            <FormControlLabel color='primary' value='testnet' control={<Radio />} label='Testnet' />
+            <FormControlLabel value='mainnet-beta' control={<Radio />} label='Mainnet-beta' />
+            <FormControlLabel value='devnet' control={<Radio />} label='Devnet' />
+            <FormControlLabel value='testnet' control={<Radio />} label='Testnet' />
           </RadioGroup>
         </Paper>
       </FormControl>
