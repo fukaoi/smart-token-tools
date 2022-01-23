@@ -5,11 +5,10 @@ import Typography from '@mui/material/Typography';
 
 const useStyles = makeStyles({
   box: {
-    background: '#ffccff',
+    backgroundImage: 'linear-gradient(90deg, rgba(251, 213, 251, 1), rgba(149, 233, 243, 1))',
     borderRadius: '8px',
     padding: '5px',
     marginBottom: '1em',
-    maxWidth: '20em',
   },
 });
 
