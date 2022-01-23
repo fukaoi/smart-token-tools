@@ -8,16 +8,18 @@ const useStyles = makeStyles({
     top: '3em',
     marginBottom: '1em',
   },
-  title: {
-    fontSize: '3em',
-  },
 });
 
 const WellComeMessage = () => {
   const styles = useStyles();
   return (
     <div className={styles.message}>
-      <Typography variant='h3' component='div'>Welcome ♥</Typography>
+      <Typography
+        variant='h3'
+        component='div'
+        fontStyle='italic'
+      >Welcome ♥
+      </Typography>
       <img src={titleLogo} alt='smart token tool' />
     </div>
   );
