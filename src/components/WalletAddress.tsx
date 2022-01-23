@@ -9,6 +9,7 @@ const useStyles = makeStyles({
     borderRadius: '8px',
     padding: '5px',
     marginBottom: '1em',
+    boxShadow: '0px 0px 6px 3px #cccccc',
   },
 });
 

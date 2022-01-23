@@ -27,11 +27,9 @@ const useStyles = makeStyles({
   root: {
     position: 'relative',
     marginTop: '1em',
-    minWidth: '25em',
-    maxWidth: '25em',
+    minWidth: '20em',
+    maxWidth: '20em',
     padding: '1.2em',
-    alignItems: 'center',
-    justifyItems: 'ceter',
   },
   radio: {
     '&$checked': {
@@ -59,16 +57,27 @@ const Token = () => {
       <FormControl>
         <Paper className={styles.root}>
           <WalletAddress address={walletAddress} />
-          <Typography variant='h4'>Select your using network cluster</Typography>
+          <Typography align='left' variant='h5'>Select your using network cluster</Typography>
           <RadioGroup
             aria-labelledby='cluster'
             defaultValue='devnet'
             name='cluster'
           >
-            <FormControlLabel value='mainnet-beta' control={<Radio />} label='Mainnet-beta' />
-            <FormControlLabel value='devnet' control={<Radio />} label='Devnet' />
-            <FormControlLabel value='testnet' control={<Radio />} label='Testnet' />
+            <FormControlLabel value='mainnet-beta' control={<Radio color='secondary' />} label='Mainnet-beta' />
+            <FormControlLabel value='devnet' control={<Radio color='warning' />} label='Devnet' />
+            <FormControlLabel value='testnet' control={<Radio color='primary' />} label='Testnet' />
           </RadioGroup>
+          <br />
+          <Typography align='left' variant='h5'>Select token issue type</Typography>
+          <RadioGroup
+            aria-labelledby='cluster'
+            defaultValue='new'
+            name='issue'
+          >
+            <FormControlLabel value='new' control={<Radio />} label='New' />
+            <FormControlLabel value='add' control={<Radio />} label='Add' />
+          </RadioGroup>
+
         </Paper>
       </FormControl>
     </div>
