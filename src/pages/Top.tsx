@@ -25,7 +25,8 @@ const StyledButton = withStyles({
 declare global {interface Window {solana: any}}
 
 const Top: FC<{parentFunc: () => void}> = ({parentFunc}) => {
-  const [_, setConnected] = useState(false);
+  
+  const [_, setConnected] = useState(false);// eslint-disable-line
 
   useEffect(() => {
     window.solana.on('connect', () => {
@@ -40,7 +41,7 @@ const Top: FC<{parentFunc: () => void}> = ({parentFunc}) => {
       // delete cookie
       setConnected(false);
     });
-  }, []);
+  }, [parentFunc]);
 
   const connectHandler = () => {
     window.solana.connect().then((conn: any) => {
