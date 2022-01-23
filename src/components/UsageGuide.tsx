@@ -39,32 +39,32 @@ const UsageGuide = () => {
       <Card className={styles.cardContainer}>
         <CardMedia
           className={styles.cardMedia}
-          component="img"
+          component='img'
           image={PhantomMarkLogo} />
         <CardContent>
-          <Typography gutterBottom variant="h5" component="div">
+          <Typography gutterBottom variant='h5' component='div'>
             Need1. Install wallet
           </Typography>
-          <Typography variant="body2" color="text.secondary">
+          <Typography variant='body2' color='text.secondary'>
             Lizards are a widespread group of squamate reptiles, with over 6,000
             species, ranging across all continents except Antarctica
           </Typography>
         </CardContent>
         <CardActions className={styles.cardAction}>
-          <Button size="small">Learn More</Button>
+          <Button size='small'>Learn More</Button>
         </CardActions>
       </Card>
       <Card className={styles.cardContainer}>
         <CardMedia
           className={styles.cardMedia}
-          component="img"
+          component='img'
           image={AtonoyMarkLogo}
         />
         <CardContent>
-          <Typography gutterBottom variant="h5" component="div">
+          <Typography gutterBottom variant='h5' component='div'>
             Need2. Get Atonoy subscription token
           </Typography>
-          <Typography variant="body2" color="text.secondary">
+          <Typography variant='body2' color='text.secondary'>
             Lizards are a widespread group of squamate reptiles, with over 6,000
           </Typography>
         </CardContent>
