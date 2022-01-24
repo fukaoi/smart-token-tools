@@ -2,7 +2,6 @@ import assert from 'assert';
 import {useEffect, useState} from 'react';
 import {makeStyles} from '@mui/styles';
 import Typography from '@mui/material/Typography';
-import {SplToken} from '../solanaSuites/spl-token';
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
@@ -12,14 +11,24 @@ import {Paper} from '@mui/material';
 import PageTitle from '../components/PageTitle';
 import WalletAddress from '../components/WalletAddress';
 
+import {SplToken} from '../shared/spl-token';
+
 const mint = () => {
   window.solana.connect().then(async (wallet: any) => {
-    const sig = await SplToken.createMint(
+    const tokenKey = await SplToken.createMint(
       wallet.publicKey,
       1,
       window.solana.signTransaction
     );
-    sig.isErr && assert(sig);
+    tokenKey.isErr && assert(tokenKey);
+    console.log('tokenKey: ', tokenKey.unwrap());
+    await SplToken.mint(
+      tokenKey.unwrap().toPublicKey(),
+      wallet.publicKey,
+      100,
+      1,
+      window.solana.signTransaction
+    );
   });
 }
 
@@ -43,8 +52,7 @@ const Token = () => {
   const styles = useStyles();
   const [walletAddress, setWalletAddress] = useState('');
   useEffect(() => {
-
-    // mint();
+    mint();
   }, []);
 
   window.solana.connect().then((conn: any) => {
