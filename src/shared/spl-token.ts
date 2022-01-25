@@ -33,7 +33,7 @@ import {
 } from '@solana-suite/core';
 
 export namespace SplToken {
-  export const getOrCreateAssociatedTokenAccount = async (
+  const getOrCreateAssociatedTokenAccount = async (
     mint: PublicKey,
     owner: PublicKey,
     signTransaction: (tx: Transaction) => any,
@@ -51,14 +51,14 @@ export namespace SplToken {
       programId,
       associatedTokenProgramId
     );
-    console.log('associatedToken: ', associatedToken.toBase58());
     let account: Account;
+    let transaction: Transaction = new Transaction();
     try {
       account = await getAccount(connection, associatedToken, commitment, programId);
     } catch (error: unknown) {
       if (error instanceof TokenAccountNotFoundError || error instanceof TokenInvalidAccountOwnerError) {
         try {
-          const transaction = new Transaction().add(
+          transaction = new Transaction().add(
             createAssociatedTokenAccountInstruction(
               owner,
               associatedToken,
@@ -73,27 +73,31 @@ export namespace SplToken {
           const blockhashObj = await connection.getRecentBlockhash();
           transaction.recentBlockhash = blockhashObj.blockhash;
 
-          const signed = await signTransaction(transaction);
-          const sig = await connection.sendRawTransaction(signed.serialize());
-          await T.confirmedSig(sig);
+
+          // const signed = await signTransaction(transaction);
+          // const sig = await connection.sendRawTransaction(signed.serialize());
+          // await T.confirmedSig(sig);
         } catch (error: unknown) {}
-        account = await getAccount(connection, associatedToken, commitment, programId);
+        // account = await getAccount(connection, associatedToken, commitment, programId);
       } else {
         throw error;
       }
     }
+    return {account: associatedToken, tx: transaction};
 
-    if (!account.mint.equals(mint)) throw new TokenInvalidMintError();
-    if (!account.owner.equals(owner)) throw new TokenInvalidOwnerError();
+    // if (!account.mint.equals(mint)) throw new TokenInvalidMintError();
+    // if (!account.owner.equals(owner)) throw new TokenInvalidOwnerError();
 
-    return account;
+    // return account;
+
   }
 
-  export const createMint = async (
+  const initMint = async (
     owner: PublicKey,
     mintDecimal: number,
     signTransaction: (tx: Transaction) => any
-  ): Promise<Result<string, Error>> => {
+  ) => {
+    // ): Promise<Result<string, Error>> => {
     const connection = Node.getConnection();
     const keypair = Keypair.generate();
     const lamports = await getMinimumBalanceForRentExemptMint(connection);
@@ -121,45 +125,58 @@ export namespace SplToken {
     transaction.recentBlockhash = blockhashObj.blockhash;
     transaction.partialSign(keypair)
 
-    const signed = await signTransaction(transaction);
-    const sig = await connection.sendRawTransaction(signed.serialize())
-      .then(Result.ok)
-      .catch(Result.err);
+    return {tokenKey: keypair.publicKey, tx: transaction};
 
-    if (sig.isErr) {
-      return sig;
-    } else {
-      T.confirmedSig(sig.value);
-      return Result.ok(keypair.publicKey.toBase58());
-    }
-  }
-
-  export const mint = async (
-    tokenKey: PublicKey,
-    owner: PublicKey,
-    totalAmount: number,
-    mintDecimal: number,
-    signTransaction: (tx: Transaction) => any,
-    // ): Promise<Result<Instruction, Error>> => {
-  ) => {
-    const connection = Node.getConnection();
-    const tokenAssociated =
-      await getOrCreateAssociatedTokenAccount(
-        tokenKey,
-        owner,
-        signTransaction
-      ) as Account
+    // const signed = await signTransaction(transaction);
+    // const sig = await connection.sendRawTransaction(signed.serialize())
     // .then(Result.ok)
     // .catch(Result.err);
 
-    // if (tokenAssociated.isErr) {
-    // return Result.err(tokenAssociated.error);
+    // if (sig.isErr) {
+    // return sig;
+    // } else {
+    // T.confirmedSig(sig.value);
+    // return Result.ok(keypair.publicKey.toBase58());
     // }
+  }
 
-    const transaction = new Transaction().add(
+  export const mint = async (
+    owner: PublicKey,
+    totalAmount: number,
+    mintDecimal: number,
+    signTransaction: (tx: Transaction | Transaction[]) => any,
+    // ): Promise<Result<Instruction, Error>> => {
+  ) => {
+    const connection = Node.getConnection();
+    const tx = new Transaction();
+
+    const initData = await initMint(
+      owner,
+      mintDecimal,
+      signTransaction
+    );
+
+    // tx.add(initData.tx);
+
+    // const tokenAssociated =
+    // await getOrCreateAssociatedTokenAccount(
+    // tokenKey.unwrap().toPublicKey(),
+    // owner,
+    // signTransaction
+    // ) as Account
+    const data =
+      await getOrCreateAssociatedTokenAccount(
+        initData.tokenKey,
+        owner,
+        signTransaction);
+
+    tx.add(data.tx);
+
+    const transaction = tx.add(
       createMintToCheckedInstruction(
-        tokenKey,
-        tokenAssociated.address,
+        initData.tokenKey,
+        // tokenAssociated.address,
+        data.account,
         owner,
         totalAmount,
         mintDecimal,
@@ -172,8 +189,25 @@ export namespace SplToken {
     const blockhashObj = await connection.getRecentBlockhash();
     transaction.recentBlockhash = blockhashObj.blockhash;
 
-    const signed = await signTransaction(transaction);
-    const sig = await connection.sendRawTransaction(signed.serialize())
-    console.log(sig);
+    // const signed = await signTransaction(transaction);
+
+    // signAllTransactions pattern
+    const signed = await signTransaction([initData.tx, transaction]);
+    console.log('signed:', signed);
+
+    const sig = await connection.sendRawTransaction(signed[0].serialize())
+    console.log('# result1 sig: ', sig);
+
+    await T.confirmedSig(sig);
+
+    const sig2 = await connection.sendRawTransaction(signed[1].serialize())
+    console.log('# result2 sig: ', sig2);
+
+
+    // signed.map(async(sign: any) => {
+      // const sig = await connection.sendRawTransaction(sign.serialize())
+      // await T.confirmedSig(sig)
+      // console.log('# result sig: ', sig);
+    // });
   }
 }

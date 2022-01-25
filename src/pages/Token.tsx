@@ -15,18 +15,12 @@ import {SplToken} from '../shared/spl-token';
 
 const mint = () => {
   window.solana.connect().then(async (wallet: any) => {
-    const tokenKey = await SplToken.createMint(
-      wallet.publicKey,
-      1,
-      window.solana.signTransaction
-    );
-    tokenKey.isErr && assert(tokenKey);
     await SplToken.mint(
-      tokenKey.unwrap().toPublicKey(),
       wallet.publicKey,
       100,
       1,
-      window.solana.signTransaction
+      // window.solana.signTransaction
+      window.solana.signAllTransactions
     );
   });
 }
