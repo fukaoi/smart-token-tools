@@ -1,4 +1,3 @@
-import assert from 'assert';
 import {useEffect, useState} from 'react';
 import {makeStyles} from '@mui/styles';
 import Typography from '@mui/material/Typography';
@@ -15,13 +14,13 @@ import {SplToken} from '../shared/spl-token';
 
 const mint = () => {
   window.solana.connect().then(async (wallet: any) => {
-    await SplToken.mint(
+    const tokenKey = await SplToken.mint(
       wallet.publicKey,
       100,
       1,
-      // window.solana.signTransaction
       window.solana.signAllTransactions
     );
+    console.log('tokenKey: ', tokenKey);
   });
 }
 

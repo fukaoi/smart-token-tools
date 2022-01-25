@@ -1,11 +1,10 @@
-import React from 'react';
 import {useState} from 'react';
 import {makeStyles} from '@mui/styles';
 
 import Header from './components/Header';
 import Token from './pages/Token';
 import Top from './pages/Top';
-import backImage from './assets/background-image.jpg';
+import backImage from './assets/background-image2.jpg';
 
 const useStyles = makeStyles({
   app: {
