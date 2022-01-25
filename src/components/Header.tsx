@@ -3,6 +3,7 @@ import Button from '@mui/material/Button';
 import {Twitter, TokenOutlined, PaidOutlined} from '@mui/icons-material';
 import headerLogo from '../assets/atonoy-logo.png';
 import {makeStyles} from '@mui/styles';
+import Token from '../pages/Token';
 
 const useStyles = makeStyles({
   horizontal: {
@@ -18,6 +19,11 @@ const useStyles = makeStyles({
     height: '40px'
   } 
 });
+
+const goToPage = (pageName: string) => {
+  console.log(pageName);
+  return <Token />
+}
 
 const Header = () => {
   const styles = useStyles();
@@ -37,6 +43,7 @@ const Header = () => {
               <PaidOutlined />
               <Button
                 key='Token'
+                onClick={() => goToPage('token')}
                 sx={{my: 1, color: 'black'}}
               >Token
               </Button>
