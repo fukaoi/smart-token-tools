@@ -1,18 +1,22 @@
 import {useEffect, useState} from 'react';
 import {makeStyles} from '@mui/styles';
-import Typography from '@mui/material/Typography';
-import Radio from '@mui/material/Radio';
-import RadioGroup from '@mui/material/RadioGroup';
-import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 import {Paper} from '@mui/material';
 
 import PageTitle from '../components/PageTitle';
 import WalletAddress from '../components/WalletAddress';
+import Complete from './Complete';
 
 import {SplToken} from '../shared/spl-token';
+import ClusterRadio from '../components/radio/ClusterRadio';
+import TokenIssueTypeRadio from '../components/radio/TokenIssueTypeRadio';
 
-const mint = () => {
+interface TokenIssued {
+  tokenKey: string,
+  totalAmount: number
+}
+
+const mint = (setTokenIssued: (v: TokenIssued) => void) => {
   window.solana.connect().then(async (wallet: any) => {
     const tokenKey = await SplToken.mint(
       wallet.publicKey,
@@ -21,6 +25,7 @@ const mint = () => {
       window.solana.signAllTransactions
     );
     console.log('tokenKey: ', tokenKey);
+    setTokenIssued({tokenKey: tokenKey.unwrap(), totalAmount: 100});
   });
 }
 
@@ -40,47 +45,35 @@ const useStyles = makeStyles({
   checked: {}
 });
 
+const isComplete = (tokenIssued: TokenIssued) => {
+  return tokenIssued.tokenKey !== '' && tokenIssued.totalAmount !== 0;
+}
+
 const Token = () => {
   const styles = useStyles();
   const [walletAddress, setWalletAddress] = useState('');
+  const [tokenIssued, setTokenIssued] = useState<TokenIssued>({tokenKey: '', totalAmount: 0});
   useEffect(() => {
-    mint();
+    mint(setTokenIssued);
   }, []);
 
   window.solana.connect().then((conn: any) => {
     setWalletAddress(conn.publicKey.toString());
   });
 
-  return (
+  const Root = () => (
     <div>
       <PageTitle title='TOKEN' />
       <FormControl>
         <Paper className={styles.root}>
           <WalletAddress address={walletAddress} />
-          <Typography align='left' variant='h5'>Select your using network cluster</Typography>
-          <RadioGroup
-            aria-labelledby='cluster'
-            defaultValue='devnet'
-            name='cluster'
-          >
-            <FormControlLabel value='mainnet-beta' control={<Radio color='secondary' />} label='Mainnet-beta' />
-            <FormControlLabel value='devnet' control={<Radio color='warning' />} label='Devnet' />
-            <FormControlLabel value='testnet' control={<Radio color='primary' />} label='Testnet' />
-          </RadioGroup>
+          <ClusterRadio />
           <br />
-          <Typography align='left' variant='h5'>Select token issue type</Typography>
-          <RadioGroup
-            aria-labelledby='cluster'
-            defaultValue='new'
-            name='issue'
-          >
-            <FormControlLabel value='new' control={<Radio />} label='New' />
-            <FormControlLabel value='add' control={<Radio />} label='Add' />
-          </RadioGroup>
-
+          <TokenIssueTypeRadio />
         </Paper>
       </FormControl>
     </div>
   );
+  return !isComplete(tokenIssued) ? <Root /> : <Complete />;
 };
-export default Token;
+  export default Token;
