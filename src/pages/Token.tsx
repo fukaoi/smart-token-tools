@@ -21,7 +21,6 @@ const mint = () => {
       window.solana.signTransaction
     );
     tokenKey.isErr && assert(tokenKey);
-    console.log('tokenKey: ', tokenKey.unwrap());
     await SplToken.mint(
       tokenKey.unwrap().toPublicKey(),
       wallet.publicKey,

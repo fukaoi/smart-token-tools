@@ -51,7 +51,7 @@ export namespace SplToken {
       programId,
       associatedTokenProgramId
     );
-    console.log('associatedToken: ', associatedToken);
+    console.log('associatedToken: ', associatedToken.toBase58());
     let account: Account;
     try {
       account = await getAccount(connection, associatedToken, commitment, programId);
@@ -75,8 +75,7 @@ export namespace SplToken {
 
           const signed = await signTransaction(transaction);
           const sig = await connection.sendRawTransaction(signed.serialize());
-          T.confirmedSig(sig);
-          console.log('createAssociatedTokenAccountInstruction: ', sig);
+          await T.confirmedSig(sig);
         } catch (error: unknown) {}
         account = await getAccount(connection, associatedToken, commitment, programId);
       } else {
@@ -84,7 +83,6 @@ export namespace SplToken {
       }
     }
 
-    console.log('mint & owner: ', mint, owner);
     if (!account.mint.equals(mint)) throw new TokenInvalidMintError();
     if (!account.owner.equals(owner)) throw new TokenInvalidOwnerError();
 
@@ -151,7 +149,6 @@ export namespace SplToken {
         owner,
         signTransaction
       ) as Account
-    console.log('tokenAssociated: ', tokenAssociated);
     // .then(Result.ok)
     // .catch(Result.err);
 
