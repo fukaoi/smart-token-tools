@@ -3,9 +3,9 @@ import {makeStyles} from '@mui/styles';
 import FormControl from '@mui/material/FormControl';
 import {Paper} from '@mui/material';
 
-import PageTitle from '../components/typography/PageTitle';
-import WalletAddress from '../components/typography/WalletAddress';
-import Complete from './Complete';
+import TitleTypography from '../components/typography/TitleTypography';
+import AddressTypography from '../components/typography/AddressTypography';
+import CompletePage from './CompletePage';
 
 import {SplToken} from '../adapters/spl-token';
 import ClusterRadio from '../components/radio/ClusterRadio';
@@ -49,7 +49,7 @@ const isComplete = (tokenIssued: TokenIssued) => {
   return tokenIssued.tokenKey !== '' && tokenIssued.totalAmount !== 0;
 }
 
-const Token = () => {
+const TokenPage = () => {
   const styles = useStyles();
   const [walletAddress, setWalletAddress] = useState('');
   const [tokenIssued, setTokenIssued] = useState<TokenIssued>({tokenKey: '', totalAmount: 0});
@@ -63,10 +63,10 @@ const Token = () => {
 
   const Root = () => (
     <div>
-      <PageTitle title='TOKEN' />
+      <TitleTypography title='TOKEN' />
       <FormControl>
         <Paper className={styles.root}>
-          <WalletAddress address={walletAddress} />
+          <AddressTypography address={walletAddress} />
           <ClusterRadio />
           <br />
           <TokenIssueTypeRadio />
@@ -74,6 +74,6 @@ const Token = () => {
       </FormControl>
     </div>
   );
-  return !isComplete(tokenIssued) ? <Root /> : <Complete />;
+  return !isComplete(tokenIssued) ? <Root /> : <CompletePage />;
 };
-  export default Token;
+  export default TokenPage;

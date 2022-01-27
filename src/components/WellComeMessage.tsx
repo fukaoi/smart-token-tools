@@ -1,6 +1,6 @@
 import {makeStyles} from '@mui/styles';
 import titleLogo from '../assets/title-logo.png';
-import PageTitle from './typography/PageTitle';
+import TitleTypography from './typography/TitleTypography';
 
 const useStyles = makeStyles({
   message: {
@@ -14,7 +14,7 @@ const WellComeMessage = () => {
   const styles = useStyles();
   return (
     <div className={styles.message}>
-      <PageTitle title='Welcome ♥' />
+      <TitleTypography title='Welcome ♥' />
       <img src={titleLogo} alt='smart token tool' />
     </div>
   );

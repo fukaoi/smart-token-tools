@@ -1,7 +1,7 @@
 import {FC} from 'react';
 import Typography from '@mui/material/Typography';
 
-const PageTitle: FC<{title: string}> = ({title}) => {
+const TitleTypography: FC<{title: string}> = ({title}) => {
   return (
       <Typography
         component='div'
@@ -13,4 +13,4 @@ const PageTitle: FC<{title: string}> = ({title}) => {
   );
 }
 
-export default PageTitle;
+export default TitleTypography;

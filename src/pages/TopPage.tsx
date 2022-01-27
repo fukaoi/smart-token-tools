@@ -5,7 +5,7 @@ import SubmitButton from '../components/button/SubmitButton';
 
 declare global {interface Window {solana: any}}
 
-const Top: FC<{callbackFunc: () => void}> = ({callbackFunc}) => {
+const TopPage: FC<{callbackFunc: () => void}> = ({callbackFunc}) => {
   
   const [_, setConnected] = useState(false);// eslint-disable-line
 
@@ -36,4 +36,4 @@ const Top: FC<{callbackFunc: () => void}> = ({callbackFunc}) => {
     </div>
   );
 };
-export default Top;
+export default TopPage;

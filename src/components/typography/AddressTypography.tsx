@@ -13,7 +13,7 @@ const useStyles = makeStyles({
   },
 });
 
-const WalletAddress: FC<{address: string}> = ({address}) => {
+const AddressTypography: FC<{address: string}> = ({address}) => {
   const styles = useStyles();
   return (
     <Box component="div" className={styles.box}>
@@ -24,11 +24,11 @@ const WalletAddress: FC<{address: string}> = ({address}) => {
       </Typography>
       <Typography
         component='div'
-        fontSize='20px'
+        fontSize='16px'
       >{address}
       </Typography>
     </Box>
   );
 }
 
-export default WalletAddress;
+export default AddressTypography;
