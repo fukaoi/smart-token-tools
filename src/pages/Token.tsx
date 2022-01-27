@@ -3,11 +3,11 @@ import {makeStyles} from '@mui/styles';
 import FormControl from '@mui/material/FormControl';
 import {Paper} from '@mui/material';
 
-import PageTitle from '../components/PageTitle';
-import WalletAddress from '../components/WalletAddress';
+import PageTitle from '../components/typography/PageTitle';
+import WalletAddress from '../components/typography/WalletAddress';
 import Complete from './Complete';
 
-import {SplToken} from '../shared/spl-token';
+import {SplToken} from '../adapters/spl-token';
 import ClusterRadio from '../components/radio/ClusterRadio';
 import TokenIssueTypeRadio from '../components/radio/TokenIssueTypeRadio';
 
@@ -54,7 +54,7 @@ const Token = () => {
   const [walletAddress, setWalletAddress] = useState('');
   const [tokenIssued, setTokenIssued] = useState<TokenIssued>({tokenKey: '', totalAmount: 0});
   useEffect(() => {
-    mint(setTokenIssued);
+    // mint(setTokenIssued);
   }, []);
 
   window.solana.connect().then((conn: any) => {

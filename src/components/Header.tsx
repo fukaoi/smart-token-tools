@@ -1,9 +1,7 @@
 import {AppBar, Toolbar, Grid, Box} from '@mui/material';
-import Button from '@mui/material/Button';
-import {Twitter, TokenOutlined, PaidOutlined} from '@mui/icons-material';
 import headerLogo from '../assets/atonoy-logo.png';
 import {makeStyles} from '@mui/styles';
-import Token from '../pages/Token';
+import NavigationButton from './button/NavigationButton';
 
 const useStyles = makeStyles({
   horizontal: {
@@ -17,12 +15,44 @@ const useStyles = makeStyles({
     marginLeft: '-4em',
     width: '180px',
     height: '40px'
-  } 
+  }
 });
 
-const goToPage = (pageName: string) => {
-  console.log(pageName);
-  return <Token />
+// const goToPage = (pageName: string) => {
+// console.log(pageName);
+// return <Token />
+// }
+
+const NavigationButtons = () => {
+  const data = [
+    {
+      name: 'Token',
+      icon: 'PaidOutlined',
+    },
+    {
+      name: 'NFT',
+      icon: 'TokenOutlined',
+    },
+    {
+      name: 'Contact',
+      icon: 'Twitter',
+    }
+  ];
+  const comp =
+    (
+      <>
+        {data.map(d =>
+          <NavigationButton
+            callbackFunc={console.log}
+            name={d.name}
+            icon={d.icon}
+          />
+        )}
+        <Box sx={{m: 1}} />
+      </>
+    );
+
+  return comp;
 }
 
 const Header = () => {
@@ -40,27 +70,7 @@ const Header = () => {
           </Grid>
           <Grid item xs={3}>
             <div className={styles.horizontal} >
-              <PaidOutlined />
-              <Button
-                key='Token'
-                onClick={() => goToPage('token')}
-                sx={{my: 1, color: 'black'}}
-              >Token
-              </Button>
-              <Box sx={{m: 1}} />
-              <TokenOutlined />
-              <Button
-                key='NFT'
-                sx={{my: 1, color: 'black', minWidth: '10px'}}
-              >NFT
-              </Button>
-              <Box sx={{m: 1}} />
-              <Twitter />
-              <Button
-                key='Contact'
-                sx={{my: 1, color: 'black'}}
-              >Contact
-              </Button>
+              <NavigationButtons />
             </div>
           </Grid>
         </Grid>

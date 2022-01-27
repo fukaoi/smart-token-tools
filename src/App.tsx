@@ -36,7 +36,7 @@ const App = () => {
     <div className={styles.app}>
       <Header />
       <main className={styles.appMain}>
-        {content === 'Token' ? <Token /> : <Top parentFunc={callWalletAdapter} />}
+        {content === 'Token' ? <Token /> : <Top callbackFunc={callWalletAdapter} />}
       </main>
     </div>
   );

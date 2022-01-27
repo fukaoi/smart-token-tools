@@ -8,9 +8,10 @@ const TokenIssueTypeRadio = () => {
     <div>
       <Typography align='left' variant='h5'>Select token issue type</Typography>
       <RadioGroup
-        aria-labelledby='cluster'
+        aria-labelledby='issue'
         defaultValue='new'
         name='issue'
+        onClick={()=> alert(1)}
       >
         <FormControlLabel value='new' control={<Radio />} label='New' />
         <FormControlLabel value='add' control={<Radio />} label='Add' />

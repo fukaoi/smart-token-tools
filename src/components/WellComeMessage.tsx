@@ -1,6 +1,6 @@
 import {makeStyles} from '@mui/styles';
 import titleLogo from '../assets/title-logo.png';
-import Typography from '@mui/material/Typography';
+import PageTitle from './typography/PageTitle';
 
 const useStyles = makeStyles({
   message: {
@@ -14,12 +14,7 @@ const WellComeMessage = () => {
   const styles = useStyles();
   return (
     <div className={styles.message}>
-      <Typography
-        variant='h3'
-        component='div'
-        fontStyle='italic'
-      >Welcome ♥
-      </Typography>
+      <PageTitle title='Welcome ♥' />
       <img src={titleLogo} alt='smart token tool' />
     </div>
   );

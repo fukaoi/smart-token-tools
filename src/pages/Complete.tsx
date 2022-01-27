@@ -1,4 +1,4 @@
-import PageTitle from "../components/PageTitle";
+import PageTitle from "../components/typography/PageTitle";
 
 const Complete = () => {
   return (
