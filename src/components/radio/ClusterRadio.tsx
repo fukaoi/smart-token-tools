@@ -1,23 +1,12 @@
-import {makeStyles} from '@mui/styles';
-import Typography from '@mui/material/Typography';
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
-
-const useStyles = makeStyles({
-  headline: {
-    padding: '5px 10px',
-    borderLeft: '3px solid #aaaaaa',
-    background: '#f4f4f4'
-  },
-});
-
+import HeadlineTypography from '../typography/HeadlineTypography';
 
 const ClusterRadio = () => {
-  const styles = useStyles();
   return (
-    <div>
-      <Typography align='left' variant='h5' className={styles.headline}>Select your using network cluster</Typography>
+    <>
+      <HeadlineTypography message='Select your using network cluster' />
       <RadioGroup
         aria-labelledby='cluster'
         defaultValue='devnet'
@@ -27,7 +16,7 @@ const ClusterRadio = () => {
         <FormControlLabel value='devnet' control={<Radio color='warning' />} label='Devnet' />
         <FormControlLabel value='testnet' control={<Radio color='primary' />} label='Testnet' />
       </RadioGroup>
-    </div>
+    </>
   );
 };
 
