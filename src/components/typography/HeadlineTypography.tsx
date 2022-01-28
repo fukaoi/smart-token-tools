@@ -5,8 +5,8 @@ import {FC} from 'react';
 const useStyles = makeStyles({
   headline: {
     padding: '3px 15px',
-    borderLeft: '3px solid #aaaaaa',
-    background: '#f4f4f4',
+    borderLeft: '3px solid #777777',
+    background: '#f1f1f1',
   },
 });
 

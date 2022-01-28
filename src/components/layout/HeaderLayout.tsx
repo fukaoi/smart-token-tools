@@ -1,7 +1,7 @@
 import {AppBar, Toolbar, Grid, Box} from '@mui/material';
-import headerLogo from '../assets/atonoy-logo.png';
+import headerLogo from '../../assets/atonoy-logo.png';
 import {makeStyles} from '@mui/styles';
-import NavigationButton from './button/NavigationButton';
+import NavigationButton from '../button/NavigationButton';
 
 const useStyles = makeStyles({
   horizontal: {
@@ -55,7 +55,7 @@ const NavigationButtons = () => {
   return comp;
 }
 
-const Header = () => {
+const HeaderLayout = () => {
   const styles = useStyles();
   return (
     <AppBar position='static' color='transparent'>
@@ -78,4 +78,4 @@ const Header = () => {
     </AppBar>
   );
 };
-export default Header;
+export default HeaderLayout;

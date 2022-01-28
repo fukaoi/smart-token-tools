@@ -1,7 +1,7 @@
 import {useState} from 'react';
 import {makeStyles} from '@mui/styles';
 
-import Header from './components/Header';
+import HeaderLayout from './components/layout/HeaderLayout';
 import TokenPage from './pages/TokenPage';
 import TopPage from './pages/TopPage';
 import backImage from './assets/background-image2.jpg';
@@ -13,12 +13,13 @@ const useStyles = makeStyles({
   appMain: {
     backgroundSize: 'cover',
     backgroundImage: `url(${backImage})`,
-    minHeight: '95vh',
+    backgroundRepeat: 'no-repeat',
+    backgroundPosition: 'ceter',
+    minHeight: '94vh',
     maxHeight: '150vh',
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'ceter',
-    // justifyContent: 'center',
     fontSize: 'calc(10px + 2vmin)',
     color: 'white',
   }
@@ -34,7 +35,7 @@ const App = () => {
 
   return (
     <div className={styles.app}>
-      <Header />
+      <HeaderLayout />
       <main className={styles.appMain}>
         {content === 'Token' ? <TokenPage /> : <TopPage callbackFunc={callWalletAdapter} />}
       </main>

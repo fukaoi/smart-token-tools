@@ -9,12 +9,10 @@ const DecimalsTextField: FC<{}> = ({}) => {
     `The value of this setting specifies the number of decimal points in the token. 
      Please refer to the example below.`;
   const example = 
-    `
-    input 1 decimals: => 1000, 10000, 1
-    input 2 decimals: => 1000.0, 10000.0, 0.1
-    input 3 decimals: => 1000.00, 10000.00, 0.01
-    input 4 decimals: => 1000.000, 10000.000, 0.001
-    `;
+    `input 1 decimals:  1000,     10000,         1
+     input 2 decimals:  1000.0,   10000.0,     0.1
+     input 3 decimals:  1000.00,  10000.00,   0.01
+     input 4 decimals:  1000.000, 10000.000, 0.001`;
   return (
     <>
       <HeadlineTypography message='Input token decimals' />

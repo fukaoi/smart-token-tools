@@ -11,6 +11,7 @@ import ClusterRadio from '../components/radio/ClusterRadio';
 import TokenIssueTypeRadio from '../components/radio/TokenIssueTypeRadio';
 import TotalSupplyTextField from '../components/textField/TotalSupplyTestField';
 import DecimalsTextField from '../components/textField/DecimalsTestField';
+import SubmitButton from '../components/button/SubmitButton';
 
 interface TokenIssued {
   tokenKey: string,
@@ -76,9 +77,14 @@ const TokenPage = () => {
           <Box sx={{mb: 4}} />
           <DecimalsTextField />
         </Paper>
+        <Box sx={{mb: 6}} />
+        <div>
+          <SubmitButton callbackFunc={console.log} title='Submit' />
+        </div>
+        <Box sx={{mb: 10}} />
       </FormControl>
     </div>
   );
   return !isComplete(tokenIssued) ? <Root /> : <CompletePage />;
 };
-  export default TokenPage;
+export default TokenPage;

@@ -2,6 +2,7 @@ import {FC, useEffect, useState} from 'react';
 import WellComeMessage from '../components/WellComeMessage';
 import UsageGuide from '../components/UsageGuide';
 import SubmitButton from '../components/button/SubmitButton';
+import {Box} from '@mui/material';
 
 declare global {interface Window {solana: any}}
 
@@ -32,6 +33,7 @@ const TopPage: FC<{callbackFunc: () => void}> = ({callbackFunc}) => {
     <div>
       <WellComeMessage />
       <UsageGuide />
+      <Box sx={{mt: 40}} />
       <SubmitButton title='Getting start' callbackFunc={connectHandler} />
     </div>
   );
