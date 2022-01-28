@@ -1,5 +1,5 @@
 import {FC} from 'react';
-import {FormControl, TextField, Box} from '@mui/material';
+import {TextField, Box} from '@mui/material';
 import HeadlineTypography from '../typography/HeadlineTypography';
 import DescriptionTypography from '../typography/DescriptionTypography';
 import ExampleTypography from '../typography/ExampleTypography';
@@ -22,6 +22,8 @@ const DecimalsTextField: FC<{}> = ({}) => {
         <TextField
           name='decimals'
           type='number'
+          inputProps={{max: 7}}
+          minRows={100}
           id='outlined-basic'
           label='decimals'
           placeholder='1, 2, 3,,,'

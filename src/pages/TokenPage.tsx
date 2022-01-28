@@ -18,7 +18,21 @@ interface TokenIssued {
   totalAmount: number
 }
 
-const mint = (setTokenIssued: (v: TokenIssued) => void) => {
+interface PostData {
+  cluster: string,
+  network: string,
+  totalSupply: number,
+  decimals: number,
+}
+
+interface ErrorPostData {
+  cluster: false,
+  network: false,
+  totalSupply: false,
+  decimals: false,
+}
+
+const mint = (setTokenIssued: (v: TokenIssued) => void, postData: PostData) => {
   window.solana.connect().then(async (wallet: any) => {
     const tokenKey = await SplToken.mint(
       wallet.publicKey,
@@ -45,13 +59,13 @@ const isComplete = (tokenIssued: TokenIssued) => {
   return tokenIssued.tokenKey !== '' && tokenIssued.totalAmount !== 0;
 }
 
+const isValidateError = (errorPostData: ErrorPostData) => 
+  Object.values(errorPostData).includes(true);
+
 const TokenPage = () => {
   const styles = useStyles();
   const [walletAddress, setWalletAddress] = useState('');
   const [tokenIssued, setTokenIssued] = useState<TokenIssued>({tokenKey: '', totalAmount: 0});
-  useEffect(() => {
-    // mint(setTokenIssued);
-  }, []);
 
   window.solana.connect().then((conn: any) => {
     setWalletAddress(conn.publicKey.toString());
@@ -60,9 +74,33 @@ const TokenPage = () => {
   const onSubmit: React.FormEventHandler<HTMLFormElement> = (ev) => {
     const formData = new FormData(ev.currentTarget);
     ev?.preventDefault();
-    for (let [key, value] of formData.entries()) {
-      console.log(key, value);
+    const postData: PostData = {cluster: '', network: '', totalSupply: 0, decimals: 0};
+    const errorPostData: ErrorPostData = {cluster: false, network: false, totalSupply: false, decimals: false};
+    for (const [key, value] of formData.entries()) {
+      switch (key) {
+        case 'cluster':
+          //validation check
+          postData.cluster = value.toString();
+          errorPostData.cluster = false;
+          break;
+        case 'network':
+          //validation check
+          postData.cluster = value.toString();
+          break;
+        case 'total-supply':
+          //validation check
+          postData.totalSupply = parseInt(value.toString());
+          break
+        case 'decimals':
+          //validation check
+          postData.decimals = parseInt(value.toString());
+          break
+        default:
+          //error
+          throw Error('No matched error');
+      }
     }
+    !isValidateError && mint(setTokenIssued, postData);
   }
 
   const Root = () => (
@@ -82,7 +120,7 @@ const TokenPage = () => {
           </Paper>
           <Box sx={{mb: 6}} />
           <div>
-            <SubmitButton callbackFunc={()=> {}} title='Submit' />
+            <SubmitButton callbackFunc={() => {}} title='Submit' />
           </div>
           <Box sx={{mb: 10}} />
         </FormControl>

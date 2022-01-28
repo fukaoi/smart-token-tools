@@ -1,5 +1,5 @@
 import {FC} from 'react';
-import {FormControl, TextField, Box} from '@mui/material';
+import {TextField, Box} from '@mui/material';
 import HeadlineTypography from '../typography/HeadlineTypography';
 
 const TotalSupplyTextField: FC<{}> = ({}) => {
@@ -12,7 +12,7 @@ const TotalSupplyTextField: FC<{}> = ({}) => {
           type='number'
           id='outlined-basic'
           label='total supply'
-          placeholder='e.g: 100000, 99999999'
+          placeholder='100000, 99999999,,,'
           variant='outlined'
           size='small'
           required
