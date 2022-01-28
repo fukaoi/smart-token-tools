@@ -7,16 +7,17 @@ const TotalSupplyTextField: FC<{}> = ({}) => {
     <>
       <HeadlineTypography message='Input total supply number' />
       <Box sx={{display: 'flex', mt: 2}}>
-        <FormControl>
-          <TextField
-            type='number'
-            id='outlined-basic'
-            label='total supply'
-            placeholder='e.g: 100000, 99999999'
-            variant='outlined'
-            size='small'
-          />
-        </FormControl>
+        <TextField
+          name='total-supply'
+          type='number'
+          id='outlined-basic'
+          label='total supply'
+          placeholder='e.g: 100000, 99999999'
+          variant='outlined'
+          size='small'
+          required
+          error={false}
+        />
       </Box>
     </>
   );

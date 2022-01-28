@@ -8,7 +8,7 @@ const DecimalsTextField: FC<{}> = ({}) => {
   const description =
     `The value of this setting specifies the number of decimal points in the token. 
      Please refer to the example below.`;
-  const example = 
+  const example =
     `input 1 decimals:  1000,     10000,         1
      input 2 decimals:  1000.0,   10000.0,     0.1
      input 3 decimals:  1000.00,  10000.00,   0.01
@@ -19,16 +19,17 @@ const DecimalsTextField: FC<{}> = ({}) => {
       <DescriptionTypography message={description} />
       <ExampleTypography example={example} />
       <Box sx={{display: 'flex', mt: 2}}>
-        <FormControl>
-          <TextField
-            type='number'
-            id='outlined-basic'
-            label='decimals'
-            placeholder='1, 2, 3,,,'
-            variant='outlined'
-            size='small'
-          />
-        </FormControl>
+        <TextField
+          name='decimals'
+          type='number'
+          id='outlined-basic'
+          label='decimals'
+          placeholder='1, 2, 3,,,'
+          variant='outlined'
+          size='small'
+          required
+          error={false}
+        />
       </Box>
     </>
   );

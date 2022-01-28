@@ -39,12 +39,6 @@ const useStyles = makeStyles({
     maxWidth: '20em',
     padding: '1.2em',
   },
-  radio: {
-    '&$checked': {
-      color: '#218010'
-    }
-  },
-  checked: {}
 });
 
 const isComplete = (tokenIssued: TokenIssued) => {
@@ -63,26 +57,36 @@ const TokenPage = () => {
     setWalletAddress(conn.publicKey.toString());
   });
 
+  const onSubmit: React.FormEventHandler<HTMLFormElement> = (ev) => {
+    const formData = new FormData(ev.currentTarget);
+    ev?.preventDefault();
+    for (let [key, value] of formData.entries()) {
+      console.log(key, value);
+    }
+  }
+
   const Root = () => (
     <div>
       <TitleTypography title='TOKEN' />
-      <FormControl onClick={console.log}>
-        <Paper className={styles.root}>
-          <AddressTypography address={walletAddress} />
-          <ClusterRadio />
-          <Box sx={{mb: 4}} />
-          <TokenIssueTypeRadio />
-          <Box sx={{mb: 4}} />
-          <TotalSupplyTextField />
-          <Box sx={{mb: 4}} />
-          <DecimalsTextField />
-        </Paper>
-        <Box sx={{mb: 6}} />
-        <div>
-          <SubmitButton callbackFunc={(ev:any) => {console.log(ev)}} title='Submit' />
-        </div>
-        <Box sx={{mb: 10}} />
-      </FormControl>
+      <form name='issue-token' onSubmit={onSubmit}>
+        <FormControl>
+          <Paper className={styles.root}>
+            <AddressTypography address={walletAddress} />
+            <ClusterRadio />
+            <Box sx={{mb: 4}} />
+            <TokenIssueTypeRadio />
+            <Box sx={{mb: 4}} />
+            <TotalSupplyTextField />
+            <Box sx={{mb: 4}} />
+            <DecimalsTextField />
+          </Paper>
+          <Box sx={{mb: 6}} />
+          <div>
+            <SubmitButton callbackFunc={()=> {}} title='Submit' />
+          </div>
+          <Box sx={{mb: 10}} />
+        </FormControl>
+      </form>
     </div>
   );
   return !isComplete(tokenIssued) ? <Root /> : <CompletePage />;
