@@ -9,7 +9,7 @@ const useStyles = makeStyles({
     borderRadius: '8px',
     padding: '5px',
     marginBottom: '1em',
-    boxShadow: '0px 0px 6px 3px #cccccc',
+    boxShadow: '0px 0px 5px 2px #cccccc',
   },
 });
 
@@ -20,6 +20,7 @@ const AddressTypography: FC<{address: string}> = ({address}) => {
       <Typography
         component='div'
         fontSize='16px'
+        color='#555555'
       > Your address:
       </Typography>
       <Typography

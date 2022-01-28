@@ -1,7 +1,6 @@
 import {useEffect, useState} from 'react';
 import {makeStyles} from '@mui/styles';
-import FormControl from '@mui/material/FormControl';
-import {Paper} from '@mui/material';
+import {Paper, Box, FormControl} from '@mui/material';
 
 import TitleTypography from '../components/typography/TitleTypography';
 import AddressTypography from '../components/typography/AddressTypography';
@@ -10,6 +9,8 @@ import CompletePage from './CompletePage';
 import {SplToken} from '../adapters/spl-token';
 import ClusterRadio from '../components/radio/ClusterRadio';
 import TokenIssueTypeRadio from '../components/radio/TokenIssueTypeRadio';
+import TotalSupplyTextField from '../components/textField/TotalSupplyTestField';
+import DecimalsTextField from '../components/textField/DecimalsTestField';
 
 interface TokenIssued {
   tokenKey: string,
@@ -68,8 +69,12 @@ const TokenPage = () => {
         <Paper className={styles.root}>
           <AddressTypography address={walletAddress} />
           <ClusterRadio />
-          <br />
+          <Box sx={{mb: 4}} />
           <TokenIssueTypeRadio />
+          <Box sx={{mb: 4}} />
+          <TotalSupplyTextField />
+          <Box sx={{mb: 4}} />
+          <DecimalsTextField />
         </Paper>
       </FormControl>
     </div>
