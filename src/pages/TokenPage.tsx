@@ -66,7 +66,7 @@ const TokenPage = () => {
   const Root = () => (
     <div>
       <TitleTypography title='TOKEN' />
-      <FormControl>
+      <FormControl onClick={console.log}>
         <Paper className={styles.root}>
           <AddressTypography address={walletAddress} />
           <ClusterRadio />
@@ -79,7 +79,7 @@ const TokenPage = () => {
         </Paper>
         <Box sx={{mb: 6}} />
         <div>
-          <SubmitButton callbackFunc={console.log} title='Submit' />
+          <SubmitButton callbackFunc={(ev:any) => {console.log(ev)}} title='Submit' />
         </div>
         <Box sx={{mb: 10}} />
       </FormControl>

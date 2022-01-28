@@ -19,9 +19,10 @@ const StyledButton = withStyles({
 })(Button);
 
 
-const SubmitButton: FC<{callbackFunc: () => void, title: string}> = ({callbackFunc, title}) => {
+const SubmitButton: FC<{callbackFunc: (event?:any) => void, title: string}> = ({callbackFunc, title}) => {
   return (
     <StyledButton
+      type='submit'
       variant='contained'
       onClick={callbackFunc}
     >{title}
