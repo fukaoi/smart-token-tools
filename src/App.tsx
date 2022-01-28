@@ -13,8 +13,8 @@ const useStyles = makeStyles({
   appMain: {
     backgroundSize: 'cover',
     backgroundImage: `url(${backImage})`,
-    minHeight: '100vh',
-    maxHeight: '100vh',
+    minHeight: '95vh',
+    maxHeight: '150vh',
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'ceter',
