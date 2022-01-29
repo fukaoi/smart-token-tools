@@ -55,7 +55,9 @@ const HeaderNavigation = () => {
     <AppBar position='static' style={{ background: 'transparent'}}>
       <Toolbar>
         <Grid container>
+
           <Grid item xs={2}>
+            <img src={headerLogo} />
           </Grid>
           <Grid item xs={8}>
           </Grid>

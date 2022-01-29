@@ -22,7 +22,7 @@ const useStyles = makeStyles({
     position: 'relative',
     top: '2em',
     maxWidth: 350,
-    height: '300px',
+    maxHeight: '500px',
     marginLeft: '4em',
     marginRight: '4em'
   },
@@ -65,8 +65,12 @@ const UsageGuide = () => {
           </Typography>
           <Typography variant='body2' color='text.secondary'>
             Lizards are a widespread group of squamate reptiles, with over 6,000
+            Lizards are a widespread group of squamate reptiles, with over 6,000
           </Typography>
         </CardContent>
+        <CardActions className={styles.cardAction}>
+          <Button size='small'>Atonoy subscription token</Button>
+        </CardActions>
       </Card>
     </div>
   );

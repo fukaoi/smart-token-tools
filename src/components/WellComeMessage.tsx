@@ -14,12 +14,18 @@ const WellComeMessage = () => {
   const styles = useStyles();
   return (
     <div className={styles.message}>
-      <TitleTypography title='Welcome ♥' />
       <Typography
         component='div'
-        fontSize='2em'
+        fontSize='23px'
+        fontWeight='500'
+      >LETS TOKEN ISSUE EASY AND QUICKLY
+      </Typography>
+      <Typography
+        component='div'
+        fontSize='3em'
         fontWeight='bold'
-      >Let's issue token/NFT<br />very quickly and easily</Typography>
+      >TOKEN AND NFT
+      </Typography>
     </div>
   );
 }

@@ -13,10 +13,10 @@ const useStyles = makeStyles({
   appMain: {
     backgroundSize: 'cover',
     backgroundImage: `url(${backImage})`,
-    backgroundRepeat: 'no-repeat',
     backgroundPosition: 'ceter',
     minHeight: '94vh',
     maxHeight: '150vh',
+    width: '100%',
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'ceter',
@@ -35,7 +35,6 @@ const App = () => {
 
   return (
     <div className={styles.app}>
-      <HeaderNavigation />
       <main className={styles.appMain}>
         {content === 'Token' ? <TokenPage /> : <TopPage callbackFunc={callWalletAdapter} />}
       </main>
