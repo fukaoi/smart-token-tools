@@ -11,19 +11,16 @@ nav{
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding-left: 7%;
-  padding-right: 7%;
+  padding-left: 5%;
+  padding-right: 5%;
 }
 .logo img{
   width: 200px;
   cursor: pointer;
 }
 nav ul li{
-  color: '#ffff3';
-  font-size: 22px;
-  list-style: none;
+  font-size: 25px;
   display: inline-block;
   padding: 0px 25px;
-  font-weight: 300;
   cursor: pointer;
 }

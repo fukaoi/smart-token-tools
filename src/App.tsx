@@ -2,9 +2,10 @@ import {useState} from 'react';
 import {makeStyles} from '@mui/styles';
 import TokenPage from './pages/TokenPage';
 import TopPage from './pages/TopPage';
-import backImage from './assets/background-image2.jpg';
+import backImage from './assets/background-image.jpg';
 import SubmitButton from './components/button/SubmitButton';
-import atonoyLogoImage from './assets/atonoy-logo.png';
+import corpLogoImage from './assets/atonoy-logo.png';
+import logoImage from './assets/smt-logo.svg';
 
 const useStyles = makeStyles({
   root: {
@@ -26,8 +27,11 @@ const useStyles = makeStyles({
     width: '100%',
     marginBottom: '10px'
   },
-  atonoyLogoImage: {
+  corpLogoImage: {
     width: '130px',
+  },
+  logoImage: {
+    alignSelf: 'left'
   }
 });
 
@@ -42,15 +46,15 @@ const App = () => {
   return (
     <main className={styles.root}>
       <nav>
-        <div>
-          <img src="img/logo.png" />
+        <div className={styles.logoImage}>
+          <img src={logoImage} />
         </div>
         <ul>
-          <li>Token</li>
+          <li>TOKEN</li>
           <li>NFT</li>
-          <li>Contact</li>
+          <li>CONTACT</li>
         </ul>
-        <SubmitButton title='Connect wallet' callbackFunc={() => {}} />
+        <SubmitButton title='Connect wallet' callbackFunc={(ev) => {console.log(ev)}} />
       </nav>
       {
         content === 'Token'
@@ -58,7 +62,7 @@ const App = () => {
           : <TopPage callbackFunc={callWalletAdapter} />
       }
       <div className={styles.footer}>
-        <img src={atonoyLogoImage} className={styles.atonoyLogoImage} />
+        <img src={corpLogoImage} className={styles.corpLogoImage} />
       </div>
     </main>
   );
