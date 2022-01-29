@@ -55,7 +55,7 @@ const NavigationButtons = () => {
   return comp;
 }
 
-const HeaderLayout = () => {
+const HeaderNavigation = () => {
   const styles = useStyles();
   return (
     <AppBar position='static' color='transparent'>
@@ -78,4 +78,4 @@ const HeaderLayout = () => {
     </AppBar>
   );
 };
-export default HeaderLayout;
+export default HeaderNavigation;

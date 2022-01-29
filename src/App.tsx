@@ -1,7 +1,7 @@
 import {useState} from 'react';
 import {makeStyles} from '@mui/styles';
 
-import HeaderLayout from './components/layout/HeaderLayout';
+import HeaderNavigation from './components/navigation/HeaderNavigation';
 import TokenPage from './pages/TokenPage';
 import TopPage from './pages/TopPage';
 import backImage from './assets/background-image2.jpg';
@@ -35,7 +35,7 @@ const App = () => {
 
   return (
     <div className={styles.app}>
-      <HeaderLayout />
+      <HeaderNavigation />
       <main className={styles.appMain}>
         {content === 'Token' ? <TokenPage /> : <TopPage callbackFunc={callWalletAdapter} />}
       </main>

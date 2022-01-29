@@ -6,7 +6,7 @@ const TitleTypography: FC<{title: string}> = ({title}) => {
       <Typography
         component='div'
         fontStyle='italic'
-        fontSize='2em'
+        fontSize='1.8em'
         sx={{mt: 5}}
       >{title}
       </Typography>
