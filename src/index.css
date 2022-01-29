@@ -19,7 +19,8 @@ nav{
   cursor: pointer;
 }
 nav ul li{
-  font-size: 25px;
+  letter-spacing: 3px;
+  font-size: 20px;
   display: inline-block;
   padding: 0px 25px;
   cursor: pointer;

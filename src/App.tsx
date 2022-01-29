@@ -50,9 +50,9 @@ const App = () => {
           <img src={logoImage} />
         </div>
         <ul>
-          <li>TOKEN</li>
+          <li>Token</li>
           <li>NFT</li>
-          <li>CONTACT</li>
+          <li>Contact</li>
         </ul>
         <SubmitButton title='Connect wallet' callbackFunc={(ev) => {console.log(ev)}} />
       </nav>
