@@ -10,12 +10,6 @@ const useStyles = makeStyles({
     alignItems: 'center',
     flexWrap: 'wrap',
   },
-  logo: {
-    marginTop: '5px',
-    marginLeft: '-4em',
-    width: '180px',
-    height: '40px'
-  }
 });
 
 // const goToPage = (pageName: string) => {
@@ -58,17 +52,14 @@ const NavigationButtons = () => {
 const HeaderNavigation = () => {
   const styles = useStyles();
   return (
-    <AppBar position='static' color='transparent'>
+    <AppBar position='static' color='inherit' style={{ background: 'transparent !important', boxShadow: 'none'}}>
       <Toolbar>
         <Grid container>
           <Grid item xs={2}>
-            <a href='https://atonoy.co'>
-              <img src={headerLogo} className={styles.logo} alt='atonoy.co' />
-            </a>
           </Grid>
-          <Grid item xs={7}>
+          <Grid item xs={8}>
           </Grid>
-          <Grid item xs={3}>
+          <Grid item xs={2}>
             <div className={styles.horizontal} >
               <NavigationButtons />
             </div>
