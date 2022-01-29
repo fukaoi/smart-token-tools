@@ -52,7 +52,7 @@ const NavigationButtons = () => {
 const HeaderNavigation = () => {
   const styles = useStyles();
   return (
-    <AppBar position='static' color='inherit' style={{ background: 'transparent !important', boxShadow: 'none'}}>
+    <AppBar position='static' style={{ background: 'transparent'}}>
       <Toolbar>
         <Grid container>
           <Grid item xs={2}>

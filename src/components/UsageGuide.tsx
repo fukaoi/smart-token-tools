@@ -20,7 +20,7 @@ const useStyles = makeStyles({
   },
   cardContainer: {
     position: 'relative',
-    top: '3em',
+    top: '2em',
     maxWidth: 350,
     height: '300px',
     marginLeft: '4em',

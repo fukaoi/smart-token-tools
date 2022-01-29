@@ -5,7 +5,7 @@ import TitleTypography from './typography/TitleTypography';
 const useStyles = makeStyles({
   message: {
     position: 'relative',
-    top: '1em',
+    top: '10px',
     marginBottom: '1em',
   },
 });
