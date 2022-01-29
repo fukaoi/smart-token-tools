@@ -7,21 +7,5 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-nav{
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding-left: 5%;
-  padding-right: 5%;
-}
-.logo img{
-  width: 200px;
-  cursor: pointer;
-}
 nav ul li{
-  letter-spacing: 3px;
-  font-size: 20px;
-  display: inline-block;
-  padding: 0px 25px;
-  cursor: pointer;
-}
+  }

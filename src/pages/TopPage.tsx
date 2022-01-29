@@ -14,8 +14,9 @@ const useStyles = makeStyles({
     marginBottom: '1em',
   },
   submit: {
-    position: 'relative',
-    top: '20em',
+    width: '100%',
+    marginTop: '8em',
+    marginBottom: '1em',
   }
 });
 
@@ -66,11 +67,12 @@ const TopPage: FC<{callbackFunc: () => void}> = ({callbackFunc}) => {
     <div>
       <WellComeMessage />
       <UsageGuide />
-      <SubmitButton 
-        className={styles.submit}
-        title='Getting start' 
-        callbackFunc={connectHandler} 
-      />
+      <div className={styles.submit}>
+        <SubmitButton
+          title='Getting start'
+          callbackFunc={connectHandler}
+        />
+      </div>
     </div>
   );
 };
