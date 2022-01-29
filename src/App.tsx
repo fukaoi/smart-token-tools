@@ -1,21 +1,17 @@
 import {useState} from 'react';
 import {makeStyles} from '@mui/styles';
-
-import HeaderNavigation from './components/navigation/HeaderNavigation';
 import TokenPage from './pages/TokenPage';
 import TopPage from './pages/TopPage';
 import backImage from './assets/background-image2.jpg';
+import SubmitButton from './components/button/SubmitButton';
 
 const useStyles = makeStyles({
-  app: {
+  root: {
     textAlign: 'center',
-  },
-  appMain: {
     backgroundSize: 'cover',
     backgroundImage: `url(${backImage})`,
     backgroundPosition: 'ceter',
-    minHeight: '94vh',
-    maxHeight: '150vh',
+    minHeight: '100vh',
     width: '100%',
     display: 'flex',
     flexDirection: 'column',
@@ -34,11 +30,24 @@ const App = () => {
   }
 
   return (
-    <div className={styles.app}>
-      <main className={styles.appMain}>
-        {content === 'Token' ? <TokenPage /> : <TopPage callbackFunc={callWalletAdapter} />}
-      </main>
-    </div>
+    <main className={styles.root}>
+      <nav>
+        <div>
+          <img src="img/logo.png" />
+        </div>
+        <ul>
+          <a href="#"><li>Token</li></a>
+          <a href="#"><li>NFT</li></a>
+          <a href="#"><li>Contact</li></a>
+        </ul>
+        <SubmitButton title='Connect wallet' callbackFunc={() => {}} />
+      </nav>
+      {
+        content === 'Token'
+          ? <TokenPage />
+          : <TopPage callbackFunc={callWalletAdapter} />
+      }
+    </main>
   );
 }
 

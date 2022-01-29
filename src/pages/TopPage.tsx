@@ -7,7 +7,7 @@ import {Box} from '@mui/material';
 declare global {interface Window {solana: any}}
 
 const TopPage: FC<{callbackFunc: () => void}> = ({callbackFunc}) => {
-  
+
   const [_, setConnected] = useState(false);// eslint-disable-line
 
   useEffect(() => {

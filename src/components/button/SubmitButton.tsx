@@ -9,8 +9,8 @@ const StyledButton = withStyles({
     border: 0,
     color: 'white',
     boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
-    width: '250px',
-    height: '50px',
+    width: '160px',
+    height: '40px',
     position: 'relative',
   },
   label: {
@@ -19,7 +19,12 @@ const StyledButton = withStyles({
 })(Button);
 
 
-const SubmitButton: FC<{callbackFunc: (event?:any) => void, title: string}> = ({callbackFunc, title}) => {
+const SubmitButton: FC<
+  {
+    callbackFunc: (event?: any) => void,
+    title: string
+  }
+> = ({callbackFunc, title}) => {
   return (
     <StyledButton
       type='submit'
