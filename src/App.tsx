@@ -58,7 +58,7 @@ const App = () => {
         <Grid container
           alignItems="center"
           justifyContent="center"
-          style={{height: '12vh'}}
+          style={{height: '10vh'}}
         >
           <Grid item xs={3}><img src={logoImage} /></Grid>
           <Grid item xs={6}>
