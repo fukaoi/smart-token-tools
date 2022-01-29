@@ -1,13 +1,46 @@
 import {FC, useEffect, useState} from 'react';
-import WellComeMessage from '../components/WellComeMessage';
 import UsageGuide from '../components/UsageGuide';
 import SubmitButton from '../components/button/SubmitButton';
+import {makeStyles} from '@mui/styles';
+import Typography from '@mui/material/Typography';
 import {Box} from '@mui/material';
 
 declare global {interface Window {solana: any}}
 
-const TopPage: FC<{callbackFunc: () => void}> = ({callbackFunc}) => {
+const useStyles = makeStyles({
+  message: {
+    position: 'relative',
+    top: '3em',
+    marginBottom: '1em',
+  },
+  submit: {
+    position: 'relative',
+    top: '20em',
+  }
+});
 
+const WellComeMessage = () => {
+  const styles = useStyles();
+  return (
+    <div className={styles.message}>
+      <Typography
+        component='div'
+        fontSize='23px'
+        fontWeight='500'
+      >LETS TOKEN ISSUE EASY AND QUICKLY
+      </Typography>
+      <Typography
+        component='div'
+        fontSize='2.4em'
+        fontWeight='bold'
+      >TOKEN AND NFT
+      </Typography>
+    </div>
+  );
+}
+
+const TopPage: FC<{callbackFunc: () => void}> = ({callbackFunc}) => {
+  const styles = useStyles();
   const [_, setConnected] = useState(false);// eslint-disable-line
 
   useEffect(() => {
@@ -33,8 +66,11 @@ const TopPage: FC<{callbackFunc: () => void}> = ({callbackFunc}) => {
     <div>
       <WellComeMessage />
       <UsageGuide />
-      <Box sx={{mt: 20}} />
-      <SubmitButton title='Getting start' callbackFunc={connectHandler} />
+      <SubmitButton 
+        className={styles.submit}
+        title='Getting start' 
+        callbackFunc={connectHandler} 
+      />
     </div>
   );
 };
