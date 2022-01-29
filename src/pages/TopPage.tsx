@@ -33,7 +33,7 @@ const TopPage: FC<{callbackFunc: () => void}> = ({callbackFunc}) => {
     <div>
       <WellComeMessage />
       <UsageGuide />
-      <Box sx={{mt: 25}} />
+      <Box sx={{mt: 20}} />
       <SubmitButton title='Getting start' callbackFunc={connectHandler} />
     </div>
   );

@@ -1,11 +1,10 @@
 import {Typography} from '@mui/material';
 import {makeStyles} from '@mui/styles';
-import TitleTypography from './typography/TitleTypography';
 
 const useStyles = makeStyles({
   message: {
     position: 'relative',
-    top: '10px',
+    top: '3em',
     marginBottom: '1em',
   },
 });

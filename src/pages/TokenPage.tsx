@@ -47,7 +47,6 @@ const mint = (setTokenIssued: (v: TokenIssued) => void, postData: PostData) => {
 
 const useStyles = makeStyles({
   root: {
-    position: 'relative',
     marginTop: '1em',
     minWidth: '20em',
     maxWidth: '20em',

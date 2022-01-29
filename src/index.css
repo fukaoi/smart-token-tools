@@ -13,24 +13,17 @@ nav{
   justify-content: space-between;
   padding-left: 7%;
   padding-right: 7%;
-  margin-bottom: 5em;
 }
 .logo img{
   width: 200px;
   cursor: pointer;
 }
 nav ul li{
+  color: '#ffff3';
+  font-size: 22px;
   list-style: none;
   display: inline-block;
   padding: 0px 25px;
-  font-weight: 400;
-}
-nav ul a{
-  color: #fffff3;
-  font-size: 20px;
-  letter-spacing: 3px;
-}
-nav ul a:hover{
-  color: white;
-  transition: .3s;
+  font-weight: 300;
+  cursor: pointer;
 }
