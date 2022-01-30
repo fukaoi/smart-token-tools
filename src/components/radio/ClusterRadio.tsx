@@ -2,8 +2,11 @@ import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import HeadlineTypography from '../typography/HeadlineTypography';
+import {FormValues} from '../../pages/TokenPage';
+import {useController, UseControllerProps} from 'react-hook-form';
 
-const ClusterRadio = () => {
+const ClusterRadio = (props: UseControllerProps<FormValues>) => {
+  // const {field, fieldState} = useController(props);
   return (
     <>
       <HeadlineTypography message='Select your using network cluster' />

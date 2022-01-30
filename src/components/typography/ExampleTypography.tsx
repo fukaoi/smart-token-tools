@@ -11,13 +11,16 @@ const useStyles = makeStyles({
     backgroundColor: '#fff7eb',
     padding: '10px',
     borderRadius: '8px',
+    whiteSpace: 'pre',
   },
 });
 
 const ExampleTypography: FC<{example: string}> = ({example}) => {
   const styles = useStyles();
   return (
-      <pre className={styles.pre}>e.g: {example}</pre>
+    <div className={styles.pre}>e.g:
+      {example}
+    </div>
   );
 }
 

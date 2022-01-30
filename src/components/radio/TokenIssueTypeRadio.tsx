@@ -1,17 +1,19 @@
-import Typography from '@mui/material/Typography';
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import HeadlineTypography from '../typography/HeadlineTypography';
+import {FormValues} from '../../pages/TokenPage';
+import {useController, UseControllerProps} from 'react-hook-form';
 
-const TokenIssueTypeRadio = () => {
+const TokenIssueTypeRadio = (props: UseControllerProps<FormValues>) => {
+  // const {field, fieldState} = useController(props);
   return (
     <>
       <HeadlineTypography message='Select token issue type' />
       <RadioGroup
-        aria-labelledby='issue'
+        aria-labelledby='issueType'
         defaultValue='new'
-        name='issue'
+        name='issueType'
       >
         <FormControlLabel value='new' control={<Radio />} label='New' />
         <FormControlLabel value='add' control={<Radio />} label='Add' />

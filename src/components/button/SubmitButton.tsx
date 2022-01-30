@@ -21,7 +21,7 @@ const StyledButton = withStyles({
 const SubmitButton: FC<
   {
     className?: any,
-    callbackFunc: (event?: any) => void,
+    callbackFunc?: (event?: any) => void,
     title: string
   }
 > = ({className, callbackFunc, title}) => {
