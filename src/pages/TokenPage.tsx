@@ -60,6 +60,12 @@ const onSubmit = (ev: any) => {
 const TokenPage = () => {
   const styles = useStyles();
   const {handleSubmit, control} = useForm<FormValues>({
+    defaultValues: {
+      cluster: 'devnet',
+      issueType: 'add',
+      totalSupply: 0,
+      decimals: 1,
+    }
   });
   const [walletAddress, setWalletAddress] = useState('');
   const [tokenIssued, setTokenIssued] = useState<TokenIssued>({tokenKey: '', totalAmount: 0});

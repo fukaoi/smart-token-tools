@@ -6,8 +6,7 @@ import {FormValues} from '../../pages/TokenPage';
 import {useController, UseControllerProps} from 'react-hook-form';
 
 const DecimalsTextField = (props: UseControllerProps<FormValues>) => {
-  const {field: {ref, ...rest}, fieldState} = useController(props);
-  const { name, control, rules, ...textFieldProps } = props;
+  const {field, fieldState} = useController(props);
   const description =
     `The value of this setting specifies the number of decimal points in the token. 
      Please refer to the example below.`;
@@ -23,14 +22,7 @@ const DecimalsTextField = (props: UseControllerProps<FormValues>) => {
       <ExampleTypography example={example} />
       <Box sx={{display: 'flex', mt: 2}}>
         <TextField
-      inputRef={ref}
-      {...rest}
-      {...textFieldProps}
-    />
-    {/* 
-        <TextField
-          name='decimals'
-          type='number'
+          type='text'
           minRows={100}
           id='outlined-basic'
           label='decimals'
@@ -38,8 +30,8 @@ const DecimalsTextField = (props: UseControllerProps<FormValues>) => {
           variant='outlined'
           size='small'
           error={false}
+          {...field}
         />
-      */}
       </Box>
     </>
   );

@@ -4,20 +4,13 @@ import {FormValues} from '../../pages/TokenPage';
 import {useController, UseControllerProps} from 'react-hook-form';
 
 const TotalSupplyTextField = (props: UseControllerProps<FormValues>) => {
-  const {field: {ref, ...rest}, fieldState} = useController(props);
-  const { name, control, rules, ...textFieldProps } = props;
+  const {field, fieldState} = useController(props);
   return (
     <>
       <HeadlineTypography message='Input total supply number' />
       <Box sx={{display: 'flex', mt: 2}}>
-  <TextField
-      inputRef={ref}
-      {...rest}
-      {...textFieldProps}
-    />
-        {/*<TextField
-          name='totalSupply'
-          type='number'
+        <TextField
+          type='text'
           id='outlined-basic'
           label='total supply'
           placeholder='100000, 99999999,,,'
@@ -25,8 +18,8 @@ const TotalSupplyTextField = (props: UseControllerProps<FormValues>) => {
           size='small'
           required
           error={false}
+          {...field}
         />
-          */}
       </Box>
     </>
   );

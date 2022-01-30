@@ -6,18 +6,30 @@ import {FormValues} from '../../pages/TokenPage';
 import {useController, UseControllerProps} from 'react-hook-form';
 
 const ClusterRadio = (props: UseControllerProps<FormValues>) => {
-  // const {field, fieldState} = useController(props);
+  const {field, fieldState} = useController(props);
   return (
     <>
       <HeadlineTypography message='Select your using network cluster' />
       <RadioGroup
         aria-labelledby='cluster'
         defaultValue='devnet'
-        name='cluster'
+        {...field}
       >
-        <FormControlLabel value='mainnet-beta' control={<Radio color='secondary' />} label='Mainnet-beta' />
-        <FormControlLabel value='devnet' control={<Radio color='warning' />} label='Devnet' />
-        <FormControlLabel value='testnet' control={<Radio color='primary' />} label='Testnet' />
+        <FormControlLabel 
+          value='mainnet-beta' 
+          control={<Radio color='secondary' />} 
+          label='Mainnet-beta' 
+        />
+        <FormControlLabel 
+          value='devnet' 
+          control={<Radio color='warning' />} 
+          label='Devnet' 
+        />
+        <FormControlLabel 
+          value='testnet' 
+          control={<Radio color='primary' />} 
+          label='Testnet' 
+        />
       </RadioGroup>
     </>
   );

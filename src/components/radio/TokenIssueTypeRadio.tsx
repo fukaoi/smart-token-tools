@@ -6,17 +6,25 @@ import {FormValues} from '../../pages/TokenPage';
 import {useController, UseControllerProps} from 'react-hook-form';
 
 const TokenIssueTypeRadio = (props: UseControllerProps<FormValues>) => {
-  // const {field, fieldState} = useController(props);
+  const {field, fieldState} = useController(props);
   return (
     <>
       <HeadlineTypography message='Select token issue type' />
       <RadioGroup
         aria-labelledby='issueType'
         defaultValue='new'
-        name='issueType'
+        {...field}
       >
-        <FormControlLabel value='new' control={<Radio />} label='New' />
-        <FormControlLabel value='add' control={<Radio />} label='Add' />
+        <FormControlLabel 
+          value='new' 
+          control={<Radio />} 
+          label='New' 
+        />
+        <FormControlLabel 
+          value='add' 
+          control={<Radio />} 
+          label='Add' 
+        />
       </RadioGroup>
     </>
   );
