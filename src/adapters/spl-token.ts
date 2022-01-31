@@ -110,11 +110,12 @@ export namespace SplToken {
 
   export const mint = async (
     owner: PublicKey,
+    cluster: string,
     totalAmount: number,
     mintDecimal: number,
     signTransaction: (tx: Transaction | Transaction[]) => any,
   ): Promise<Result<string, Error>> => {
-    const connection = Node.getConnection();
+    const connection = Node.getConnection(cluster);
     const tx = new Transaction();
 
     const txData1 = await initMint(

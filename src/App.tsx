@@ -56,11 +56,11 @@ const App = () => {
     <main className={styles.root}>
       <div className={styles.navi}>
         <Grid container
-          alignItems="center"
-          justifyContent="center"
+          alignItems='center'
+          justifyContent='center'
           style={{height: '10vh'}}
         >
-          <Grid item xs={3}><img src={logoImage} /></Grid>
+          <Grid item xs={3}><a href='/'><img src={logoImage} /></a></Grid>
           <Grid item xs={6}>
             <div className={styles.naviLink}>Token</div>
             <div className={styles.naviLink}>NFT</div>

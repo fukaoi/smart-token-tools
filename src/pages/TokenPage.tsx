@@ -25,18 +25,25 @@ export interface FormValues {
   decimals: number,
 }
 
-// const mint = (setTokenIssued: (v: TokenIssued) => void, postData: PostData) => {
-// window.solana.connect().then(async (wallet: any) => {
-// const tokenKey = await SplToken.mint(
-// wallet.publicKey,
-// 100,
-// 1,
-// window.solana.signAllTransactions
-// );
-// console.log('tokenKey: ', tokenKey);
-// setTokenIssued({tokenKey: tokenKey.unwrap(), totalAmount: 100});
-// });
-// }
+const mint = async(
+  walletAddress: string,
+  postData: FormValues,
+  setTokenIssued: (v: TokenIssued) => void,
+) => {
+  // window.solana.connect().then(async (wallet: any) => {
+    const sig = await SplToken.mint(
+      // wallet.publicKey,
+      walletAddress.toPublicKey(),
+      postData.cluster,
+      postData.totalSupply,
+      postData.decimals,
+      window.solana.signAllTransactions
+    );
+    console.debug('tokenKey: ', sig);
+    sig.isErr && alert(sig.error);
+    setTokenIssued({tokenKey: sig.unwrap(), totalAmount: postData.totalSupply});
+  // });
+}
 
 const useStyles = makeStyles({
   root: {
@@ -51,12 +58,6 @@ const isComplete = (tokenIssued: TokenIssued) => {
   return tokenIssued.tokenKey !== '' && tokenIssued.totalAmount !== 0;
 }
 
-const onSubmit = (ev: any) => {
-  console.log('------------------------');
-  console.log('[ev]', ev);
-  console.log('------------------------');
-}
-
 const TokenPage = () => {
   const styles = useStyles();
   const {handleSubmit, control} = useForm<FormValues>({
@@ -69,6 +70,10 @@ const TokenPage = () => {
   });
   const [walletAddress, setWalletAddress] = useState('');
   const [tokenIssued, setTokenIssued] = useState<TokenIssued>({tokenKey: '', totalAmount: 0});
+
+  const onSubmit = (data: any) => {
+    mint(walletAddress, data, setTokenIssued);
+  }
 
   window.solana.connect().then((conn: any) => {
     setWalletAddress(conn.publicKey.toString());
@@ -91,7 +96,7 @@ const TokenPage = () => {
           </Paper>
           <Box sx={{mb: 6}} />
           <div>
-            <SubmitButton title='Submit' />
+            <SubmitButton title='Confirm' />
           </div>
           <Box sx={{mb: 10}} />
         </FormControl>
