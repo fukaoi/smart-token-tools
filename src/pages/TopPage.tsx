@@ -43,22 +43,10 @@ const WellComeMessage = () => {
 const TopPage = () => {
   const styles = useStyles();
   const [isConnect, setConnected] = useState(false);// eslint-disable-line
-
-  useEffect(() => {
-    window.solana.on('connect', () => {
-      console.log('connected');
-      setConnected(true);
-    });
-
-    window.solana.on('disconnect', () => {
-      console.log('disconnected');
-      setConnected(false);
-    });
-  }, []);
-
   const connectHandler = () => {
     window.solana.connect().then((conn: any) => {
       console.log(conn.publicKey.toString());
+      setConnected(true);
     });
   };
 
