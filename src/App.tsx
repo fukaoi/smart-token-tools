@@ -75,7 +75,11 @@ const App = () => {
           ? <TokenPage />
           : <TopPage callbackFunc={callWalletAdapter} />
       }
-      <div className={styles.footer}><img src={corpLogoImage} className={styles.corpLogoImage} /></div>
+      <div className={styles.footer}>
+        <a href='https://atonoy.co'>
+          <img src={corpLogoImage} className={styles.corpLogoImage} />
+        </a>
+      </div>
     </main>
   );
 }
