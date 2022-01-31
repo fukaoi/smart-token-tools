@@ -5,6 +5,8 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
+import {theme} from '../constants/colorTheme';
+import {ThemeProvider} from '@mui/material/styles';
 
 import AtonoyMarkLogo from '../assets/atonoy-logo-mark.png';
 import PhantomMarkLogo from '../assets/phantom-logo-mark.png'
@@ -68,9 +70,11 @@ const UsageGuide = () => {
             Lizards are a widespread group of squamate reptiles, with over 6,000
           </Typography>
         </CardContent>
+        <ThemeProvider theme={theme}>
         <CardActions className={styles.cardAction}>
-          <Button size='small'>Atonoy subscription token</Button>
+          <Button size='small' color={theme.palette.red}>Atonoy subscription token</Button>
         </CardActions>
+      </ThemeProvider>
       </Card>
     </div>
   );

@@ -70,17 +70,6 @@ const App = () => {
           <Grid item xs={2}><SubmitButton title='Connect wallet' callbackFunc={(ev) => {console.log(ev)}} /></Grid>
         </Grid>
       </div>
-      {/*
-      <nav className={styles.navi}>
-        <img src={logoImage} />
-        <ul>
-          <li className={styles.naviLink}>Token</li>
-          <li className={styles.naviLink}>NFT</li>
-          <li className={styles.naviLink}>Contact</li>
-        </ul>
-        <SubmitButton title='Connect wallet' callbackFunc={(ev) => {console.log(ev)}} />
-      </nav>
-      */}
       {
         content === 'Token'
           ? <TokenPage />
