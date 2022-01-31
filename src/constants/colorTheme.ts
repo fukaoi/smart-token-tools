@@ -1,6 +1,5 @@
 import {createTheme} from '@mui/material/styles';
 import {indigo, deepOrange, pink} from '@mui/material/colors';
-// import createPalette from '@mui/material/styles/createPalette';
 
 
 declare module "@mui/material/styles/createPalette" {
@@ -13,8 +12,8 @@ declare module "@mui/material/styles/createPalette" {
   } 
 }
 
-declare module '@mui/material/Chip' {
-  export interface ChipPropsColorOverrides {
+declare module '@mui/material/Button' {
+  export interface ButtonPropsColorOverrides {
     'red': true
   }
 }
