@@ -160,7 +160,58 @@ export namespace SplToken {
     for (let sign of signed) {
       const sig = await connection.sendRawTransaction(sign.serialize())
       await T.confirmedSig(sig)
-      console.log('# result sig: ', sig);
+    };
+
+    return Result.ok(tokenKey.toBase58());
+  }
+
+   export const addMinting = async (
+    tokenKey: PublicKey,
+    owner: PublicKey,
+    cluster: string,
+    totalAmount: number,
+    mintDecimal: number,
+    signTransaction: (tx: Transaction | Transaction[]) => any,
+  ): Promise<Result<string, Error>> => {
+    const connection = Node.getConnection(cluster);
+    const tx = new Transaction();
+
+    const txData1 =
+      await getOrCreateAssociatedTokenAccount(
+        tokenKey,
+        owner,
+      );
+
+    if (txData1.isErr) return Result.err(txData1.error);
+
+    const tokenAccount = txData1.unwrap().account;
+
+    console.log('tokenAccount: ', tokenAccount.toBase58());
+    console.log('tx: ', txData1.unwrap().tx);
+
+    tx.add(txData1.unwrap().tx);
+
+    const transaction = tx.add(
+      createMintToCheckedInstruction(
+        tokenKey,
+        tokenAccount,
+        owner,
+        totalAmount,
+        mintDecimal,
+        [],
+        TOKEN_PROGRAM_ID
+      )
+    );
+
+    transaction.feePayer = owner;
+    const blockhashObj = await connection.getRecentBlockhash();
+    transaction.recentBlockhash = blockhashObj.blockhash;
+
+    const signed = await signTransaction([transaction]);
+
+    for (let sign of signed) {
+      const sig = await connection.sendRawTransaction(sign.serialize())
+      await T.confirmedSig(sig)
     };
 
     return Result.ok(tokenKey.toBase58());

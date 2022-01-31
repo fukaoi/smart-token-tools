@@ -21,7 +21,7 @@ const AddressTypography: FC<{address: string}> = ({address}) => {
       <Typography
         component='div'
         fontSize='16px'
-      > Your address:
+      > current your address:
       </Typography>
       <Typography
         component='div'

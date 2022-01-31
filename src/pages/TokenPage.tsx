@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
 import {makeStyles} from '@mui/styles';
 import {Paper, Box, FormControl} from '@mui/material';
 import {useForm} from 'react-hook-form';
@@ -8,8 +8,9 @@ import AddressTypography from '../components/typography/AddressTypography';
 import CompletePage from './CompletePage';
 import ClusterRadio from '../components/radio/ClusterRadio';
 import TokenIssueTypeRadio from '../components/radio/TokenIssueTypeRadio';
-import TotalSupplyTextField from '../components/textField/TotalSupplyTestField';
-import DecimalsTextField from '../components/textField/DecimalsTestField';
+import TotalSupplyTextField from '../components/textField/TotalSupplyTextField';
+import DecimalsTextField from '../components/textField/DecimalsTextField';
+import TokenKeyTextField from '../components/textField/TokenKeyTextField';
 import SubmitButton from '../components/button/SubmitButton';
 import {SplToken} from '../adapters/spl-token';
 
@@ -23,26 +24,43 @@ export interface FormValues {
   issueType: string,
   totalSupply: number,
   decimals: number,
+  tokenKey?: string,
 }
 
-const mint = async(
+const mint = async (
   walletAddress: string,
   postData: FormValues,
   setTokenIssued: (v: TokenIssued) => void,
 ) => {
-  // window.solana.connect().then(async (wallet: any) => {
-    const sig = await SplToken.mint(
-      // wallet.publicKey,
-      walletAddress.toPublicKey(),
-      postData.cluster,
-      postData.totalSupply,
-      postData.decimals,
-      window.solana.signAllTransactions
-    );
-    console.debug('tokenKey: ', sig);
-    sig.isErr && alert(sig.error);
-    setTokenIssued({tokenKey: sig.unwrap(), totalAmount: postData.totalSupply});
-  // });
+  const sig = await SplToken.mint(
+    walletAddress.toPublicKey(),
+    postData.cluster,
+    postData.totalSupply,
+    postData.decimals,
+    window.solana.signAllTransactions
+  );
+  console.debug('mint sig: ', sig);
+  sig.isErr && alert(sig.error);
+  setTokenIssued({tokenKey: sig.unwrap(), totalAmount: postData.totalSupply});
+}
+
+const addMinting = async (
+  tokenKey: string,
+  walletAddress: string,
+  postData: FormValues,
+  setTokenIssued: (v: TokenIssued) => void,
+) => {
+  const sig = await SplToken.addMinting(
+    tokenKey.toPublicKey(),
+    walletAddress.toPublicKey(),
+    postData.cluster,
+    postData.totalSupply,
+    postData.decimals,
+    window.solana.signAllTransactions
+  );
+  console.debug('add minting sig: ', sig);
+  sig.isErr && alert(sig.error);
+  setTokenIssued({tokenKey: sig.unwrap(), totalAmount: postData.totalSupply});
 }
 
 const useStyles = makeStyles({
@@ -60,21 +78,30 @@ const isComplete = (tokenIssued: TokenIssued) => {
 
 const TokenPage = () => {
   const styles = useStyles();
-  const {handleSubmit, control} = useForm<FormValues>({
+  const {handleSubmit, control, watch} = useForm<FormValues>({
     defaultValues: {
       cluster: 'devnet',
-      issueType: 'add',
-      totalSupply: 0,
-      decimals: 1,
+      issueType: 'new',
+      totalSupply: 100000,
+      decimals: 2,
+      tokenKey: '',
     }
   });
+
   const [walletAddress, setWalletAddress] = useState('');
   const [tokenIssued, setTokenIssued] = useState<TokenIssued>({tokenKey: '', totalAmount: 0});
 
-  const onSubmit = (data: any) => {
-    mint(walletAddress, data, setTokenIssued);
+  const onSubmit = (data: FormValues) => {
+    if (data.issueType === 'new') {
+      mint(walletAddress, data, setTokenIssued);
+    } else if (data.issueType === 'add' && data.tokenKey) {
+      addMinting(data.tokenKey, walletAddress, data, setTokenIssued);
+    } else {
+      alert('Error no match issue type');
+    }
   }
 
+  // Fetch wallet address
   window.solana.connect().then((conn: any) => {
     setWalletAddress(conn.publicKey.toString());
   });
@@ -93,6 +120,14 @@ const TokenPage = () => {
             <TotalSupplyTextField control={control} name='totalSupply' />
             <Box sx={{mb: 4}} />
             <DecimalsTextField control={control} name='decimals' />
+            {
+              watch('issueType') === 'add'
+              &&
+              <>
+                <Box sx={{mb: 4}} />
+                <TokenKeyTextField control={control} name='tokenKey' />
+              </>
+            }
           </Paper>
           <Box sx={{mb: 6}} />
           <div>
