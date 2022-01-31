@@ -1,9 +1,9 @@
-import {FC, useEffect, useState} from 'react';
+import {useEffect, useState} from 'react';
 import UsageGuide from '../components/UsageGuide';
 import SubmitButton from '../components/button/SubmitButton';
 import {makeStyles} from '@mui/styles';
 import Typography from '@mui/material/Typography';
-import {Box} from '@mui/material';
+import TokenPage from './TokenPage';
 
 declare global {interface Window {solana: any}}
 
@@ -40,22 +40,21 @@ const WellComeMessage = () => {
   );
 }
 
-const TopPage: FC<{callbackFunc: () => void}> = ({callbackFunc}) => {
+const TopPage = () => {
   const styles = useStyles();
-  const [_, setConnected] = useState(false);// eslint-disable-line
+  const [isConnect, setConnected] = useState(false);// eslint-disable-line
 
   useEffect(() => {
     window.solana.on('connect', () => {
       console.log('connected');
       setConnected(true);
-      callbackFunc();
     });
 
     window.solana.on('disconnect', () => {
       console.log('disconnected');
       setConnected(false);
     });
-  }, [callbackFunc]);
+  }, []);
 
   const connectHandler = () => {
     window.solana.connect().then((conn: any) => {
@@ -63,17 +62,20 @@ const TopPage: FC<{callbackFunc: () => void}> = ({callbackFunc}) => {
     });
   };
 
-  return (
-    <div>
-      <WellComeMessage />
-      <UsageGuide />
-      <div className={styles.submit}>
-        <SubmitButton
-          title='Getting start'
-          callbackFunc={connectHandler}
-        />
+  const Route = () => {
+    return (
+      <div>
+        <WellComeMessage />
+        <UsageGuide />
+        <div className={styles.submit}>
+          <SubmitButton
+            title='Getting start'
+            callbackFunc={connectHandler}
+          />
+        </div>
       </div>
-    </div>
-  );
+    );
+  }
+  return isConnect ? <TokenPage /> : <Route />;
 };
 export default TopPage;

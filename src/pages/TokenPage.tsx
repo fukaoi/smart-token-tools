@@ -107,13 +107,14 @@ const TokenPage = () => {
 
   // Fetch wallet address
   useEffect(() => {
-    const id = setInterval(() => {
-      window.solana.connect().then((conn: any) => {
-        setWalletAddress(conn.publicKey.toString());
-      });
-    }, 5000);
-    return () => {
-      clearInterval(id);
+    if (window.solana.isConnect) {
+      const id = setInterval(() => {
+        window.solana.connect().then((conn: any) => {
+          setWalletAddress(conn.publicKey.toString());
+        });
+      }, 5000);
+
+      return () => clearInterval(id);
     }
   });
 
