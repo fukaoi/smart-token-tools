@@ -2,10 +2,8 @@ import {useState, useEffect} from 'react';
 import {makeStyles} from '@mui/styles';
 import {Paper, Box, FormControl} from '@mui/material';
 import {useForm} from 'react-hook-form';
-
 import TitleTypography from '../components/typography/TitleTypography';
 import AddressTypography from '../components/typography/AddressTypography';
-import CompletePage from './CompletePage';
 import ClusterRadio from '../components/radio/ClusterRadio';
 import TokenIssueTypeRadio from '../components/radio/TokenIssueTypeRadio';
 import TotalSupplyTextField from '../components/textField/TotalSupplyTextField';
@@ -13,11 +11,7 @@ import DecimalsTextField from '../components/textField/DecimalsTextField';
 import TokenKeyTextField from '../components/textField/TokenKeyTextField';
 import SubmitButton from '../components/button/SubmitButton';
 import {SplToken} from '../shared/spl-token';
-
-interface TokenIssued {
-  tokenKey: string,
-  totalAmount: number
-}
+import {useNavigate} from 'react-router-dom';
 
 export interface FormValues {
   cluster: string,
@@ -30,8 +24,8 @@ export interface FormValues {
 const mint = async (
   walletAddress: string,
   postData: FormValues,
-  setTokenIssued: (v: TokenIssued) => void,
 ) => {
+  console.log('mint: ', walletAddress, postData);
   const sig = await SplToken.mint(
     walletAddress.toPublicKey(),
     postData.cluster,
@@ -41,14 +35,12 @@ const mint = async (
   );
   console.debug('mint sig: ', sig);
   sig.isErr && alert(sig.error);
-  setTokenIssued({tokenKey: sig.unwrap(), totalAmount: postData.totalSupply});
 }
 
 const addMinting = async (
   tokenKey: string,
   walletAddress: string,
   postData: FormValues,
-  setTokenIssued: (v: TokenIssued) => void,
 ) => {
   const sig = await SplToken.addMinting(
     tokenKey.toPublicKey(),
@@ -60,7 +52,6 @@ const addMinting = async (
   );
   console.debug('add minting sig: ', sig);
   sig.isErr && alert(sig.error);
-  setTokenIssued({tokenKey: sig.unwrap(), totalAmount: postData.totalSupply});
 }
 
 const useStyles = makeStyles({
@@ -72,12 +63,9 @@ const useStyles = makeStyles({
   },
 });
 
-const isComplete = (tokenIssued: TokenIssued) => {
-  return tokenIssued.tokenKey !== '' && tokenIssued.totalAmount !== 0;
-}
-
 const TokenPage = () => {
   const styles = useStyles();
+  const navigate = useNavigate();
   const {handleSubmit, control, watch} = useForm<FormValues>({
     defaultValues: {
       cluster: 'devnet',
@@ -88,37 +76,32 @@ const TokenPage = () => {
     }
   });
 
-  const [walletAddress, setWalletAddress] = useState('');
-  const [tokenIssued, setTokenIssued] = useState<TokenIssued>({tokenKey: '', totalAmount: 0});
+  const [walletAddress, setWalletAddress] = useState<string>('');
 
-  const onSubmit = (data: FormValues) => {
+  const onSubmit = async (data: FormValues) => {
     if (data.issueType === 'new') {
-      mint(walletAddress, data, setTokenIssued);
+      await mint(walletAddress, data);
     } else if (data.issueType === 'add' && data.tokenKey) {
-      addMinting(data.tokenKey, walletAddress, data, setTokenIssued);
+      await addMinting(data.tokenKey, walletAddress, data);
     } else {
+      //todo: error
       alert('Error no match issue type');
     }
+    navigate('/complete');
   }
-
-  window.solana?.connect().then((conn: any) => {
-    setWalletAddress(conn.publicKey.toString());
-  });
 
   // Fetch wallet address
   useEffect(() => {
-    // if (window.solana.isConnect) {
-      const id = setInterval(() => {
-        window.solana.connect().then((conn: any) => {
-          setWalletAddress(conn.publicKey.toString());
-        });
-      }, 5000);
+    const id = setInterval(() => {
+      window.solana.connect().then((conn: any) => {
+        setWalletAddress(conn.publicKey.toString());
+      });
+    }, 5000);
 
-      return () => clearInterval(id);
-    // }
+    return () => clearInterval(id);
   });
 
-  const Root = () => (
+  return (
     <div>
       <TitleTypography title='TOKEN' />
       <form onSubmit={handleSubmit(onSubmit)}>
@@ -150,6 +133,5 @@ const TokenPage = () => {
       </form>
     </div>
   );
-  return !isComplete(tokenIssued) ? <Root /> : <CompletePage />;
 };
 export default TokenPage;

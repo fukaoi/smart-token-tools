@@ -1,9 +1,8 @@
-import {useEffect, useState} from 'react';
 import UsageGuide from '../components/UsageGuide';
 import SubmitButton from '../components/button/SubmitButton';
 import {makeStyles} from '@mui/styles';
 import Typography from '@mui/material/Typography';
-import TokenPage from './TokenPage';
+import {useNavigate} from 'react-router-dom';
 
 declare global {interface Window {solana: any}}
 
@@ -42,28 +41,23 @@ const WellComeMessage = () => {
 
 const TopPage = () => {
   const styles = useStyles();
-  const [isConnect, setConnected] = useState(false);// eslint-disable-line
+  const navigate = useNavigate();
+
   const connectHandler = () => {
-    window.solana.connect().then((conn: any) => {
-      console.log(conn.publicKey.toString());
-      setConnected(true);
-    });
+    navigate('/token');
   };
 
-  const Route = () => {
-    return (
-      <div>
-        <WellComeMessage />
-        <UsageGuide />
-        <div className={styles.submit}>
-          <SubmitButton
-            title='Getting start'
-            callbackFunc={connectHandler}
-          />
-        </div>
+  return (
+    <div>
+      <WellComeMessage />
+      <UsageGuide />
+      <div className={styles.submit}>
+        <SubmitButton
+          title='Getting start'
+          callbackFunc={connectHandler}
+        />
       </div>
-    );
-  }
-  return isConnect ? <TokenPage /> : <Route />;
+    </div>
+  );
 };
 export default TopPage;

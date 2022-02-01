@@ -1,3 +1,4 @@
+import {useEffect, useState} from 'react';
 import {makeStyles} from '@mui/styles';
 import TokenPage from './pages/TokenPage';
 import TopPage from './pages/TopPage';
@@ -58,14 +59,42 @@ const useStyles = makeStyles({
   }
 });
 
+
 const App = () => {
   const styles = useStyles();
-
   const connectHandler = () => {
-    window.solana.connect().then((conn: any) => {
-      console.log(conn);
-    });
+    console.log('call connectHandler')
+    if (!window.solana.isConnected) {
+      window.solana.connect().then((conn: any) => {
+        setButtonTitle({title: 'disconnect', func: disConnectHandler});
+        console.log(conn);
+      });
+    }
   };
+
+  const disConnectHandler = () => {
+    console.log('call disconnectHandler')
+    if (window.solana.isConnected) {
+      window.solana.disconnect().then(() => {
+        setButtonTitle({title: 'connect', func: connectHandler});
+      });
+    }
+  };
+
+  const [buttonTitle, setButtonTitle] = useState({title: 'connect wallet', func: connectHandler});
+  useEffect(() => {
+    if (window.solana) {
+      window.solana.on('connect', (conn: any) => {
+        setButtonTitle({title: 'disconnect', func: disConnectHandler});
+        console.log('connected');
+      });
+
+      window.solana.on('disconnect', () => {
+        setButtonTitle({title: 'connect', func: connectHandler});
+        console.log('disconnected');
+      });
+    }
+  }, []);
 
   return (
     <Router>
@@ -99,9 +128,8 @@ const App = () => {
             <Grid item xs={1}></Grid>
             <Grid item xs={2}>
               <SubmitButton
-                isDisabled={false}
-                callbackFunc={connectHandler}
-                title='Connect wallet'
+                callbackFunc={buttonTitle.func}
+                title={buttonTitle.title}
               />
             </Grid>
           </Grid>
