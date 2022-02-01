@@ -15,6 +15,7 @@ import {
 } from 'react-router-dom';
 import NftPage from './pages/NftPage';
 import CompletePage from './pages/CompletePage';
+import {createContext} from 'vm';
 
 const useStyles = makeStyles({
   root: {
@@ -59,45 +60,26 @@ const useStyles = makeStyles({
   }
 });
 
+export const SiteContext = createContext();
 
 const App = () => {
   const styles = useStyles();
   const connectHandler = () => {
-    console.log('call connectHandler')
-    if (!window.solana.isConnected) {
-      window.solana.connect().then((conn: any) => {
-        setButtonTitle({title: 'disconnect', func: disConnectHandler});
-        console.log(conn);
-      });
-    }
+    window.solana.connect().then(
+    );
   };
 
-  const disConnectHandler = () => {
-    console.log('call disconnectHandler')
-    if (window.solana.isConnected) {
-      window.solana.disconnect().then(() => {
-        setButtonTitle({title: 'connect', func: connectHandler});
-      });
-    }
-  };
+  const [buttonTitle, setButtonTitle] = useState('connect wallet');
 
-  const [buttonTitle, setButtonTitle] = useState({title: 'connect wallet', func: connectHandler});
   useEffect(() => {
-    if (window.solana) {
-      window.solana.on('connect', (conn: any) => {
-        setButtonTitle({title: 'disconnect', func: disConnectHandler});
-        console.log('connected');
-      });
-
-      window.solana.on('disconnect', () => {
-        setButtonTitle({title: 'connect', func: connectHandler});
-        console.log('disconnected');
-      });
-    }
+    window.solana.on('disconnect', () => {
+      console.log('disconnected');
+    });
   }, []);
 
-  return (
-    <Router>
+return (
+  <Router>
+    <SiteContext.Provider value={{isConnected: true}}>
       <main className={styles.root}>
         <div className={styles.navi}>
           <Grid container
@@ -128,8 +110,8 @@ const App = () => {
             <Grid item xs={1}></Grid>
             <Grid item xs={2}>
               <SubmitButton
-                callbackFunc={buttonTitle.func}
-                title={buttonTitle.title}
+                callbackFunc={connectHandler}
+                title={buttonTitle}
               />
             </Grid>
           </Grid>
@@ -146,8 +128,9 @@ const App = () => {
           </a>
         </div>
       </main>
-    </Router>
-  );
+    </SiteContext.Provider>
+  </Router>
+);
 }
 
 export default App;

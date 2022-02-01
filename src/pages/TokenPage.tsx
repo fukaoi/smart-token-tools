@@ -25,7 +25,6 @@ const mint = async (
   walletAddress: string,
   postData: FormValues,
 ) => {
-  console.log('mint: ', walletAddress, postData);
   const sig = await SplToken.mint(
     walletAddress.toPublicKey(),
     postData.cluster,
@@ -79,6 +78,15 @@ const TokenPage = () => {
   const [walletAddress, setWalletAddress] = useState<string>('');
 
   const onSubmit = async (data: FormValues) => {
+    window.solana.connect().then((conn: any) => {
+      if (!window.solana.isConnected) {
+        // error modal
+        navigate('/');
+      } else {
+        setWalletAddress(conn.publicKey.toString());
+      }
+    });
+
     if (data.issueType === 'new') {
       await mint(walletAddress, data);
     } else if (data.issueType === 'add' && data.tokenKey) {

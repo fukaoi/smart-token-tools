@@ -40,11 +40,19 @@ const WellComeMessage = () => {
 }
 
 const TopPage = () => {
+
   const styles = useStyles();
   const navigate = useNavigate();
 
   const connectHandler = () => {
-    navigate('/token');
+    window.solana.connect().then(() => {
+      if (!window.solana.isConnected) {
+        // error modal
+        navigate('/');
+      } else {
+        navigate('/token');
+      }
+    });
   };
 
   return (
