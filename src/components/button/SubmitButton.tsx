@@ -1,4 +1,4 @@
-import {FC} from 'react';
+import {FC, useRef} from 'react';
 import {withStyles} from '@mui/styles';
 import Button from '@mui/material/Button';
 
@@ -17,21 +17,24 @@ const StyledButton = withStyles({
   },
 })(Button);
 
-
 const SubmitButton: FC<
   {
-    className?: any,
-    callbackFunc?: (event?: any) => void,
     title: string
+    callbackFunc?: (event?: any) => void,
+    isDisabled?: boolean,
   }
-> = ({className, callbackFunc, title}) => {
+> = ({
+  title, 
+  callbackFunc, 
+  isDisabled = false,
+}) => {
   return (
     <StyledButton
+      disabled={isDisabled}
       type='submit'
       variant='contained'
       onClick={callbackFunc}
       style={{fontWeight: '550', fontSize: '15px'}}
-      className={className}
     >{title}
     </StyledButton>
   );

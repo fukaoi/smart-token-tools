@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
-import {theme} from './constants/colorTheme';
+import {theme} from './shared/colorTheme';
 import {ThemeProvider} from '@mui/material/styles';
 
 ReactDOM.render(

@@ -12,7 +12,7 @@ import TotalSupplyTextField from '../components/textField/TotalSupplyTextField';
 import DecimalsTextField from '../components/textField/DecimalsTextField';
 import TokenKeyTextField from '../components/textField/TokenKeyTextField';
 import SubmitButton from '../components/button/SubmitButton';
-import {SplToken} from '../adapters/spl-token';
+import {SplToken} from '../shared/spl-token';
 
 interface TokenIssued {
   tokenKey: string,
@@ -101,13 +101,13 @@ const TokenPage = () => {
     }
   }
 
-  window.solana.connect().then((conn: any) => {
+  window.solana?.connect().then((conn: any) => {
     setWalletAddress(conn.publicKey.toString());
   });
 
   // Fetch wallet address
   useEffect(() => {
-    if (window.solana.isConnect) {
+    // if (window.solana.isConnect) {
       const id = setInterval(() => {
         window.solana.connect().then((conn: any) => {
           setWalletAddress(conn.publicKey.toString());
@@ -115,7 +115,7 @@ const TokenPage = () => {
       }, 5000);
 
       return () => clearInterval(id);
-    }
+    // }
   });
 
   const Root = () => (

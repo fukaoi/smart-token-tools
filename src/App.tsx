@@ -52,11 +52,20 @@ const useStyles = makeStyles({
   link: {
     textDecoration: 'none',
     color: 'white',
+  },
+  grid: {
+    height: '10vh',
   }
 });
 
 const App = () => {
   const styles = useStyles();
+
+  const connectHandler = () => {
+    window.solana.connect().then((conn: any) => {
+      console.log(conn);
+    });
+  };
 
   return (
     <Router>
@@ -65,9 +74,11 @@ const App = () => {
           <Grid container
             alignItems='center'
             justifyContent='center'
-            style={{height: '10vh'}}
+            className={styles.grid}
           >
-            <Grid item xs={3}><a href='/'><img src={logoImage} /></a></Grid>
+            <Grid item xs={3}>
+              <a href='/'><img src={logoImage} /></a>
+            </Grid>
             <Grid item xs={6}>
               <div className={styles.naviLink}>
                 <Link to='/token' className={styles.link}>Token</Link>
@@ -79,6 +90,7 @@ const App = () => {
                 <a href='https://twitter.com/messages/compose?recipient_id='
                   className={styles.link}
                   target='_blank'
+                  rel='noreferrer'
                 >
                   Contact
                 </a>
@@ -87,20 +99,21 @@ const App = () => {
             <Grid item xs={1}></Grid>
             <Grid item xs={2}>
               <SubmitButton
+                isDisabled={false}
+                callbackFunc={connectHandler}
                 title='Connect wallet'
-                callbackFunc={(ev) => {console.log(ev)}}
               />
             </Grid>
           </Grid>
           <Routes>
-            <Route path="/" element={<TopPage />} />
-            <Route path="/token" element={<TokenPage />} />
-            <Route path="/nft" element={<NftPage />} />
-            <Route path="/complete" element={<CompletePage />} />
+            <Route path='/' element={<TopPage />} />
+            <Route path='/token' element={<TokenPage />} />
+            <Route path='/nft' element={<NftPage />} />
+            <Route path='/complete' element={<CompletePage />} />
           </Routes>
         </div>
         <div className={styles.footer}>
-          <a href='https://atonoy.co' target='_blank'>
+          <a href='https://atonoy.co' target='_blank' rel='noreferrer'>
             <img src={corpLogoImage} className={styles.corpLogoImage} />
           </a>
         </div>
