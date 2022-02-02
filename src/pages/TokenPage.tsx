@@ -76,23 +76,27 @@ const TokenPage = () => {
   });
 
   const [walletAddress, setWalletAddress] = useState<string>('');
+  const [status, setStatus] = useState('init');
 
   const onSubmit = async (data: FormValues) => {
-    window.solana.connect().then((conn: any) => {
-      setWalletAddress(conn.publicKey.toString());
-    });
+    try {
+      window.solana.connect().then((conn: any) => {
+        setWalletAddress(conn.publicKey.toString());
+      });
 
-    if (data.issueType === 'new') {
-      await mint(walletAddress, data);
-    } else if (data.issueType === 'add' && data.tokenKey) {
-      await addMinting(data.tokenKey, walletAddress, data);
-    } else {
-      //todo: error
-      alert('Error no match issue type');
+      setStatus('processing');
+      if (data.issueType === 'new') {
+        await mint(walletAddress, data);
+      } else if (data.issueType === 'add' && data.tokenKey) {
+        await addMinting(data.tokenKey, walletAddress, data);
+      } else {
+        throw new Error('Error no match issue type');
+      }
+      navigate('/complete');
+    } catch (error: any) {
+      setStatus('init');
     }
-    navigate('/complete');
   }
-
 
   // Fetch wallet address
   useEffect(() => {
@@ -109,6 +113,8 @@ const TokenPage = () => {
 
     return () => clearInterval(id);
   });
+
+  const title = status === 'init' ? 'Confirm' : 'Processing'
 
   return (
     <div>
@@ -135,7 +141,9 @@ const TokenPage = () => {
           </Paper>
           <Box sx={{mb: 6}} />
           <div>
-            <SubmitButton title='Confirm' />
+            <SubmitButton
+              title={title}
+            />
           </div>
           <Box sx={{mb: 10}} />
         </FormControl>

@@ -1,23 +1,22 @@
 import {createTheme} from '@mui/material/styles';
 import {indigo, deepOrange, grey} from '@mui/material/colors';
 
-
 declare module '@mui/material/styles/createPalette' {
-  interface Palette {    
+  interface Palette {
     orangeGuradation: Palette['primary'];
-    grey2: Palette['primary'];
+    deepGrey: Palette['primary'];
   }
 
-  interface PaletteOptions {    
-    grey2: PaletteOptions['primary'];
+  interface PaletteOptions {
     orangeGuradation: PaletteOptions['primary'];
-  } 
+    deepGrey: PaletteOptions['primary'];
+  }
 }
 
 declare module '@mui/material/Button' {
   export interface ButtonPropsColorOverrides {
     'orangeGuradation': true
-    'grey': true
+    'deepGrey': true
   }
 }
 
@@ -30,11 +29,10 @@ export const theme = createTheme({
       main: deepOrange[500],
     },
     orangeGuradation: {
-      // main: 'linear-gradient(#FE6B8B 30%, #FF8E53 90%)',
-      main: '#FF8E53',
+      main: 'linear-gradient(#FE6B8B 30%, #FF8E53 90%)',
     },
-    grey2: {
-      main: grey[500]
+    deepGrey: {
+      main: grey[600]
     },
   }
 });

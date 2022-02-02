@@ -19,7 +19,7 @@ const StyledButton = withStyles({
 
 const SubmitButton: FC<
   {
-    title: string
+    title: string,
     callbackFunc?: (event?: any) => void,
     isDisabled?: boolean,
   }
