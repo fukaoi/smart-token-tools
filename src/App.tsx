@@ -76,16 +76,6 @@ const App = () => {
   // };
 
   const [isConnected, setIsConnected] = useState(false);
-
-  useEffect(() => {
-    if (window.solana) {
-    console.log('useEffect');
-      window.solana.connect({onlyIfTrusted: true}).then(() => {
-        setIsConnected(true);
-      });
-    }
-  }, []);
-
   const buttonTitle = isConnected ? 'Connected' : 'Connect wallet';
   // const func = isConnected ? disConnectHandler : connectHandler;
 
