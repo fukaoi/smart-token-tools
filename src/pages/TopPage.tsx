@@ -3,6 +3,8 @@ import SubmitButton from '../components/button/SubmitButton';
 import {makeStyles} from '@mui/styles';
 import Typography from '@mui/material/Typography';
 import {useNavigate} from 'react-router-dom';
+import {SiteContext} from '../App';
+import {useContext} from 'react';
 
 declare global {interface Window {solana: any}}
 
@@ -40,13 +42,12 @@ const WellComeMessage = () => {
 }
 
 const TopPage = () => {
-
+  const context = useContext(SiteContext);
   const styles = useStyles();
   const navigate = useNavigate();
-
   const connectHandler = () => {
     window.solana.connect().then(() => {
-      if (!window.solana.isConnected) {
+      if (!context.isWalletConnected) {
         // error modal
         navigate('/');
       } else {

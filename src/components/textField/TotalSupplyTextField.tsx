@@ -4,7 +4,7 @@ import {FormValues} from '../../pages/TokenPage';
 import {useController, UseControllerProps} from 'react-hook-form';
 
 const TotalSupplyTextField = (props: UseControllerProps<FormValues>) => {
-  const {field, fieldState} = useController(props);
+  const {field} = useController(props);
   return (
     <>
       <HeadlineTypography message='Input total supply number' />

@@ -6,7 +6,7 @@ import {FormValues} from '../../pages/TokenPage';
 import {useController, UseControllerProps} from 'react-hook-form';
 
 const ClusterRadio = (props: UseControllerProps<FormValues>) => {
-  const {field, fieldState} = useController(props);
+  const {field} = useController(props);
   return (
     <>
       <HeadlineTypography message='Select your using network cluster' />

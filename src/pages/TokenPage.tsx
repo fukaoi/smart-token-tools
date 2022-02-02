@@ -12,6 +12,8 @@ import TokenKeyTextField from '../components/textField/TokenKeyTextField';
 import SubmitButton from '../components/button/SubmitButton';
 import {SplToken} from '../shared/spl-token';
 import {useNavigate} from 'react-router-dom';
+import {SiteContext} from '../App';
+import {useContext} from 'react';
 
 export interface FormValues {
   cluster: string,
@@ -63,6 +65,7 @@ const useStyles = makeStyles({
 });
 
 const TokenPage = () => {
+  const context = useContext(SiteContext);
   const styles = useStyles();
   const navigate = useNavigate();
   const {handleSubmit, control, watch} = useForm<FormValues>({
@@ -79,7 +82,7 @@ const TokenPage = () => {
 
   const onSubmit = async (data: FormValues) => {
     window.solana.connect().then((conn: any) => {
-      if (!window.solana.isConnected) {
+      if (!context.isWalletConnected) {
         // error modal
         navigate('/');
       } else {
@@ -102,9 +105,10 @@ const TokenPage = () => {
   useEffect(() => {
     const id = setInterval(() => {
       window.solana.connect({onlyIfTrusted: true}).then((conn: any) => {
+        context.isWalletConnected = true;
         setWalletAddress(conn.publicKey.toString());
       });
-    }, 5000);
+    }, 3000);
 
     return () => clearInterval(id);
   });

@@ -6,7 +6,7 @@ import {FormValues} from '../../pages/TokenPage';
 import {useController, UseControllerProps} from 'react-hook-form';
 
 const TokenIssueTypeRadio = (props: UseControllerProps<FormValues>) => {
-  const {field, fieldState} = useController(props);
+  const {field} = useController(props);
   return (
     <>
       <HeadlineTypography message='Select token issue type' />
