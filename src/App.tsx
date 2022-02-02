@@ -1,9 +1,7 @@
-import {useState, createContext} from 'react';
 import {makeStyles} from '@mui/styles';
 import TokenPage from './pages/TokenPage';
 import TopPage from './pages/TopPage';
 import backImage from './assets/background-image.jpg';
-import SubmitButton from './components/button/SubmitButton';
 import corpLogoImage from './assets/atonoy-logo.png';
 import logoImage from './assets/smt-logo.svg';
 import {Grid} from '@mui/material';
@@ -59,73 +57,54 @@ const useStyles = makeStyles({
   }
 });
 
-export const SiteContext = createContext({isWalletConnected: false});
-
 const App = () => {
   const styles = useStyles();
-  const connectHandler = () => {
-    console.log('connectHandler');
-    window.solana.connect().then(() => {
-      setIsConnected(true);
-    });
-  };
-  const [isConnected, setIsConnected] = useState(false);
-  const buttonTitle = isConnected ? 'Connected' : 'Connect wallet';
 
   return (
-    <SiteContext.Provider value={{isWalletConnected: isConnected}} >
-      <Router>
-        <main className={styles.root}>
-          <div className={styles.navi}>
-            <Grid container
-              alignItems='center'
-              justifyContent='center'
-              className={styles.grid}
-            >
-              <Grid item xs={3}>
-                <a href='/'><img src={logoImage} alt='Smart token tool' /></a>
-              </Grid>
-              <Grid item xs={6}>
-                <div className={styles.naviLink}>
-                  <Link to='/token' className={styles.link}>Token</Link>
-                </div>
-                <div className={styles.naviLink}>
-                  <Link to='/nft' className={styles.link}>NFT</Link>
-                </div>
-                <div className={styles.naviLink}>
-                  <a href='https://twitter.com/messages/compose?recipient_id='
-                    className={styles.link}
-                    target='_blank'
-                    rel='noreferrer'
-                  >
-                    Contact
-                  </a>
-                </div>
-              </Grid>
-              <Grid item xs={1}></Grid>
-              <Grid item xs={2}>
-                <SubmitButton
-                  callbackFunc={connectHandler}
-                  title={buttonTitle}
-                  isDisabled={isConnected}
-                />
-              </Grid>
+    <Router>
+      <main className={styles.root}>
+        <div className={styles.navi}>
+          <Grid container
+            alignItems='center'
+            justifyContent='center'
+            className={styles.grid}
+          >
+            <Grid item xs={3}>
+              <a href='/'><img src={logoImage} alt='Smart token tool' /></a>
             </Grid>
-            <Routes>
-              <Route path='/' element={<TopPage />} />
-              <Route path='/token' element={<TokenPage />} />
-              <Route path='/nft' element={<NftPage />} />
-              <Route path='/complete' element={<CompletePage />} />
-            </Routes>
-          </div>
-          <div className={styles.footer}>
-            <a href='https://atonoy.co' target='_blank' rel='noreferrer'>
-              <img src={corpLogoImage} className={styles.corpLogoImage} alt='Atonoy' />
-            </a>
-          </div>
-        </main>
-      </Router>
-    </SiteContext.Provider>
+            <Grid item xs={6}>
+              <div className={styles.naviLink}>
+                <Link to='/token' className={styles.link}>Token</Link>
+              </div>
+              <div className={styles.naviLink}>
+                <Link to='/nft' className={styles.link}>NFT</Link>
+              </div>
+              <div className={styles.naviLink}>
+                <a href='https://twitter.com/messages/compose?recipient_id='
+                  className={styles.link}
+                  target='_blank'
+                  rel='noreferrer'
+                >
+                  Contact
+                </a>
+              </div>
+            </Grid>
+            <Grid item xs={3}></Grid>
+          </Grid>
+          <Routes>
+            <Route path='/' element={<TopPage />} />
+            <Route path='/token' element={<TokenPage />} />
+            <Route path='/nft' element={<NftPage />} />
+            <Route path='/complete' element={<CompletePage />} />
+          </Routes>
+        </div>
+        <div className={styles.footer}>
+          <a href='https://atonoy.co' target='_blank' rel='noreferrer'>
+            <img src={corpLogoImage} className={styles.corpLogoImage} alt='Atonoy' />
+          </a>
+        </div>
+      </main>
+    </Router>
   );
 }
 
