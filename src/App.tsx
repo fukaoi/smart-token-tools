@@ -15,7 +15,6 @@ import {
 } from 'react-router-dom';
 import NftPage from './pages/NftPage';
 import CompletePage from './pages/CompletePage';
-import {createContext} from 'vm';
 
 const useStyles = makeStyles({
   root: {
@@ -60,26 +59,38 @@ const useStyles = makeStyles({
   }
 });
 
-export const SiteContext = createContext();
-
 const App = () => {
   const styles = useStyles();
   const connectHandler = () => {
-    window.solana.connect().then(
-    );
+    console.log('connectHandler');
+    window.solana.connect().then(() => {
+      setIsConnected(true);
+    });
   };
 
-  const [buttonTitle, setButtonTitle] = useState('connect wallet');
+  // const disConnectHandler = () => {
+    // console.log('disConnectHandler');
+    // window.solana.disconnect().then(() => {
+      // setIsConnected(false);
+    // });
+  // };
+
+  const [isConnected, setIsConnected] = useState(false);
 
   useEffect(() => {
-    window.solana.on('disconnect', () => {
-      console.log('disconnected');
-    });
+    if (window.solana) {
+    console.log('useEffect');
+      window.solana.connect({onlyIfTrusted: true}).then(() => {
+        setIsConnected(true);
+      });
+    }
   }, []);
 
-return (
-  <Router>
-    <SiteContext.Provider value={{isConnected: true}}>
+  const buttonTitle = isConnected ? 'Connected' : 'Connect wallet';
+  // const func = isConnected ? disConnectHandler : connectHandler;
+
+  return (
+    <Router>
       <main className={styles.root}>
         <div className={styles.navi}>
           <Grid container
@@ -112,6 +123,7 @@ return (
               <SubmitButton
                 callbackFunc={connectHandler}
                 title={buttonTitle}
+                isDisabled={isConnected}
               />
             </Grid>
           </Grid>
@@ -128,9 +140,8 @@ return (
           </a>
         </div>
       </main>
-    </SiteContext.Provider>
-  </Router>
-);
+    </Router>
+  );
 }
 
 export default App;
