@@ -1,5 +1,6 @@
 import {FC} from 'react';
 import {makeStyles} from '@mui/styles';
+import {theme} from '../../shared/colorTheme';
 
 const useStyles = makeStyles({
   pre: {
@@ -7,7 +8,7 @@ const useStyles = makeStyles({
     fontSize: '15px',
     marginLeft: '1em',
     marginBottom: '2em',
-    color: '#555555',
+    color: `${theme.palette.textBlack.light}`,
     backgroundColor: '#fff7eb',
     padding: '10px',
     borderRadius: '8px',

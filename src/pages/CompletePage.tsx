@@ -1,12 +1,13 @@
+import {useEffect} from 'react';
 import TitleTypography from "../components/typography/TitleTypography";
-import Typography from '@mui/material/Typography';
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
 import {makeStyles} from '@mui/styles';
 import CompleteBackground from '../assets/complete-background.png';
-import HeadlineTypography from '../components/typography/HeadlineTypography';
-import AddressTypography from '../components/typography/AddressTypography';
+import MintedInfoTypography from "../components/typography/MintedInfoTypography";
+import {Paper} from '@mui/material';
+import {useNavigate} from 'react-router-dom';
+import Typography from '@mui/material/Typography';
+import Button from '@mui/material/Button';
+import {theme} from '../shared/colorTheme';
 
 const useStyles = makeStyles({
   container: {
@@ -15,6 +16,7 @@ const useStyles = makeStyles({
     flexWrap: 'wrap',
   },
   cardMedia: {
+    width: '100%',
     textAlign: 'center',
   },
   cardContainer: {
@@ -28,36 +30,54 @@ const useStyles = makeStyles({
   },
   cardAction: {
     justifyContent: 'center'
-  }
+  },
+  root: {
+    marginTop: '1em',
+    minWidth: '20em',
+    maxWidth: '20em',
+    padding: '20px',
+  },
 });
 
 
 const CompletePage = () => {
   const styles = useStyles();
+  const navigate = useNavigate();
+  // useEffect(() => {
+  // if (window.solana) {
+  // console.log('icConnected', window.solana.isConnected);
+  // !window.solana.isConnected && navigate('/');
+  // }
+  // });
+
   return (
     <>
       <TitleTypography title='Complete' />
       <div className={styles.container}>
-        <Card className={styles.cardContainer}>
-          <CardMedia
-            className={styles.cardMedia}
-            component='img'
-            image={CompleteBackground} />
-          <CardContent>
-            <Typography gutterBottom variant='h5' component='div'>
-              Mint Success!!
-            </Typography>
-            <Typography variant='body2' color='text.secondary'>
-              Below info your mint info
-            </Typography>
-            <AddressTypography address='Minted key of your token' />
-             <div style={{fontSize: '17px'}}>HeH2PRj4GEdLCsbKQ18LvwhbuH4anmPQ3HoeRsJmymVw</div>
-             <br />
-            <AddressTypography address='Minted total supply of your token' />
-             <div style={{fontSize: '17px'}}>100000</div>
-          </CardContent>
-          Lets Go Explorer
-        </Card>
+        <Paper className={styles.root}>
+          <img src={CompleteBackground} className={styles.cardMedia} />
+          <Typography
+            component='div'
+            fontSize='26px'
+            sx={{mt: 1, mb: 3}}
+          >Your token issuing was success!!
+          </Typography>
+          <MintedInfoTypography message='Minted token key' />
+          <Typography
+            component='div'
+            fontSize='16px'
+            sx={{mt: 1, mb: 3}}
+          >HeH2PRj4GEdLCsbKQ18LvwhbuH4anmPQ3HoeRsJmymVw
+          </Typography>
+          <MintedInfoTypography message='Minted total supply' />
+          <Typography
+            component='div'
+            fontSize='16px'
+            sx={{mt: 1, mb: 3}}
+          >{'10000000'.toLocaleString() }
+          </Typography>
+          <Button size='large'>See your token info at Explorer</Button>
+        </Paper>
       </div>
     </>
   );

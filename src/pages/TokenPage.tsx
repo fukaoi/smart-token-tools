@@ -101,11 +101,13 @@ const TokenPage = () => {
   // Fetch wallet address
   useEffect(() => {
     if (window.solana) {
+      !window.solana.isConnected && navigate('/');
       window.solana.connect().then((conn: any) => {
         setWalletAddress(conn.publicKey.toString());
       });
     }
     const id = setInterval(() => {
+      !window.solana.isConnected && navigate('/');
       window.solana.connect({onlyIfTrusted: true}).then((conn: any) => {
         setWalletAddress(conn.publicKey.toString());
       });
