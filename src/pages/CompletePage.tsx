@@ -40,7 +40,7 @@ const useStyles = makeStyles({
 const CompletePage = () => {
   const styles = useStyles();
   const {state} = useLocation();
-  const completedSig = (state as {sig: string}).sig;
+  const tokenId = (state as {tokenId: string}).tokenId;
 
   // useEffect(() => {
   // if (window.solana) {
@@ -61,8 +61,8 @@ const CompletePage = () => {
             sx={{mt: 1, mb: 3}}
           >Your token issuing was success!!
           </Typography>
-          <MintedInfoTypography message='HeH2PRj4GEdLCsbKQ18LvwhbuH4anmPQ3HoeRsJmymVw' />
-          <Link href={completedSig.toExplorerUrl()}>
+          <MintedInfoTypography message={tokenId} />
+          <Link href={tokenId.toExplorerUrl()}>
             <Button size='large'>See your token info at Explorer</Button>
           </Link>
         </Paper>

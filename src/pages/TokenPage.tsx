@@ -25,16 +25,16 @@ const mint = async (
   walletAddress: string,
   postData: FormValues,
 ) => {
-  const sig = await SplToken.mint(
+  const tokenId = await SplToken.mint(
     walletAddress.toPublicKey(),
     postData.cluster,
     postData.totalSupply,
     postData.decimals,
     window.solana.signAllTransactions
   );
-  console.debug('mint sig: ', sig);
-  sig.isErr && alert(sig.error);
-  return sig.unwrap();
+  console.debug('mint tokenId: ', tokenId);
+  tokenId.isErr && alert(tokenId.error);
+  return tokenId.unwrap();
 }
 
 const addMinting = async (
@@ -42,7 +42,7 @@ const addMinting = async (
   walletAddress: string,
   postData: FormValues,
 ) => {
-  const sig = await SplToken.addMinting(
+  const tokenId = await SplToken.addMinting(
     tokenKey.toPublicKey(),
     walletAddress.toPublicKey(),
     postData.cluster,
@@ -50,9 +50,9 @@ const addMinting = async (
     postData.decimals,
     window.solana.signAllTransactions
   );
-  console.debug('add minting sig: ', sig);
-  sig.isErr && alert(sig.error);
-  return sig.unwrap();
+  console.debug('add minting tokenId: ', tokenId);
+  tokenId.isErr && alert(tokenId.error);
+  return tokenId.unwrap();
 }
 
 const useStyles = makeStyles({
@@ -87,16 +87,16 @@ const TokenPage = () => {
       });
 
       setStatus('processing');
-      let sig = '';
+      let tokenId = '';
       if (data.issueType === 'new') {
-        sig = await mint(walletAddress, data);
+        tokenId = await mint(walletAddress, data);
       } else if (data.issueType === 'add' && data.tokenKey) {
-        sig = await addMinting(data.tokenKey, walletAddress, data);
+        tokenId = await addMinting(data.tokenKey, walletAddress, data);
       } else {
         throw new Error('Error no match issue type');
       }
-      alert(sig);
-      navigate('/complete', {state: {sig}});
+      alert(tokenId);
+      navigate('/complete', {state: {tokenId}});
     } catch (error: any) {
       setStatus('init');
     }
