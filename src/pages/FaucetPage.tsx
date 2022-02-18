@@ -1,4 +1,3 @@
-import {useState, useEffect} from 'react';
 import {makeStyles} from '@mui/styles';
 import {useForm} from 'react-hook-form';
 import TitleTypography from "../components/typography/TitleTypography";
@@ -24,9 +23,9 @@ const useStyles = makeStyles({
   },
 });
 
-const FaucetPage = () => {
+const FaucetPage = ({currentAddress}: any) => {
   const styles = useStyles();
-  const {handleSubmit, control, watch} = useForm<FormValues>({
+  const {handleSubmit} = useForm<FormValues>({
     defaultValues: {
       cluster: 'devnet',
       issueType: 'new',
@@ -36,6 +35,7 @@ const FaucetPage = () => {
     }
   });
   const onSubmit = async (data: FormValues) => {
+    console.log(data);
   }
   const description =
     `The value of this setting specifies the number of decimal points in the token. 
@@ -46,7 +46,7 @@ const FaucetPage = () => {
       <form onSubmit={handleSubmit(onSubmit)}>
         <FormControl>
           <Paper className={styles.root}>
-            <AddressTypography address='walletAddress' />
+            <AddressTypography address={currentAddress} />
             <DescriptionTypography message={description} />
           </Paper>
           <Box sx={{mb: 6}} />

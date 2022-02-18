@@ -13,8 +13,7 @@ import {
 import NftPage from './pages/NftPage';
 import CompletePage from './pages/CompletePage';
 import FaucetPage from './pages/FaucetPage';
-import {useEffect} from 'react';
-import {useNavigate} from 'react-router-dom';
+import {useEffect, useState} from 'react';
 
 const useStyles = makeStyles({
   root: {
@@ -61,19 +60,34 @@ const useStyles = makeStyles({
 
 const App = () => {
   const styles = useStyles();
-  const navigate = useNavigate();
+  const [walletAddress, setWalletAddress] = useState<string>('');
+  const [cache, setCache] = useState<Window>(window);
 
   useEffect(() => {
-    if (window.solana) {
-      if (!window.solana.isConnected) {
-        // alert('disconnect, SMT');
-        // navigate('/');
+    if (cache.solana) {
+      console.debug('#read cache');
+      cache.solana.connect({onlyIfTrusted: true}).then((conn: any) => {
+        setWalletAddress(conn.publicKey.toString());
+      });
+    } else {
+      console.debug('#read window object');
+      setTimeout(() => {
         window.solana.connect({onlyIfTrusted: true}).then((conn: any) => {
-          console.log('# reconnect', conn.publicKey.toString());
+          console.debug('#setCache()');
+          setCache(window);
+          setWalletAddress(conn.publicKey.toString());
         });
-      }
+      }, 1000);
     }
-  });
+    const id = setInterval(() => {
+      console.debug('#setInterval');
+      cache.solana.connect({onlyIfTrusted: true}).then((conn: any) => {
+        console.debug('#setWalletAddress: ', conn.publicKey.toString());
+        setWalletAddress(conn.publicKey.toString());
+      });
+    }, 5000);
+    return () => clearInterval(id);
+  }, [cache, walletAddress]);
 
   return (
     <main className={styles.root}>
@@ -101,9 +115,9 @@ const App = () => {
         </Grid>
         <Routes>
           <Route path='/' element={<TopPage />} />
-          <Route path='/token' element={<TokenPage />} />
+          <Route path='/token' element={<TokenPage currentAddress={walletAddress} />} />
           <Route path='/nft' element={<NftPage />} />
-          <Route path='/faucet' element={<FaucetPage />} />
+          <Route path='/faucet' element={<FaucetPage currentAddress={walletAddress} />} />
           <Route path='/complete' element={<CompletePage />} />
         </Routes>
       </div>

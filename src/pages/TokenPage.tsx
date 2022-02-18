@@ -1,4 +1,4 @@
-import {useState, useEffect} from 'react';
+import {useState} from 'react';
 import {makeStyles} from '@mui/styles';
 import {Paper, Box, FormControl} from '@mui/material';
 import {useForm} from 'react-hook-form';
@@ -64,7 +64,7 @@ const useStyles = makeStyles({
   },
 });
 
-const TokenPage = () => {
+const TokenPage = ({currentAddress}: any) => {
   const styles = useStyles();
   const navigate = useNavigate();
   const {handleSubmit, control, watch} = useForm<FormValues>({
@@ -95,23 +95,11 @@ const TokenPage = () => {
       } else {
         throw new Error('Error no match issue type');
       }
-      alert(tokenId);
       navigate('/complete', {state: {tokenId}});
     } catch (error: any) {
       setStatus('init');
     }
   }
-
-  // Fetch wallet address
-  useEffect(() => {
-    const id = setInterval(() => {
-      window.solana.connect({onlyIfTrusted: true}).then((conn: any) => {
-        setWalletAddress(conn.publicKey.toString());
-      });
-    }, 5000);
-
-    return () => clearInterval(id);
-  });
 
   const title = status === 'init' ? 'Confirm' : 'Processing'
 
@@ -121,7 +109,7 @@ const TokenPage = () => {
       <form onSubmit={handleSubmit(onSubmit)}>
         <FormControl>
           <Paper className={styles.root}>
-            <AddressTypography address={walletAddress} />
+            <AddressTypography address={currentAddress} />
             <ClusterRadio control={control} name='cluster' />
             <Box sx={{mb: 4}} />
             <TokenIssueTypeRadio control={control} name='issueType' />

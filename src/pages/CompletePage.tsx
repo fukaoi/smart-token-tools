@@ -54,7 +54,7 @@ const CompletePage = () => {
       <TitleTypography title='Complete' />
       <div className={styles.container}>
         <Paper className={styles.root}>
-          <img src={CompleteBackground} className={styles.cardMedia} />
+          <img alt="complete" src={CompleteBackground} className={styles.cardMedia} />
           <Typography
             component='div'
             fontSize='26px'
