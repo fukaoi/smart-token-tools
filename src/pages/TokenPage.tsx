@@ -104,16 +104,6 @@ const TokenPage = () => {
 
   // Fetch wallet address
   useEffect(() => {
-    if (window.solana) {
-      if (!window.solana.isConnected) {
-        alert('disconnect, SMT');
-        console.log(window.solana.isConnected);
-        navigate('/');
-      }
-      window.solana.connect().then((conn: any) => {
-        setWalletAddress(conn.publicKey.toString());
-      });
-    }
     const id = setInterval(() => {
       window.solana.connect({onlyIfTrusted: true}).then((conn: any) => {
         setWalletAddress(conn.publicKey.toString());
@@ -126,7 +116,7 @@ const TokenPage = () => {
   const title = status === 'init' ? 'Confirm' : 'Processing'
 
   return (
-    <div>
+    <>
       <TitleTypography title='TOKEN' />
       <form onSubmit={handleSubmit(onSubmit)}>
         <FormControl>
@@ -157,7 +147,7 @@ const TokenPage = () => {
           <Box sx={{mb: 10}} />
         </FormControl>
       </form>
-    </div>
+    </>
   );
 };
 export default TokenPage;

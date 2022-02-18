@@ -49,7 +49,7 @@ const TopPage = () => {
   };
 
   return (
-    <div>
+    <>
       <WellComeMessage />
       <UsageGuide />
       <div className={styles.submit}>
@@ -58,7 +58,7 @@ const TopPage = () => {
           callbackFunc={connectHandler}
         />
       </div>
-    </div>
+    </>
   );
 };
 export default TopPage;

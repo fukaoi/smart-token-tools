@@ -6,7 +6,6 @@ import corpLogoImage from './assets/atonoy-logo.png';
 import logoImage from './assets/smt-logo.svg';
 import {Grid} from '@mui/material';
 import {
-  BrowserRouter as Router,
   Routes,
   Route,
   Link
@@ -14,6 +13,8 @@ import {
 import NftPage from './pages/NftPage';
 import CompletePage from './pages/CompletePage';
 import FaucetPage from './pages/FaucetPage';
+import {useEffect} from 'react';
+import {useNavigate} from 'react-router-dom';
 
 const useStyles = makeStyles({
   root: {
@@ -60,47 +61,58 @@ const useStyles = makeStyles({
 
 const App = () => {
   const styles = useStyles();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (window.solana) {
+      if (!window.solana.isConnected) {
+        // alert('disconnect, SMT');
+        // navigate('/');
+        window.solana.connect({onlyIfTrusted: true}).then((conn: any) => {
+          console.log('# reconnect', conn.publicKey.toString());
+        });
+      }
+    }
+  });
 
   return (
-    <Router>
-      <main className={styles.root}>
-        <div className={styles.navi}>
-          <Grid container
-            alignItems='center'
-            justifyContent='center'
-            className={styles.grid}
-          >
-            <Grid item xs={3}>
-              <a href='/'><img src={logoImage} alt='Smart token tool' /></a>
-            </Grid>
-            <Grid item xs={6}>
-              <div className={styles.naviLink}>
-                <Link to='/token' className={styles.link}>Token</Link>
-              </div>
-              <div className={styles.naviLink}>
-                <Link to='/nft' className={styles.link}>NFT</Link>
-              </div>
-              <div className={styles.naviLink}>
-                <Link to='/faucet' className={styles.link}>Faucet</Link>
-              </div>
-            </Grid>
-            <Grid item xs={3}></Grid>
+    <main className={styles.root}>
+      <div className={styles.navi}>
+        <Grid container
+          alignItems='center'
+          justifyContent='center'
+          className={styles.grid}
+        >
+          <Grid item xs={3}>
+            <a href='/'><img src={logoImage} alt='Smart token tool' /></a>
           </Grid>
-          <Routes>
-            <Route path='/' element={<TopPage />} />
-            <Route path='/token' element={<TokenPage />} />
-            <Route path='/nft' element={<NftPage />} />
-            <Route path='/faucet' element={<FaucetPage />} />
-            <Route path='/complete' element={<CompletePage />} />
-          </Routes>
-        </div>
-        <div className={styles.footer}>
-          <a href='https://atonoy.co' target='_blank' rel='noreferrer'>
-            <img src={corpLogoImage} className={styles.corpLogoImage} alt='Atonoy' />
-          </a>
-        </div>
-      </main>
-    </Router>
+          <Grid item xs={6}>
+            <div className={styles.naviLink}>
+              <Link to='/token' className={styles.link}>Token</Link>
+            </div>
+            <div className={styles.naviLink}>
+              <Link to='/nft' className={styles.link}>NFT</Link>
+            </div>
+            <div className={styles.naviLink}>
+              <Link to='/faucet' className={styles.link}>Faucet</Link>
+            </div>
+          </Grid>
+          <Grid item xs={3}></Grid>
+        </Grid>
+        <Routes>
+          <Route path='/' element={<TopPage />} />
+          <Route path='/token' element={<TokenPage />} />
+          <Route path='/nft' element={<NftPage />} />
+          <Route path='/faucet' element={<FaucetPage />} />
+          <Route path='/complete' element={<CompletePage />} />
+        </Routes>
+      </div>
+      <div className={styles.footer}>
+        <a href='https://atonoy.co' target='_blank' rel='noreferrer'>
+          <img src={corpLogoImage} className={styles.corpLogoImage} alt='Atonoy' />
+        </a>
+      </div>
+    </main>
   );
 }
 
