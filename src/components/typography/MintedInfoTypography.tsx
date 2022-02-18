@@ -19,7 +19,12 @@ const MintedInfoTypography: FC<{message: string}> = ({message}) => {
   const styles = useStyles();
   return (
     <Box component="div" className={styles.box}>
-      <Typography
+        <Typography
+        component='div'
+        fontSize='16px'
+      > Your token id:
+      </Typography>
+    <Typography
         component='div'
         fontSize='16px'
       >{message}

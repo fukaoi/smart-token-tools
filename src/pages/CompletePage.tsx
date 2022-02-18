@@ -1,13 +1,11 @@
-import {useEffect} from 'react';
 import TitleTypography from "../components/typography/TitleTypography";
 import {makeStyles} from '@mui/styles';
 import CompleteBackground from '../assets/complete-background.png';
 import MintedInfoTypography from "../components/typography/MintedInfoTypography";
-import {Paper} from '@mui/material';
-import {useNavigate} from 'react-router-dom';
+import {Paper, Link} from '@mui/material';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
-import {theme} from '../shared/colorTheme';
+import {useLocation} from 'react-router-dom';
 
 const useStyles = makeStyles({
   container: {
@@ -39,10 +37,11 @@ const useStyles = makeStyles({
   },
 });
 
-
 const CompletePage = () => {
   const styles = useStyles();
-  const navigate = useNavigate();
+  const {state} = useLocation();
+  const completedSig = (state as {sig: string}).sig;
+
   // useEffect(() => {
   // if (window.solana) {
   // console.log('icConnected', window.solana.isConnected);
@@ -62,14 +61,10 @@ const CompletePage = () => {
             sx={{mt: 1, mb: 3}}
           >Your token issuing was success!!
           </Typography>
-          <MintedInfoTypography message='Minted token info' />
-          <Typography
-            component='div'
-            fontSize='16px'
-            sx={{m: 5, p: 5}}
-          >HeH2PRj4GEdLCsbKQ18LvwhbuH4anmPQ3HoeRsJmymVw
-          </Typography>
-          <Button size='large'>See your token info at Explorer</Button>
+          <MintedInfoTypography message='HeH2PRj4GEdLCsbKQ18LvwhbuH4anmPQ3HoeRsJmymVw' />
+          <Link href={completedSig.toExplorerUrl()}>
+            <Button size='large'>See your token info at Explorer</Button>
+          </Link>
         </Paper>
       </div>
     </>

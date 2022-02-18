@@ -34,6 +34,7 @@ const mint = async (
   );
   console.debug('mint sig: ', sig);
   sig.isErr && alert(sig.error);
+  return sig.unwrap();
 }
 
 const addMinting = async (
@@ -51,6 +52,7 @@ const addMinting = async (
   );
   console.debug('add minting sig: ', sig);
   sig.isErr && alert(sig.error);
+  return sig.unwrap();
 }
 
 const useStyles = makeStyles({
@@ -85,14 +87,16 @@ const TokenPage = () => {
       });
 
       setStatus('processing');
+      let sig = '';
       if (data.issueType === 'new') {
-        await mint(walletAddress, data);
+        sig = await mint(walletAddress, data);
       } else if (data.issueType === 'add' && data.tokenKey) {
-        await addMinting(data.tokenKey, walletAddress, data);
+        sig = await addMinting(data.tokenKey, walletAddress, data);
       } else {
         throw new Error('Error no match issue type');
       }
-      navigate('/complete');
+      alert(sig);
+      navigate('/complete', {state: {sig}});
     } catch (error: any) {
       setStatus('init');
     }
@@ -101,7 +105,7 @@ const TokenPage = () => {
   // Fetch wallet address
   useEffect(() => {
     if (window.solana) {
-      if( !window.solana.isConnected) {
+      if (!window.solana.isConnected) {
         alert('disconnect, SMT');
         console.log(window.solana.isConnected);
         navigate('/');
