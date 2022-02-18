@@ -62,19 +62,12 @@ const CompletePage = () => {
             sx={{mt: 1, mb: 3}}
           >Your token issuing was success!!
           </Typography>
-          <MintedInfoTypography message='Minted token key' />
+          <MintedInfoTypography message='Minted token info' />
           <Typography
             component='div'
             fontSize='16px'
-            sx={{mt: 1, mb: 3}}
+            sx={{m: 5, p: 5}}
           >HeH2PRj4GEdLCsbKQ18LvwhbuH4anmPQ3HoeRsJmymVw
-          </Typography>
-          <MintedInfoTypography message='Minted total supply' />
-          <Typography
-            component='div'
-            fontSize='16px'
-            sx={{mt: 1, mb: 3}}
-          >{'10000000'.toLocaleString() }
           </Typography>
           <Button size='large'>See your token info at Explorer</Button>
         </Paper>

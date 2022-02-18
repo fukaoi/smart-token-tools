@@ -13,6 +13,7 @@ import {
 } from 'react-router-dom';
 import NftPage from './pages/NftPage';
 import CompletePage from './pages/CompletePage';
+import FaucetPage from './pages/FaucetPage';
 
 const useStyles = makeStyles({
   root: {
@@ -80,13 +81,7 @@ const App = () => {
                 <Link to='/nft' className={styles.link}>NFT</Link>
               </div>
               <div className={styles.naviLink}>
-                <a href='https://twitter.com/messages/compose?recipient_id='
-                  className={styles.link}
-                  target='_blank'
-                  rel='noreferrer'
-                >
-                  Contact
-                </a>
+                <Link to='/faucet' className={styles.link}>Faucet</Link>
               </div>
             </Grid>
             <Grid item xs={3}></Grid>
@@ -95,6 +90,7 @@ const App = () => {
             <Route path='/' element={<TopPage />} />
             <Route path='/token' element={<TokenPage />} />
             <Route path='/nft' element={<NftPage />} />
+            <Route path='/faucet' element={<FaucetPage />} />
             <Route path='/complete' element={<CompletePage />} />
           </Routes>
         </div>
