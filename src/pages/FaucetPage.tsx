@@ -1,10 +1,11 @@
 import {makeStyles} from '@mui/styles';
-import {useForm} from 'react-hook-form';
 import TitleTypography from "../components/typography/TitleTypography";
 import DescriptionTypography from '../components/typography/DescriptionTypography';
 import AddressTypography from '../components/typography/AddressTypography';
-import {Paper, Box, FormControl} from '@mui/material';
+import {Paper, Box} from '@mui/material';
 import SubmitButton from '../components/button/SubmitButton';
+import CompleteModal from '../components/modal/CompleteModal';
+import {useState} from 'react';
 
 export interface FormValues {
   cluster: string,
@@ -15,6 +16,11 @@ export interface FormValues {
 }
 
 const useStyles = makeStyles({
+  container: {
+    display: 'flex',
+    justifyContent: 'center',
+    flexWrap: 'wrap',
+  },
   root: {
     marginTop: '1em',
     minWidth: '20em',
@@ -25,39 +31,34 @@ const useStyles = makeStyles({
 
 const FaucetPage = ({currentAddress}: any) => {
   const styles = useStyles();
-  const {handleSubmit} = useForm<FormValues>({
-    defaultValues: {
-      cluster: 'devnet',
-      issueType: 'new',
-      totalSupply: 100000,
-      decimals: 2,
-      tokenKey: '',
-    }
-  });
-  const onSubmit = async (data: FormValues) => {
-    console.log(data);
+  const [open, setOpen] = useState(false);
+  const onSubmit = async () => {
+    setOpen(true);
   }
+  const handleClose = () => {
+    setOpen(false);
+  };
   const description =
     `The value of this setting specifies the number of decimal points in the token. 
      Please refer to the example below.`;
   return (
     <>
       <TitleTypography title='FAUCET' />
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <FormControl>
-          <Paper className={styles.root}>
-            <AddressTypography address={currentAddress} />
-            <DescriptionTypography message={description} />
-          </Paper>
-          <Box sx={{mb: 6}} />
-          <div>
-            <SubmitButton
-              title='Submit'
-            />
-          </div>
-          <Box sx={{mb: 10}} />
-        </FormControl>
-      </form>
+      <div className={styles.container}>
+        <Paper className={styles.root}>
+          <AddressTypography address={currentAddress} />
+          <DescriptionTypography message={description} />
+        </Paper>
+      </div>
+      <Box sx={{mb: 6}} />
+      <div>
+        <SubmitButton
+          title='Submit'
+          callbackFunc={onSubmit}
+        />
+        <CompleteModal open={open} onClose={handleClose} />
+      </div>
+      <Box sx={{mb: 10}} />
     </>
   );
 };

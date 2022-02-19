@@ -42,13 +42,6 @@ const CompletePage = () => {
   const {state} = useLocation();
   const tokenId = (state as {tokenId: string}).tokenId;
 
-  // useEffect(() => {
-  // if (window.solana) {
-  // console.log('icConnected', window.solana.isConnected);
-  // !window.solana.isConnected && navigate('/');
-  // }
-  // });
-
   return (
     <>
       <TitleTypography title='Complete' />
