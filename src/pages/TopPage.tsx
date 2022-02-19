@@ -3,6 +3,7 @@ import SubmitButton from '../components/button/SubmitButton';
 import {makeStyles} from '@mui/styles';
 import Typography from '@mui/material/Typography';
 import {useNavigate} from 'react-router-dom';
+import {useState} from 'react';
 
 declare global {interface Window {solana: any}}
 
@@ -41,8 +42,16 @@ const WellComeMessage = () => {
 
 const TopPage = () => {
   const styles = useStyles();
+  const [btnState, setBtnState] = useState(
+    {
+      title: 'Getting start', 
+      isDisabled: false
+    }
+  );
   const navigate = useNavigate();
+
   const connectHandler = () => {
+    setBtnState({title: 'Processing', isDisabled: true});
     window.solana.connect().then(() => {
       navigate('/token');
     });
@@ -54,7 +63,8 @@ const TopPage = () => {
       <UsageGuide />
       <div className={styles.submit}>
         <SubmitButton
-          title='Getting start'
+          isDisabled={btnState.isDisabled}
+          title={btnState.title}
           callbackFunc={connectHandler}
         />
       </div>

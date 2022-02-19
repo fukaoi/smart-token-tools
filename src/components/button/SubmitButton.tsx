@@ -24,19 +24,19 @@ const SubmitButton: FC<
     isDisabled?: boolean,
   }
 > = ({
-  title, 
-  callbackFunc, 
+  title,
+  callbackFunc,
   isDisabled = false,
 }) => {
-  return (
-    <StyledButton
-      disabled={isDisabled}
-      type='submit'
-      variant='contained'
-      onClick={callbackFunc}
-      style={{fontWeight: '550', fontSize: '15px'}}
-    >{title}
-    </StyledButton>
-  );
-};
+    return (
+      <StyledButton
+        disabled={isDisabled}
+        type='submit'
+        variant='contained'
+        onClick={callbackFunc}
+        style={{fontWeight: '550', fontSize: '15px'}}
+      >{title}
+      </StyledButton>
+    );
+  };
 export default SubmitButton;

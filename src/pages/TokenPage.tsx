@@ -67,6 +67,13 @@ const useStyles = makeStyles({
 const TokenPage = ({currentAddress}: any) => {
   const styles = useStyles();
   const navigate = useNavigate();
+  const [btnState, setBtnState] = useState(
+    {
+      title: 'Confirm',
+      isDisabled: false,
+    }
+  );
+
   const {handleSubmit, control, watch} = useForm<FormValues>({
     defaultValues: {
       cluster: 'devnet',
@@ -78,15 +85,14 @@ const TokenPage = ({currentAddress}: any) => {
   });
 
   const [walletAddress, setWalletAddress] = useState<string>('');
-  const [status, setStatus] = useState('init');
 
   const onSubmit = async (data: FormValues) => {
+    setBtnState({title: 'Processing', isDisabled: true});
     try {
       window.solana.connect().then((conn: any) => {
         setWalletAddress(conn.publicKey.toString());
       });
 
-      setStatus('processing');
       let tokenId = '';
       if (data.issueType === 'new') {
         tokenId = await mint(walletAddress, data);
@@ -97,11 +103,9 @@ const TokenPage = ({currentAddress}: any) => {
       }
       navigate('/complete', {state: {tokenId}});
     } catch (error: any) {
-      setStatus('init');
+      setBtnState({title: 'Confirm', isDisabled: false});
     }
   }
-
-  const title = status === 'init' ? 'Confirm' : 'Processing'
 
   return (
     <>
@@ -129,7 +133,8 @@ const TokenPage = ({currentAddress}: any) => {
           <Box sx={{mb: 6}} />
           <div>
             <SubmitButton
-              title={title}
+              isDisabled={btnState.isDisabled}
+              title={btnState.title}
             />
           </div>
           <Box sx={{mb: 10}} />
