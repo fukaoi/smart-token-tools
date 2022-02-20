@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
 import {makeStyles} from '@mui/styles';
 import {Paper, Box, FormControl} from '@mui/material';
 import {useForm} from 'react-hook-form';
@@ -106,6 +106,25 @@ const TokenPage = ({currentAddress}: any) => {
       setBtnState({title: 'Confirm', isDisabled: false});
     }
   }
+  // Fetch wallet address
+  useEffect(() => {
+    if (window.solana) {
+      if (!window.solana.isConnected) {
+        alert('disconnect, SMT');
+        console.log(window.solana.isConnected);
+        navigate('/');
+      }
+      window.solana.connect().then((conn: any) => {
+        setWalletAddress(conn.publicKey.toString());
+      });
+    }
+    const id = setInterval(() => {
+      window.solana.connect({onlyIfTrusted: true}).then((conn: any) => {
+        setWalletAddress(conn.publicKey.toString());
+      });
+    }, 5000);
+    return () => clearInterval(id);
+  });
 
   return (
     <>
