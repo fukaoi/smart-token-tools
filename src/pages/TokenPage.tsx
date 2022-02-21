@@ -64,16 +64,11 @@ const useStyles = makeStyles({
   },
 });
 
-const TokenPage = ({currentAddress}: any) => {
+const TokenPage = () => {
   const styles = useStyles();
   const navigate = useNavigate();
-  const [btnState, setBtnState] = useState(
-    {
-      title: 'Confirm',
-      isDisabled: false,
-    }
-  );
-
+  const [walletAddress, setWalletAddress] = useState<string>('');
+  const [btnState, setBtnState] = useState({title: 'Confirm', isDisabled: false});
   const {handleSubmit, control, watch} = useForm<FormValues>({
     defaultValues: {
       cluster: 'devnet',
@@ -84,15 +79,10 @@ const TokenPage = ({currentAddress}: any) => {
     }
   });
 
-  const [walletAddress, setWalletAddress] = useState<string>('');
 
   const onSubmit = async (data: FormValues) => {
     setBtnState({title: 'Processing', isDisabled: true});
     try {
-      window.solana.connect().then((conn: any) => {
-        setWalletAddress(conn.publicKey.toString());
-      });
-
       let tokenId = '';
       if (data.issueType === 'new') {
         tokenId = await mint(walletAddress, data);
@@ -132,7 +122,7 @@ const TokenPage = ({currentAddress}: any) => {
       <form onSubmit={handleSubmit(onSubmit)}>
         <FormControl>
           <Paper className={styles.root}>
-            <AddressTypography address={currentAddress} />
+            <AddressTypography address={walletAddress} />
             <ClusterRadio control={control} name='cluster' />
             <Box sx={{mb: 4}} />
             <TokenIssueTypeRadio control={control} name='issueType' />

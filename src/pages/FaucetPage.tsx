@@ -5,7 +5,9 @@ import AddressTypography from '../components/typography/AddressTypography';
 import {Paper, Box} from '@mui/material';
 import SubmitButton from '../components/button/SubmitButton';
 import CompleteModal from '../components/modal/CompleteModal';
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
+import {useNavigate} from 'react-router-dom';
+import {Account} from '@solana-suite/core';
 
 export interface FormValues {
   cluster: string,
@@ -29,32 +31,63 @@ const useStyles = makeStyles({
   },
 });
 
-const FaucetPage = ({currentAddress}: any) => {
+const FaucetPage = () => {
+  const navigate = useNavigate();
   const styles = useStyles();
   const [open, setOpen] = useState(false);
-  const onSubmit = async () => {
-    setOpen(true);
+  const [walletAddress, setWalletAddress] = useState<string>('');
+  const [btnState, setBtnState] = useState({title: 'Confirm', isDisabled: false});
+
+  // Fetch wallet address
+  useEffect(() => {
+    if (window.solana) {
+      if (!window.solana.isConnected) {
+        alert('disconnect, SMT');
+        console.log(window.solana.isConnected);
+        navigate('/');
+      }
+      window.solana.connect().then((conn: any) => {
+        setWalletAddress(conn.publicKey.toString());
+      });
+    }
+    const id = setInterval(() => {
+      window.solana.connect({onlyIfTrusted: true}).then((conn: any) => {
+        setWalletAddress(conn.publicKey.toString());
+      });
+    }, 5000);
+    return () => clearInterval(id);
+  });
+
+  const onSubmit = async (walletAddress: string) => {
+    setBtnState({title: 'Processing', isDisabled: true});
+    const res = await Account.requestAirdrop(walletAddress.toPublicKey());
+    if (res.isErr) {
+      // error action
+    } else { 
+      setOpen(true);
+    }
   }
   const handleClose = () => {
     setOpen(false);
+    setBtnState({title: 'Confirm', isDisabled: false});
   };
   const description =
-    `The value of this setting specifies the number of decimal points in the token. 
-     Please refer to the example below.`;
+    `By pressing the submit button, you can receive 1SOL. This feature is only supported by devnet, so if you are on mainnet, you can buy SOLs on the exchange or have them sent to you from another address.`;
   return (
     <>
       <TitleTypography title='FAUCET' />
       <div className={styles.container}>
         <Paper className={styles.root}>
-          <AddressTypography address={currentAddress} />
+          <AddressTypography address={walletAddress} />
           <DescriptionTypography message={description} />
         </Paper>
       </div>
       <Box sx={{mb: 6}} />
       <div>
         <SubmitButton
-          title='Submit'
-          callbackFunc={onSubmit}
+          title={btnState.title}
+          isDisabled={btnState.isDisabled}
+          callbackFunc={() => onSubmit(walletAddress)}
         />
         <CompleteModal open={open} onClose={handleClose} />
       </div>
