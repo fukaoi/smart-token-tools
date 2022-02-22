@@ -8,6 +8,7 @@ import InfoModal from '../components/modal/InfoModal';
 import {useState, useEffect} from 'react';
 import {useNavigate} from 'react-router-dom';
 import {Account} from '@solana-suite/core';
+import ErrorModal from '../components/modal/ErrorModal';
 
 export interface FormValues {
   cluster: string,
@@ -35,6 +36,7 @@ const FaucetPage = () => {
   const navigate = useNavigate();
   const styles = useStyles();
   const [open, setOpen] = useState(false);
+  const [errorModal, setErrorModal] = useState({open: false, message: ''});
   const [walletAddress, setWalletAddress] = useState<string>('');
   const [btnState, setBtnState] = useState({title: 'Confirm', isDisabled: false});
 
@@ -61,7 +63,7 @@ const FaucetPage = () => {
     setBtnState({title: 'Processing', isDisabled: true});
     const res = await Account.requestAirdrop(walletAddress.toPublicKey());
     if (res.isErr) {
-      navigate('/', {state: {error: res.error}});
+      setErrorModal({open: true, message: res.error.message});
     } else {
       setOpen(true);
     }
@@ -91,6 +93,11 @@ const FaucetPage = () => {
         <InfoModal open={open} onClose={handleClose} />
       </div>
       <Box sx={{mb: 10}} />
+      <ErrorModal
+        open={errorModal.open}
+        onClose={handleClose}
+        message={errorModal.message}
+      />
     </>
   );
 };

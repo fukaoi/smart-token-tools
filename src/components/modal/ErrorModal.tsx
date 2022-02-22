@@ -8,18 +8,18 @@ const style = {
     fontSize: '1.2em',
   },
   box: {
-  position: 'absolute' as 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  width: 400,
-  bgcolor: 'background.paper',
-  boxShadow: 24,
-  p: 1,
+    position: 'absolute' as 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: 400,
+    bgcolor: 'background.paper',
+    boxShadow: 24,
+    p: 1,
   }
 };
 
-const ErrorModal: FC<{open: boolean, onClose: any}> = ({open, onClose}) => {
+const ErrorModal: FC<{open: boolean, onClose: any, message: string}> = ({open, onClose, message}) => {
   return (
     <div>
       <Modal
@@ -35,7 +35,7 @@ const ErrorModal: FC<{open: boolean, onClose: any}> = ({open, onClose}) => {
             severity='error'
             color='error'
           >
-           Raise Error
+            {message}
           </Alert>
         </Box>
       </Modal>
