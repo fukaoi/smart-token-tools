@@ -35,6 +35,9 @@ const useStyles = makeStyles({
     maxWidth: '20em',
     padding: '20px',
   },
+  link: {
+    textDecoration: 'none',
+  }
 });
 
 const CompletePage = () => {
@@ -55,7 +58,7 @@ const CompletePage = () => {
           >Your token issuing was success!!
           </Typography>
           <MintedInfoTypography message={tokenId} />
-          <Link href={tokenId.toExplorerUrl()}>
+          <Link sx={styles.link} href={tokenId.toExplorerUrl()}>
             <Button size='large'>See your token info at Explorer</Button>
           </Link>
         </Paper>

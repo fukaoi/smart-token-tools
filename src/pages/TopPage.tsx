@@ -10,6 +10,7 @@ import CardMedia from '@mui/material/CardMedia';
 import AtonoyMarkLogo from '../assets/atonoy-logo-mark.png';
 import PhantomMarkLogo from '../assets/phantom-logo-mark.png'
 import Button from '@mui/material/Button';
+import {Link} from '@mui/material';
 
 declare global {interface Window {solana: any}}
 
@@ -42,6 +43,9 @@ const styles = {
   },
   cardAction: {
     justifyContent: 'center'
+  }, 
+  link: {
+    textDecoration: 'none',
   }
 };
 
@@ -67,13 +71,13 @@ const WellComeMessage = () => {
 const TopPage = () => {
   const [open, setOpen] = useState(false);
   const [message, setMessage] = useState('');
+  const navigate = useNavigate();
   const [btnState, setBtnState] = useState(
     {
       title: 'Getting start',
       isDisabled: false
     }
   );
-  const navigate = useNavigate();
 
   const handleClose = () => {
     setOpen(false);
@@ -109,12 +113,14 @@ const TopPage = () => {
               Need1. Install wallet
             </Typography>
             <Typography variant='body2' color='text.secondary'>
-              Lizards are a widespread group of squamate reptiles, with over 6,000
-              species, ranging across all continents except Antarctica
+              SMT only allows connections to phantom wallet, 
+              you must first install the phantom wallet extension on a phatom browser.
             </Typography>
           </CardContent>
           <CardActions sx={styles.cardAction}>
+          <Link sx={styles.link} href='https://phantom.app/download'>
             <Button size='small'>Learn More</Button>
+          </Link>
           </CardActions>
         </Card>
         <Card sx={styles.cardContainer}>
@@ -128,12 +134,16 @@ const TopPage = () => {
               Need2. Get Atonoy subscription token
             </Typography>
             <Typography variant='body2' color='text.secondary'>
-              Lizards are a widespread group of squamate reptiles, with over 6,000
-              Lizards are a widespread group of squamate reptiles, with over 6,000
+              To use SMT, you will need a usage subscription token issued by Atonoy.inc. 
+              If you are don't have subscription token, please contact 
+              <Link sx={styles.link} href='https://atonoy.co'>Atonoy.inc</Link>.
             </Typography>
           </CardContent>
           <CardActions sx={styles.cardAction}>
+          <Link  sx={styles.link} href=''>
             <Button size='small'> Atonoy subscription token</Button>
+          </Link>
+
           </CardActions>
         </Card>
       </div>

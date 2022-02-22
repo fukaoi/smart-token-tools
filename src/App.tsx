@@ -1,4 +1,3 @@
-import {makeStyles} from '@mui/styles';
 import TokenPage from './pages/TokenPage';
 import TopPage from './pages/TopPage';
 import backImage from './assets/background-image.jpg';
@@ -14,10 +13,10 @@ import NftPage from './pages/NftPage';
 import CompletePage from './pages/CompletePage';
 import FaucetPage from './pages/FaucetPage';
 
-const useStyles = makeStyles({
+const styles = {
   root: {
-    position: 'relative',
-    textAlign: 'center',
+    position: 'relative' as 'relative',
+    textAlign: 'center' as 'center',
     backgroundSize: 'cover',
     backgroundImage: `url(${backImage})`,
     backgroundPosition: 'ceter',
@@ -30,7 +29,7 @@ const useStyles = makeStyles({
   },
   footer: {
     fontSize: '18px',
-    position: 'absolute',
+    position: 'absolute' as 'absolute',
     bottom: '10px',
     width: '100%',
   },
@@ -55,31 +54,29 @@ const useStyles = makeStyles({
   grid: {
     height: '10vh',
   }
-});
+};
 
 const App = () => {
-  const styles = useStyles();
-
   return (
-    <main className={styles.root}>
-      <div className={styles.navi}>
+    <main style={styles.root}>
+      <div style={styles.navi}>
         <Grid container
           alignItems='center'
           justifyContent='center'
-          className={styles.grid}
+          sx={styles.grid}
         >
           <Grid item xs={3}>
             <a href='/'><img src={logoImage} alt='Smart token tool' /></a>
           </Grid>
           <Grid item xs={6}>
-            <div className={styles.naviLink}>
-              <Link to='/token' className={styles.link}>Token</Link>
+            <div style={styles.naviLink}>
+              <Link to='/token' style={styles.link}>Token</Link>
             </div>
-            <div className={styles.naviLink}>
-              <Link to='/nft' className={styles.link}>NFT</Link>
+            <div style={styles.naviLink}>
+              <Link to='/nft' style={styles.link}>NFT</Link>
             </div>
-            <div className={styles.naviLink}>
-              <Link to='/faucet' className={styles.link}>Faucet</Link>
+            <div style={styles.naviLink}>
+              <Link to='/faucet' style={styles.link}>Faucet</Link>
             </div>
           </Grid>
           <Grid item xs={3}></Grid>
@@ -92,9 +89,9 @@ const App = () => {
           <Route path='/complete' element={<CompletePage />} />
         </Routes>
       </div>
-      <div className={styles.footer}>
+      <div style={styles.footer}>
         <a href='https://atonoy.co' target='_blank' rel='noreferrer'>
-          <img src={corpLogoImage} className={styles.corpLogoImage} alt='Atonoy' />
+          <img src={corpLogoImage} style={styles.corpLogoImage} alt='Atonoy' />
         </a>
       </div>
     </main>
