@@ -1,7 +1,7 @@
 import WarningModal from '../components/modal/WarningModal';
 import SubmitButton from '../components/button/SubmitButton';
 import Typography from '@mui/material/Typography';
-import {useNavigate} from 'react-router-dom';
+import {useLocation, useNavigate} from 'react-router-dom';
 import {useState} from 'react';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
@@ -72,6 +72,8 @@ const TopPage = () => {
   const [open, setOpen] = useState(false);
   const [message, setMessage] = useState('');
   const navigate = useNavigate();
+  const location = useLocation();
+  console.log('location:', location);
   const [btnState, setBtnState] = useState(
     {
       title: 'Getting start',

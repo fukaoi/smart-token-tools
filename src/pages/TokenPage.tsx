@@ -1,5 +1,4 @@
 import {useState, useEffect} from 'react';
-import {makeStyles} from '@mui/styles';
 import {Paper, Box, FormControl} from '@mui/material';
 import {useForm} from 'react-hook-form';
 import TitleTypography from '../components/typography/TitleTypography';
@@ -55,17 +54,16 @@ const addMinting = async (
   return tokenId.unwrap();
 }
 
-const useStyles = makeStyles({
+const styles = {
   root: {
     marginTop: '1em',
     minWidth: '20em',
     maxWidth: '20em',
     padding: '1.2em',
   },
-});
+};
 
 const TokenPage = () => {
-  const styles = useStyles();
   const navigate = useNavigate();
   const [walletAddress, setWalletAddress] = useState<string>('');
   const [btnState, setBtnState] = useState({title: 'Confirm', isDisabled: false});
@@ -102,7 +100,7 @@ const TokenPage = () => {
       if (!window.solana.isConnected) {
         alert('disconnect, SMT');
         console.log(window.solana.isConnected);
-        navigate('/');
+        navigate('/', {state: {error: 'disconnect'}});
       }
       window.solana.connect().then((conn: any) => {
         setWalletAddress(conn.publicKey.toString());
@@ -121,7 +119,7 @@ const TokenPage = () => {
       <TitleTypography title='TOKEN' />
       <form onSubmit={handleSubmit(onSubmit)}>
         <FormControl>
-          <Paper className={styles.root}>
+          <Paper sx={styles.root}>
             <AddressTypography address={walletAddress} />
             <ClusterRadio control={control} name='cluster' />
             <Box sx={{mb: 4}} />
