@@ -24,16 +24,15 @@ const mint = async (
   walletAddress: string,
   postData: FormValues,
 ) => {
-  const tokenId = await SplToken.mint(
+  const res = await SplToken.mint(
     walletAddress.toPublicKey(),
     postData.cluster,
     postData.totalSupply,
     postData.decimals,
     window.solana.signAllTransactions
   );
-  console.debug('mint tokenId: ', tokenId);
-  tokenId.isErr && alert(tokenId.error);
-  return tokenId.unwrap();
+  console.debug('mint tokenId: ', res);
+  return res;
 }
 
 const addMinting = async (
@@ -41,7 +40,7 @@ const addMinting = async (
   walletAddress: string,
   postData: FormValues,
 ) => {
-  const tokenId = await SplToken.addMinting(
+  const res = await SplToken.addMinting(
     tokenKey.toPublicKey(),
     walletAddress.toPublicKey(),
     postData.cluster,
@@ -49,9 +48,8 @@ const addMinting = async (
     postData.decimals,
     window.solana.signAllTransactions
   );
-  console.debug('add minting tokenId: ', tokenId);
-  tokenId.isErr && alert(tokenId.error);
-  return tokenId.unwrap();
+  console.debug('add minting tokenId: ', res);
+  return res;
 }
 
 const styles = {
@@ -77,23 +75,31 @@ const TokenPage = () => {
     }
   });
 
-
   const onSubmit = async (data: FormValues) => {
     setBtnState({title: 'Processing', isDisabled: true});
-    try {
-      let tokenId = '';
-      if (data.issueType === 'new') {
-        tokenId = await mint(walletAddress, data);
-      } else if (data.issueType === 'add' && data.tokenKey) {
-        tokenId = await addMinting(data.tokenKey, walletAddress, data);
+    let tokenId = '';
+    if (data.issueType === 'new') {
+      const res = await mint(walletAddress, data);
+      if (res.isErr) {
+        // error modal
+        setBtnState({title: 'Confirm', isDisabled: false});
       } else {
-        throw new Error('Error no match issue type');
+        tokenId = res.value;
       }
-      navigate('/complete', {state: {tokenId}});
-    } catch (error: any) {
-      setBtnState({title: 'Confirm', isDisabled: false});
+    } else if (data.issueType === 'add' && data.tokenKey) {
+      const res = await addMinting(data.tokenKey, walletAddress, data);
+      if (res.isErr) {
+        // error modal
+        setBtnState({title: 'Confirm', isDisabled: false});
+      } else {
+        tokenId = res.value;
+      }
+    } else {
+      throw new Error('Error no match issue type');
     }
+    navigate('/complete', {state: {tokenId}});
   }
+
   // Fetch wallet address
   useEffect(() => {
     if (window.solana) {

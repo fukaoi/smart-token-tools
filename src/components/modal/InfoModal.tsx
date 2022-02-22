@@ -19,7 +19,7 @@ const style = {
   }
 };
 
-const CompleteModal: FC<{open: boolean, onClose: any}> = ({open, onClose}) => {
+const InfoModal: FC<{open: boolean, onClose: any}> = ({open, onClose}) => {
   return (
     <div>
       <Modal
@@ -42,4 +42,4 @@ const CompleteModal: FC<{open: boolean, onClose: any}> = ({open, onClose}) => {
     </div>
   );
 }
-export default CompleteModal;
+export default InfoModal;

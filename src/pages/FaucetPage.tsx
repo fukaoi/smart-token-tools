@@ -4,7 +4,7 @@ import DescriptionTypography from '../components/typography/DescriptionTypograph
 import AddressTypography from '../components/typography/AddressTypography';
 import {Paper, Box} from '@mui/material';
 import SubmitButton from '../components/button/SubmitButton';
-import CompleteModal from '../components/modal/CompleteModal';
+import InfoModal from '../components/modal/InfoModal';
 import {useState, useEffect} from 'react';
 import {useNavigate} from 'react-router-dom';
 import {Account} from '@solana-suite/core';
@@ -88,7 +88,7 @@ const FaucetPage = () => {
           isDisabled={btnState.isDisabled}
           callbackFunc={() => onSubmit(walletAddress)}
         />
-        <CompleteModal open={open} onClose={handleClose} />
+        <InfoModal open={open} onClose={handleClose} />
       </div>
       <Box sx={{mb: 10}} />
     </>
