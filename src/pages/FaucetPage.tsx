@@ -42,9 +42,8 @@ const FaucetPage = () => {
   useEffect(() => {
     if (window.solana) {
       if (!window.solana.isConnected) {
-        alert('disconnect, SMT');
-        console.log(window.solana.isConnected);
-        navigate('/');
+        const message = 'Your session disconnected from phantom wallet';
+        navigate('/', {state: {warning: message}});
       }
       window.solana.connect().then((conn: any) => {
         setWalletAddress(conn.publicKey.toString());
@@ -62,8 +61,8 @@ const FaucetPage = () => {
     setBtnState({title: 'Processing', isDisabled: true});
     const res = await Account.requestAirdrop(walletAddress.toPublicKey());
     if (res.isErr) {
-      // error action
-    } else { 
+      navigate('/', {state: {error: res.error}});
+    } else {
       setOpen(true);
     }
   }

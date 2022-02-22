@@ -40,8 +40,8 @@ const styles = {
 };
 
 const CompletePage = () => {
-  const {state} = useLocation();
-  const tokenId = (state as {tokenId: string}).tokenId;
+  const {state} = useLocation() as NavigateOptions;
+  const tokenId = state.tokenId as string;
 
   return (
     <>

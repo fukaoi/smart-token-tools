@@ -98,9 +98,8 @@ const TokenPage = () => {
   useEffect(() => {
     if (window.solana) {
       if (!window.solana.isConnected) {
-        alert('disconnect, SMT');
-        console.log(window.solana.isConnected);
-        navigate('/', {state: {error: 'disconnect'}});
+        const message = 'Your session disconnected from phantom wallet';
+        navigate('/', {state: {warning: message}});
       }
       window.solana.connect().then((conn: any) => {
         setWalletAddress(conn.publicKey.toString());

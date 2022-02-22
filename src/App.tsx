@@ -13,6 +13,17 @@ import NftPage from './pages/NftPage';
 import CompletePage from './pages/CompletePage';
 import FaucetPage from './pages/FaucetPage';
 
+declare global {
+  interface Window {solana: any}
+  interface NavigateOptions {
+    state: {
+      warning?: string,
+      error?: string,
+      tokenId?: string
+    }
+  }
+}
+
 const styles = {
   root: {
     position: 'relative' as 'relative',
