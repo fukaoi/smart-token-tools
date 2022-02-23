@@ -1,5 +1,4 @@
 import TitleTypography from "../components/typography/TitleTypography";
-import {makeStyles} from '@mui/styles';
 import CompleteBackground from '../assets/complete-background.png';
 import MintedInfoTypography from "../components/typography/MintedInfoTypography";
 import {Paper, Link} from '@mui/material';
@@ -7,15 +6,15 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import {useLocation} from 'react-router-dom';
 
-const useStyles = makeStyles({
+const styles = {
   container: {
     display: 'flex',
     justifyContent: 'center',
-    flexWrap: 'wrap',
+    flexWrap: 'wrap' as 'wrap',
   },
   cardMedia: {
     width: '100%',
-    textAlign: 'center',
+    textAlign: 'center' as 'center',
   },
   cardContainer: {
     position: 'relative',
@@ -35,19 +34,21 @@ const useStyles = makeStyles({
     maxWidth: '20em',
     padding: '20px',
   },
-});
+  link: {
+    textDecoration: 'none',
+  }
+};
 
 const CompletePage = () => {
-  const styles = useStyles();
-  const {state} = useLocation();
-  const tokenId = (state as {tokenId: string}).tokenId;
+  const {state} = useLocation() as NavigateOptions;
+  const tokenId = state.tokenId as string;
 
   return (
     <>
       <TitleTypography title='Complete' />
-      <div className={styles.container}>
-        <Paper className={styles.root}>
-          <img alt="complete" src={CompleteBackground} className={styles.cardMedia} />
+      <div style={styles.container}>
+        <Paper sx={styles.root}>
+          <img alt="complete" src={CompleteBackground} style={styles.cardMedia} />
           <Typography
             component='div'
             fontSize='26px'
@@ -55,7 +56,7 @@ const CompletePage = () => {
           >Your token issuing was success!!
           </Typography>
           <MintedInfoTypography message={tokenId} />
-          <Link href={tokenId.toExplorerUrl()}>
+          <Link sx={styles.link} href={tokenId.toExplorerUrl()}>
             <Button size='large'>See your token info at Explorer</Button>
           </Link>
         </Paper>

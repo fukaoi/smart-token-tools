@@ -8,18 +8,18 @@ const style = {
     fontSize: '1.2em',
   },
   box: {
-  position: 'absolute' as 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  width: 400,
-  bgcolor: 'background.paper',
-  boxShadow: 24,
-  p: 1,
+    position: 'absolute' as 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: 400,
+    bgcolor: 'background.paper',
+    boxShadow: 24,
+    p: 1,
   }
 };
 
-const CompleteModal: FC<{open: boolean, onClose: any}> = ({open, onClose}) => {
+const ErrorModal: FC<{open: boolean, onClose: any, message: string}> = ({open, onClose, message}) => {
   return (
     <div>
       <Modal
@@ -32,14 +32,14 @@ const CompleteModal: FC<{open: boolean, onClose: any}> = ({open, onClose}) => {
           <Alert
             sx={style.alert}
             variant='filled'
-            severity='success'
-            color='info'
+            severity='error'
+            color='error'
           >
-            Faucet a success. Got 1 SOL
+            {message}
           </Alert>
         </Box>
       </Modal>
     </div>
   );
 }
-export default CompleteModal;
+export default ErrorModal;

@@ -1,5 +1,4 @@
 import {useState, useEffect} from 'react';
-import {makeStyles} from '@mui/styles';
 import {Paper, Box, FormControl} from '@mui/material';
 import {useForm} from 'react-hook-form';
 import TitleTypography from '../components/typography/TitleTypography';
@@ -25,16 +24,15 @@ const mint = async (
   walletAddress: string,
   postData: FormValues,
 ) => {
-  const tokenId = await SplToken.mint(
+  const res = await SplToken.mint(
     walletAddress.toPublicKey(),
     postData.cluster,
     postData.totalSupply,
     postData.decimals,
     window.solana.signAllTransactions
   );
-  console.debug('mint tokenId: ', tokenId);
-  tokenId.isErr && alert(tokenId.error);
-  return tokenId.unwrap();
+  console.debug('mint tokenId: ', res);
+  return res;
 }
 
 const addMinting = async (
@@ -42,7 +40,7 @@ const addMinting = async (
   walletAddress: string,
   postData: FormValues,
 ) => {
-  const tokenId = await SplToken.addMinting(
+  const res = await SplToken.addMinting(
     tokenKey.toPublicKey(),
     walletAddress.toPublicKey(),
     postData.cluster,
@@ -50,30 +48,23 @@ const addMinting = async (
     postData.decimals,
     window.solana.signAllTransactions
   );
-  console.debug('add minting tokenId: ', tokenId);
-  tokenId.isErr && alert(tokenId.error);
-  return tokenId.unwrap();
+  console.debug('add minting tokenId: ', res);
+  return res;
 }
 
-const useStyles = makeStyles({
+const styles = {
   root: {
     marginTop: '1em',
     minWidth: '20em',
     maxWidth: '20em',
     padding: '1.2em',
   },
-});
+};
 
-const TokenPage = ({currentAddress}: any) => {
-  const styles = useStyles();
+const TokenPage = () => {
   const navigate = useNavigate();
-  const [btnState, setBtnState] = useState(
-    {
-      title: 'Confirm',
-      isDisabled: false,
-    }
-  );
-
+  const [walletAddress, setWalletAddress] = useState<string>('');
+  const [btnState, setBtnState] = useState({title: 'Confirm', isDisabled: false});
   const {handleSubmit, control, watch} = useForm<FormValues>({
     defaultValues: {
       cluster: 'devnet',
@@ -84,35 +75,37 @@ const TokenPage = ({currentAddress}: any) => {
     }
   });
 
-  const [walletAddress, setWalletAddress] = useState<string>('');
-
   const onSubmit = async (data: FormValues) => {
     setBtnState({title: 'Processing', isDisabled: true});
-    try {
-      window.solana.connect().then((conn: any) => {
-        setWalletAddress(conn.publicKey.toString());
-      });
-
-      let tokenId = '';
-      if (data.issueType === 'new') {
-        tokenId = await mint(walletAddress, data);
-      } else if (data.issueType === 'add' && data.tokenKey) {
-        tokenId = await addMinting(data.tokenKey, walletAddress, data);
+    let tokenId = '';
+    if (data.issueType === 'new') {
+      const res = await mint(walletAddress, data);
+      if (res.isErr) {
+        // error modal
+        setBtnState({title: 'Confirm', isDisabled: false});
       } else {
-        throw new Error('Error no match issue type');
+        tokenId = res.value;
       }
-      navigate('/complete', {state: {tokenId}});
-    } catch (error: any) {
-      setBtnState({title: 'Confirm', isDisabled: false});
+    } else if (data.issueType === 'add' && data.tokenKey) {
+      const res = await addMinting(data.tokenKey, walletAddress, data);
+      if (res.isErr) {
+        // error modal
+        setBtnState({title: 'Confirm', isDisabled: false});
+      } else {
+        tokenId = res.value;
+      }
+    } else {
+      throw new Error('Error no match issue type');
     }
+    navigate('/complete', {state: {tokenId}});
   }
+
   // Fetch wallet address
   useEffect(() => {
     if (window.solana) {
       if (!window.solana.isConnected) {
-        alert('disconnect, SMT');
-        console.log(window.solana.isConnected);
-        navigate('/');
+        const message = 'Your session disconnected from phantom wallet';
+        navigate('/', {state: {warning: message}});
       }
       window.solana.connect().then((conn: any) => {
         setWalletAddress(conn.publicKey.toString());
@@ -131,8 +124,8 @@ const TokenPage = ({currentAddress}: any) => {
       <TitleTypography title='TOKEN' />
       <form onSubmit={handleSubmit(onSubmit)}>
         <FormControl>
-          <Paper className={styles.root}>
-            <AddressTypography address={currentAddress} />
+          <Paper sx={styles.root}>
+            <AddressTypography address={walletAddress} />
             <ClusterRadio control={control} name='cluster' />
             <Box sx={{mb: 4}} />
             <TokenIssueTypeRadio control={control} name='issueType' />
