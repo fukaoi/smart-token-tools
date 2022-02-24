@@ -70,9 +70,10 @@ const TopPage = () => {
   const navigate = useNavigate();
   const {state} = useLocation() as NavigateOptions;
   const [warningModal, setWarningModal] = useState({open: false, message: ''});
+  let title = 'Getting start';
   const [btnState, setBtnState] = useState(
     {
-      title: 'Getting start',
+      title: title,
       isDisabled: false
     }
   );
@@ -86,10 +87,11 @@ const TopPage = () => {
 
   const handleClose = () => {
     setWarningModal({open: false, message: ''});
-    setBtnState({title: 'Confirm', isDisabled: false});
+    setBtnState({title, isDisabled: false});
   };
   const connectHandler = () => {
-    setBtnState({title: 'Processing', isDisabled: true});
+    let title = 'Processing';
+    setBtnState({title, isDisabled: true});
     if (!window.solana) {
       const message =
         `You will need Phantom wallet to access.
