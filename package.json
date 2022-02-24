@@ -28,7 +28,7 @@
   },
   "scripts": {
     "dev": "react-app-rewired start",
-    "start": "npx http-server -p 3000 build/",
+    "start": "http-server -p $PORT build/",
     "build": "react-app-rewired build",
     "test": "react-app-rewired test",
     "eject": "react-app-rewired eject"
