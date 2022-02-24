@@ -1,4 +1,4 @@
-import {useState, useEffect} from 'react';
+import {useState} from 'react';
 import {Paper, Box, FormControl} from '@mui/material';
 import {useForm} from 'react-hook-form';
 import TitleTypography from '../components/typography/TitleTypography';
@@ -11,6 +11,7 @@ import TokenKeyTextField from '../components/textField/TokenKeyTextField';
 import SubmitButton from '../components/button/SubmitButton';
 import {SplToken} from '../shared/spl-token';
 import {useNavigate} from 'react-router-dom';
+import {useSessionCheck} from '../hooks/SessionCheck';
 
 export interface FormValues {
   cluster: string,
@@ -100,24 +101,7 @@ const TokenPage = () => {
     navigate('/complete', {state: {tokenId}});
   }
 
-  // Fetch wallet address
-  useEffect(() => {
-    if (window.solana) {
-      if (!window.solana.isConnected) {
-        const message = 'Your session disconnected from phantom wallet';
-        navigate('/', {state: {warning: message}});
-      }
-      window.solana.connect().then((conn: any) => {
-        setWalletAddress(conn.publicKey.toString());
-      });
-    }
-    const id = setInterval(() => {
-      window.solana.connect({onlyIfTrusted: true}).then((conn: any) => {
-        setWalletAddress(conn.publicKey.toString());
-      });
-    }, 5000);
-    return () => clearInterval(id);
-  });
+  useSessionCheck(setWalletAddress);
 
   return (
     <>

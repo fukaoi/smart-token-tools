@@ -5,10 +5,10 @@ import AddressTypography from '../components/typography/AddressTypography';
 import {Paper, Box} from '@mui/material';
 import SubmitButton from '../components/button/SubmitButton';
 import InfoModal from '../components/modal/InfoModal';
-import {useState, useEffect} from 'react';
-import {useNavigate} from 'react-router-dom';
+import {useState} from 'react';
 import {Account} from '@solana-suite/core';
 import ErrorModal from '../components/modal/ErrorModal';
+import {useSessionCheck} from '../hooks/SessionCheck';
 
 export interface FormValues {
   cluster: string,
@@ -33,31 +33,13 @@ const useStyles = makeStyles({
 });
 
 const FaucetPage = () => {
-  const navigate = useNavigate();
   const styles = useStyles();
   const [open, setOpen] = useState(false);
   const [errorModal, setErrorModal] = useState({open: false, message: ''});
   const [walletAddress, setWalletAddress] = useState<string>('');
   const [btnState, setBtnState] = useState({title: 'Confirm', isDisabled: false});
 
-  // Fetch wallet address
-  useEffect(() => {
-    if (window.solana) {
-      if (!window.solana.isConnected) {
-        const message = 'Your session disconnected from phantom wallet';
-        navigate('/', {state: {warning: message}});
-      }
-      window.solana.connect().then((conn: any) => {
-        setWalletAddress(conn.publicKey.toString());
-      });
-    }
-    const id = setInterval(() => {
-      window.solana.connect({onlyIfTrusted: true}).then((conn: any) => {
-        setWalletAddress(conn.publicKey.toString());
-      });
-    }, 5000);
-    return () => clearInterval(id);
-  });
+  useSessionCheck(setWalletAddress);
 
   const onSubmit = async (walletAddress: string) => {
     setBtnState({title: 'Processing', isDisabled: true});
