@@ -18,6 +18,7 @@ import {
   SystemProgram,
   PublicKey,
   Keypair,
+  Connection,
 } from '@solana/web3.js';
 
 import {
@@ -31,6 +32,7 @@ import {
 
 export namespace SplToken {
   const getOrCreateAssociatedTokenAccount = async (
+    connection: Connection,
     mint: PublicKey,
     owner: PublicKey,
     allowOwnerOffCurve = false,
@@ -38,7 +40,6 @@ export namespace SplToken {
     programId = TOKEN_PROGRAM_ID,
     associatedTokenProgramId = ASSOCIATED_TOKEN_PROGRAM_ID,
   ) => {
-    const connection = Node.getConnection();
     const associatedToken = await getAssociatedTokenAddress(
       mint,
       owner,
@@ -68,17 +69,17 @@ export namespace SplToken {
       );
 
       transaction.feePayer = owner;
-      const blockhashObj = await connection.getRecentBlockhash();
+      const blockhashObj = await connection.getLatestBlockhash();
       transaction.recentBlockhash = blockhashObj.blockhash;
     }
     return Result.ok({account: associatedToken, tx: transaction});
   }
 
   const initMint = async (
+    connection: Connection,
     owner: PublicKey,
     mintDecimal: number,
   ) => {
-    const connection = Node.getConnection();
     const keypair = Keypair.generate();
     const lamports = await getMinimumBalanceForRentExemptMint(connection);
 
@@ -101,7 +102,7 @@ export namespace SplToken {
     );
 
     transaction.feePayer = owner;
-    const blockhashObj = await connection.getRecentBlockhash();
+    const blockhashObj = await connection.getLatestBlockhash();
     transaction.recentBlockhash = blockhashObj.blockhash;
     transaction.partialSign(keypair)
 
@@ -119,6 +120,7 @@ export namespace SplToken {
     const tx = new Transaction();
 
     const txData1 = await initMint(
+      connection,
       owner,
       mintDecimal,
     );
@@ -129,6 +131,7 @@ export namespace SplToken {
 
     const txData2 =
       await getOrCreateAssociatedTokenAccount(
+        connection,
         txData1.unwrap().tokenKey,
         owner,
       );
@@ -152,7 +155,7 @@ export namespace SplToken {
     );
 
     transaction.feePayer = owner;
-    const blockhashObj = await connection.getRecentBlockhash();
+    const blockhashObj = await connection.getLatestBlockhash();
     transaction.recentBlockhash = blockhashObj.blockhash;
 
     const signed = await signTransaction([txData1.unwrap().tx, transaction]);
@@ -165,7 +168,7 @@ export namespace SplToken {
     return Result.ok(tokenKey.toBase58());
   }
 
-   export const addMinting = async (
+  export const addMinting = async (
     tokenKey: PublicKey,
     owner: PublicKey,
     cluster: string,
@@ -178,6 +181,7 @@ export namespace SplToken {
 
     const txData1 =
       await getOrCreateAssociatedTokenAccount(
+        connection,
         tokenKey,
         owner,
       );
@@ -204,7 +208,7 @@ export namespace SplToken {
     );
 
     transaction.feePayer = owner;
-    const blockhashObj = await connection.getRecentBlockhash();
+    const blockhashObj = await connection.getLatestBlockhash();
     transaction.recentBlockhash = blockhashObj.blockhash;
 
     const signed = await signTransaction([transaction]);
