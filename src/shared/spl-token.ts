@@ -116,7 +116,8 @@ export namespace SplToken {
     mintDecimal: number,
     signTransaction: (tx: Transaction | Transaction[]) => any,
   ): Promise<Result<string, Error>> => {
-    const connection = Node.getConnection(cluster);
+    Node.changeConnection({cluster});
+    const connection = Node.getConnection();
     const tx = new Transaction();
 
     const txData1 = await initMint(
@@ -176,7 +177,8 @@ export namespace SplToken {
     mintDecimal: number,
     signTransaction: (tx: Transaction | Transaction[]) => any,
   ): Promise<Result<string, Error>> => {
-    const connection = Node.getConnection(cluster);
+    Node.changeConnection({cluster});
+    const connection = Node.getConnection();
     const tx = new Transaction();
 
     const txData1 =
