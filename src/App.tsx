@@ -12,6 +12,7 @@ import {
 import NftPage from './pages/NftPage';
 import CompletePage from './pages/CompletePage';
 import FaucetPage from './pages/FaucetPage';
+import {Device} from './shared/device';
 
 declare global {
   interface Window {solana: any}
@@ -87,7 +88,7 @@ const App = () => {
   }
   return (
     <Box sx={styles.root}>
-      <div style={styles.navi}>
+      <Box sx={styles.navi}>
         <Grid container
           alignItems='center'
           justifyContent='center'
@@ -99,15 +100,19 @@ const App = () => {
             </Box>
           </Grid>
           <Grid item xs={6}>
-            <div style={styles.naviLink}>
-              <Link to='/token' style={styles.link}>Token</Link>
-            </div>
-            <div style={styles.naviLink}>
-              <Link to='/nft' style={styles.link}>NFT</Link>
-            </div>
-            <div style={styles.naviLink}>
-              <Link to='/faucet' style={styles.link}>Faucet</Link>
-            </div>
+            {!Device.isSmartPhone() &&
+              <>
+                <div style={styles.naviLink}>
+                  <Link to='/token' style={styles.link}>Token</Link>
+                </div>
+                <div style={styles.naviLink}>
+                  <Link to='/nft' style={styles.link}>NFT</Link>
+                </div>
+                <div style={styles.naviLink}>
+                  <Link to='/faucet' style={styles.link}>Faucet</Link>
+                </div>
+              </>
+            }
           </Grid>
           <Grid item xs={3}></Grid>
         </Grid>
@@ -118,9 +123,9 @@ const App = () => {
           <Route path='/faucet' element={<FaucetPage />} />
           <Route path='/complete' element={<CompletePage />} />
         </Routes>
-      </div>
+      </Box>
       {
-        match1100 
+        match1100
         &&
         <Box sx={styles.footer}>
           <a href='https://atonoy.co' target='_blank' rel='noreferrer'>
