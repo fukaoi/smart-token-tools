@@ -3,7 +3,7 @@ import TopPage from './pages/TopPage';
 import backImage from './assets/background-image.jpg';
 import corpLogoImage from './assets/atonoy-logo.png';
 import logoImage from './assets/smt-logo.svg';
-import {Grid} from '@mui/material';
+import {Grid, Box, useMediaQuery} from '@mui/material';
 import {
   Routes,
   Route,
@@ -31,7 +31,7 @@ const styles = {
     backgroundSize: 'cover',
     backgroundImage: `url(${backImage})`,
     backgroundPosition: 'ceter',
-    minHeight: '100vh',
+    minHeight: '120vh',
     maxHeight: '200vh',
     width: '100%',
     alignItems: 'ceter',
@@ -64,10 +64,24 @@ const styles = {
   },
   grid: {
     height: '10vh',
+  },
+  logoImage: {
+    alignItems: 'center',
+    marginBottom: '0',
   }
 };
 
 const App = () => {
+  const match1100 = useMediaQuery('(min-width:1150px)');
+  const match1024 = useMediaQuery('(min-width:1024px)');
+  const match600 = useMediaQuery('(min-width:600px)');
+  if (!match600) {
+    styles.logoImage.marginBottom = '6em';
+  } else if (!match1024) {
+    styles.logoImage.marginBottom = '5em';
+  } else {
+    styles.logoImage.marginBottom = '0';
+  }
   return (
     <main style={styles.root}>
       <div style={styles.navi}>
@@ -77,7 +91,9 @@ const App = () => {
           sx={styles.grid}
         >
           <Grid item xs={3}>
-            <a href='/'><img src={logoImage} alt='Smart token tool' /></a>
+            <Box sx={styles.logoImage}>
+              <a href='/'><img src={logoImage} alt='Smart token tool' /></a>
+            </Box>
           </Grid>
           <Grid item xs={6}>
             <div style={styles.naviLink}>
@@ -100,11 +116,15 @@ const App = () => {
           <Route path='/complete' element={<CompletePage />} />
         </Routes>
       </div>
-      <div style={styles.footer}>
-        <a href='https://atonoy.co' target='_blank' rel='noreferrer'>
-          <img src={corpLogoImage} style={styles.corpLogoImage} alt='Atonoy' />
-        </a>
-      </div>
+      {
+        match1100 
+        &&
+        <Box sx={styles.footer}>
+          <a href='https://atonoy.co' target='_blank' rel='noreferrer'>
+            <img src={corpLogoImage} style={styles.corpLogoImage} alt='Atonoy' />
+          </a>
+        </Box>
+      }
     </main>
   );
 }
