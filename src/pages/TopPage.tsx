@@ -11,6 +11,7 @@ import AtonoyMarkLogo from '../assets/atonoy-logo-mark.png';
 import PhantomMarkLogo from '../assets/phantom-logo-mark.png'
 import Button from '@mui/material/Button';
 import {Link} from '@mui/material';
+import {Device} from '../shared/device';
 
 const styles = {
   message: {
@@ -92,7 +93,11 @@ const TopPage = () => {
   const connectHandler = () => {
     let title = 'Processing';
     setBtnState({title, isDisabled: true});
-    if (!window.solana) {
+    if (Device.isSmartPhone()) {
+      const message =
+        `Sorry. Only available for PC access`;
+      setWarningModal({open: true, message});
+    } else if (!window.solana) {
       const message =
         `You will need Phantom wallet to access.
        Please install it from the URL below.
