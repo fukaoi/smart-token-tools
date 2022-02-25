@@ -31,7 +31,7 @@ const styles = {
     backgroundSize: 'cover',
     backgroundImage: `url(${backImage})`,
     backgroundPosition: 'ceter',
-    minHeight: '120vh',
+    minHeight: '100vh',
     maxHeight: '200vh',
     width: '100%',
     alignItems: 'ceter',
@@ -76,14 +76,17 @@ const App = () => {
   const match1024 = useMediaQuery('(min-width:1024px)');
   const match600 = useMediaQuery('(min-width:600px)');
   if (!match600) {
+    styles.root.minHeight = '120vh';
     styles.logoImage.marginBottom = '6em';
   } else if (!match1024) {
+    styles.root.minHeight = '120vh';
     styles.logoImage.marginBottom = '5em';
   } else {
+    styles.root.minHeight = '100vh';
     styles.logoImage.marginBottom = '0';
   }
   return (
-    <main style={styles.root}>
+    <Box sx={styles.root}>
       <div style={styles.navi}>
         <Grid container
           alignItems='center'
@@ -125,7 +128,7 @@ const App = () => {
           </a>
         </Box>
       }
-    </main>
+    </Box>
   );
 }
 
