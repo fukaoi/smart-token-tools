@@ -69,7 +69,9 @@ export namespace SplToken {
       );
 
       transaction.feePayer = owner;
-      const blockhashObj = await connection.getLatestBlockhash();
+      const blockhashObj = await connection.getRecentBlockhash();
+      // since solana v0.1.8
+      // const blockhashObj = await connection.getLatestBlockhash();
       transaction.recentBlockhash = blockhashObj.blockhash;
     }
     return Result.ok({account: associatedToken, tx: transaction});
@@ -102,7 +104,9 @@ export namespace SplToken {
     );
 
     transaction.feePayer = owner;
-    const blockhashObj = await connection.getLatestBlockhash();
+    const blockhashObj = await connection.getRecentBlockhash();
+    // since solana v0.1.8
+    // const blockhashObj = await connection.getLatestBlockhash();
     transaction.recentBlockhash = blockhashObj.blockhash;
     transaction.partialSign(keypair)
 
@@ -156,7 +160,9 @@ export namespace SplToken {
     );
 
     transaction.feePayer = owner;
-    const blockhashObj = await connection.getLatestBlockhash();
+    const blockhashObj = await connection.getRecentBlockhash();
+    // since solana v0.1.8
+    // const blockhashObj = await connection.getLatestBlockhash();
     transaction.recentBlockhash = blockhashObj.blockhash;
 
     const signed = await signTransaction([txData1.unwrap().tx, transaction]);
@@ -210,7 +216,9 @@ export namespace SplToken {
     );
 
     transaction.feePayer = owner;
-    const blockhashObj = await connection.getLatestBlockhash();
+    const blockhashObj = await connection.getRecentBlockhash();
+    // since solana v0.1.8
+    // const blockhashObj = await connection.getLatestBlockhash();
     transaction.recentBlockhash = blockhashObj.blockhash;
 
     const signed = await signTransaction([transaction]);
