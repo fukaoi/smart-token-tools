@@ -1,6 +1,6 @@
 {
   "name": "smart-token-tool",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.7.1",
@@ -35,7 +35,8 @@
     "start": "http-server -p $PORT build/",
     "build": "react-app-rewired build",
     "test": "react-app-rewired test",
-    "eject": "react-app-rewired eject"
+    "eject": "react-app-rewired eject",
+    "postinstall": "cd node_modules/@solana-suite/shared/ && ./solana-suite-config.js cluster dev "
   },
   "eslintConfig": {
     "extends": [
