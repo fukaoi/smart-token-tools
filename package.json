@@ -10,7 +10,7 @@
     "@mui/styles": "^5.2.3",
     "@solana-suite/core": "latest",
     "@solana/buffer-layout": "4.0.0",
-    "@solana/spl-token": "0.2.0-alpha.1",
+    "@solana/spl-token": "0.2.0",
     "http-server": "^14.1.0",
     "react": "^17.0.2",
     "react-app-rewired": "^2.1.11",
