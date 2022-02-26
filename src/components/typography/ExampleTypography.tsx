@@ -1,10 +1,9 @@
 import {FC} from 'react';
-import {makeStyles} from '@mui/styles';
 import {theme} from '../../shared/colorTheme';
 
-const useStyles = makeStyles({
+const styles = {
   pre: {
-    textAlign: 'left',
+    textAlign: 'left' as 'left',
     fontSize: '15px',
     marginLeft: '1em',
     marginBottom: '2em',
@@ -14,12 +13,11 @@ const useStyles = makeStyles({
     borderRadius: '8px',
     fontFamily: 'Source Code Pro',
   },
-});
+};
 
 const ExampleTypography: FC<{example: string}> = ({example}) => {
-  const styles = useStyles();
   return (
-    <pre className={styles.pre}>e.g:
+    <pre style={styles.pre}>e.g:
       {example}
     </pre>
   );

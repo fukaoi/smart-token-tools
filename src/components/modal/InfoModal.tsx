@@ -8,20 +8,20 @@ const style = {
     fontSize: '1.2em',
   },
   box: {
-  position: 'absolute' as 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  width: 400,
-  bgcolor: 'background.paper',
-  boxShadow: 24,
-  p: 1,
+    position: 'absolute' as 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: 400,
+    bgcolor: 'background.paper',
+    boxShadow: 24,
+    p: 1,
   }
 };
 
 const InfoModal: FC<{open: boolean, onClose: any}> = ({open, onClose}) => {
   return (
-    <div>
+    <>
       <Modal
         open={open}
         onClose={onClose}
@@ -39,7 +39,7 @@ const InfoModal: FC<{open: boolean, onClose: any}> = ({open, onClose}) => {
           </Alert>
         </Box>
       </Modal>
-    </div>
+    </>
   );
 }
 export default InfoModal;

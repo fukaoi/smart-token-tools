@@ -1,4 +1,3 @@
-import {makeStyles} from '@mui/styles';
 import TitleTypography from "../components/typography/TitleTypography";
 import DescriptionTypography from '../components/typography/DescriptionTypography';
 import AddressTypography from '../components/typography/AddressTypography';
@@ -18,7 +17,7 @@ export interface FormValues {
   tokenKey?: string,
 }
 
-const useStyles = makeStyles({
+const styles = {
   container: {
     display: 'flex',
     justifyContent: 'center',
@@ -30,10 +29,9 @@ const useStyles = makeStyles({
     maxWidth: '20em',
     padding: '1.2em',
   },
-});
+};
 
 const FaucetPage = () => {
-  const styles = useStyles();
   const [open, setOpen] = useState(false);
   const [errorModal, setErrorModal] = useState({open: false, message: ''});
   const [walletAddress, setWalletAddress] = useState<string>('');
@@ -59,21 +57,21 @@ const FaucetPage = () => {
   return (
     <>
       <TitleTypography title='FAUCET' />
-      <div className={styles.container}>
-        <Paper className={styles.root}>
+      <Box sx={styles.container}>
+        <Paper sx={styles.root}>
           <AddressTypography address={walletAddress} />
           <DescriptionTypography message={description} />
         </Paper>
-      </div>
+      </Box>
       <Box sx={{mb: 6}} />
-      <div>
+      <Box>
         <SubmitButton
           title={btnState.title}
           isDisabled={btnState.isDisabled}
           callbackFunc={() => onSubmit(walletAddress)}
         />
         <InfoModal open={open} onClose={handleClose} />
-      </div>
+      </Box>
       <Box sx={{mb: 10}} />
       <ErrorModal
         open={errorModal.open}

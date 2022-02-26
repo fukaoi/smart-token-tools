@@ -1,21 +1,19 @@
 import {FC} from 'react';
-import {makeStyles} from '@mui/styles';
 import {Box} from '@mui/system';
 import Typography from '@mui/material/Typography';
-import { theme } from '../../shared/colorTheme';
+import {theme} from '../../shared/colorTheme';
 
-const useStyles = makeStyles({
+const styles = {
   box: {
     textAlign: 'left',
     marginBottom: '1em',
     marginLeft: '10px',
   },
-});
+};
 
 const DescriptionTypography: FC<{message: string}> = ({message}) => {
-  const styles = useStyles();
   return (
-    <Box component="div" className={styles.box}>
+    <Box component="div" sx={styles.box}>
       <Typography
         component='div'
         fontSize='15px'

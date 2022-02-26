@@ -102,15 +102,15 @@ const App = () => {
           <Grid item xs={6}>
             {!Device.isSmartPhone() &&
               <>
-                <div style={styles.naviLink}>
+                <Box style={styles.naviLink}>
                   <Link to='/token' style={styles.link}>Token</Link>
-                </div>
-                <div style={styles.naviLink}>
+                </Box>
+                <Box style={styles.naviLink}>
                   <Link to='/nft' style={styles.link}>NFT</Link>
-                </div>
-                <div style={styles.naviLink}>
+                </Box>
+                <Box style={styles.naviLink}>
                   <Link to='/faucet' style={styles.link}>Faucet</Link>
-                </div>
+                </Box>
               </>
             }
           </Grid>

@@ -21,7 +21,7 @@ const style = {
 
 const ErrorModal: FC<{open: boolean, onClose: any, message: string}> = ({open, onClose, message}) => {
   return (
-    <div>
+    <>
       <Modal
         open={open}
         onClose={onClose}
@@ -39,7 +39,7 @@ const ErrorModal: FC<{open: boolean, onClose: any, message: string}> = ({open, o
           </Alert>
         </Box>
       </Modal>
-    </div>
+    </>
   );
 }
 export default ErrorModal;

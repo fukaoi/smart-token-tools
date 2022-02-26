@@ -8,24 +8,24 @@ const style = {
     fontSize: '1.2em',
   },
   box: {
-  position: 'absolute' as 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  width: 400,
-  bgcolor: 'background.paper',
-  boxShadow: 24,
-  p: 1,
+    position: 'absolute' as 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: 400,
+    bgcolor: 'background.paper',
+    boxShadow: 24,
+    p: 1,
   }
 };
 
 const WarningModal: FC<{
-  open: boolean, 
+  open: boolean,
   onClose: any,
   message: string
 }> = ({open, onClose, message}) => {
   return (
-    <div>
+    <>
       <Modal
         open={open}
         onClose={onClose}
@@ -39,11 +39,11 @@ const WarningModal: FC<{
             severity='warning'
             color='success'
           >
-            {message} 
+            {message}
           </Alert>
         </Box>
       </Modal>
-    </div>
+    </>
   );
 }
 export default WarningModal;

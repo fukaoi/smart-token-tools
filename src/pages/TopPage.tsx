@@ -9,7 +9,7 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import PhantomMarkLogo from '../assets/phantom-logo-mark.png'
 import Button from '@mui/material/Button';
-import {Link} from '@mui/material';
+import {Box, Link} from '@mui/material';
 import {Device} from '../shared/device';
 
 const styles = {
@@ -49,7 +49,7 @@ const styles = {
 
 const WellComeMessage = () => {
   return (
-    <div style={styles.message}>
+    <Box style={styles.message}>
       <Typography
         component='div'
         fontSize='23px'
@@ -62,7 +62,7 @@ const WellComeMessage = () => {
         fontWeight='bold'
       >TOKEN AND NFT
       </Typography>
-    </div>
+    </Box>
   );
 }
 
@@ -113,7 +113,7 @@ const TopPage = () => {
   return (
     <>
       <WellComeMessage />
-      <div style={styles.container}>
+      <Box style={styles.container}>
         <Card sx={styles.cardContainer}>
           <CardMedia
             sx={styles.cardMedia}
@@ -134,15 +134,15 @@ const TopPage = () => {
             </Link>
           </CardActions>
         </Card>
-      </div>
+      </Box>
 
-      <div style={styles.submit}>
+      <Box style={styles.submit}>
         <SubmitButton
           isDisabled={btnState.isDisabled}
           title={btnState.title}
           callbackFunc={connectHandler}
         />
-      </div>
+      </Box>
       <WarningModal
         open={warningModal.open}
         onClose={handleClose}
