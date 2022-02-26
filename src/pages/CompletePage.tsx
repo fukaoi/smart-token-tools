@@ -1,7 +1,7 @@
 import TitleTypography from "../components/typography/TitleTypography";
 import CompleteBackground from '../assets/complete-background.png';
 import MintedInfoTypography from "../components/typography/MintedInfoTypography";
-import {Paper, Link} from '@mui/material';
+import {Paper, Link, Box} from '@mui/material';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import {useLocation} from 'react-router-dom';
@@ -46,7 +46,7 @@ const CompletePage = () => {
   return (
     <>
       <TitleTypography title='Complete' />
-      <div style={styles.container}>
+      <Box style={styles.container}>
         <Paper sx={styles.root}>
           <img alt="complete" src={CompleteBackground} style={styles.cardMedia} />
           <Typography
@@ -60,7 +60,7 @@ const CompletePage = () => {
             <Button size='large'>See your token info at Explorer</Button>
           </Link>
         </Paper>
-      </div>
+      </Box>
     </>
   );
 };
