@@ -121,7 +121,7 @@ const TopPage = () => {
             image={PhantomMarkLogo} />
           <CardContent>
             <Typography gutterBottom variant='h5' component='div'>
-              Need. Install Phantom wallet
+              Need. Install Phantom wallet for Desktop
             </Typography>
             <Typography variant='body2' color='text.secondary'>
               SMT only allows connections to phantom wallet,
