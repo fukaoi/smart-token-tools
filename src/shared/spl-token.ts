@@ -168,8 +168,9 @@ export namespace SplToken {
     const signed = await signTransaction([txData1.unwrap().tx, transaction]);
 
     for (let sign of signed) {
-      const sig = await connection.sendRawTransaction(sign.serialize())
-      await T.confirmedSig(sig)
+      const sig = await connection.sendRawTransaction(sign.serialize()).then(Result.ok).catch(Result.err);
+      if (sig.isErr) return Result.err(sig.error);
+      await T.confirmedSig(sig.value)
     };
 
     return Result.ok(tokenKey.toBase58());
@@ -224,8 +225,9 @@ export namespace SplToken {
     const signed = await signTransaction([transaction]);
 
     for (let sign of signed) {
-      const sig = await connection.sendRawTransaction(sign.serialize())
-      await T.confirmedSig(sig)
+      const sig = await connection.sendRawTransaction(sign.serialize()).then(Result.ok).catch(Result.err);
+      if (sig.isErr) return Result.err(sig.error);
+      await T.confirmedSig(sig.value)
     };
 
     return Result.ok(tokenKey.toBase58());

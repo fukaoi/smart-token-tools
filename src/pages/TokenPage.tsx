@@ -12,6 +12,7 @@ import SubmitButton from '../components/button/SubmitButton';
 import {SplToken} from '../shared/spl-token';
 import {useNavigate} from 'react-router-dom';
 import {useSessionCheck} from '../hooks/SessionCheck';
+import ErrorModal from '../components/modal/ErrorModal';
 
 export interface FormValues {
   cluster: string,
@@ -66,6 +67,7 @@ const TokenPage = () => {
   const navigate = useNavigate();
   const [walletAddress, setWalletAddress] = useState<string>('');
   const [btnState, setBtnState] = useState({title: 'Confirm', isDisabled: false});
+  const [errorModal, setErrorModal] = useState({open: false, message: ''});
   const {handleSubmit, control, watch} = useForm<FormValues>({
     defaultValues: {
       cluster: 'devnet',
@@ -76,29 +78,32 @@ const TokenPage = () => {
     }
   });
 
+  const handleClose = () => {
+    setErrorModal({open: false, message: ''});
+    setBtnState({title: 'Confirm', isDisabled: false});
+  };
+
   const onSubmit = async (data: FormValues) => {
     setBtnState({title: 'Processing', isDisabled: true});
     let tokenId = '';
     if (data.issueType === 'new') {
       const res = await mint(walletAddress, data);
       if (res.isErr) {
-        // error modal
-        setBtnState({title: 'Confirm', isDisabled: false});
+        setErrorModal({open: true, message: res.error.message});
       } else {
         tokenId = res.value;
       }
     } else if (data.issueType === 'add' && data.tokenKey) {
       const res = await addMinting(data.tokenKey, walletAddress, data);
       if (res.isErr) {
-        // error modal
-        setBtnState({title: 'Confirm', isDisabled: false});
+        setErrorModal({open: true, message: res.error.message});
       } else {
         tokenId = res.value;
       }
     } else {
-      throw new Error('Error no match issue type');
+      setErrorModal({open: true, message: 'Error no match issue type'});
     }
-    navigate('/complete', {state: {tokenId}});
+    tokenId.length !== 0 && navigate('/complete', {state: {tokenId}});
   }
 
   useSessionCheck(setWalletAddress);
@@ -121,21 +126,26 @@ const TokenPage = () => {
               watch('issueType') === 'add'
               &&
               <>
-                <Box sx={{mb: 4}} />
+                <Box sx={{mb: 1}} />
                 <TokenKeyTextField control={control} name='tokenKey' />
               </>
             }
           </Paper>
           <Box sx={{mb: 6}} />
-          <div>
+          <Box>
             <SubmitButton
               isDisabled={btnState.isDisabled}
               title={btnState.title}
             />
-          </div>
+          </Box>
           <Box sx={{mb: 10}} />
         </FormControl>
       </form>
+      <ErrorModal
+        open={errorModal.open}
+        onClose={handleClose}
+        message={errorModal.message}
+      />
     </>
   );
 };
