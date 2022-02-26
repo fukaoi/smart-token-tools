@@ -7,7 +7,6 @@ import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
-import AtonoyMarkLogo from '../assets/atonoy-logo-mark.png';
 import PhantomMarkLogo from '../assets/phantom-logo-mark.png'
 import Button from '@mui/material/Button';
 import {Link} from '@mui/material';
@@ -122,7 +121,7 @@ const TopPage = () => {
             image={PhantomMarkLogo} />
           <CardContent>
             <Typography gutterBottom variant='h5' component='div'>
-              Need1. Install wallet
+              Need. Install Phantom wallet
             </Typography>
             <Typography variant='body2' color='text.secondary'>
               SMT only allows connections to phantom wallet,
@@ -133,29 +132,6 @@ const TopPage = () => {
             <Link sx={styles.link} href='https://phantom.app/download'>
               <Button size='small'>Learn More</Button>
             </Link>
-          </CardActions>
-        </Card>
-        <Card sx={styles.cardContainer}>
-          <CardMedia
-            sx={styles.cardMedia}
-            component='img'
-            image={AtonoyMarkLogo}
-          />
-          <CardContent>
-            <Typography gutterBottom variant='h5' component='div'>
-              Need2. Get Atonoy subscription token
-            </Typography>
-            <Typography variant='body2' color='text.secondary'>
-              To use SMT, you will need a usage subscription token issued by Atonoy.inc.
-              If you are don't have subscription token, please contact
-              <Link sx={styles.link} href='https://atonoy.co'>Atonoy.inc</Link>.
-            </Typography>
-          </CardContent>
-          <CardActions sx={styles.cardAction}>
-            <Link sx={styles.link} href=''>
-              <Button size='small'> Atonoy subscription token</Button>
-            </Link>
-
           </CardActions>
         </Card>
       </div>
