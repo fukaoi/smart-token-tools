@@ -7,7 +7,6 @@ import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
-import AtonoyMarkLogo from '../assets/atonoy-logo-mark.png';
 import PhantomMarkLogo from '../assets/phantom-logo-mark.png'
 import Button from '@mui/material/Button';
 import {Link} from '@mui/material';
@@ -122,7 +121,7 @@ const TopPage = () => {
             image={PhantomMarkLogo} />
           <CardContent>
             <Typography gutterBottom variant='h5' component='div'>
-              Need. Install wallet
+              Need. Install Phantom wallet
             </Typography>
             <Typography variant='body2' color='text.secondary'>
               SMT only allows connections to phantom wallet,
