@@ -28,7 +28,7 @@ jobs:
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "smart-token-tool" #Must be unique in Heroku
-          heroku_email: "a.takachi@atonoy.co"
+          heroku_email: ${{secrets.HEROKU_EMAIL}}
 
       # Runs a single command using the runners shell
       - name: Run a one-line script
