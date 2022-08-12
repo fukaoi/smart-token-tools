@@ -9,6 +9,7 @@ import { useSessionCheck } from "../hooks/SessionCheck";
 import ErrorModal from "../components/modal/ErrorModal";
 import NftNameTextField from "../components/textField/NftNameTextField";
 import UploadButton from "../components/button/UploadButton";
+import SymbolTextField from "../components/textField/SymbolTextField";
 
 export interface FormValues {
   cluster: string;
@@ -72,6 +73,8 @@ const NftPage = () => {
             <ClusterRadio control={control} name="cluster" />
             <Box sx={{ mb: 4 }} />
             <NftNameTextField control={control} name="nftName" />
+            <Box sx={{ mb: 4 }} />
+            <SymbolTextField control={control} name="symbol" />
             <Box sx={{ mb: 4 }} />
             <Box>
               <UploadButton
