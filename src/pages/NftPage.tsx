@@ -10,6 +10,9 @@ import ErrorModal from "../components/modal/ErrorModal";
 import NftNameTextField from "../components/textField/NftNameTextField";
 import UploadButton from "../components/button/UploadButton";
 import SymbolTextField from "../components/textField/SymbolTextField";
+import OptionalButton from "../components/button/OptionalButton";
+import DescriptionTextField from "../components/textField/DescriptionTextField";
+import HeadlineTypography from "../components/typography/HeadlineTypography";
 
 export interface FormValues {
   cluster: string;
@@ -19,6 +22,7 @@ export interface FormValues {
   tokenKey?: string;
   nftName?: string;
   symbol?: string;
+  description?: string;
   sellerFeeBasisPoints?: number;
 }
 
@@ -42,6 +46,7 @@ const NftPage = () => {
     title: "Upload",
     isDisabled: false,
   });
+  const [optionalBtnState, setOptionalBtnState] = useState(false);
 
   const [errorModal, setErrorModal] = useState({ open: false, message: "" });
   const { handleSubmit, control, watch } = useForm<FormValues>({
@@ -61,6 +66,10 @@ const NftPage = () => {
     console.log(data);
   };
 
+  const handleOptional = () => {
+    setOptionalBtnState((prevState) => !prevState);
+  };
+
   useSessionCheck(setWalletAddress);
 
   return (
@@ -76,10 +85,19 @@ const NftPage = () => {
             <Box sx={{ mb: 4 }} />
             <SymbolTextField control={control} name="symbol" />
             <Box sx={{ mb: 4 }} />
+            <DescriptionTextField control={control} name="description" />
+            <Box sx={{ mb: 4 }} />
+            <HeadlineTypography message="Image Upload" />
             <Box>
               <UploadButton
                 isDisabled={uploadBtnState.isDisabled}
                 title={uploadBtnState.title}
+              />
+            </Box>
+            <Box>
+              <OptionalButton
+                isOpen={optionalBtnState}
+                callbackFunc={handleOptional}
               />
             </Box>
           </Paper>
