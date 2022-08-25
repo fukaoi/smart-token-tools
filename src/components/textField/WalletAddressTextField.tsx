@@ -3,18 +3,18 @@ import HeadlineTypography from "../typography/HeadlineTypography";
 import { FormValues } from "../../pages/NftPage";
 import { useController, UseControllerProps } from "react-hook-form";
 
-const RoyaltyTextField = (props: UseControllerProps<FormValues>) => {
+const WalletAddressTextField = (props: UseControllerProps<FormValues>) => {
   const { field } = useController(props);
   return (
     <>
-      <HeadlineTypography message="Input Royalty" />
+      <HeadlineTypography message="Input Wallet Address" />
       <Box sx={{ display: "flex", mt: 2 }}>
         <TextField
           type="text"
           minRows={100}
           id="outlined-basic"
-          label="royalty"
-          placeholder="1, 2, 3,,,"
+          label="Wallet Address"
+          placeholder="Input Wallet Address"
           variant="outlined"
           size="small"
           error={false}
@@ -25,4 +25,4 @@ const RoyaltyTextField = (props: UseControllerProps<FormValues>) => {
   );
 };
 
-export default RoyaltyTextField;
+export default WalletAddressTextField;

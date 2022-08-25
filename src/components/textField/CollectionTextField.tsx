@@ -3,26 +3,29 @@ import HeadlineTypography from "../typography/HeadlineTypography";
 import { FormValues } from "../../pages/NftPage";
 import { useController, UseControllerProps } from "react-hook-form";
 
-const RoyaltyTextField = (props: UseControllerProps<FormValues>) => {
+const CollectionTextField = (props: UseControllerProps<FormValues>) => {
   const { field } = useController(props);
   return (
     <>
-      <HeadlineTypography message="Input Royalty" />
+      <HeadlineTypography message="Collection" />
       <Box sx={{ display: "flex", mt: 2 }}>
         <TextField
           type="text"
           minRows={100}
-          id="outlined-basic"
-          label="royalty"
-          placeholder="1, 2, 3,,,"
-          variant="outlined"
+          id="filled-basic"
+          label="Collection"
+          placeholder="ATONOy"
+          variant="filled"
           size="small"
           error={false}
           {...field}
+          inputProps={{
+            readOnly: true,
+          }}
         />
       </Box>
     </>
   );
 };
 
-export default RoyaltyTextField;
+export default CollectionTextField;

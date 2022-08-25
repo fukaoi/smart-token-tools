@@ -3,17 +3,17 @@ import HeadlineTypography from "../typography/HeadlineTypography";
 import { FormValues } from "../../pages/NftPage";
 import { useController, UseControllerProps } from "react-hook-form";
 
-const RoyaltyTextField = (props: UseControllerProps<FormValues>) => {
+const ShareTextField = (props: UseControllerProps<FormValues>) => {
   const { field } = useController(props);
   return (
     <>
-      <HeadlineTypography message="Input Royalty" />
+      <HeadlineTypography message="Input Share" />
       <Box sx={{ display: "flex", mt: 2 }}>
         <TextField
           type="text"
           minRows={100}
           id="outlined-basic"
-          label="royalty"
+          label="Share"
           placeholder="1, 2, 3,,,"
           variant="outlined"
           size="small"
@@ -25,4 +25,4 @@ const RoyaltyTextField = (props: UseControllerProps<FormValues>) => {
   );
 };
 
-export default RoyaltyTextField;
+export default ShareTextField;

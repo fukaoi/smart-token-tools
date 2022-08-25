@@ -24,7 +24,17 @@ export interface FormValues {
   nftName?: string;
   symbol?: string;
   description?: string;
-  sellerFeeBasisPoints?: number;
+  royalty?: number;
+  address?: string;
+  verified?: boolean;
+  share?: number;
+  collection?: string;
+}
+
+export interface Creator {
+  address: string;
+  verified: boolean;
+  share: number;
 }
 
 const styles = {
