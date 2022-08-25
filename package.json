@@ -10,6 +10,7 @@
     "@mui/material": "^5.9.2",
     "@mui/styles": "^5.9.2",
     "@solana-suite/core": "latest",
+    "@solana-suite/nft": "latest",
     "@solana/buffer-layout": "^4.0.0",
     "@solana/spl-token": "0.2.0",
     "buffer": "^6.0.3",

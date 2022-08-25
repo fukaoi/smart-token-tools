@@ -1,4 +1,4 @@
-import { Button, ImageList, ImageListItem } from "@mui/material";
+import { Box, Button, ImageList, ImageListItem } from "@mui/material";
 import { FC, useState } from "react";
 
 const FileUploadUI: FC = () => {
@@ -23,7 +23,7 @@ const FileUploadUI: FC = () => {
   };
 
   return (
-    <div className="mg20">
+    <>
       <label htmlFor="btn-upload">
         <input
           id="btn-upload"
@@ -35,13 +35,15 @@ const FileUploadUI: FC = () => {
             handleOnAddImage(e)
           }
         />
-        <Button variant="outlined" component="span">
-          Choose Image
-        </Button>
+        <Box sx={{ display: "flex", mt: 2 }}>
+          <Button variant="outlined" component="span">
+            Choose Image
+          </Button>
+        </Box>
       </label>
       {imagePreview ? (
         <ImageList
-          sx={{ width: 500, height: 450 }}
+          sx={{ width: 300, height: 300 }}
           variant="woven"
           cols={1}
           gap={1}
@@ -56,7 +58,7 @@ const FileUploadUI: FC = () => {
           </ImageListItem>
         </ImageList>
       ) : null}
-    </div>
+    </>
   );
 };
 export default FileUploadUI;

@@ -11,6 +11,9 @@ const StyledButton = withStyles({
     width: "200px",
     height: "40px",
     position: "relative",
+    textAlign: "left",
+    marginTop: "1em",
+    marginRight: "447px",
   },
   label: {
     textTransform: "capitalize",
@@ -23,15 +26,24 @@ const UploadButton: FC<{
   isDisabled?: boolean;
 }> = ({ title, callbackFunc, isDisabled = false }) => {
   return (
-    <StyledButton
-      disabled={isDisabled}
-      type="submit"
-      variant="contained"
-      onClick={callbackFunc}
-      style={{ fontWeight: "550", fontSize: "15px" }}
-    >
-      {title}
-    </StyledButton>
+    <label htmlFor={`upload-button`}>
+      <input
+        accept="image/*"
+        name={"upload-button"}
+        style={{ display: "none" }}
+        multiple
+        type="file"
+      />
+      <StyledButton
+        disabled={isDisabled}
+        type="submit"
+        variant="contained"
+        onClick={callbackFunc}
+        style={{ fontWeight: "550", fontSize: "15px" }}
+      >
+        {title}
+      </StyledButton>
+    </label>
   );
 };
 export default UploadButton;

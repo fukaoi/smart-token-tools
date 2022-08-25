@@ -8,11 +8,12 @@ import SubmitButton from "../components/button/SubmitButton";
 import { useSessionCheck } from "../hooks/SessionCheck";
 import ErrorModal from "../components/modal/ErrorModal";
 import NftNameTextField from "../components/textField/NftNameTextField";
-import UploadButton from "../components/button/UploadButton";
 import SymbolTextField from "../components/textField/SymbolTextField";
 import OptionalButton from "../components/button/OptionalButton";
 import DescriptionTextField from "../components/textField/DescriptionTextField";
 import HeadlineTypography from "../components/typography/HeadlineTypography";
+import FileUploadUI from "../components/FileUploadUI";
+import OptionalUI from "../components/OptionalUI";
 
 export interface FormValues {
   cluster: string;
@@ -42,13 +43,10 @@ const NftPage = () => {
     title: "Confirm",
     isDisabled: false,
   });
-  const [uploadBtnState, setUploadBtnState] = useState({
-    title: "Upload",
-    isDisabled: false,
-  });
   const [optionalBtnState, setOptionalBtnState] = useState(false);
-
   const [errorModal, setErrorModal] = useState({ open: false, message: "" });
+  const [isShow, setIsShow] = useState(false);
+
   const { handleSubmit, control, watch } = useForm<FormValues>({
     defaultValues: {
       cluster: "devnet",
@@ -66,8 +64,9 @@ const NftPage = () => {
     console.log(data);
   };
 
-  const handleOptional = () => {
+  const handleOptionalButton = () => {
     setOptionalBtnState((prevState) => !prevState);
+    setIsShow((prevState) => !prevState);
   };
 
   useSessionCheck(setWalletAddress);
@@ -88,18 +87,16 @@ const NftPage = () => {
             <DescriptionTextField control={control} name="description" />
             <Box sx={{ mb: 4 }} />
             <HeadlineTypography message="Image Upload" />
-            <Box>
-              <UploadButton
-                isDisabled={uploadBtnState.isDisabled}
-                title={uploadBtnState.title}
-              />
+            <Box sx={{ mb: 4 }}>
+              <FileUploadUI />
             </Box>
-            <Box>
+            <Box sx={{ mb: 4 }}>
               <OptionalButton
                 isOpen={optionalBtnState}
-                callbackFunc={handleOptional}
+                callbackFunc={handleOptionalButton}
               />
             </Box>
+            {isShow ? <OptionalUI isShow={false} /> : null}
           </Paper>
           <Box sx={{ mb: 6 }} />
           <Box>
