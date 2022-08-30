@@ -1,16 +1,29 @@
 import { Box, Button, ImageList, ImageListItem } from "@mui/material";
 import { FC, useState } from "react";
 import { useForm } from "react-hook-form";
-import { FormValues, Creator } from "../pages/NftPage";
-
+import { FormValues } from "../pages/NftPage";
 import RoyaltyTextField from "./textField/RoyaltyTextField";
 import WalletAddressTextField from "./textField/WalletAddressTextField";
 import VerifiedRadio from "./radio/VerifiedRadio";
 import ShareTextField from "./textField/ShareTextField";
 import CollectionTextField from "./textField/CollectionTextField";
 
-const OptionalUI: FC<{ isShow: boolean }> = (isShow) => {
-  const { handleSubmit, control, watch } = useForm<FormValues>({
+export type OptionalUIProps = {
+  isShow: boolean;
+  royalty: number;
+  setRoyalty: (royalty: number) => void;
+  walletAddress: string;
+  setWalletAddress: (walletAddress: string) => void;
+  verified: boolean;
+  setVerified: (verified: boolean) => void;
+  share: number;
+  setShare: (share: number) => void;
+  collection: string;
+  setCollection: (collection: string) => void;
+};
+
+const OptionalUI: FC<OptionalUIProps> = () => {
+  const { control } = useForm<FormValues>({
     defaultValues: {
       royalty: 0,
       address: "",

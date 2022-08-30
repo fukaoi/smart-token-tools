@@ -10,9 +10,9 @@ const VerifiedRadio = (props: UseControllerProps<FormValues>) => {
   return (
     <>
       <HeadlineTypography message="Select Verified" />
-      <RadioGroup aria-labelledby="issueType" defaultValue="True" {...field}>
-        <FormControlLabel value="True" control={<Radio />} label="True" />
-        <FormControlLabel value="False" control={<Radio />} label="False" />
+      <RadioGroup aria-labelledby="issueType" defaultValue="false" {...field}>
+        <FormControlLabel value="true" control={<Radio />} label="True" />
+        <FormControlLabel value="false" control={<Radio />} label="False" />
       </RadioGroup>
     </>
   );

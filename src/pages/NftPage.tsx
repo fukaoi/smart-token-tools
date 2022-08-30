@@ -14,6 +14,9 @@ import DescriptionTextField from "../components/textField/DescriptionTextField";
 import HeadlineTypography from "../components/typography/HeadlineTypography";
 import FileUploadUI from "../components/FileUploadUI";
 import OptionalUI from "../components/OptionalUI";
+import WalletAddressTextField from "../components/textField/WalletAddressTextField";
+import Loading from "../components/Loading";
+// import { uploadContents } from "../shared/nftMint";
 
 export interface FormValues {
   cluster: string;
@@ -24,6 +27,7 @@ export interface FormValues {
   nftName?: string;
   symbol?: string;
   description?: string;
+  imagePreview?: string;
   royalty?: number;
   address?: string;
   verified?: boolean;
@@ -48,14 +52,23 @@ const styles = {
 
 const NftPage = () => {
   useSessionCheck(console.log);
-  const [walletAddress, setWalletAddress] = useState<string>("");
+
   const [btnState, setBtnState] = useState({
     title: "Confirm",
     isDisabled: false,
   });
+  const [imagePreview, setImagePreview] = useState<string | undefined>(
+    undefined
+  );
+  const [royalty, setRoyalty] = useState<number>(0);
+  const [walletAddress, setWalletAddress] = useState<string>("");
+  const [verified, setVerified] = useState<boolean>(false);
+  const [share, setShare] = useState<number>(0);
+  const [collection, setCollection] = useState<string>("ATONOY");
   const [optionalBtnState, setOptionalBtnState] = useState(false);
   const [errorModal, setErrorModal] = useState({ open: false, message: "" });
   const [isShow, setIsShow] = useState(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const { handleSubmit, control, watch } = useForm<FormValues>({
     defaultValues: {
@@ -68,10 +81,21 @@ const NftPage = () => {
     setBtnState({ title: "Confirm", isDisabled: false });
   };
 
-  const onSubmit = async (data: FormValues) => {
-    setBtnState({ title: "Processing", isDisabled: true });
+  const onSubmit = async (data: any) => {
+    // setBtnState({ title: "Processing", isDisabled: true });
+    setIsLoading(true);
+    setTimeout(function () {
+      console.log("I am the third log after 5 seconds");
+    }, 3000);
     alert("on submit");
     console.log(data);
+    // setIsLoading(false);
+
+    // const res = await uploadContents(
+    //   data.nftName as string,
+    //   data.description as string,
+    //   imagePreview as string
+    // );
   };
 
   const handleOptionalButton = () => {
@@ -98,7 +122,7 @@ const NftPage = () => {
             <Box sx={{ mb: 4 }} />
             <HeadlineTypography message="Image Upload" />
             <Box sx={{ mb: 4 }}>
-              <FileUploadUI />
+              <FileUploadUI {...{ imagePreview, setImagePreview }} />
             </Box>
             <Box sx={{ mb: 4 }}>
               <OptionalButton
@@ -106,7 +130,23 @@ const NftPage = () => {
                 callbackFunc={handleOptionalButton}
               />
             </Box>
-            {isShow ? <OptionalUI isShow={false} /> : null}
+            {isShow ? (
+              <OptionalUI
+                {...{
+                  isShow,
+                  royalty,
+                  setRoyalty,
+                  walletAddress,
+                  setWalletAddress,
+                  verified,
+                  setVerified,
+                  share,
+                  setShare,
+                  collection,
+                  setCollection,
+                }}
+              />
+            ) : null}
           </Paper>
           <Box sx={{ mb: 6 }} />
           <Box>
@@ -123,6 +163,7 @@ const NftPage = () => {
         onClose={handleClose}
         message={errorModal.message}
       />
+      <Loading isLoading={isLoading} />
     </>
   );
 };

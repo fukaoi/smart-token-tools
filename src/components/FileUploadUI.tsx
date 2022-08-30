@@ -1,11 +1,15 @@
 import { Box, Button, ImageList, ImageListItem } from "@mui/material";
-import { FC, useState } from "react";
+import { FC } from "react";
 
-const FileUploadUI: FC = () => {
-  const [imagePreview, setImagePreview] = useState<string | undefined>(
-    undefined
-  );
+export type FileUploadUIProps = {
+  imagePreview: any;
+  setImagePreview: (file: string | undefined) => void;
+};
 
+const FileUploadUI: FC<FileUploadUIProps> = ({
+  imagePreview,
+  setImagePreview,
+}) => {
   const handleOnAddImage = (e: React.ChangeEvent<HTMLInputElement>) => {
     setImagePreview(undefined);
 
@@ -24,10 +28,10 @@ const FileUploadUI: FC = () => {
 
   return (
     <>
-      <label htmlFor="btn-upload">
+      <label htmlFor="image-upload">
         <input
-          id="btn-upload"
-          name="btn-upload"
+          id="image-upload"
+          name="image-upload"
           style={{ display: "none" }}
           type="file"
           accept="image/*"

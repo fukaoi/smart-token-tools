@@ -13,7 +13,7 @@ const OptionalButton: FC<{
         <span
           style={{
             fontWeight: "550",
-            fontSize: "15px",
+            fontSize: "18px",
             marginBottom: "15px",
           }}
         >
