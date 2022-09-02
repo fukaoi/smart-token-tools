@@ -21,8 +21,8 @@ const style = {
 
 const Loading: FC<LoadingProps> = ({ isLoading }) => {
   return isLoading ? (
-    <Box sx={style.box} color="primary: amber">
-      <CircularProgress />
+    <Box sx={style.box}>
+      <CircularProgress color="info" />
     </Box>
   ) : null;
 };

@@ -23,8 +23,6 @@ import {
 
 import { Node, Result } from "@solana-suite/shared";
 
-import { Transaction as T } from "@solana-suite/core";
-
 export namespace SplToken {
   const getOrCreateAssociatedTokenAccount = async (
     connection: Connection,
@@ -165,7 +163,7 @@ export namespace SplToken {
         .then(Result.ok)
         .catch(Result.err);
       if (sig.isErr) return Result.err(sig.error);
-      await T.confirmedSig(sig.value);
+      await Node.confirmedSig(sig.value);
     }
 
     return Result.ok(tokenKey.toBase58());
@@ -224,7 +222,7 @@ export namespace SplToken {
         .then(Result.ok)
         .catch(Result.err);
       if (sig.isErr) return Result.err(sig.error);
-      await T.confirmedSig(sig.value);
+      await Node.confirmedSig(sig.value);
     }
 
     return Result.ok(tokenKey.toBase58());

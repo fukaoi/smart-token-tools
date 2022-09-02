@@ -29,7 +29,7 @@ const OptionalUI: FC<OptionalUIProps> = () => {
       address: "",
       verified: false,
       share: 0,
-      collection: "ATONOY",
+      collection: "Powered by ATONOY Co, Ltd",
     },
   });
 

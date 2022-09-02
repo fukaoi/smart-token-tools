@@ -16,6 +16,7 @@ import FileUploadUI from "../components/FileUploadUI";
 import OptionalUI from "../components/OptionalUI";
 import WalletAddressTextField from "../components/textField/WalletAddressTextField";
 import Loading from "../components/Loading";
+import { nftMint } from "../shared/nftMint";
 // import { uploadContents } from "../shared/nftMint";
 
 export interface FormValues {
@@ -64,7 +65,9 @@ const NftPage = () => {
   const [walletAddress, setWalletAddress] = useState<string>("");
   const [verified, setVerified] = useState<boolean>(false);
   const [share, setShare] = useState<number>(0);
-  const [collection, setCollection] = useState<string>("ATONOY");
+  const [collection, setCollection] = useState<string>(
+    "Powered by ATONOY Co, Ltd"
+  );
   const [optionalBtnState, setOptionalBtnState] = useState(false);
   const [errorModal, setErrorModal] = useState({ open: false, message: "" });
   const [isShow, setIsShow] = useState(false);
@@ -89,13 +92,17 @@ const NftPage = () => {
     }, 3000);
     alert("on submit");
     console.log(data);
-    // setIsLoading(false);
+    setIsLoading(false);
 
-    // const res = await uploadContents(
-    //   data.nftName as string,
-    //   data.description as string,
-    //   imagePreview as string
-    // );
+    const res = await nftMint(
+      imagePreview as string,
+      data.nftName,
+      data.description,
+      0,
+      walletAddress,
+      "feePayer"
+    );
+    console.log(res);
   };
 
   const handleOptionalButton = () => {

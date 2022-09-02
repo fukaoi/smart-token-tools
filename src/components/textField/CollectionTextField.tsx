@@ -14,7 +14,7 @@ const CollectionTextField = (props: UseControllerProps<FormValues>) => {
           minRows={100}
           id="filled-basic"
           label="Collection"
-          placeholder="ATONOy"
+          placeholder="Powered by ATONOY Co, Ltd"
           variant="filled"
           size="small"
           error={false}
@@ -22,6 +22,7 @@ const CollectionTextField = (props: UseControllerProps<FormValues>) => {
           inputProps={{
             readOnly: true,
           }}
+          style={{ width: 250 }}
         />
       </Box>
     </>

@@ -1,25 +1,37 @@
-// import {
-//   Metaplex,
-//   MetaplexInstructure,
-//   StorageNftStorage,
-// } from "@solana-suite/nft";
+import assert from "assert";
+import { Metaplex } from "@solana-suite/nft";
+import { Node, sleep } from "@solana-suite/shared";
 
-// export const uploadContents = async (
-//   name: string,
-//   description: string,
-//   image: string
-// ) => {
-//   const asset = {
-//     name,
-//     description,
-//     image,
-//   };
+export const nftMint = async (
+  file: string,
+  name: string,
+  description: string,
+  royalty: number,
+  address: string,
+  feePayer: string
+) => {
+  const inst1 = await Metaplex.mint(
+    {
+      filePath: file,
+      name,
+      description,
+      symbol: "ATONOY",
+      royalty,
+      storageType: "nftStorage",
+    },
+    address.toPublicKey(),
+    feePayer.toKeypair()
+  );
 
-//   const url = await StorageNftStorage.upload(asset);
+  // this is NFT ID
+  (await inst1.submit()).match(
+    async (value) => await Node.confirmedSig(value),
+    (error) => assert.fail(error)
+  );
 
-//   console.log("url", url);
+  await sleep(5);
 
-//   return url.unwrap();
-// };
-
-export {};
+  const mint = inst1.unwrap().data as string;
+  console.log("# mint: ", mint);
+  console.log("mint");
+};
