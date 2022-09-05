@@ -6,6 +6,7 @@ import RoyaltyTextField from "./textField/RoyaltyTextField";
 import WalletAddressTextField from "./textField/WalletAddressTextField";
 import VerifiedRadio from "./radio/VerifiedRadio";
 import ShareTextField from "./textField/ShareTextField";
+import HeadlineTypography from "./typography/HeadlineTypography";
 
 export type CreatorUIProps = {
   walletAddress: string;
@@ -28,6 +29,7 @@ const CreatorUI: FC<CreatorUIProps> = () => {
   return (
     <>
       <Box sx={{ mb: 4 }} />
+      <HeadlineTypography message="Creator Info Input Form" />
       <WalletAddressTextField control={control} name="address" />
       <Box sx={{ mb: 4 }} />
       <ShareTextField control={control} name="share" />

@@ -7,7 +7,6 @@ const WalletAddressTextField = (props: UseControllerProps<FormValues>) => {
   const { field } = useController(props);
   return (
     <>
-      <HeadlineTypography message="Input Wallet Address" />
       <Box sx={{ display: "flex", mt: 2 }}>
         <TextField
           type="text"
@@ -20,19 +19,6 @@ const WalletAddressTextField = (props: UseControllerProps<FormValues>) => {
           error={false}
           {...field}
           style={{ width: 480 }}
-        />
-      </Box>
-      <Box sx={{ display: "flex", mt: 2 }}>
-        <TextField
-          type="text"
-          minRows={100}
-          id="outlined-basic"
-          label="royalty"
-          placeholder="1, 2, 3,,,"
-          variant="outlined"
-          size="small"
-          error={false}
-          {...field}
         />
       </Box>
     </>
