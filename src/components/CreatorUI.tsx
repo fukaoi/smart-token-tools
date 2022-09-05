@@ -34,6 +34,7 @@ const CreatorUI: FC<CreatorUIProps> = () => {
       <Box sx={{ mb: 4 }} />
       <ShareTextField control={control} name="share" />
       <Box sx={{ mb: 4 }} />
+      <HeadlineTypography message="Verified" />
       <VerifiedRadio control={control} name="verified" />
     </>
   );
