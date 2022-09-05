@@ -16,7 +16,7 @@ import FileUploadUI from "../components/FileUploadUI";
 import OptionalUI from "../components/OptionalUI";
 import WalletAddressTextField from "../components/textField/WalletAddressTextField";
 import Loading from "../components/Loading";
-import { nftMint } from "../shared/nftMint";
+// import { nftMint } from "../shared/nftMint";
 // import { uploadContents } from "../shared/nftMint";
 
 export interface FormValues {
@@ -94,15 +94,15 @@ const NftPage = () => {
     console.log(data);
     setIsLoading(false);
 
-    const res = await nftMint(
-      imagePreview as string,
-      data.nftName,
-      data.description,
-      0,
-      walletAddress,
-      "feePayer"
-    );
-    console.log(res);
+    // const res = await nftMint(
+    //   imagePreview as string,
+    //   data.nftName,
+    //   data.description,
+    //   0,
+    //   walletAddress,
+    //   "feePayer"
+    // );
+    // console.log(res);
   };
 
   const handleOptionalButton = () => {

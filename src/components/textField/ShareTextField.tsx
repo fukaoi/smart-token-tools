@@ -7,7 +7,6 @@ const ShareTextField = (props: UseControllerProps<FormValues>) => {
   const { field } = useController(props);
   return (
     <>
-      <HeadlineTypography message="Input Share" />
       <Box sx={{ display: "flex", mt: 2 }}>
         <TextField
           type="text"

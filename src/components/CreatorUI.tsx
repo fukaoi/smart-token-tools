@@ -1,0 +1,39 @@
+import { Box, Button, ImageList, ImageListItem } from "@mui/material";
+import { FC, useState } from "react";
+import { useForm } from "react-hook-form";
+import { FormValues } from "../pages/NftPage";
+import RoyaltyTextField from "./textField/RoyaltyTextField";
+import WalletAddressTextField from "./textField/WalletAddressTextField";
+import VerifiedRadio from "./radio/VerifiedRadio";
+import ShareTextField from "./textField/ShareTextField";
+
+export type CreatorUIProps = {
+  walletAddress: string;
+  setWalletAddress: (walletAddress: string) => void;
+  share: number;
+  setShare: (share: number) => void;
+  verified: boolean;
+  setVerified: (verified: boolean) => void;
+};
+
+const CreatorUI: FC<CreatorUIProps> = () => {
+  const { control } = useForm<FormValues>({
+    defaultValues: {
+      address: "",
+      verified: false,
+      share: 0,
+    },
+  });
+
+  return (
+    <>
+      <Box sx={{ mb: 4 }} />
+      <WalletAddressTextField control={control} name="address" />
+      <Box sx={{ mb: 4 }} />
+      <ShareTextField control={control} name="share" />
+      <Box sx={{ mb: 4 }} />
+      <VerifiedRadio control={control} name="verified" />
+    </>
+  );
+};
+export default CreatorUI;
