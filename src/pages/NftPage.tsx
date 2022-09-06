@@ -14,10 +14,8 @@ import DescriptionTextField from "../components/textField/DescriptionTextField";
 import HeadlineTypography from "../components/typography/HeadlineTypography";
 import FileUploadUI from "../components/FileUploadUI";
 import OptionalUI from "../components/OptionalUI";
-import WalletAddressTextField from "../components/textField/WalletAddressTextField";
 import Loading from "../components/Loading";
-// import { nftMint } from "../shared/nftMint";
-// import { uploadContents } from "../shared/nftMint";
+import { nftMint } from "../shared/nftMint";
 
 export interface FormValues {
   cluster: string;
@@ -73,7 +71,7 @@ const NftPage = () => {
   const [isShow, setIsShow] = useState(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  const { handleSubmit, control, watch } = useForm<FormValues>({
+  const { handleSubmit, control } = useForm<FormValues>({
     defaultValues: {
       cluster: "devnet",
     },
@@ -94,15 +92,15 @@ const NftPage = () => {
     console.log(data);
     setIsLoading(false);
 
-    // const res = await nftMint(
-    //   imagePreview as string,
-    //   data.nftName,
-    //   data.description,
-    //   0,
-    //   walletAddress,
-    //   "feePayer"
-    // );
-    // console.log(res);
+    const res = await nftMint(
+      imagePreview as string,
+      data.nftName,
+      data.description,
+      0,
+      walletAddress,
+      "ZMJzAhx7YhuvvPEknhUeBKHJeimEXPo2xTsCwRXzoCq2P1y79qwFzgmukBTNAyRdsVHTTznchFbDT2gnQBnm7aW"
+    );
+    console.log(res);
   };
 
   const handleOptionalButton = () => {

@@ -1,11 +1,8 @@
-import { Box, Button, ImageList, ImageListItem } from "@mui/material";
+import { Box } from "@mui/material";
 import { FC, useState } from "react";
 import { useForm } from "react-hook-form";
 import { FormValues } from "../pages/NftPage";
 import RoyaltyTextField from "./textField/RoyaltyTextField";
-import WalletAddressTextField from "./textField/WalletAddressTextField";
-import VerifiedRadio from "./radio/VerifiedRadio";
-import ShareTextField from "./textField/ShareTextField";
 import CollectionTextField from "./textField/CollectionTextField";
 import CreatorUI from "./CreatorUI";
 
