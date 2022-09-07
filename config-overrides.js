@@ -1,23 +1,30 @@
-const webpack = require("webpack");
+const webpack = require('webpack');
 
 module.exports = function override(webpackConfig) {
   webpackConfig.module.rules.push({
     test: /.mjs$/,
     include: /node_modules/,
-    type: "javascript/auto",
-    // resolve: {
-    //   fullySpecified: false
-    // }
+    resolve: {
+      fullySpecified: false,
+    },
   });
+
+  webpackConfig.ignoreWarnings = [/Failed to parse source map/];
+
+  // Polyfill Buffer.
+  webpackConfig.plugins.push(
+    new webpack.ProvidePlugin({ Buffer: ['buffer', 'Buffer'] })
+  );
 
   const fallback = webpackConfig.resolve.fallback || {};
   Object.assign(fallback, {
-    assert: require.resolve("assert"),
-    buffer: require.resolve("buffer"),
-    crypto: require.resolve("crypto-browserify"),
-    // fs: false,
-    path: require.resolve("path-browserify"),
-    zlib: require.resolve("browserify-zlib"),
+    assert: require.resolve('assert'),
+    stream: require.resolve('stream-browserify'),
+    crypto: require.resolve('crypto-browserify'),
+    util: require.resolve('util'),
+    fs: false,
+    path: false,
+    zlib: false,
   });
   webpackConfig.resolve.fallback = fallback;
 
