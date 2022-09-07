@@ -1,6 +1,6 @@
-import assert from "assert";
-import { Metaplex } from "@solana-suite/nft";
-import { Node, sleep } from "@solana-suite/shared";
+import { Metaplex } from '@solana-suite/nft';
+import { Node, Result } from '@solana-suite/shared';
+import { Transaction } from '@solana/web3.js';
 
 export const nftMint = async (
   file: string,
@@ -8,7 +8,8 @@ export const nftMint = async (
   description: string,
   royalty: number,
   address: string,
-  feePayer: string
+  feePayer: string,
+  signTransaction: (tx: Transaction | Transaction[]) => any
 ) => {
   console.log(file);
   console.log(name);
@@ -21,25 +22,31 @@ export const nftMint = async (
       filePath: file,
       name,
       description,
-      symbol: "ATONOY",
+      symbol: 'ATONOY',
       royalty,
-      storageType: "nftStorage",
+      storageType: 'nftStorage',
     },
     address.toPublicKey(),
     feePayer.toKeypair()
   );
 
-  // this is NFT ID
-  (await inst1.submit()).match(
-    async (value) => await Node.confirmedSig(value),
-    (error) => assert.fail(error)
-  );
+  const inst = inst1.unwrap().instructions;
+  const tx = new Transaction();
+  inst.map((i) => tx.add(i));
+  tx.feePayer = feePayer.toPublicKey();
+  const blockhashObj = await Node.getConnection().getRecentBlockhash();
+  tx.recentBlockhash = blockhashObj.blockhash;
 
-  await sleep(5);
+  const signed = await signTransaction([tx]);
 
-  const mint = inst1.unwrap().data as string;
-  console.log("# mint: ", mint);
-  console.log("mint");
+  for (let sign of signed) {
+    const sig = await Node.getConnection()
+      .sendRawTransaction(sign.serialize())
+      .then(Result.ok)
+      .catch(Result.err);
+    if (sig.isErr) return Result.err(sig.error);
+  }
+  return Result.ok(inst1.unwrap().data);
 };
 
 // export {};
