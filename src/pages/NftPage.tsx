@@ -56,7 +56,7 @@ const NftPage = () => {
     title: "Confirm",
     isDisabled: false,
   });
-  const [imagePreview, setImagePreview] = useState<string | undefined>(
+  const [imagePreview, setImagePreview] = useState<File | string | undefined>(
     undefined
   );
   const [royalty, setRoyalty] = useState<number>(0);
@@ -85,9 +85,6 @@ const NftPage = () => {
   const onSubmit = async (data: any) => {
     // setBtnState({ title: "Processing", isDisabled: true });
     setIsLoading(true);
-    setTimeout(function () {
-      console.log("I am the third log after 5 seconds");
-    }, 3000);
     alert("on submit");
     console.log(data);
     setIsLoading(false);

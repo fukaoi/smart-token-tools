@@ -20,7 +20,6 @@ export const nftMint = async (
     {
       filePath: file,
       name,
-      description,
       symbol: "ATONOY",
       royalty,
       storageType: "nftStorage",

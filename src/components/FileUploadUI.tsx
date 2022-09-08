@@ -3,7 +3,7 @@ import { FC } from "react";
 
 export type FileUploadUIProps = {
   imagePreview: any;
-  setImagePreview: (file: string | undefined) => void;
+  setImagePreview: (file: File | string | undefined) => void;
 };
 
 const FileUploadUI: FC<FileUploadUIProps> = ({
@@ -21,7 +21,7 @@ const FileUploadUI: FC<FileUploadUIProps> = ({
 
     reader.onload = (e: any) => {
       const result = e.target.result as string;
-      setImagePreview(result);
+      setImagePreview(file);
     };
     reader.readAsDataURL(file);
   };
