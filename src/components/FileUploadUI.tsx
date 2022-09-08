@@ -21,7 +21,7 @@ const FileUploadUI: FC<FileUploadUIProps> = ({
 
     reader.onload = (e: any) => {
       const result = e.target.result as string;
-      setImagePreview(file);
+      setImagePreview(result);
     };
     reader.readAsDataURL(file);
   };
