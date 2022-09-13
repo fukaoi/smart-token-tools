@@ -1,6 +1,5 @@
 import { FC } from "react";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
-import RemoveCircleIcon from "@mui/icons-material/RemoveCircle";
 import { IconButton } from "@mui/material";
 
 const AddCreatorButton: FC<{
@@ -20,7 +19,7 @@ const AddCreatorButton: FC<{
           Add Creator
         </span>
         <IconButton type="button" size="medium" onClick={callbackFunc}>
-          {isOpen ? <RemoveCircleIcon /> : <AddCircleOutlineIcon />}
+          <AddCircleOutlineIcon />
         </IconButton>
       </div>
     </>

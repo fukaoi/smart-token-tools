@@ -1,9 +1,9 @@
 import { TextField, Box } from "@mui/material";
-import { FormValues } from "../../pages/NftPage";
+import { NFTFormValues } from "../../pages/NftPage";
 import { useController, UseControllerProps } from "react-hook-form";
 import DescriptionTypography from "../typography/DescriptionTypography";
 
-const ShareTextField = (props: UseControllerProps<FormValues>) => {
+const ShareTextField = (props: UseControllerProps<NFTFormValues>) => {
   const { field } = useController(props);
   const description = `
   Set Share. What percentage of royalties to get

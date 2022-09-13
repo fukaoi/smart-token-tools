@@ -1,58 +1,36 @@
 import { Box } from "@mui/material";
-import { FC, useState } from "react";
-import { useForm } from "react-hook-form";
-import { FormValues } from "../pages/NftPage";
+import { FC } from "react";
+import { ControllerRenderProps } from "react-hook-form";
 import RoyaltyTextField from "./textField/RoyaltyTextField";
 import CollectionTextField from "./textField/CollectionTextField";
 import CreatorUI from "./CreatorUI";
+import AddCreatorButton from "./button/AddCreatorButton";
 
 export type OptionalUIProps = {
   isShow: boolean;
-  royalty: number;
-  setRoyalty: (royalty: number) => void;
-  walletAddress: string;
-  setWalletAddress: (walletAddress: string) => void;
-  verified: boolean;
-  setVerified: (verified: boolean) => void;
-  share: number;
-  setShare: (share: number) => void;
-  collection: string;
-  setCollection: (collection: string) => void;
+  field?: ControllerRenderProps;
+  register?: any;
+  control?: any;
 };
 
-const OptionalUI: FC<OptionalUIProps> = () => {
-  const [walletAddress, setWalletAddress] = useState<string>("");
-  const [verified, setVerified] = useState<boolean>(false);
-  const [share, setShare] = useState<number>(0);
-
-  const { control } = useForm<FormValues>({
-    defaultValues: {
-      royalty: 0,
-      address: "",
-      verified: false,
-      share: 0,
-      collection: "Powered by ATONOY Co, Ltd",
-    },
-  });
+const OptionalUI: FC<OptionalUIProps> = ({ control }) => {
+  const handleAddButton = () => {
+    // console.log("props", props);
+    // console.log("control", props.control);
+  };
 
   return (
     <>
       <Box sx={{ mb: 4 }} />
       <RoyaltyTextField control={control} name="royalty" />
       <Box sx={{ mb: 4 }} />
-      <CreatorUI
-        {...{
-          walletAddress,
-          setWalletAddress,
-          verified,
-          setVerified,
-          share,
-          setShare,
-        }}
-      />
+      <CreatorUI {...{ control }} />
+      <Box sx={{ mb: 4 }} />
+      <AddCreatorButton callbackFunc={handleAddButton} />
       <Box sx={{ mb: 4 }} />
       <CollectionTextField control={control} name="collection" />
     </>
   );
 };
+
 export default OptionalUI;
