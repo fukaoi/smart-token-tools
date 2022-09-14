@@ -14,10 +14,7 @@ export type OptionalUIProps = {
 };
 
 const OptionalUI: FC<OptionalUIProps> = ({ control }) => {
-  const handleAddButton = () => {
-    // console.log("props", props);
-    // console.log("control", props.control);
-  };
+  const handleAddButton = () => {};
 
   return (
     <>

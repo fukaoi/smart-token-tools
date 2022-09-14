@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Paper, Box, FormControl } from "@mui/material";
-import { useForm } from "react-hook-form";
+import { ControllerRenderProps, useForm } from "react-hook-form";
 import TitleTypography from "../components/typography/TitleTypography";
 import AddressTypography from "../components/typography/AddressTypography";
 import ClusterRadio from "../components/radio/ClusterRadio";
@@ -19,9 +19,6 @@ import { nftMint } from "../shared/nftMint";
 import { Validator } from "@solana-suite/nft";
 
 export interface NFTFormValues {
-  control?: any;
-  field?: any;
-  optional: any;
   cluster: string;
   nftName: string;
   symbol: string;
@@ -32,6 +29,9 @@ export interface NFTFormValues {
   verified?: boolean;
   share?: number;
   collection?: string;
+  control?: any;
+  field?: ControllerRenderProps;
+  optional: any;
 }
 
 export interface Creator {

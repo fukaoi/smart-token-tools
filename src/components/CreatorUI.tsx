@@ -1,7 +1,6 @@
 import { Box } from "@mui/material";
 import { FC } from "react";
 import { ControllerRenderProps } from "react-hook-form";
-import { NFTFormValues } from "../pages/NftPage";
 import WalletAddressTextField from "./textField/WalletAddressTextField";
 import VerifiedRadio from "./radio/VerifiedRadio";
 import ShareTextField from "./textField/ShareTextField";
