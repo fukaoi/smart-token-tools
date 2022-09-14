@@ -90,15 +90,13 @@ const NftPage = () => {
     // const a = Validator.isSymbol(data.symbol);
     // console.log("a", a);
 
-    // const res = await nftMint(
-    //   imagePreview as string,
-    //   data.nftName,
-    //   data.description,
-    //   0,
-    //   walletAddress,
-    //   "ZMJzAhx7YhuvvPEknhUeBKHJeimEXPo2xTsCwRXzoCq2P1y79qwFzgmukBTNAyRdsVHTTznchFbDT2gnQBnm7aW"
-    // );
-    // console.log(res);
+    await nftMint(
+      imagePreview as string,
+      data.nftName,
+      data.description,
+      0,
+      window.solana
+    );
   };
 
   const handleOptionalButton = () => {
