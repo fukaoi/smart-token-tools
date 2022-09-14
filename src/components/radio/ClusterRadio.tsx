@@ -2,10 +2,11 @@ import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import HeadlineTypography from "../typography/HeadlineTypography";
-import { FormValues } from "../../pages/TokenPage";
 import { useController, UseControllerProps } from "react-hook-form";
+import { FormValues } from "../../pages/TokenPage";
+import { NFTFormValues } from "../../pages/NftPage";
 
-const ClusterRadio = (props: UseControllerProps<FormValues>) => {
+const ClusterRadio = (props: UseControllerProps<any>) => {
   const { field } = useController(props);
   return (
     <>

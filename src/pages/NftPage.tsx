@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Paper, Box, FormControl } from "@mui/material";
-import { useForm } from "react-hook-form";
+import { ControllerRenderProps, useForm } from "react-hook-form";
 import TitleTypography from "../components/typography/TitleTypography";
 import AddressTypography from "../components/typography/AddressTypography";
 import ClusterRadio from "../components/radio/ClusterRadio";
@@ -16,22 +16,22 @@ import FileUploadUI from "../components/FileUploadUI";
 import OptionalUI from "../components/OptionalUI";
 import Loading from "../components/Loading";
 import { nftMint } from "../shared/nftMint";
+import { Validator } from "@solana-suite/nft";
 
-export interface FormValues {
+export interface NFTFormValues {
   cluster: string;
-  issueType: string;
-  totalSupply: number;
-  decimals: number;
-  tokenKey?: string;
-  nftName?: string;
-  symbol?: string;
-  description?: string;
+  nftName: string;
+  symbol: string;
+  description: string;
   imagePreview?: string;
   royalty?: number;
   address?: string;
   verified?: boolean;
   share?: number;
   collection?: string;
+  control?: any;
+  field?: ControllerRenderProps;
+  optional: any;
 }
 
 export interface Creator {
@@ -56,24 +56,22 @@ const NftPage = () => {
     title: "Confirm",
     isDisabled: false,
   });
-  const [imagePreview, setImagePreview] = useState<string | undefined>(
+  const [imagePreview, setImagePreview] = useState<File | string | undefined>(
     undefined
   );
-  const [royalty, setRoyalty] = useState<number>(0);
   const [walletAddress, setWalletAddress] = useState<string>("");
-  const [verified, setVerified] = useState<boolean>(false);
-  const [share, setShare] = useState<number>(0);
-  const [collection, setCollection] = useState<string>(
-    "Powered by ATONOY Co, Ltd"
-  );
   const [optionalBtnState, setOptionalBtnState] = useState(false);
   const [errorModal, setErrorModal] = useState({ open: false, message: "" });
   const [isShow, setIsShow] = useState(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  const { handleSubmit, control } = useForm<FormValues>({
+  const { handleSubmit, control, register } = useForm<NFTFormValues>({
     defaultValues: {
       cluster: "devnet",
+      royalty: 0,
+      share: 0,
+      verified: false,
+      collection: "Powered by ATONOY Co, Ltd",
     },
   });
 
@@ -85,22 +83,22 @@ const NftPage = () => {
   const onSubmit = async (data: any) => {
     // setBtnState({ title: "Processing", isDisabled: true });
     setIsLoading(true);
-    setTimeout(function () {
-      console.log("I am the third log after 5 seconds");
-    }, 3000);
     alert("on submit");
     console.log(data);
     setIsLoading(false);
 
-    const res = await nftMint(
-      imagePreview as string,
-      data.nftName,
-      data.description,
-      0,
-      walletAddress,
-      "ZMJzAhx7YhuvvPEknhUeBKHJeimEXPo2xTsCwRXzoCq2P1y79qwFzgmukBTNAyRdsVHTTznchFbDT2gnQBnm7aW"
-    );
-    console.log(res);
+    // const a = Validator.isSymbol(data.symbol);
+    // console.log("a", a);
+
+    // const res = await nftMint(
+    //   imagePreview as string,
+    //   data.nftName,
+    //   data.description,
+    //   0,
+    //   walletAddress,
+    //   "ZMJzAhx7YhuvvPEknhUeBKHJeimEXPo2xTsCwRXzoCq2P1y79qwFzgmukBTNAyRdsVHTTznchFbDT2gnQBnm7aW"
+    // );
+    // console.log(res);
   };
 
   const handleOptionalButton = () => {
@@ -139,16 +137,8 @@ const NftPage = () => {
               <OptionalUI
                 {...{
                   isShow,
-                  royalty,
-                  setRoyalty,
-                  walletAddress,
-                  setWalletAddress,
-                  verified,
-                  setVerified,
-                  share,
-                  setShare,
-                  collection,
-                  setCollection,
+                  control,
+                  register,
                 }}
               />
             ) : null}

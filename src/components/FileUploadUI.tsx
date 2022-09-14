@@ -3,7 +3,7 @@ import { FC } from "react";
 
 export type FileUploadUIProps = {
   imagePreview: any;
-  setImagePreview: (file: string | undefined) => void;
+  setImagePreview: (file: File | string | undefined) => void;
 };
 
 const FileUploadUI: FC<FileUploadUIProps> = ({

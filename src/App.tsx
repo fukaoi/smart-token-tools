@@ -31,7 +31,7 @@ const styles = {
     backgroundImage: `url(${backImage})`,
     backgroundPosition: "ceter",
     minHeight: "100vh",
-    maxHeight: "200vh",
+    maxHeight: "100%",
     width: "100%",
     alignItems: "ceter",
     fontSize: "calc(10px + 2vmin)",

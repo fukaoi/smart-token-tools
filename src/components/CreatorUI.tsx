@@ -1,30 +1,18 @@
 import { Box } from "@mui/material";
 import { FC } from "react";
-import { useForm } from "react-hook-form";
-import { FormValues } from "../pages/NftPage";
+import { ControllerRenderProps } from "react-hook-form";
 import WalletAddressTextField from "./textField/WalletAddressTextField";
 import VerifiedRadio from "./radio/VerifiedRadio";
 import ShareTextField from "./textField/ShareTextField";
 import HeadlineTypography from "./typography/HeadlineTypography";
 
 export type CreatorUIProps = {
-  walletAddress: string;
-  setWalletAddress: (walletAddress: string) => void;
-  share: number;
-  setShare: (share: number) => void;
-  verified: boolean;
-  setVerified: (verified: boolean) => void;
+  field?: ControllerRenderProps;
+  register?: any;
+  control?: any;
 };
 
-const CreatorUI: FC<CreatorUIProps> = () => {
-  const { control } = useForm<FormValues>({
-    defaultValues: {
-      address: "",
-      verified: false,
-      share: 0,
-    },
-  });
-
+const CreatorUI: FC<CreatorUIProps> = ({ control }) => {
   return (
     <>
       <Box sx={{ mb: 4 }} />
