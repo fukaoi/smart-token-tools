@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { useState } from 'react';
 import { Paper, Box, FormControl } from '@mui/material';
 import { ControllerRenderProps, useForm } from 'react-hook-form';
@@ -17,27 +18,49 @@ import OptionalUI from '../components/OptionalUI';
 import Loading from '../components/Loading';
 import { Validator, ValidatorError } from '@solana-suite/nft';
 import { Metaplex } from '@solana-suite/phantom';
+=======
+import { useState } from 'react'
+import { Paper, Box, FormControl } from '@mui/material'
+import { ControllerRenderProps, useForm } from 'react-hook-form'
+import TitleTypography from '../components/typography/TitleTypography'
+import AddressTypography from '../components/typography/AddressTypography'
+import ClusterRadio from '../components/radio/ClusterRadio'
+import SubmitButton from '../components/button/SubmitButton'
+import { useSessionCheck } from '../hooks/SessionCheck'
+import ErrorModal from '../components/modal/ErrorModal'
+import NftNameTextField from '../components/textField/NftNameTextField'
+import SymbolTextField from '../components/textField/SymbolTextField'
+import OptionalButton from '../components/button/OptionalButton'
+import DescriptionTextField from '../components/textField/DescriptionTextField'
+import HeadlineTypography from '../components/typography/HeadlineTypography'
+import FileUploadUI from '../components/FileUploadUI'
+import OptionalUI from '../components/OptionalUI'
+import Loading from '../components/Loading'
+import { Validator } from '@solana-suite/nft'
+import { useNavigate } from 'react-router'
+>>>>>>> d4e323c (refactor optional)
 
 export interface NFTFormValues {
-  cluster: string;
-  nftName: string;
-  symbol: string;
-  description: string;
-  imagePreview?: string;
-  royalty?: number;
-  address?: string;
-  verified?: boolean;
-  share?: number;
-  collection?: string;
-  control?: any;
-  field?: ControllerRenderProps;
-  optional: any;
+  cluster: string
+  nftName: string
+  symbol: string
+  description: string
+  imagePreview?: string
+  creators?: Creator[]
+  royalty?: number
+  address?: string
+  verified?: boolean
+  share?: number
+  collection?: string
+  control?: any
+  field?: ControllerRenderProps
+  optional: any
 }
 
 export interface Creator {
-  address: string;
-  verified: boolean;
-  share: number;
+  address: string
+  verified: boolean
+  share: number
 }
 
 const styles = {
@@ -47,15 +70,16 @@ const styles = {
     maxWidth: '20em',
     padding: '1.2em',
   },
-};
+}
 
 const NftPage = () => {
-  useSessionCheck(console.log);
+  useSessionCheck(console.log)
+  const navigate = useNavigate()
 
   const [btnState, setBtnState] = useState({
     title: 'Confirm',
     isDisabled: false,
-  });
+  })
   const [imagePreview, setImagePreview] = useState<File | string | undefined>(
     undefined
   );
@@ -64,7 +88,7 @@ const NftPage = () => {
   const [optionalBtnState, setOptionalBtnState] = useState(false);
   const [errorModal, setErrorModal] = useState({ open: false, message: '' });
   const [isShow, setIsShow] = useState(false);
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false)
 
   const { handleSubmit, control, register } = useForm<NFTFormValues>({
     defaultValues: {
@@ -74,23 +98,19 @@ const NftPage = () => {
       verified: false,
       collection: 'Powered by ATONOY Co, Ltd',
     },
-  });
+  })
 
   const handleClose = () => {
     setErrorModal({ open: false, message: '' });
     setBtnState({ title: 'Confirm', isDisabled: false });
   };
-   
+
   const onSubmit = async (data: any) => {
     // setBtnState({ title: "Processing", isDisabled: true });
-    setIsLoading(true);
-    alert('on submit');
-    console.log(data);
-    setIsLoading(false);
-
-    // const a = Validator.isSymbol(data.symbol);
-    // console.log("a", a);
-
+    setIsLoading(true)
+    alert('on submit')
+    console.log(data)
+    setIsLoading(false)
     const mint = await Metaplex.mint(
       {
         filePath: fileBuffer!,
@@ -104,7 +124,7 @@ const NftPage = () => {
     );
 
     mint.match(
-      (ok) => console.log('mint: ', ok),
+      (ok: any) => console.log('mint: ', ok),
       (err: Error) => {
         console.error('err:', err);
         if ('details' in err) {
@@ -115,11 +135,11 @@ const NftPage = () => {
   };
 
   const handleOptionalButton = () => {
-    setOptionalBtnState((prevState) => !prevState);
-    setIsShow((prevState) => !prevState);
-  };
+    setOptionalBtnState(prevState => !prevState)
+    setIsShow(prevState => !prevState)
+  }
 
-  useSessionCheck(setWalletAddress);
+  useSessionCheck(setWalletAddress)
 
   return (
     <>
@@ -146,15 +166,13 @@ const NftPage = () => {
                 callbackFunc={handleOptionalButton}
               />
             </Box>
-            {isShow ? (
-              <OptionalUI
-                {...{
-                  isShow,
-                  control,
-                  register,
-                }}
-              />
-            ) : null}
+            <OptionalUI
+              {...{
+                isShow,
+                control,
+                register,
+              }}
+            />
           </Paper>
           <Box sx={{ mb: 6 }} />
           <Box>
@@ -173,6 +191,6 @@ const NftPage = () => {
       />
       <Loading isLoading={isLoading} />
     </>
-  );
-};
-export default NftPage;
+  )
+}
+export default NftPage

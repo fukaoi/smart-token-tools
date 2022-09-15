@@ -54,7 +54,7 @@ const NftCompletePage = () => {
             style={styles.cardMedia}
           />
           <Typography component="div" fontSize="26px" sx={{ mt: 1, mb: 3 }}>
-            Your Nft issuing was success!!
+            Your NFT issuing was success!!
           </Typography>
           <MintedInfoTypography message={tokenId} />
           <Link sx={styles.link} href={tokenId.toExplorerUrl()}>
