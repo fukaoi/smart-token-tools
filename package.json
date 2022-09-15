@@ -8,10 +8,7 @@
     "@mui/icons-material": "^5.8.4",
     "@mui/material": "^5.9.2",
     "@mui/system": "latest",
-    "@solana-suite/core": "latest",
-    "@solana-suite/nft": "latest",
-    "@solana/buffer-layout": "^4.0.0",
-    "@solana/spl-token": "0.2.0",
+    "@solana-suite/phantom": "^0.3.6",
     "assert": "^2.0.0",
     "crypto-browserify": "^3.12.0",
     "http-server": "^14.1.1",
@@ -21,8 +18,8 @@
     "react-hook-form": "^7.33.1",
     "react-router-dom": "^6.3.0",
     "stream-browserify": "^3.0.0",
-    "web-vitals": "^2.1.4",
-    "util": "^0.12.4"
+    "util": "^0.12.4",
+    "web-vitals": "^2.1.4"
   },
   "resolutions": {
     "@solana/buffer-layout": "latest"

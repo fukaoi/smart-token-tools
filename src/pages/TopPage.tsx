@@ -105,7 +105,7 @@ const TopPage = () => {
       setWarningModal({open: true, message});
     } else {
       window.solana.connect().then(() => {
-        navigate('/token');
+        navigate('/nft');
       });
     }
   };

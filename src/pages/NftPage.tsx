@@ -1,22 +1,22 @@
-import { useState } from "react";
-import { Paper, Box, FormControl } from "@mui/material";
-import { ControllerRenderProps, useForm } from "react-hook-form";
-import TitleTypography from "../components/typography/TitleTypography";
-import AddressTypography from "../components/typography/AddressTypography";
-import ClusterRadio from "../components/radio/ClusterRadio";
-import SubmitButton from "../components/button/SubmitButton";
-import { useSessionCheck } from "../hooks/SessionCheck";
-import ErrorModal from "../components/modal/ErrorModal";
-import NftNameTextField from "../components/textField/NftNameTextField";
-import SymbolTextField from "../components/textField/SymbolTextField";
-import OptionalButton from "../components/button/OptionalButton";
-import DescriptionTextField from "../components/textField/DescriptionTextField";
-import HeadlineTypography from "../components/typography/HeadlineTypography";
-import FileUploadUI from "../components/FileUploadUI";
-import OptionalUI from "../components/OptionalUI";
-import Loading from "../components/Loading";
-import { nftMint } from "../shared/nftMint";
-import { Validator } from "@solana-suite/nft";
+import { useState } from 'react';
+import { Paper, Box, FormControl } from '@mui/material';
+import { ControllerRenderProps, useForm } from 'react-hook-form';
+import TitleTypography from '../components/typography/TitleTypography';
+import AddressTypography from '../components/typography/AddressTypography';
+import ClusterRadio from '../components/radio/ClusterRadio';
+import SubmitButton from '../components/button/SubmitButton';
+import { useSessionCheck } from '../hooks/SessionCheck';
+import ErrorModal from '../components/modal/ErrorModal';
+import NftNameTextField from '../components/textField/NftNameTextField';
+import SymbolTextField from '../components/textField/SymbolTextField';
+import OptionalButton from '../components/button/OptionalButton';
+import DescriptionTextField from '../components/textField/DescriptionTextField';
+import HeadlineTypography from '../components/typography/HeadlineTypography';
+import FileUploadUI from '../components/FileUploadUI';
+import OptionalUI from '../components/OptionalUI';
+import Loading from '../components/Loading';
+import { Validator, ValidatorError } from '@solana-suite/nft';
+import { Metaplex } from '@solana-suite/phantom';
 
 export interface NFTFormValues {
   cluster: string;
@@ -42,10 +42,10 @@ export interface Creator {
 
 const styles = {
   root: {
-    marginTop: "1em",
-    minWidth: "20em",
-    maxWidth: "20em",
-    padding: "1.2em",
+    marginTop: '1em',
+    minWidth: '20em',
+    maxWidth: '20em',
+    padding: '1.2em',
   },
 };
 
@@ -53,52 +53,65 @@ const NftPage = () => {
   useSessionCheck(console.log);
 
   const [btnState, setBtnState] = useState({
-    title: "Confirm",
+    title: 'Confirm',
     isDisabled: false,
   });
   const [imagePreview, setImagePreview] = useState<File | string | undefined>(
     undefined
   );
-  const [walletAddress, setWalletAddress] = useState<string>("");
+  const [fileBuffer, setFileBuffer] = useState<ArrayBuffer>();
+  const [walletAddress, setWalletAddress] = useState<string>('');
   const [optionalBtnState, setOptionalBtnState] = useState(false);
-  const [errorModal, setErrorModal] = useState({ open: false, message: "" });
+  const [errorModal, setErrorModal] = useState({ open: false, message: '' });
   const [isShow, setIsShow] = useState(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const { handleSubmit, control, register } = useForm<NFTFormValues>({
     defaultValues: {
-      cluster: "devnet",
+      cluster: 'devnet',
       royalty: 0,
       share: 0,
       verified: false,
-      collection: "Powered by ATONOY Co, Ltd",
+      collection: 'Powered by ATONOY Co, Ltd',
     },
   });
 
   const handleClose = () => {
-    setErrorModal({ open: false, message: "" });
-    setBtnState({ title: "Confirm", isDisabled: false });
+    setErrorModal({ open: false, message: '' });
+    setBtnState({ title: 'Confirm', isDisabled: false });
   };
-
+   
   const onSubmit = async (data: any) => {
     // setBtnState({ title: "Processing", isDisabled: true });
     setIsLoading(true);
-    alert("on submit");
+    alert('on submit');
     console.log(data);
     setIsLoading(false);
 
     // const a = Validator.isSymbol(data.symbol);
     // console.log("a", a);
 
-    // const res = await nftMint(
-    //   imagePreview as string,
-    //   data.nftName,
-    //   data.description,
-    //   0,
-    //   walletAddress,
-    //   "ZMJzAhx7YhuvvPEknhUeBKHJeimEXPo2xTsCwRXzoCq2P1y79qwFzgmukBTNAyRdsVHTTznchFbDT2gnQBnm7aW"
-    // );
-    // console.log(res);
+    const mint = await Metaplex.mint(
+      {
+        filePath: fileBuffer!,
+        name: data.nftName,
+        symbol: data.symbol,
+        description: data.description,
+        royalty: 0,
+        storageType: 'nftStorage',
+      },
+      window.solana
+    );
+
+    mint.match(
+      (ok) => console.log('mint: ', ok),
+      (err: Error) => {
+        console.error('err:', err);
+        if ('details' in err) {
+          console.error((err as ValidatorError).details);
+        }
+      }
+    );
   };
 
   const handleOptionalButton = () => {
@@ -125,7 +138,7 @@ const NftPage = () => {
             <Box sx={{ mb: 4 }} />
             <HeadlineTypography message="Image Upload" />
             <Box sx={{ mb: 4 }}>
-              <FileUploadUI {...{ imagePreview, setImagePreview }} />
+              <FileUploadUI {...{ imagePreview, setImagePreview, setFileBuffer}} />
             </Box>
             <Box sx={{ mb: 4 }}>
               <OptionalButton

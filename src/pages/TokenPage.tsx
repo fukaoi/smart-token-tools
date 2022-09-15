@@ -9,10 +9,10 @@ import TotalSupplyTextField from '../components/textField/TotalSupplyTextField';
 import DecimalsTextField from '../components/textField/DecimalsTextField';
 import TokenKeyTextField from '../components/textField/TokenKeyTextField';
 import SubmitButton from '../components/button/SubmitButton';
-import {SplToken} from '../shared/spl-token';
 import {useNavigate} from 'react-router-dom';
 import {useSessionCheck} from '../hooks/SessionCheck';
 import ErrorModal from '../components/modal/ErrorModal';
+import {SplToken} from '@solana-suite/phantom';
 
 export interface FormValues {
   cluster: string,
@@ -31,7 +31,7 @@ const mint = async (
     postData.cluster,
     postData.totalSupply,
     postData.decimals,
-    window.solana.signAllTransactions
+    window.solana
   );
   console.debug('mint tokenId: ', res);
   return res;
@@ -48,7 +48,7 @@ const addMinting = async (
     postData.cluster,
     postData.totalSupply,
     postData.decimals,
-    window.solana.signAllTransactions
+    window.solana
   );
   console.debug('add minting tokenId: ', res);
   return res;
