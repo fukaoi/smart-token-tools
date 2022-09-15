@@ -62,7 +62,10 @@ const NftPage = () => {
   const [imagePreview, setImagePreview] = useState<File | string | undefined>(
     undefined,
   );
+<<<<<<< HEAD
   const [fileBuffer, setFileBuffer] = useState<ArrayBuffer>();
+=======
+>>>>>>> 309c20a (pretteir fix and submit param fix)
   const [walletAddress, setWalletAddress] = useState<string>('');
   const [optionalBtnState, setOptionalBtnState] = useState(false);
   const [errorModal, setErrorModal] = useState({ open: false, message: '' });
@@ -72,6 +75,9 @@ const NftPage = () => {
   const { handleSubmit, control, register } = useForm<NFTFormValues>({
     defaultValues: {
       cluster: 'devnet',
+      name: '',
+      symbol: '',
+      description: '',
       royalty: 0,
       share: 0,
       verified: false,
@@ -93,10 +99,7 @@ const NftPage = () => {
 
   const onSubmit = async (data: any) => {
     // setBtnState({ title: "Processing", isDisabled: true });
-    setIsLoading(true);
-    alert('on submit');
     console.log(data);
-    setIsLoading(false);
     const mint = await Metaplex.mint(
       {
         filePath: fileBuffer!,
@@ -118,6 +121,10 @@ const NftPage = () => {
         }
       },
     );
+
+    alert('on submit');
+
+
   };
 
   const handleOptionalButton = () => {
@@ -136,7 +143,7 @@ const NftPage = () => {
             <AddressTypography address={walletAddress} />
             <ClusterRadio control={control} name="cluster" />
             <Box sx={{ mb: 4 }} />
-            <NftNameTextField control={control} name="nftName" />
+            <NftNameTextField control={control} name="name" />
             <Box sx={{ mb: 4 }} />
             <SymbolTextField control={control} name="symbol" />
             <Box sx={{ mb: 4 }} />
