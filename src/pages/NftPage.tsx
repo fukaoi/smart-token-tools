@@ -62,10 +62,7 @@ const NftPage = () => {
   const [imagePreview, setImagePreview] = useState<File | string | undefined>(
     undefined,
   );
-<<<<<<< HEAD
   const [fileBuffer, setFileBuffer] = useState<ArrayBuffer>();
-=======
->>>>>>> 309c20a (pretteir fix and submit param fix)
   const [walletAddress, setWalletAddress] = useState<string>('');
   const [optionalBtnState, setOptionalBtnState] = useState(false);
   const [errorModal, setErrorModal] = useState({ open: false, message: '' });
@@ -123,8 +120,6 @@ const NftPage = () => {
     );
 
     alert('on submit');
-
-
   };
 
   const handleOptionalButton = () => {
