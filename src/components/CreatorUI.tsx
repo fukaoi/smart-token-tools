@@ -36,16 +36,25 @@ const CreatorUI: FC<CreatorUIProps> = ({ control }) => {
 
   return (
     <>
-      {fields.map((item, index) => (
-        <div key={item.id}>
+      {fields.map((creators, index) => (
+        <div key={creators.id}>
           <Box sx={{ mb: 4 }} />
           <HeadlineTypography message="Creator Info Input Form" />
-          <WalletAddressTextField control={control} name="address" />
+          <WalletAddressTextField
+            control={control}
+            name={`creators.[${index}].address`}
+          />
           <Box sx={{ mb: 4 }} />
-          <ShareTextField control={control} name="share" />
+          <ShareTextField
+            control={control}
+            name={`creators.[${index}].share`}
+          />
           <Box sx={{ mb: 4 }} />
           <HeadlineTypography message="Verified" />
-          <VerifiedRadio control={control} name="verified" />
+          <VerifiedRadio
+            control={control}
+            name={`creators.[${index}].verified`}
+          />
           <Box sx={{ mb: 4 }} />
           <AddCreatorButton callbackFunc={handleAddButton} />
         </div>
