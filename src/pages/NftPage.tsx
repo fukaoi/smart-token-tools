@@ -92,7 +92,7 @@ const NftPage = () => {
 
     const mint = await Metaplex.mint(
       {
-        filePath: imagePreview as string,
+        filePath: (imagePreview as string),
         name: data.nftName,
         symbol: data.symbol,
         description: data.description,
