@@ -59,6 +59,7 @@ const NftPage = () => {
   const [imagePreview, setImagePreview] = useState<File | string | undefined>(
     undefined
   );
+  const [fileBuffer, setFileBuffer] = useState<ArrayBuffer>();
   const [walletAddress, setWalletAddress] = useState<string>('');
   const [optionalBtnState, setOptionalBtnState] = useState(false);
   const [errorModal, setErrorModal] = useState({ open: false, message: '' });
@@ -79,7 +80,7 @@ const NftPage = () => {
     setErrorModal({ open: false, message: '' });
     setBtnState({ title: 'Confirm', isDisabled: false });
   };
-
+   
   const onSubmit = async (data: any) => {
     // setBtnState({ title: "Processing", isDisabled: true });
     setIsLoading(true);
@@ -92,7 +93,7 @@ const NftPage = () => {
 
     const mint = await Metaplex.mint(
       {
-        filePath: (imagePreview as string),
+        filePath: fileBuffer!,
         name: data.nftName,
         symbol: data.symbol,
         description: data.description,
@@ -137,7 +138,7 @@ const NftPage = () => {
             <Box sx={{ mb: 4 }} />
             <HeadlineTypography message="Image Upload" />
             <Box sx={{ mb: 4 }}>
-              <FileUploadUI {...{ imagePreview, setImagePreview }} />
+              <FileUploadUI {...{ imagePreview, setImagePreview, setFileBuffer}} />
             </Box>
             <Box sx={{ mb: 4 }}>
               <OptionalButton

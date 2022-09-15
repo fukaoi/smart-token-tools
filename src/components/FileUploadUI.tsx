@@ -4,11 +4,13 @@ import { FC } from "react";
 export type FileUploadUIProps = {
   imagePreview: any;
   setImagePreview: (file: File | string | undefined) => void;
+  setFileBuffer: (buffer: ArrayBuffer) => void;
 };
 
 const FileUploadUI: FC<FileUploadUIProps> = ({
   imagePreview,
   setImagePreview,
+  setFileBuffer,
 }) => {
   const handleOnAddImage = (e: React.ChangeEvent<HTMLInputElement>) => {
     setImagePreview(undefined);
@@ -18,6 +20,7 @@ const FileUploadUI: FC<FileUploadUIProps> = ({
 
     const reader = new FileReader();
     const file = e.target.files[0];
+    file.arrayBuffer().then(setFileBuffer);
 
     reader.onload = (e: any) => {
       const result = e.target.result as string;
