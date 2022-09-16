@@ -1,21 +1,21 @@
-import { Box } from '@mui/material'
-import { FC } from 'react'
+import { Box } from '@mui/material';
+import { FC } from 'react';
 import {
   Control,
   ControllerRenderProps,
   UseFormRegister,
-} from 'react-hook-form'
-import RoyaltyTextField from './textField/RoyaltyTextField'
-import CollectionTextField from './textField/CollectionTextField'
-import CreatorUI from './CreatorUI'
-import { NFTFormValues } from '../pages/NftPage'
+} from 'react-hook-form';
+import RoyaltyTextField from './textField/RoyaltyTextField';
+import CollectionTextField from './textField/CollectionTextField';
+import CreatorUI from './CreatorUI';
+import { NFTFormValues } from '../pages/NftPage';
 
 export type OptionalUIProps = {
-  isShow: boolean
-  field?: ControllerRenderProps
-  register?: UseFormRegister<NFTFormValues>
-  control?: Control<NFTFormValues>
-}
+  isShow: boolean;
+  field?: ControllerRenderProps;
+  register?: UseFormRegister<NFTFormValues>;
+  control?: Control<NFTFormValues>;
+};
 
 const OptionalUI: FC<OptionalUIProps> = ({ isShow, control }) => {
   return isShow ? (
@@ -27,7 +27,7 @@ const OptionalUI: FC<OptionalUIProps> = ({ isShow, control }) => {
       <Box sx={{ mb: 4 }} />
       <CollectionTextField control={control} name="collection" />
     </>
-  ) : null
-}
+  ) : null;
+};
 
-export default OptionalUI
+export default OptionalUI;

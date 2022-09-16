@@ -36,11 +36,11 @@ export interface NFTFormValues {
   optional: any;
 }
 
-export interface Creator {
+export type Creator = {
   address: string;
   verified: boolean;
   share: number;
-}
+}[];
 
 const styles = {
   root: {
@@ -69,15 +69,13 @@ const NftPage = () => {
   const [isShow, setIsShow] = useState(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  const { handleSubmit, control, register } = useForm<NFTFormValues>({
+  const { handleSubmit, control } = useForm<NFTFormValues>({
     defaultValues: {
       cluster: 'devnet',
       name: '',
       symbol: '',
       description: '',
       royalty: 0,
-      share: 0,
-      verified: false,
       collection: 'Powered by ATONOY Co, Ltd',
       creators: [
         {
@@ -100,7 +98,7 @@ const NftPage = () => {
     const mint = await Metaplex.mint(
       {
         filePath: fileBuffer!,
-        name: data.nftName,
+        name: data.name,
         symbol: data.symbol,
         description: data.description,
         royalty: 0,
@@ -160,7 +158,6 @@ const NftPage = () => {
               {...{
                 isShow,
                 control,
-                register,
               }}
             />
           </Paper>
