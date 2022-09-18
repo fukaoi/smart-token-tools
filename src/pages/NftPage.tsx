@@ -87,6 +87,9 @@ const NftPage = () => {
     },
   });
 
+  // H52snmJVMqJTcmaJGTdkvWTKYzThnvML2xUBC8n1inC6
+  // 8Prqdyz6e3E1uwEsZuwZ5iPH8zSVcjcragg86cxno5xf
+
   const handleClose = () => {
     setErrorModal({ open: false, message: '' });
     setBtnState({ title: 'Confirm', isDisabled: false });
@@ -95,27 +98,74 @@ const NftPage = () => {
   const onSubmit = async (data: any) => {
     // setBtnState({ title: "Processing", isDisabled: true });
     console.log(data);
+
+    if (data.creators[0].address !== '') {
+      const res = data.creators.map(item => {
+        const address = item.address.toPublicKey();
+        return {
+          address,
+          share: item.share,
+          verified: item.verified,
+        };
+      });
+      console.log('creators', res);
+
+      const mint = await Metaplex.mint(
+        {
+          filePath: fileBuffer!,
+          name: data.name,
+          symbol: data.symbol,
+          description: data.description,
+          royalty: data.royalty,
+          creators: res,
+          storageType: 'nftStorage',
+        },
+        window.solana,
+      );
+
+      mint.match(
+        (ok: any) => {
+          console.log('mint: ', ok);
+        },
+        (err: Error) => {
+          console.error('err:', err);
+          if ('details' in err) {
+            console.error((err as ValidatorError).details);
+          }
+        },
+      );
+    }
+
     const mint = await Metaplex.mint(
       {
         filePath: fileBuffer!,
         name: data.name,
         symbol: data.symbol,
         description: data.description,
-        royalty: 0,
+        royalty: data.royalty,
         storageType: 'nftStorage',
       },
       window.solana,
     );
 
     mint.match(
-      (ok: any) => console.log('mint: ', ok),
+      (ok: any) => {
+        console.log('mint: ', ok);
+      },
       (err: Error) => {
         console.error('err:', err);
         if ('details' in err) {
           console.error((err as ValidatorError).details);
         }
+        setErrorModal({ open: true, message: err.message });
       },
     );
+
+    if (err) {
+    }
+
+
+    // navigate('/Nftcomplete', { state: { mint } });
 
     alert('on submit');
   };
