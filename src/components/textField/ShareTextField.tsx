@@ -1,7 +1,7 @@
-import { TextField, Box } from "@mui/material";
-import { NFTFormValues } from "../../pages/NftPage";
-import { useController, UseControllerProps } from "react-hook-form";
-import DescriptionTypography from "../typography/DescriptionTypography";
+import { TextField, Box } from '@mui/material';
+import { NFTFormValues } from '../../pages/NftPage';
+import { useController, UseControllerProps } from 'react-hook-form';
+import DescriptionTypography from '../typography/DescriptionTypography';
 
 const ShareTextField = (props: UseControllerProps<NFTFormValues>) => {
   const { field } = useController(props);
@@ -11,8 +11,8 @@ const ShareTextField = (props: UseControllerProps<NFTFormValues>) => {
 
   return (
     <>
-      <DescriptionTypography message={description} />
-      <Box sx={{ display: "flex", mt: 2 }}>
+      {/* <DescriptionTypography message={description} /> */}
+      <Box sx={{ display: 'flex', mt: 2 }}>
         <TextField
           type="text"
           minRows={100}
