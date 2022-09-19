@@ -112,8 +112,6 @@ const NftPage = () => {
         };
       });
 
-      console.log('creator あり');
-
       const mint = await Metaplex.mint(
         {
           filePath: fileBuffer!,
@@ -126,8 +124,6 @@ const NftPage = () => {
         },
         window.solana,
       );
-
-      console.log('creatorあり ここまできた');
 
       mint.match(
         (ok: any) => {
@@ -155,8 +151,6 @@ const NftPage = () => {
         window.solana,
       );
 
-      console.log('creatorなし');
-
       mint.match(
         (ok: any) => {
           console.log('mint: ', ok);
@@ -170,8 +164,6 @@ const NftPage = () => {
           setErrorModal({ open: true, message: err.message });
         },
       );
-
-      console.log('creatorなし ここまできた');
 
       const res = mint.unwrap();
 
