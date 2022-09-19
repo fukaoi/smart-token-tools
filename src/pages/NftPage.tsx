@@ -100,8 +100,6 @@ const NftPage = () => {
     // setIsLoading(true);
     console.log('data', data);
     console.log('data.creator', data.creators[0]);
-    console.log('data.creator.address', data.creators[0].address);
-
     if (data.creators[0].address !== '') {
       const creators = data.creators.map(item => {
         const address = item.address.toPublicKey();
