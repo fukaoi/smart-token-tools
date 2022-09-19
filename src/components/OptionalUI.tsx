@@ -8,6 +8,7 @@ import {
 import RoyaltyTextField from './textField/RoyaltyTextField';
 import CollectionTextField from './textField/CollectionTextField';
 import CreatorUI from './CreatorUI';
+
 import { NFTFormValues } from '../pages/NftPage';
 
 export type OptionalUIProps = {
@@ -24,6 +25,7 @@ const OptionalUI: FC<OptionalUIProps> = ({ isShow, control }) => {
       <RoyaltyTextField control={control} name="royalty" />
       <Box sx={{ mb: 4 }} />
       <CreatorUI {...{ control }} />
+
       <Box sx={{ mb: 4 }} />
       <CollectionTextField control={control} name="collection" />
     </>

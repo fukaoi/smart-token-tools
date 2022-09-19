@@ -15,7 +15,7 @@ import HeadlineTypography from '../components/typography/HeadlineTypography';
 import FileUploadUI from '../components/FileUploadUI';
 import OptionalUI from '../components/OptionalUI';
 import Loading from '../components/Loading';
-import { Validator, ValidatorError } from '@solana-suite/nft';
+import { ValidatorError } from '@solana-suite/nft';
 import { useNavigate } from 'react-router';
 import { Metaplex } from '@solana-suite/phantom';
 
@@ -96,11 +96,14 @@ const NftPage = () => {
   };
 
   const onSubmit = async (data: any) => {
-    // setBtnState({ title: "Processing", isDisabled: true });
-    console.log(data);
+    // setBtnState({ title: 'Processing', isDisabled: true });
+    // setIsLoading(true);
+    console.log('data', data);
+    console.log('data.creator', data.creators[0]);
+    console.log('data.creator.address', data.creators[0].address);
 
     if (data.creators[0].address !== '') {
-      const res = data.creators.map(item => {
+      const creators = data.creators.map(item => {
         const address = item.address.toPublicKey();
         return {
           address,
@@ -108,7 +111,8 @@ const NftPage = () => {
           verified: item.verified,
         };
       });
-      console.log('creators', res);
+
+      console.log('creator あり');
 
       const mint = await Metaplex.mint(
         {
@@ -117,11 +121,13 @@ const NftPage = () => {
           symbol: data.symbol,
           description: data.description,
           royalty: data.royalty,
-          creators: res,
+          creators,
           storageType: 'nftStorage',
         },
         window.solana,
       );
+
+      console.log('creatorあり ここまできた');
 
       mint.match(
         (ok: any) => {
@@ -132,42 +138,47 @@ const NftPage = () => {
           if ('details' in err) {
             console.error((err as ValidatorError).details);
           }
+          setIsLoading(false);
+          setErrorModal({ open: true, message: err.message });
         },
       );
+    } else {
+      const mint = await Metaplex.mint(
+        {
+          filePath: fileBuffer!,
+          name: data.name,
+          symbol: data.symbol,
+          description: data.description,
+          royalty: data.royalty,
+          storageType: 'nftStorage',
+        },
+        window.solana,
+      );
+
+      console.log('creatorなし');
+
+      mint.match(
+        (ok: any) => {
+          console.log('mint: ', ok);
+        },
+        (err: Error) => {
+          console.error('err:', err);
+          if ('details' in err) {
+            console.error((err as ValidatorError).details);
+          }
+          setIsLoading(false);
+          setErrorModal({ open: true, message: err.message });
+        },
+      );
+
+      console.log('creatorなし ここまできた');
+
+      const res = mint.unwrap();
+
+      // setIsLoading(false);
+
+      navigate('/nftcomplete', { state: { res } });
     }
-
-    const mint = await Metaplex.mint(
-      {
-        filePath: fileBuffer!,
-        name: data.name,
-        symbol: data.symbol,
-        description: data.description,
-        royalty: data.royalty,
-        storageType: 'nftStorage',
-      },
-      window.solana,
-    );
-
-    mint.match(
-      (ok: any) => {
-        console.log('mint: ', ok);
-      },
-      (err: Error) => {
-        console.error('err:', err);
-        if ('details' in err) {
-          console.error((err as ValidatorError).details);
-        }
-        setErrorModal({ open: true, message: err.message });
-      },
-    );
-
-    if (err) {
-    }
-
-
-    // navigate('/Nftcomplete', { state: { mint } });
-
-    alert('on submit');
   };
 
   const handleOptionalButton = () => {
@@ -193,17 +204,15 @@ const NftPage = () => {
             <DescriptionTextField control={control} name="description" />
             <Box sx={{ mb: 4 }} />
             <HeadlineTypography message="Image Upload" />
-            <Box sx={{ mb: 4 }}>
-              <FileUploadUI
-                {...{ imagePreview, setImagePreview, setFileBuffer }}
-              />
-            </Box>
-            <Box sx={{ mb: 4 }}>
-              <OptionalButton
-                isOpen={optionalBtnState}
-                callbackFunc={handleOptionalButton}
-              />
-            </Box>
+            <Box sx={{ mb: 4 }} />
+            <FileUploadUI
+              {...{ imagePreview, setImagePreview, setFileBuffer }}
+            />
+            <Box sx={{ mb: 4 }} />
+            <OptionalButton
+              isOpen={optionalBtnState}
+              callbackFunc={handleOptionalButton}
+            />
             <OptionalUI
               {...{
                 isShow,

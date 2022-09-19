@@ -43,11 +43,6 @@ const CreatorUI: FC<CreatorUIProps> = ({ control }) => {
     });
   };
 
-  // TODO: Validation 追加 暫定対応
-  // TODO: NFTロジックリファクタ
-  // TODO: ADD Creator ボタンを最下部に一つのみ
-  // TODO: 完了後の画面実装
-
   return (
     <>
       {fields.map((field, index) => (

@@ -1,14 +1,15 @@
-import TokenPage from "./pages/TokenPage";
-import TopPage from "./pages/TopPage";
-import backImage from "./assets/background-image.jpg";
-import corpLogoImage from "./assets/atonoy-logo.png";
-import logoImage from "./assets/smt-logo.svg";
-import { Grid, Box, useMediaQuery } from "@mui/material";
-import { Routes, Route, Link } from "react-router-dom";
-import NftPage from "./pages/NftPage";
-import CompletePage from "./pages/CompletePage";
-import FaucetPage from "./pages/FaucetPage";
-import { Device } from "./shared/device";
+import TokenPage from './pages/TokenPage';
+import TopPage from './pages/TopPage';
+import backImage from './assets/background-image.jpg';
+import corpLogoImage from './assets/atonoy-logo.png';
+import logoImage from './assets/smt-logo.svg';
+import { Grid, Box, useMediaQuery } from '@mui/material';
+import { Routes, Route, Link } from 'react-router-dom';
+import NftPage from './pages/NftPage';
+import CompletePage from './pages/CompletePage';
+import NftCompletePage from './pages/NftCompletePage';
+import FaucetPage from './pages/FaucetPage';
+import { Device } from './shared/device';
 
 declare global {
   interface Window {
@@ -25,64 +26,64 @@ declare global {
 
 const styles = {
   root: {
-    position: "relative" as "relative",
-    textAlign: "center" as "center",
-    backgroundSize: "cover",
+    position: 'relative' as 'relative',
+    textAlign: 'center' as 'center',
+    backgroundSize: 'cover',
     backgroundImage: `url(${backImage})`,
-    backgroundPosition: "ceter",
-    minHeight: "100vh",
-    maxHeight: "100%",
-    width: "100%",
-    alignItems: "ceter",
-    fontSize: "calc(10px + 2vmin)",
-    color: "white",
+    backgroundPosition: 'ceter',
+    minHeight: '100vh',
+    maxHeight: '100%',
+    width: '100%',
+    alignItems: 'ceter',
+    fontSize: 'calc(10px + 2vmin)',
+    color: 'white',
   },
   footer: {
-    fontSize: "18px",
-    position: "absolute" as "absolute",
-    bottom: "10px",
-    width: "100%",
+    fontSize: '18px',
+    position: 'absolute' as 'absolute',
+    bottom: '10px',
+    width: '100%',
   },
   corpLogoImage: {
-    width: "120px",
+    width: '120px',
   },
   navi: {
-    paddingLeft: "3%",
-    paddingRight: "3%",
+    paddingLeft: '3%',
+    paddingRight: '3%',
   },
   naviLink: {
-    letterSpacing: "3px",
-    fontSize: "20px",
-    display: "inline-block",
-    marginLeft: "20px",
-    marginRight: "20px",
+    letterSpacing: '3px',
+    fontSize: '20px',
+    display: 'inline-block',
+    marginLeft: '20px',
+    marginRight: '20px',
   },
   link: {
-    textDecoration: "none",
-    color: "white",
+    textDecoration: 'none',
+    color: 'white',
   },
   grid: {
-    height: "10vh",
+    height: '10vh',
   },
   logoImage: {
-    alignItems: "center",
-    marginBottom: "0",
+    alignItems: 'center',
+    marginBottom: '0',
   },
 };
 
 const App = () => {
-  const match1100 = useMediaQuery("(min-width:1150px)");
-  const match1024 = useMediaQuery("(min-width:1024px)");
-  const match600 = useMediaQuery("(min-width:600px)");
+  const match1100 = useMediaQuery('(min-width:1150px)');
+  const match1024 = useMediaQuery('(min-width:1024px)');
+  const match600 = useMediaQuery('(min-width:600px)');
   if (!match600) {
-    styles.root.minHeight = "120vh";
-    styles.logoImage.marginBottom = "6em";
+    styles.root.minHeight = '120vh';
+    styles.logoImage.marginBottom = '6em';
   } else if (!match1024) {
-    styles.root.minHeight = "120vh";
-    styles.logoImage.marginBottom = "5em";
+    styles.root.minHeight = '120vh';
+    styles.logoImage.marginBottom = '5em';
   } else {
-    styles.root.minHeight = "100vh";
-    styles.logoImage.marginBottom = "0";
+    styles.root.minHeight = '100vh';
+    styles.logoImage.marginBottom = '0';
   }
   return (
     <Box sx={styles.root}>
@@ -129,6 +130,7 @@ const App = () => {
           <Route path="/nft" element={<NftPage />} />
           <Route path="/faucet" element={<FaucetPage />} />
           <Route path="/complete" element={<CompletePage />} />
+          <Route path="/nftcomplete" element={<NftCompletePage />} />
         </Routes>
       </Box>
       {match1100 && (
