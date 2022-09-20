@@ -16,7 +16,7 @@ import FileUploadUI from '../components/FileUploadUI';
 import OptionalUI from '../components/OptionalUI';
 import Loading from '../components/Loading';
 import { Validator, ValidatorError } from '@solana-suite/nft';
-import { Metaplex } from '@solana-suite/phantom';
+import { MetaplexPhantom } from '@solana-suite/phantom';
 
 export interface NFTFormValues {
   cluster: string;
@@ -91,7 +91,7 @@ const NftPage = () => {
     // const a = Validator.isSymbol(data.symbol);
     // console.log("a", a);
 
-    const mint = await Metaplex.mint(
+    const mint = await MetaplexPhantom.mint(
       {
         filePath: fileBuffer!,
         name: data.nftName,
