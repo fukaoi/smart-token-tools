@@ -1,5 +1,5 @@
-import { Box, Button, ImageList, ImageListItem } from "@mui/material";
-import { FC } from "react";
+import { Box, Button, ImageList, ImageListItem } from '@mui/material';
+import { FC } from 'react';
 
 export type FileUploadUIProps = {
   imagePreview: any;
@@ -16,13 +16,13 @@ const FileUploadUI: FC<FileUploadUIProps> = ({
     setImagePreview(undefined);
 
     if (!e.target.files) return;
-    if (!e.target.files?.[0].type.match("image.*")) return;
+    if (!e.target.files?.[0].type.match('image.*')) return;
 
     const reader = new FileReader();
     const file = e.target.files[0];
     file.arrayBuffer().then(setFileBuffer);
 
-    reader.onload = (e: any) => {
+    reader.onload = (e: ProgressEvent<FileReader>) => {
       const result = e.target.result as string;
       setImagePreview(result);
     };
@@ -35,14 +35,14 @@ const FileUploadUI: FC<FileUploadUIProps> = ({
         <input
           id="image-upload"
           name="image-upload"
-          style={{ display: "none" }}
+          style={{ display: 'none' }}
           type="file"
           accept="image/*"
           onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
             handleOnAddImage(e)
           }
         />
-        <Box sx={{ display: "flex", mt: 2 }}>
+        <Box sx={{ display: 'flex', mt: 2 }}>
           <Button variant="outlined" component="span">
             Choose Image
           </Button>
