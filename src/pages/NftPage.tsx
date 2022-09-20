@@ -137,7 +137,7 @@ const NftPage = () => {
         },
       );
     } else {
-      const mint = await Metaplex.mint(
+      const mint = await MetaplexPhantom.mint(
         {
           filePath: fileBuffer!,
           name: data.name,
