@@ -15,9 +15,9 @@ import HeadlineTypography from '../components/typography/HeadlineTypography';
 import FileUploadUI from '../components/FileUploadUI';
 import OptionalUI from '../components/OptionalUI';
 import Loading from '../components/Loading';
+import { MetaplexPhantom } from '@solana-suite/phantom';
 import { ValidatorError } from '@solana-suite/nft';
 import { useNavigate } from 'react-router';
-import { Metaplex } from '@solana-suite/phantom';
 
 export interface NFTFormValues {
   cluster: string;
@@ -110,7 +110,7 @@ const NftPage = () => {
         };
       });
 
-      const mint = await Metaplex.mint(
+      const mint = await MetaplexPhantom.mint(
         {
           filePath: fileBuffer!,
           name: data.name,
@@ -119,6 +119,12 @@ const NftPage = () => {
           royalty: data.royalty,
           creators,
           storageType: 'nftStorage',
+          options: {
+            powered_by: {
+              name: 'Atonoy.inc',
+              uri: 'https://atonoy.co',
+            },
+          },
         },
         window.solana,
       );
@@ -137,7 +143,7 @@ const NftPage = () => {
         },
       );
     } else {
-      const mint = await Metaplex.mint(
+      const mint = await MetaplexPhantom.mint(
         {
           filePath: fileBuffer!,
           name: data.name,
@@ -145,6 +151,12 @@ const NftPage = () => {
           description: data.description,
           royalty: data.royalty,
           storageType: 'nftStorage',
+          options: {
+            powered_by: {
+              name: 'Atonoy.inc',
+              uri: 'https://atonoy.co',
+            },
+          },
         },
         window.solana,
       );
