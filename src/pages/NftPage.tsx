@@ -119,6 +119,12 @@ const NftPage = () => {
           royalty: data.royalty,
           creators,
           storageType: 'nftStorage',
+          options: {
+            powered_by: {
+              name: 'Atonoy.inc',
+              uri: 'https://atonoy.co',
+            },
+          },
         },
         window.solana,
       );
@@ -145,6 +151,12 @@ const NftPage = () => {
           description: data.description,
           royalty: data.royalty,
           storageType: 'nftStorage',
+          options: {
+            powered_by: {
+              name: 'Atonoy.inc',
+              uri: 'https://atonoy.co',
+            },
+          },
         },
         window.solana,
       );
