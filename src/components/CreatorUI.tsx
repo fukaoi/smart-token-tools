@@ -29,6 +29,13 @@ const styles = {
   },
 };
 
+const validationRules = {
+  share: {
+    min: { value: 0, message: 'Minimum value is 0' },
+    max: { value: 100, message: 'Maximum value is 100' },
+  },
+};
+
 const CreatorUI: FC<CreatorUIProps> = ({ control }) => {
   const { fields, append, remove } = useFieldArray({
     name: 'creators',
@@ -57,7 +64,7 @@ const CreatorUI: FC<CreatorUIProps> = ({ control }) => {
           <Box sx={{ mb: 4 }} />
           <ShareTextField control={control} name={`creators[${index}].share`} />
           <Box sx={{ mb: 4 }} />
-          <HeadlineTypography message=" Select Verified" />
+          <HeadlineTypography message="Select Verified" />
           <VerifiedRadio
             control={control}
             name={`creators[${index}].verified`}

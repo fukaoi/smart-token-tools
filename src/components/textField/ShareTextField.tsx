@@ -4,7 +4,7 @@ import { useController, UseControllerProps } from 'react-hook-form';
 import DescriptionTypography from '../typography/DescriptionTypography';
 
 const ShareTextField = (props: UseControllerProps<NFTFormValues>) => {
-  const { field } = useController(props);
+  const { field, fieldState } = useController(props);
   const description = `
   Set Share. What percentage of royalties to get
   `;
@@ -21,7 +21,8 @@ const ShareTextField = (props: UseControllerProps<NFTFormValues>) => {
           placeholder="1, 2, 3,,,"
           variant="outlined"
           size="small"
-          error={false}
+          error={fieldState.invalid}
+          helperText={fieldState.error?.message}
           {...field}
         />
       </Box>

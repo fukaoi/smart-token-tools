@@ -30,7 +30,6 @@ export interface NFTFormValues {
   address?: string;
   verified?: boolean;
   share?: number;
-  collection?: string;
   control?: Control<NFTFormValues>;
   field?: ControllerRenderProps;
   optional: any;
@@ -70,13 +69,13 @@ const NftPage = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const { handleSubmit, control } = useForm<NFTFormValues>({
+    mode: 'onSubmit',
     defaultValues: {
       cluster: 'devnet',
       name: '',
       symbol: '',
       description: '',
       royalty: 0,
-      collection: 'Powered by ATONOY Co, Ltd',
       creators: [
         {
           address: '',
@@ -87,9 +86,22 @@ const NftPage = () => {
     },
   });
 
+  const validationRules = {
+    name: {
+      required: 'Please enter the required field',
+      maxLength: { value: 32, message: 'Max Length Is 32 Characters' },
+    },
+    symbol: {
+      required: 'Please enter the required field',
+      maxLength: { value: 10, message: 'Max Length Is 10 Characters' },
+    },
+    description: {
+      required: 'Please enter the required field',
+    },
+  };
+
   // H52snmJVMqJTcmaJGTdkvWTKYzThnvML2xUBC8n1inC6
   // 8Prqdyz6e3E1uwEsZuwZ5iPH8zSVcjcragg86cxno5xf
-  // https://solscan.io/account/6YPNupVdmmgjERZkUitht7bH1GWefReJQDJH3v1vpaSG?cluster=devnet
 
   const handleClose = () => {
     setErrorModal({ open: false, message: '' });
@@ -97,12 +109,11 @@ const NftPage = () => {
   };
 
   const onSubmit = async (data: any) => {
-    // setBtnState({ title: 'Processing', isDisabled: true });
-    // setIsLoading(true);
+    setBtnState({ title: 'Processing', isDisabled: true });
+    setIsLoading(true);
 
     try {
       console.log('data', data);
-      console.log('data.creator', data.creators[0]);
 
       if (data.creators[0].address !== '') {
         const creators = data.creators.map(item => {
@@ -130,6 +141,7 @@ const NftPage = () => {
               },
             },
           },
+          data.cluster,
           window.solana,
         );
 
@@ -166,6 +178,7 @@ const NftPage = () => {
               },
             },
           },
+          data.cluster,
           window.solana,
         );
 
@@ -185,12 +198,14 @@ const NftPage = () => {
 
         const res = mint.unwrap();
 
-        // setIsLoading(false);
+        setIsLoading(false);
 
         navigate('/nftcomplete', { state: { res } });
       }
     } catch (error) {
       console.log(error);
+      setBtnState({ title: 'Submit', isDisabled: false });
+      setIsLoading(false);
     }
   };
 
@@ -210,11 +225,23 @@ const NftPage = () => {
             <AddressTypography address={walletAddress} />
             <ClusterRadio control={control} name="cluster" />
             <Box sx={{ mb: 4 }} />
-            <NftNameTextField control={control} name="name" />
+            <NftNameTextField
+              control={control}
+              name="name"
+              rules={validationRules.name}
+            />
             <Box sx={{ mb: 4 }} />
-            <SymbolTextField control={control} name="symbol" />
+            <SymbolTextField
+              control={control}
+              name="symbol"
+              rules={validationRules.symbol}
+            />
             <Box sx={{ mb: 4 }} />
-            <DescriptionTextField control={control} name="description" />
+            <DescriptionTextField
+              control={control}
+              name="description"
+              rules={validationRules.description}
+            />
             <Box sx={{ mb: 4 }} />
             <HeadlineTypography message="Image Upload" />
             <Box sx={{ mb: 4 }} />

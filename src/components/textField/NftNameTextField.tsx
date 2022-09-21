@@ -4,7 +4,7 @@ import { NFTFormValues } from '../../pages/NftPage';
 import { useController, UseControllerProps } from 'react-hook-form';
 
 const NftNameTextField = (props: UseControllerProps<NFTFormValues>) => {
-  const { field } = useController(props);
+  const { field, fieldState } = useController(props);
   return (
     <>
       <HeadlineTypography message="Input NFT Name" />
@@ -12,12 +12,12 @@ const NftNameTextField = (props: UseControllerProps<NFTFormValues>) => {
         <TextField
           type="text"
           id="outlined-basic"
-          label="input nft name"
+          label="Input NFT Name"
           placeholder="NFT NAME..."
           variant="outlined"
           size="small"
-          required
-          error={false}
+          error={fieldState.invalid}
+          helperText={fieldState.error?.message}
           {...field}
         />
       </Box>

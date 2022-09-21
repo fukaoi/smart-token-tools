@@ -9,6 +9,7 @@ import TotalSupplyTextField from '../components/textField/TotalSupplyTextField';
 import DecimalsTextField from '../components/textField/DecimalsTextField';
 import TokenKeyTextField from '../components/textField/TokenKeyTextField';
 import SubmitButton from '../components/button/SubmitButton';
+import Loading from '../components/Loading';
 import { useNavigate } from 'react-router-dom';
 import { useSessionCheck } from '../hooks/SessionCheck';
 import ErrorModal from '../components/modal/ErrorModal';
@@ -63,6 +64,7 @@ const styles = {
 const TokenPage = () => {
   const navigate = useNavigate();
   const [walletAddress, setWalletAddress] = useState<string>('');
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [btnState, setBtnState] = useState({
     title: 'Confirm',
     isDisabled: false,
@@ -84,11 +86,15 @@ const TokenPage = () => {
   };
 
   const onSubmit = async (data: FormValues) => {
+    console.log('data', data);
     setBtnState({ title: 'Processing', isDisabled: true });
+    setIsLoading(true);
+
     let tokenId = '';
     if (data.issueType === 'new') {
       const res = await mint(walletAddress, data);
       if (res.isErr) {
+        setIsLoading(false);
         setErrorModal({ open: true, message: res.error.message });
       } else {
         tokenId = res.value;
@@ -96,11 +102,13 @@ const TokenPage = () => {
     } else if (data.issueType === 'add' && data.tokenKey) {
       const res = await addMinting(data.tokenKey, walletAddress, data);
       if (res.isErr) {
+        setIsLoading(false);
         setErrorModal({ open: true, message: res.error.message });
       } else {
         tokenId = res.value;
       }
     } else {
+      setIsLoading(false);
       setErrorModal({ open: true, message: 'Error no match issue type' });
     }
     tokenId.length !== 0 && navigate('/complete', { state: { tokenId } });
@@ -144,6 +152,7 @@ const TokenPage = () => {
         onClose={handleClose}
         message={errorModal.message}
       />
+      <Loading isLoading={isLoading} />
     </>
   );
 };
