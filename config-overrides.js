@@ -13,7 +13,7 @@ module.exports = function override(webpackConfig) {
 
   // Polyfill Buffer.
   webpackConfig.plugins.push(
-    new webpack.ProvidePlugin({ Buffer: ['buffer', 'Buffer'] })
+    new webpack.ProvidePlugin({ Buffer: ['buffer', 'Buffer'] }),
   );
 
   const fallback = webpackConfig.resolve.fallback || {};

@@ -89,6 +89,7 @@ const NftPage = () => {
 
   // H52snmJVMqJTcmaJGTdkvWTKYzThnvML2xUBC8n1inC6
   // 8Prqdyz6e3E1uwEsZuwZ5iPH8zSVcjcragg86cxno5xf
+  // https://solscan.io/account/6YPNupVdmmgjERZkUitht7bH1GWefReJQDJH3v1vpaSG?cluster=devnet
 
   const handleClose = () => {
     setErrorModal({ open: false, message: '' });
@@ -98,76 +99,98 @@ const NftPage = () => {
   const onSubmit = async (data: any) => {
     // setBtnState({ title: 'Processing', isDisabled: true });
     // setIsLoading(true);
-    console.log('data', data);
-    console.log('data.creator', data.creators[0]);
-    if (data.creators[0].address !== '') {
-      const creators = data.creators.map(item => {
-        const address = item.address.toPublicKey();
-        return {
-          address,
-          share: item.share,
-          verified: item.verified,
-        };
-      });
 
-      const mint = await MetaplexPhantom.mint(
-        {
-          filePath: fileBuffer!,
-          name: data.name,
-          symbol: data.symbol,
-          description: data.description,
-          royalty: data.royalty,
-          creators,
-          storageType: 'nftStorage',
-        },
-        window.solana,
-      );
+    try {
+      console.log('data', data);
+      console.log('data.creator', data.creators[0]);
 
-      mint.match(
-        (ok: any) => {
-          console.log('mint: ', ok);
-        },
-        (err: Error) => {
-          console.error('err:', err);
-          if ('details' in err) {
-            console.error((err as ValidatorError).details);
-          }
-          setIsLoading(false);
-          setErrorModal({ open: true, message: err.message });
-        },
-      );
-    } else {
-      const mint = await MetaplexPhantom.mint(
-        {
-          filePath: fileBuffer!,
-          name: data.name,
-          symbol: data.symbol,
-          description: data.description,
-          royalty: data.royalty,
-          storageType: 'nftStorage',
-        },
-        window.solana,
-      );
+      if (data.creators[0].address !== '') {
+        const creators = data.creators.map(item => {
+          const address = item.address.toPublicKey();
+          return {
+            address,
+            share: item.share,
+            verified: item.verified,
+          };
+        });
 
-      mint.match(
-        (ok: any) => {
-          console.log('mint: ', ok);
-        },
-        (err: Error) => {
-          console.error('err:', err);
-          if ('details' in err) {
-            console.error((err as ValidatorError).details);
-          }
-          setIsLoading(false);
-          setErrorModal({ open: true, message: err.message });
-        },
-      );
+        const mint = await MetaplexPhantom.mint(
+          {
+            filePath: fileBuffer!,
+            name: data.name,
+            symbol: data.symbol,
+            description: data.description,
+            royalty: data.royalty,
+            creators,
+            storageType: 'nftStorage',
+            options: {
+              powered_by: {
+                name: 'Atonoy.inc',
+                uri: 'https://atonoy.co',
+              },
+            },
+          },
+          window.solana,
+        );
 
-      const res = mint.unwrap();
+        mint.match(
+          (ok: any) => {
+            console.log('mint: ', ok);
+          },
+          (err: Error) => {
+            console.error('err:', err);
+            if ('details' in err) {
+              console.error((err as ValidatorError).details);
+            }
+            setIsLoading(false);
+            setErrorModal({ open: true, message: err.message });
+          },
+        );
 
-      // setIsLoading(false);
+        const res = mint.unwrap();
 
-      navigate('/nftcomplete', { state: { res } });
+        navigate('/nftcomplete', { state: { res } });
+      } else {
+        const mint = await MetaplexPhantom.mint(
+          {
+            filePath: fileBuffer!,
+            name: data.name,
+            symbol: data.symbol,
+            description: data.description,
+            royalty: data.royalty,
+            storageType: 'nftStorage',
+            options: {
+              powered_by: {
+                name: 'Atonoy.inc',
+                uri: 'https://atonoy.co',
+              },
+            },
+          },
+          window.solana,
+        );
+
+        mint.match(
+          (ok: any) => {
+            console.log('mint: ', ok);
+          },
+          (err: Error) => {
+            console.error('err:', err);
+            if ('details' in err) {
+              console.error((err as ValidatorError).details);
+            }
+            setIsLoading(false);
+            setErrorModal({ open: true, message: err.message });
+          },
+        );
+
+        const res = mint.unwrap();
+
+        // setIsLoading(false);
+
+        navigate('/nftcomplete', { state: { res } });
+      }
+    } catch (error) {
+      console.log(error);
     }
   };
 
