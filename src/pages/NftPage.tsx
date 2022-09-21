@@ -100,9 +100,6 @@ const NftPage = () => {
     },
   };
 
-  // H52snmJVMqJTcmaJGTdkvWTKYzThnvML2xUBC8n1inC6
-  // 8Prqdyz6e3E1uwEsZuwZ5iPH8zSVcjcragg86cxno5xf
-
   const handleClose = () => {
     setErrorModal({ open: false, message: '' });
     setBtnState({ title: 'Confirm', isDisabled: false });
@@ -111,6 +108,10 @@ const NftPage = () => {
   const onSubmit = async (data: any) => {
     setBtnState({ title: 'Processing', isDisabled: true });
     setIsLoading(true);
+
+    if (!fileBuffer) {
+      setErrorModal({ open: true, message: 'Please Image Upload' });
+    }
 
     try {
       console.log('data', data);
@@ -190,6 +191,7 @@ const NftPage = () => {
             console.error('err:', err);
             if ('details' in err) {
               console.error((err as ValidatorError).details);
+              setErrorModal({ open: true, message: err.details });
             }
             setIsLoading(false);
             setErrorModal({ open: true, message: err.message });

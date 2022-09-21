@@ -62,7 +62,11 @@ const CreatorUI: FC<CreatorUIProps> = ({ control }) => {
             name={`creators[${index}].address`}
           />
           <Box sx={{ mb: 4 }} />
-          <ShareTextField control={control} name={`creators[${index}].share`} />
+          <ShareTextField
+            control={control}
+            name={`creators[${index}].share`}
+            rules={validationRules.share}
+          />
           <Box sx={{ mb: 4 }} />
           <HeadlineTypography message="Select Verified" />
           <VerifiedRadio
