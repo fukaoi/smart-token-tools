@@ -135,7 +135,7 @@ const NftPage = () => {
       console.log(error);
       setBtnState({ title: 'Submit', isDisabled: false });
       setIsLoading(false);
-      setErrorModal({ open: true, message: error });
+      setErrorModal({ open: true, message: 'Please try later again' });
     }
   };
 

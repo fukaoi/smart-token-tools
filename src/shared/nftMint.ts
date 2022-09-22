@@ -3,7 +3,7 @@ import { ValidatorError } from '@solana-suite/nft';
 
 export const addPublicKey = (creators: any) => {
   const res = creators.map(
-    (item: { address: string; share: any; verified: any }) => {
+    (item: { address: string; share: number; verified: boolean }) => {
       const address = item.address.toPublicKey();
       return {
         address,
@@ -16,7 +16,7 @@ export const addPublicKey = (creators: any) => {
 };
 
 export const creatorMint = async (
-  filePath: any,
+  filePath: ArrayBuffer,
   name: string,
   symbol: string,
   description: string,
@@ -60,7 +60,7 @@ export const creatorMint = async (
 };
 
 export const noCreatorMint = async (
-  filePath: any,
+  filePath: ArrayBuffer,
   name: string,
   symbol: string,
   description: string,
