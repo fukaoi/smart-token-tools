@@ -41,7 +41,7 @@ const styles = {
 
 const NftCompletePage = () => {
   const { state } = useLocation() as NavigateOptions;
-  const nftMint = state.res as string;
+  const nftMint = state.mint as string;
 
   return (
     <>

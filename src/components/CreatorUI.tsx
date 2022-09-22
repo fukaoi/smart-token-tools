@@ -6,16 +6,15 @@ import {
   useFieldArray,
   UseFormRegister,
 } from 'react-hook-form';
-import WalletAddressTextField from './textField/WalletAddressTextField';
-import VerifiedRadio from './radio/VerifiedRadio';
-import ShareTextField from './textField/ShareTextField';
-import HeadlineTypography from './typography/HeadlineTypography';
-import AddCreatorButton from './button/AddCreatorButton';
 import { Divider } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
-import { validationRules } from '../shared/validation';
-
+import HeadlineTypography from './typography/HeadlineTypography';
+import WalletAddressTextField from './textField/WalletAddressTextField';
+import ShareTextField from './textField/ShareTextField';
+import VerifiedRadio from './radio/VerifiedRadio';
+import AddCreatorButton from './button/AddCreatorButton';
 import { NFTFormValues } from '../pages/NftPage';
+import { validationRules } from '../shared/validation';
 
 export type CreatorUIProps = {
   field?: ControllerRenderProps;

@@ -1,11 +1,11 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router';
 import { Paper, Box, FormControl } from '@mui/material';
 import { Control, ControllerRenderProps, useForm } from 'react-hook-form';
 import TitleTypography from '../components/typography/TitleTypography';
 import AddressTypography from '../components/typography/AddressTypography';
 import ClusterRadio from '../components/radio/ClusterRadio';
 import SubmitButton from '../components/button/SubmitButton';
-import { useSessionCheck } from '../hooks/SessionCheck';
 import ErrorModal from '../components/modal/ErrorModal';
 import NftNameTextField from '../components/textField/NftNameTextField';
 import SymbolTextField from '../components/textField/SymbolTextField';
@@ -15,9 +15,10 @@ import HeadlineTypography from '../components/typography/HeadlineTypography';
 import FileUploadUI from '../components/FileUploadUI';
 import OptionalUI from '../components/OptionalUI';
 import Loading from '../components/Loading';
-import { ValidatorError } from '@solana-suite/nft';
-import { useNavigate } from 'react-router';
+import { useSessionCheck } from '../hooks/SessionCheck';
 import { validationRules } from '../shared/validation';
+import { addPublicKey, creatorMint, noCreatorMint } from '../shared/nftMint';
+import { ValidatorError } from '@solana-suite/nft';
 import { MetaplexPhantom } from '@solana-suite/phantom';
 
 export interface NFTFormValues {
@@ -28,9 +29,6 @@ export interface NFTFormValues {
   imagePreview?: string;
   creators?: Creator[];
   royalty?: number;
-  address?: string;
-  verified?: boolean;
-  share?: number;
   control?: Control<NFTFormValues>;
   field?: ControllerRenderProps;
   optional: any;
@@ -80,8 +78,8 @@ const NftPage = () => {
       creators: [
         {
           address: '',
-          share: 0,
           verified: false,
+          share: 0,
         },
       ],
     },
@@ -104,92 +102,36 @@ const NftPage = () => {
       console.log('data', data);
 
       if (data.creators[0].address !== '') {
-        const creators = data.creators.map(item => {
-          const address = item.address.toPublicKey();
-          return {
-            address,
-            share: item.share,
-            verified: item.verified,
-          };
-        });
+        const creators = addPublicKey(data.creators);
 
-        const mint = await MetaplexPhantom.mint(
-          {
-            filePath: fileBuffer!,
-            name: data.name,
-            symbol: data.symbol,
-            description: data.description,
-            royalty: data.royalty,
-            creators,
-            storageType: 'nftStorage',
-            options: {
-              powered_by: {
-                name: 'Atonoy.inc',
-                uri: 'https://atonoy.co',
-              },
-            },
-          },
+        const mint = await creatorMint(
+          fileBuffer!,
+          data.name,
+          data.symbol,
+          data.description,
+          data.royalty,
+          creators,
           data.cluster,
-          window.solana,
         );
 
-        mint.match(
-          (ok: any) => {
-            console.log('mint: ', ok);
-          },
-          (err: Error) => {
-            console.error('err:', err);
-            if ('details' in err) {
-              console.error((err as ValidatorError).details);
-            }
-            setIsLoading(false);
-            setErrorModal({ open: true, message: err.message });
-          },
-        );
-
-        const res = mint.unwrap();
-
-        navigate('/nftcomplete', { state: { res } });
-      } else {
-        const mint = await MetaplexPhantom.mint(
-          {
-            filePath: fileBuffer!,
-            name: data.name,
-            symbol: data.symbol,
-            description: data.description,
-            royalty: data.royalty,
-            storageType: 'nftStorage',
-            options: {
-              powered_by: {
-                name: 'Atonoy.inc',
-                uri: 'https://atonoy.co',
-              },
-            },
-          },
-          data.cluster,
-          window.solana,
-        );
-
-        mint.match(
-          (ok: any) => {
-            console.log('mint: ', ok);
-          },
-          (err: Error) => {
-            console.error('err:', err);
-            if ('details' in err) {
-              console.error((err as ValidatorError).details);
-              setErrorModal({ open: true, message: err.details });
-            }
-            setIsLoading(false);
-            setErrorModal({ open: true, message: err.message });
-          },
-        );
-
-        const res = mint.unwrap();
-
+        setBtnState({ title: 'Submit', isDisabled: false });
         setIsLoading(false);
 
-        navigate('/nftcomplete', { state: { res } });
+        navigate('/nftcomplete', { state: { mint } });
+      } else {
+        const mint = await noCreatorMint(
+          fileBuffer!,
+          data.name,
+          data.symbol,
+          data.description,
+          data.royalty,
+          data.cluster,
+        );
+
+        setBtnState({ title: 'Submit', isDisabled: false });
+        setIsLoading(false);
+
+        navigate('/nftcomplete', { state: { mint } });
       }
     } catch (error) {
       console.log(error);
