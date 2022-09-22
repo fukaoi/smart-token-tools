@@ -3,25 +3,24 @@ import TopPage from './pages/TopPage';
 import backImage from './assets/background-image.jpg';
 import corpLogoImage from './assets/atonoy-logo.png';
 import logoImage from './assets/smt-logo.svg';
-import {Grid, Box, useMediaQuery} from '@mui/material';
-import {
-  Routes,
-  Route,
-  Link
-} from 'react-router-dom';
+import { Grid, Box, useMediaQuery } from '@mui/material';
+import { Routes, Route, Link } from 'react-router-dom';
 import NftPage from './pages/NftPage';
 import CompletePage from './pages/CompletePage';
+import NftCompletePage from './pages/NftCompletePage';
 import FaucetPage from './pages/FaucetPage';
-import {Device} from './shared/device';
+import { Device } from './shared/device';
 
 declare global {
-  interface Window {solana: any}
+  interface Window {
+    solana: any;
+  }
   interface NavigateOptions {
     state: {
-      warning?: string,
-      error?: string,
-      tokenId?: string
-    }
+      warning?: string;
+      error?: string;
+      tokenId?: string;
+    };
   }
 }
 
@@ -33,7 +32,7 @@ const styles = {
     backgroundImage: `url(${backImage})`,
     backgroundPosition: 'ceter',
     minHeight: '100vh',
-    maxHeight: '200vh',
+    maxHeight: '100%',
     width: '100%',
     alignItems: 'ceter',
     fontSize: 'calc(10px + 2vmin)',
@@ -69,7 +68,7 @@ const styles = {
   logoImage: {
     alignItems: 'center',
     marginBottom: '0',
-  }
+  },
 };
 
 const App = () => {
@@ -89,52 +88,64 @@ const App = () => {
   return (
     <Box sx={styles.root}>
       <Box sx={styles.navi}>
-        <Grid container
-          alignItems='center'
-          justifyContent='center'
+        <Grid
+          container
+          alignItems="center"
+          justifyContent="center"
           sx={styles.grid}
         >
           <Grid item xs={3}>
             <Box sx={styles.logoImage}>
-              <a href='/'><img src={logoImage} alt='Smart token tool' /></a>
+              <a href="/">
+                <img src={logoImage} alt="Smart token tool" />
+              </a>
             </Box>
           </Grid>
           <Grid item xs={6}>
-            {!Device.isSmartPhone() &&
+            {!Device.isSmartPhone() && (
               <>
                 <Box style={styles.naviLink}>
-                  <Link to='/token' style={styles.link}>Token</Link>
+                  <Link to="/token" style={styles.link}>
+                    Token
+                  </Link>
                 </Box>
                 <Box style={styles.naviLink}>
-                  <Link to='/nft' style={styles.link}>NFT</Link>
+                  <Link to="/nft" style={styles.link}>
+                    NFT
+                  </Link>
                 </Box>
                 <Box style={styles.naviLink}>
-                  <Link to='/faucet' style={styles.link}>Faucet</Link>
+                  <Link to="/faucet" style={styles.link}>
+                    Faucet
+                  </Link>
                 </Box>
               </>
-            }
+            )}
           </Grid>
           <Grid item xs={3}></Grid>
         </Grid>
         <Routes>
-          <Route path='/' element={<TopPage />} />
-          <Route path='/token' element={<TokenPage />} />
-          <Route path='/nft' element={<NftPage />} />
-          <Route path='/faucet' element={<FaucetPage />} />
-          <Route path='/complete' element={<CompletePage />} />
+          <Route path="/" element={<TopPage />} />
+          <Route path="/token" element={<TokenPage />} />
+          <Route path="/nft" element={<NftPage />} />
+          <Route path="/faucet" element={<FaucetPage />} />
+          <Route path="/complete" element={<CompletePage />} />
+          <Route path="/nftcomplete" element={<NftCompletePage />} />
         </Routes>
       </Box>
-      {
-        match1100
-        &&
+      {match1100 && (
         <Box sx={styles.footer}>
-          <a href='https://atonoy.co' target='_blank' rel='noreferrer'>
-            <img src={corpLogoImage} style={styles.corpLogoImage} alt='Atonoy' />
+          <a href="https://atonoy.co" target="_blank" rel="noreferrer">
+            <img
+              src={corpLogoImage}
+              style={styles.corpLogoImage}
+              alt="Atonoy"
+            />
           </a>
         </Box>
-      }
+      )}
     </Box>
   );
-}
+};
 
 export default App;
