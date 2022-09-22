@@ -12,7 +12,6 @@ import HeadlineTypography from '../typography/HeadlineTypography';
 import WalletAddressTextField from '../textField/WalletAddressTextField';
 import ShareTextField from '../textField/ShareTextField';
 import VerifiedRadio from '../radio/VerifiedRadio';
-import AddCreatorButton from '../button/AddCreatorButton';
 import { NFTFormValues } from '../../pages/NftPage';
 import { validationRules } from '../../shared/validation';
 
@@ -29,20 +28,7 @@ const styles = {
   },
 };
 
-const CreatorUI: FC<CreatorUIProps> = ({ control }) => {
-  const { fields, append, remove } = useFieldArray({
-    name: 'creators',
-    control,
-  });
-
-  const handleAddButton = () => {
-    append({
-      address: '',
-      share: 0,
-      verified: false,
-    });
-  };
-
+const CreatorUI: FC<CreatorUIProps> = ({ control, fields, remove }) => {
   return (
     <>
       {fields.map((field, index) => (
@@ -77,7 +63,6 @@ const CreatorUI: FC<CreatorUIProps> = ({ control }) => {
           )}
           <Box sx={{ mb: 3 }} />
           <Divider />
-          <AddCreatorButton callbackFunc={handleAddButton} />
         </div>
       ))}
     </>
