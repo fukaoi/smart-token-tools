@@ -1,17 +1,12 @@
 import { TextField, Box } from '@mui/material';
 import { NFTFormValues } from '../../pages/NftPage';
 import { useController, UseControllerProps } from 'react-hook-form';
-import DescriptionTypography from '../typography/DescriptionTypography';
 
 const ShareTextField = (props: UseControllerProps<NFTFormValues>) => {
   const { field, fieldState } = useController(props);
-  const description = `
-  Set Share. What percentage of royalties to get
-  `;
 
   return (
     <>
-      {/* <DescriptionTypography message={description} /> */}
       <Box sx={{ display: 'flex', mt: 2 }}>
         <TextField
           type="text"

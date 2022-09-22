@@ -1,10 +1,8 @@
-import Radio from "@mui/material/Radio";
-import RadioGroup from "@mui/material/RadioGroup";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import HeadlineTypography from "../typography/HeadlineTypography";
-import { useController, UseControllerProps } from "react-hook-form";
-import { FormValues } from "../../pages/TokenPage";
-import { NFTFormValues } from "../../pages/NftPage";
+import Radio from '@mui/material/Radio';
+import RadioGroup from '@mui/material/RadioGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import HeadlineTypography from '../typography/HeadlineTypography';
+import { useController, UseControllerProps } from 'react-hook-form';
 
 const ClusterRadio = (props: UseControllerProps<any>) => {
   const { field } = useController(props);
