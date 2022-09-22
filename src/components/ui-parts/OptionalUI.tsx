@@ -5,10 +5,10 @@ import {
   ControllerRenderProps,
   UseFormRegister,
 } from 'react-hook-form';
-import RoyaltyTextField from './textField/RoyaltyTextField';
+import RoyaltyTextField from '../textField/RoyaltyTextField';
 import CreatorUI from './CreatorUI';
-import { validationRules } from '../shared/validation';
-import { NFTFormValues } from '../pages/NftPage';
+import { validationRules } from '../../shared/validation';
+import { NFTFormValues } from '../../pages/NftPage';
 
 export type OptionalUIProps = {
   isShow: boolean;

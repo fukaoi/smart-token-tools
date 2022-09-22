@@ -41,7 +41,7 @@ const styles = {
 
 const NftCompletePage = () => {
   const { state } = useLocation() as NavigateOptions;
-  const nftMint = state.mint as string;
+  const nftId = state.mint as string;
 
   return (
     <>
@@ -56,8 +56,8 @@ const NftCompletePage = () => {
           <Typography component="div" fontSize="26px" sx={{ mt: 1, mb: 3 }}>
             Your NFT issuing was success!!
           </Typography>
-          <MintedInfoTypography message={nftMint} />
-          <Link sx={styles.link} target="_blank" href={nftMint.toExplorerUrl()}>
+          <MintedInfoTypography message={nftId} />
+          <Link sx={styles.link} target="_blank" href={nftId.toExplorerUrl()}>
             <Button size="large">See your NFT info at Explorer</Button>
           </Link>
         </Paper>

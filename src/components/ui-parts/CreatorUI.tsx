@@ -8,13 +8,13 @@ import {
 } from 'react-hook-form';
 import { Divider } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
-import HeadlineTypography from './typography/HeadlineTypography';
-import WalletAddressTextField from './textField/WalletAddressTextField';
-import ShareTextField from './textField/ShareTextField';
-import VerifiedRadio from './radio/VerifiedRadio';
-import AddCreatorButton from './button/AddCreatorButton';
-import { NFTFormValues } from '../pages/NftPage';
-import { validationRules } from '../shared/validation';
+import HeadlineTypography from '../typography/HeadlineTypography';
+import WalletAddressTextField from '../textField/WalletAddressTextField';
+import ShareTextField from '../textField/ShareTextField';
+import VerifiedRadio from '../radio/VerifiedRadio';
+import AddCreatorButton from '../button/AddCreatorButton';
+import { NFTFormValues } from '../../pages/NftPage';
+import { validationRules } from '../../shared/validation';
 
 export type CreatorUIProps = {
   field?: ControllerRenderProps;
