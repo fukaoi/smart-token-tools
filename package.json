@@ -1,6 +1,6 @@
 {
   "name": "smart-token-tool",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.7.1",
@@ -28,7 +28,9 @@
     "@types/react-dom": "^18.0.6",
     "@types/react-router-dom": "^5.3.3",
     "react-scripts": "^5.0.1",
-    "typescript": "^4.7.4"
+    "typescript": "^4.7.4",
+    "nth-check": "^2.0.1",
+    "jspdf": "^2.3.1"
   },
   "scripts": {
     "dev": "react-app-rewired start",
