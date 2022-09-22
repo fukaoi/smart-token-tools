@@ -116,7 +116,6 @@ const NftPage = () => {
 
         setBtnState({ title: 'Submit', isDisabled: false });
         setIsLoading(false);
-
         navigate('/nftcomplete', { state: { mint } });
       } else {
         const mint = await noCreatorMint(
@@ -130,13 +129,13 @@ const NftPage = () => {
 
         setBtnState({ title: 'Submit', isDisabled: false });
         setIsLoading(false);
-
         navigate('/nftcomplete', { state: { mint } });
       }
     } catch (error) {
       console.log(error);
       setBtnState({ title: 'Submit', isDisabled: false });
       setIsLoading(false);
+      setErrorModal({ open: true, message: error });
     }
   };
 
