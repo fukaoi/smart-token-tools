@@ -7,7 +7,7 @@ import {
 } from 'react-hook-form';
 import RoyaltyTextField from './textField/RoyaltyTextField';
 import CreatorUI from './CreatorUI';
-
+import { validationRules } from '../shared/validation';
 import { NFTFormValues } from '../pages/NftPage';
 
 export type OptionalUIProps = {
@@ -15,13 +15,6 @@ export type OptionalUIProps = {
   field?: ControllerRenderProps;
   register?: UseFormRegister<NFTFormValues>;
   control?: Control<NFTFormValues>;
-};
-
-const validationRules = {
-  royalty: {
-    min: { value: 0, message: 'Minimum value is 0' },
-    max: { value: 100, message: 'Maximum value is 100' },
-  },
 };
 
 const OptionalUI: FC<OptionalUIProps> = ({ isShow, control }) => {
@@ -35,7 +28,6 @@ const OptionalUI: FC<OptionalUIProps> = ({ isShow, control }) => {
       />
       <Box sx={{ mb: 4 }} />
       <CreatorUI {...{ control }} />
-
       <Box sx={{ mb: 4 }} />
     </>
   ) : null;

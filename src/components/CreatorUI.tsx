@@ -13,6 +13,7 @@ import HeadlineTypography from './typography/HeadlineTypography';
 import AddCreatorButton from './button/AddCreatorButton';
 import { Divider } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
+import { validationRules } from '../shared/validation';
 
 import { NFTFormValues } from '../pages/NftPage';
 
@@ -26,13 +27,6 @@ const styles = {
   rightButton: {
     cursor: 'pointer',
     paddingLeft: '80%',
-  },
-};
-
-const validationRules = {
-  share: {
-    min: { value: 0, message: 'Minimum value is 0' },
-    max: { value: 100, message: 'Maximum value is 100' },
   },
 };
 
@@ -56,7 +50,6 @@ const CreatorUI: FC<CreatorUIProps> = ({ control }) => {
         <div key={field.id}>
           <Box sx={{ mb: 4 }} />
           <HeadlineTypography message="Creator Info Input Form" />
-
           <WalletAddressTextField
             control={control}
             name={`creators[${index}].address`}

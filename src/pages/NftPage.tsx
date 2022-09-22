@@ -17,6 +17,7 @@ import OptionalUI from '../components/OptionalUI';
 import Loading from '../components/Loading';
 import { ValidatorError } from '@solana-suite/nft';
 import { useNavigate } from 'react-router';
+import { validationRules } from '../shared/validation';
 import { MetaplexPhantom } from '@solana-suite/phantom';
 
 export interface NFTFormValues {
@@ -85,20 +86,6 @@ const NftPage = () => {
       ],
     },
   });
-
-  const validationRules = {
-    name: {
-      required: 'Please enter the required field',
-      maxLength: { value: 32, message: 'Max Length Is 32 Characters' },
-    },
-    symbol: {
-      required: 'Please enter the required field',
-      maxLength: { value: 10, message: 'Max Length Is 10 Characters' },
-    },
-    description: {
-      required: 'Please enter the required field',
-    },
-  };
 
   const handleClose = () => {
     setErrorModal({ open: false, message: '' });
