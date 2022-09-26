@@ -21,7 +21,7 @@ export type OptionalUIProps = {
 
 const OptionalUI: FC<OptionalUIProps> = ({ isShow, control }) => {
   const { fields, append, remove } = useFieldArray({
-    name: 'creators',
+    name: `creators`,
     control,
   });
 

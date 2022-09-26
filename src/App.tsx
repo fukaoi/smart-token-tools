@@ -20,6 +20,7 @@ declare global {
       warning?: string;
       error?: string;
       tokenId?: string;
+      mint?: string;
     };
   }
 }
