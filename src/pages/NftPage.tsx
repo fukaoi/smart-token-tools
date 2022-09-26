@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router';
 import { Paper, Box, FormControl } from '@mui/material';
-import { Control, ControllerRenderProps, useForm } from 'react-hook-form';
+import { ControllerRenderProps, useForm } from 'react-hook-form';
 import TitleTypography from '../components/typography/TitleTypography';
 import AddressTypography from '../components/typography/AddressTypography';
 import ClusterRadio from '../components/radio/ClusterRadio';
@@ -18,8 +18,6 @@ import Loading from '../components/Loading';
 import { useSessionCheck } from '../hooks/SessionCheck';
 import { validationRules } from '../shared/validation';
 import { addPublicKey, creatorMint, noCreatorMint } from '../shared/nftMint';
-import { ValidatorError } from '@solana-suite/nft';
-import { MetaplexPhantom } from '@solana-suite/phantom';
 
 export interface NFTFormValues {
   cluster: string;
@@ -27,18 +25,19 @@ export interface NFTFormValues {
   symbol: string;
   description: string;
   imagePreview?: string;
-  creators?: Creator[];
+  creators: Creator[];
   royalty?: number;
-  control?: Control<NFTFormValues>;
+  control?: any;
   field?: ControllerRenderProps;
-  optional: any;
+  optional?: any;
+  name?: string;
 }
 
-export type Creator = {
+export interface Creator {
   address: string;
   verified: boolean;
   share: number;
-}[];
+}
 
 const styles = {
   root: {

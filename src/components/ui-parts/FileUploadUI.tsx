@@ -23,7 +23,7 @@ const FileUploadUI: FC<FileUploadUIProps> = ({
     file.arrayBuffer().then(setFileBuffer);
 
     reader.onload = (e: ProgressEvent<FileReader>) => {
-      const result = e.target.result as string;
+      const result = reader.result as unknown as string;
       setImagePreview(result);
     };
     reader.readAsDataURL(file);

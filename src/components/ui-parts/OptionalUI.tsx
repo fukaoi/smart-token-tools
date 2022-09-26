@@ -1,11 +1,6 @@
 import { Box } from '@mui/material';
 import { FC } from 'react';
-import {
-  Control,
-  ControllerRenderProps,
-  useFieldArray,
-  UseFormRegister,
-} from 'react-hook-form';
+import { Control, useFieldArray } from 'react-hook-form';
 import RoyaltyTextField from '../textField/RoyaltyTextField';
 import CreatorUI from './CreatorUI';
 import AddCreatorButton from '../button/AddCreatorButton';
@@ -14,14 +9,12 @@ import { validationRules } from '../../shared/validation';
 
 export type OptionalUIProps = {
   isShow: boolean;
-  field?: ControllerRenderProps;
-  register?: UseFormRegister<NFTFormValues>;
   control?: Control<NFTFormValues>;
 };
 
 const OptionalUI: FC<OptionalUIProps> = ({ isShow, control }) => {
   const { fields, append, remove } = useFieldArray({
-    name: 'creators',
+    name: `creators`,
     control,
   });
 
