@@ -46,6 +46,9 @@
       "react-app/jest"
     ]
   },
+  "overrides": {
+    "@metaplex-foundation/mpl-token-metadata": "2.2.4"
+  },
   "browserslist": {
     "production": [
       "chrome >= 67",
