@@ -54,7 +54,7 @@ const WellComeMessage = () => {
         component='div'
         fontSize='23px'
         fontWeight='500'
-      >LETS TOKEN ISSUE EASY AND QUICKLY
+      >LETS MINT EASY AND QUICKLY
       </Typography>
       <Typography
         component='div'
@@ -125,7 +125,7 @@ const TopPage = () => {
             </Typography>
             <Typography variant='body2' color='text.secondary'>
               SMT only allows connections to phantom wallet,
-              you must first install the phantom wallet extension on a phatom browser.
+              you must first install the phantom wallet extension on a phantom browser.
             </Typography>
           </CardContent>
           <CardActions sx={styles.cardAction}>
