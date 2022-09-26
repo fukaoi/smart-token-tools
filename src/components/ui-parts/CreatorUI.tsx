@@ -1,6 +1,6 @@
 import { Box } from '@mui/material';
 import { FC } from 'react';
-import { Control, UseFormRegister } from 'react-hook-form';
+import { Control } from 'react-hook-form';
 import { Divider } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import HeadlineTypography from '../typography/HeadlineTypography';
@@ -12,7 +12,6 @@ import { validationRules } from '../../shared/validation';
 
 export type CreatorUIProps = {
   fields?: any;
-  register?: UseFormRegister<NFTFormValues>;
   remove?: any;
   control?: Control<NFTFormValues>;
 };
