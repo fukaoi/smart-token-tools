@@ -175,7 +175,12 @@ const NftPage = () => {
             <HeadlineTypography message="Image Upload" />
             <Box sx={{ mb: 4 }} />
             <FileUploadUI
-              {...{ imagePreview, setImagePreview, setFileBuffer }}
+              {...{
+                imagePreview,
+                setErrorModal,
+                setImagePreview,
+                setFileBuffer,
+              }}
             />
             <Box sx={{ mb: 4 }} />
             <OptionalButton
