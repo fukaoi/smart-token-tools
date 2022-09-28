@@ -24,9 +24,7 @@ const FileUploadUI: FC<FileUploadUIProps> = ({
     const file = e.target.files[0];
     file.arrayBuffer().then(setFileBuffer);
 
-    console.log('file', file);
-    console.log('filesize', file.size);
-
+    // 100MB Image Size
     if (100000000 < file.size) {
       setErrorModal({ open: true, message: 'ERROR! Max Image size is 100MB' });
       return;
