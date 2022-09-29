@@ -107,7 +107,6 @@ const NftPage = () => {
           (sum: number, i: { share: number }) => sum + i.share,
           0,
         );
-        console.log('sumShare', sumShare);
 
         if (sumShare > 100) {
           setBtnState({ title: 'Submit', isDisabled: false });

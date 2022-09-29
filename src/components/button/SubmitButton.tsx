@@ -20,7 +20,7 @@ const SubmitButton: FC<{
 }> = ({ title, callbackFunc, isDisabled = false }) => {
   return (
     <StyledButton
-      sx={{ boxShadow: 24, border: 1, borderColor: 'grey.500' }}
+      // sx={{ boxShadow: 24, border: 1, borderColor: 'grey.500' }}
       disabled={isDisabled}
       type="submit"
       onClick={callbackFunc}

@@ -9,7 +9,7 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import PhantomMarkLogo from '../assets/phantom-logo-mark.png';
 import Button from '@mui/material/Button';
-import { Box, Link, Paper } from '@mui/material';
+import { Box, Link } from '@mui/material';
 import { Device } from '../shared/device';
 import UserPolicyCheckBox from '../components/checkbox/userPolicyCheckbox';
 
@@ -45,6 +45,9 @@ const styles = {
   link: {
     textDecoration: 'none',
   },
+  policyCard: {
+    width: 300,
+  },
   policyBox: {
     display: 'flex',
     justifyContent: 'center',
@@ -75,12 +78,13 @@ const TopPage = () => {
   let title = 'Getting start';
   const [btnState, setBtnState] = useState({
     title: title,
-    isDisabled: false,
+    isDisabled: true,
   });
   const [isChecked, setIsChecked] = useState(false);
 
   const toggleCheckbox = () => {
     setIsChecked(!isChecked);
+    setBtnState(prevState => ({ title, isDisabled: !prevState.isDisabled }));
   };
 
   // raise warning other page
@@ -92,8 +96,9 @@ const TopPage = () => {
 
   const handleClose = () => {
     setWarningModal({ open: false, message: '' });
-    setBtnState({ title, isDisabled: false });
+    setBtnState({ title, isDisabled: true });
   };
+
   const connectHandler = () => {
     let title = 'Processing';
     setBtnState({ title, isDisabled: true });
@@ -140,18 +145,21 @@ const TopPage = () => {
       </Box>
 
       <Box style={styles.policyBox}>
-        <Paper sx={{ p: 1 }}>
-          <UserPolicyCheckBox callbackFunc={toggleCheckbox} />
-        </Paper>
+        <Card sx={styles.policyCard}>
+          <UserPolicyCheckBox
+            callbackFunc={toggleCheckbox}
+            isChecked={isChecked}
+          />
+          <Box style={styles.submit}>
+            <SubmitButton
+              isDisabled={btnState.isDisabled}
+              title={btnState.title}
+              callbackFunc={connectHandler}
+            />
+          </Box>
+        </Card>
       </Box>
 
-      <Box style={styles.submit}>
-        <SubmitButton
-          isDisabled={btnState.isDisabled}
-          title={btnState.title}
-          callbackFunc={connectHandler}
-        />
-      </Box>
       <WarningModal
         open={warningModal.open}
         onClose={handleClose}

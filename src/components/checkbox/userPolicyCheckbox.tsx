@@ -1,23 +1,37 @@
 import { FC } from 'react';
 import Checkbox from '@mui/material/Checkbox';
-import { FormControlLabel, FormGroup } from '@mui/material';
+import { FormControlLabel, FormGroup, Link } from '@mui/material';
 
 const UserPolicyCheckBox: FC<{
   callbackFunc?: (event?: any) => void;
+  isChecked: boolean;
 }> = ({ callbackFunc }) => {
   return (
     <>
-      <FormGroup>
-        <a style={{ fontSize: '15px' }} href="https://www.google.com/">
-          外部リンクここ
-        </a>
-        <FormControlLabel
-          value="agree"
-          control={<Checkbox />}
-          label="agree with the terms"
-          labelPlacement="start"
-        />
-      </FormGroup>
+      <div style={{ position: 'relative', top: '30px' }}>
+        <FormGroup>
+          <FormControlLabel
+            value="agree"
+            onChange={callbackFunc}
+            control={<Checkbox />}
+            label={
+              <p style={{ fontSize: '12px' }}>
+                I agree to the
+                <Link
+                  style={{ marginLeft: '5px' }}
+                  onClick={e => {
+                    e.preventDefault();
+                    alert('link clicked!');
+                  }}
+                >
+                  terms & conditions
+                </Link>
+              </p>
+            }
+            labelPlacement="end"
+          />
+        </FormGroup>
+      </div>
     </>
   );
 };
