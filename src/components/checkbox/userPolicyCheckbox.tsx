@@ -1,6 +1,7 @@
 import { FC } from 'react';
 import Checkbox from '@mui/material/Checkbox';
 import { FormControlLabel, FormGroup, Link } from '@mui/material';
+import OpenInNewIcon from '@mui/icons-material/OpenInNew';
 
 const UserPolicyCheckBox: FC<{
   callbackFunc?: (event?: any) => void;
@@ -13,18 +14,27 @@ const UserPolicyCheckBox: FC<{
           <FormControlLabel
             value="agree"
             onChange={callbackFunc}
-            control={<Checkbox />}
+            control={
+              <Checkbox
+                color="primary"
+                style={{
+                  color: 'white',
+                }}
+              />
+            }
             label={
-              <p style={{ fontSize: '12px' }}>
+              <p style={{ fontSize: '14px', fontWeight: 'bold' }}>
                 I agree to the
                 <Link
-                  style={{ marginLeft: '5px' }}
+                  target="_blank"
+                  color="inherit"
+                  style={{ marginLeft: '5px', borderBottom: '15px ,#87cef' }}
                   onClick={e => {
                     e.preventDefault();
-                    alert('link clicked!');
                   }}
                 >
                   terms & conditions
+                  <OpenInNewIcon style={{ position: 'relative', top: '5px' }} />
                 </Link>
               </p>
             }

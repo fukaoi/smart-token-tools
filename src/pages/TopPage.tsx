@@ -145,7 +145,7 @@ const TopPage = () => {
       </Box>
 
       <Box style={styles.policyBox}>
-        <Card sx={styles.policyCard}>
+        <Box sx={styles.policyCard}>
           <UserPolicyCheckBox
             callbackFunc={toggleCheckbox}
             isChecked={isChecked}
@@ -157,7 +157,7 @@ const TopPage = () => {
               callbackFunc={connectHandler}
             />
           </Box>
-        </Card>
+        </Box>
       </Box>
 
       <WarningModal
