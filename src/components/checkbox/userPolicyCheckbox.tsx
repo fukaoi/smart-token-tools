@@ -31,6 +31,7 @@ const UserPolicyCheckBox: FC<{
                   style={{ marginLeft: '5px', borderBottom: '15px ,#87cef' }}
                   onClick={e => {
                     e.preventDefault();
+                    alert('In Preparation. Please wait.');
                   }}
                 >
                   terms & conditions
