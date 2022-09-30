@@ -103,6 +103,21 @@ const NftPage = () => {
       if (data.creators[0].address !== '') {
         const creators = addPublicKey(data.creators);
 
+        const sumShare = creators.reduce(
+          (sum: number, i: { share: number }) => sum + i.share,
+          0,
+        );
+
+        if (sumShare > 100) {
+          setBtnState({ title: 'Submit', isDisabled: false });
+          setIsLoading(false);
+          setErrorModal({
+            open: true,
+            message: 'ERROR! Total Share Is 100 Over',
+          });
+          return;
+        }
+
         const mint = await creatorMint(
           fileBuffer!,
           data.name,
@@ -175,7 +190,12 @@ const NftPage = () => {
             <HeadlineTypography message="Image Upload" />
             <Box sx={{ mb: 4 }} />
             <FileUploadUI
-              {...{ imagePreview, setImagePreview, setFileBuffer }}
+              {...{
+                imagePreview,
+                setErrorModal,
+                setImagePreview,
+                setFileBuffer,
+              }}
             />
             <Box sx={{ mb: 4 }} />
             <OptionalButton

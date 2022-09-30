@@ -16,9 +16,12 @@ const DescriptionTextField = (props: UseControllerProps<NFTFormValues>) => {
           placeholder="Description"
           variant="outlined"
           size="small"
+          multiline
+          rows={4}
           error={fieldState.invalid}
           helperText={fieldState.error?.message}
           {...field}
+          style={{ width: 480 }}
         />
       </Box>
     </>

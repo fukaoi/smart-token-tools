@@ -29,7 +29,7 @@ const styles = {
     position: 'relative' as 'relative',
     textAlign: 'center' as 'center',
     backgroundSize: 'cover',
-    backgroundImage: `url(${backImage})`,
+    backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url(${backImage})`,
     backgroundPosition: 'center',
     minHeight: '100vh',
     maxHeight: '100%',

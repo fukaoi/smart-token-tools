@@ -3,6 +3,7 @@ import { FC } from 'react';
 
 export type FileUploadUIProps = {
   imagePreview: any;
+  setErrorModal: any;
   setImagePreview: (file: File | string | undefined) => void;
   setFileBuffer: (buffer: ArrayBuffer) => void;
 };
@@ -11,6 +12,7 @@ const FileUploadUI: FC<FileUploadUIProps> = ({
   imagePreview,
   setImagePreview,
   setFileBuffer,
+  setErrorModal,
 }) => {
   const handleOnAddImage = (e: React.ChangeEvent<HTMLInputElement>) => {
     setImagePreview(undefined);
@@ -21,6 +23,12 @@ const FileUploadUI: FC<FileUploadUIProps> = ({
     const reader = new FileReader();
     const file = e.target.files[0];
     file.arrayBuffer().then(setFileBuffer);
+
+    // 100MB Image Size
+    if (100000000 < file.size) {
+      setErrorModal({ open: true, message: 'ERROR! Max Image size is 100MB' });
+      return;
+    }
 
     reader.onload = (e: ProgressEvent<FileReader>) => {
       const result = reader.result as unknown as string;
