@@ -20,7 +20,7 @@ const styles = {
   },
   submit: {
     width: '100%',
-    marginTop: '1em',
+    marginTop: '1.5em',
     marginBottom: '1em',
   },
   container: {
