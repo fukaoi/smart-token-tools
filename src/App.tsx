@@ -19,7 +19,6 @@ declare global {
     state: {
       warning?: string;
       error?: string;
-      tokenId?: string;
       mint?: string;
     };
   }
@@ -35,7 +34,7 @@ const styles = {
     minHeight: '100vh',
     maxHeight: '100%',
     width: '100%',
-    alignItems: 'ceter',
+    alignItems: 'center',
     fontSize: 'calc(10px + 2vmin)',
     color: 'white',
   },
@@ -131,7 +130,7 @@ const App = () => {
           <Route path="/nft" element={<NftPage />} />
           <Route path="/faucet" element={<FaucetPage />} />
           <Route path="/complete" element={<CompletePage />} />
-          <Route path="/nftcomplete" element={<NftCompletePage />} />
+          <Route path="/nft-complete" element={<NftCompletePage />} />
         </Routes>
       </Box>
       {match1100 && (

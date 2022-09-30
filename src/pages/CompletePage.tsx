@@ -41,7 +41,7 @@ const styles = {
 
 const CompletePage = () => {
   const {state} = useLocation() as NavigateOptions;
-  const tokenId = state.tokenId as string;
+  const mint = state.mint as string;
 
   return (
     <>
@@ -55,8 +55,8 @@ const CompletePage = () => {
             sx={{mt: 1, mb: 3}}
           >Your token issuing was success!!
           </Typography>
-          <MintedInfoTypography message={tokenId} />
-          <Link sx={styles.link} href={tokenId.toExplorerUrl()}>
+          <MintedInfoTypography message={mint} />
+          <Link sx={styles.link} href={mint.toExplorerUrl()}>
             <Button size='large'>See your token info at Explorer</Button>
           </Link>
         </Paper>

@@ -31,7 +31,7 @@ const mint = async (walletAddress: string, postData: FormValues) => {
     postData.decimals,
     window.solana,
   );
-  console.debug('mint tokenId: ', res);
+  console.debug('mint: ', res);
   return res;
 };
 
@@ -48,7 +48,7 @@ const addMinting = async (
     postData.decimals,
     window.solana,
   );
-  console.debug('add minting tokenId: ', res);
+  console.debug('add mint: ', res);
   return res;
 };
 
