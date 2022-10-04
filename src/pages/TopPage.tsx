@@ -45,13 +45,13 @@ const styles = {
   link: {
     textDecoration: 'none',
   },
-  policyCard: {
-    width: 300,
-  },
   policyBox: {
     display: 'flex',
     justifyContent: 'center',
     marginTop: '6.5em',
+  },
+  policyCard: {
+    width: 300,
   },
 };
 

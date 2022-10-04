@@ -24,7 +24,7 @@ const UserPolicyCheckBox: FC<{
             }
             label={
               <p style={{ fontSize: '14px', fontWeight: 'bold' }}>
-                I agree to the
+                I agree to SMT
                 <Link
                   target="_blank"
                   color="inherit"
@@ -35,7 +35,7 @@ const UserPolicyCheckBox: FC<{
                   }}
                 >
                   terms & conditions
-                  <OpenInNewIcon style={{ position: 'relative', top: '5px' }} />
+                  <OpenInNewIcon style={{ position: 'relative', top: '5px', left: '5px' }} />
                 </Link>
               </p>
             }

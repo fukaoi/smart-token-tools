@@ -40,7 +40,6 @@ const styles = {
   },
   footer: {
     fontSize: '18px',
-    position: 'absolute' as 'absolute',
     bottom: '10px',
     width: '100%',
   },
