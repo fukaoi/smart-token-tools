@@ -16,7 +16,8 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v2
-      - run: | 
+      - name: setup npm
+        run: | 
           npm ci
           npm version patch
       - uses: akhileshns/heroku-deploy@v3.12.12
