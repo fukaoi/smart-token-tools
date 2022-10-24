@@ -2,11 +2,11 @@ name: Deploy
 
 on:
   push:
-    branches: 
+    branches:
       - main
     paths-ignore:
-      - "README.md"
-      - ".github/workflows/*.yml"
+      - 'README.md'
+      - '.github/workflows/*.yml'
 
   workflow_dispatch:
 
@@ -21,7 +21,11 @@ jobs:
       - uses: akhileshns/heroku-deploy@v3.12.12
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-          heroku_app_name: "smart-token-tool" #Must be unique in Heroku
+          heroku_app_name: 'smart-token-tool' #Must be unique in Heroku
           heroku_email: ${{secrets.HEROKU_EMAIL}}
       - name: Run a one-line script
         run: echo complete deploy
+      - name: Auto tagging
+        uses: butlerlogic/action-autotag@stable
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
