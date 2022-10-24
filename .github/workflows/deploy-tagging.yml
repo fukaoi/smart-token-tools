@@ -33,7 +33,6 @@ jobs:
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
           commit_message: Exec auto commit
-          file_pattern: 'package.json'
       # -----------------------------------      
       - name: Auto tagging
         uses: butlerlogic/action-autotag@stable

@@ -10,11 +10,11 @@ const styles = {
   container: {
     display: 'flex',
     justifyContent: 'center',
-    flexWrap: 'wrap' as 'wrap',
+    flexWrap: 'wrap' as const,
   },
   cardMedia: {
     width: '100%',
-    textAlign: 'center' as 'center',
+    textAlign: 'center' as const,
   },
   cardContainer: {
     position: 'relative',

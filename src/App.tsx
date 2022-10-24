@@ -9,10 +9,11 @@ import CompletePage from './pages/CompletePage';
 import NftCompletePage from './pages/NftCompletePage';
 import FaucetPage from './pages/FaucetPage';
 import { Device } from './shared/device';
+import { Phantom } from '@solana-suite/phantom';
 
 declare global {
   interface Window {
-    solana: any;
+    Phantom: Phantom;
   }
   interface NavigateOptions {
     state: {
@@ -25,8 +26,8 @@ declare global {
 
 const styles = {
   root: {
-    position: 'relative' as 'relative',
-    textAlign: 'center' as 'center',
+    position: 'relative' as const,
+    textAlign: 'center' as const,
     backgroundSize: 'cover',
     backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url(${backImage})`,
     backgroundPosition: 'center',

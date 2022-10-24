@@ -1,6 +1,6 @@
-import TitleTypography from "../components/typography/TitleTypography";
+import TitleTypography from '../components/typography/TitleTypography';
 import CompleteBackground from '../assets/complete-background.png';
-import MintedInfoTypography from "../components/typography/MintedInfoTypography";
+import MintedInfoTypography from '../components/typography/MintedInfoTypography';
 import {Paper, Link, Box} from '@mui/material';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
@@ -10,11 +10,11 @@ const styles = {
   container: {
     display: 'flex',
     justifyContent: 'center',
-    flexWrap: 'wrap' as 'wrap',
+    flexWrap: 'wrap' as const,
   },
   cardMedia: {
     width: '100%',
-    textAlign: 'center' as 'center',
+    textAlign: 'center' as const,
   },
   cardContainer: {
     position: 'relative',

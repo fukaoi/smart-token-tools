@@ -3,7 +3,7 @@ import {theme} from '../../shared/colorTheme';
 
 const styles = {
   pre: {
-    textAlign: 'left' as 'left',
+    textAlign: 'left' as const,
     fontSize: '15px',
     marginLeft: '1em',
     marginBottom: '2em',

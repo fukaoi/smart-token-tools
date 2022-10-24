@@ -15,7 +15,7 @@ import UserPolicyCheckBox from '../components/checkbox/userPolicyCheckbox';
 
 const styles = {
   message: {
-    position: 'relative' as 'relative',
+    position: 'relative' as const,
     top: '2em',
   },
   submit: {
@@ -26,7 +26,7 @@ const styles = {
   container: {
     display: 'flex',
     justifyContent: 'center',
-    flexWrap: 'wrap' as 'wrap',
+    flexWrap: 'wrap' as const,
   },
   cardMedia: {
     textAlign: 'center',
@@ -75,7 +75,7 @@ const TopPage = () => {
     open: false,
     message: '',
   });
-  let title = 'Getting start';
+  const title = 'Getting start';
   const [btnState, setBtnState] = useState({
     title: title,
     isDisabled: true,
@@ -90,7 +90,7 @@ const TopPage = () => {
   // raise warning other page
   useEffect(() => {
     if (state?.warning !== undefined) {
-      setWarningModal({ open: true, message: state.warning as string });
+      setWarningModal({ open: true, message: state.warning  });
     }
   }, [state]);
 
@@ -100,7 +100,7 @@ const TopPage = () => {
   };
 
   const connectHandler = () => {
-    let title = 'Processing';
+    const title = 'Processing';
     setBtnState({ title, isDisabled: true });
     if (Device.isSmartPhone()) {
       const message = `Sorry. Only available for PC access`;

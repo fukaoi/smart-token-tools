@@ -1,7 +1,7 @@
-import { FC } from "react";
-import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
-import RemoveCircleIcon from "@mui/icons-material/RemoveCircle";
-import { IconButton } from "@mui/material";
+import { FC } from 'react';
+import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
+import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
+import { IconButton } from '@mui/material';
 
 const OptionalButton: FC<{
   callbackFunc?: (event?: any) => void;
@@ -12,9 +12,9 @@ const OptionalButton: FC<{
       <div>
         <span
           style={{
-            fontWeight: "550",
-            fontSize: "18px",
-            marginBottom: "15px",
+            fontWeight: '550',
+            fontSize: '18px',
+            marginBottom: '15px',
           }}
         >
           Optional

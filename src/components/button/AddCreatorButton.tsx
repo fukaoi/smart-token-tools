@@ -1,19 +1,19 @@
-import { FC } from "react";
-import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
-import { IconButton } from "@mui/material";
+import { FC } from 'react';
+import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
+import { IconButton } from '@mui/material';
 
 const AddCreatorButton: FC<{
   callbackFunc?: (event?: any) => void;
   isOpen?: boolean;
-}> = ({ callbackFunc, isOpen }) => {
+}> = ({ callbackFunc }) => {
   return (
     <>
       <div>
         <span
           style={{
-            fontWeight: "550",
-            fontSize: "18px",
-            marginBottom: "15px",
+            fontWeight: '550',
+            fontSize: '18px',
+            marginBottom: '15px',
           }}
         >
           Add Creator
