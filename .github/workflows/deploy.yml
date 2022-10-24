@@ -1,4 +1,4 @@
-name: Deploy and Update tag
+name: Deploy
 
 on:
   push:
