@@ -13,7 +13,7 @@ import { Phantom } from '@solana-suite/phantom';
 
 declare global {
   interface Window {
-    Phantom: Phantom;
+    solana: Phantom;
   }
   interface NavigateOptions {
     state: {

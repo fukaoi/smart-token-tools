@@ -105,13 +105,13 @@ const TopPage = () => {
     if (Device.isSmartPhone()) {
       const message = `Sorry. Only available for PC access`;
       setWarningModal({ open: true, message });
-    } else if (!window.Phantom) {
+    } else if (!window.solana) {
       const message = `You will need Phantom wallet to access.
        Please install it from the URL below.
        https://phantom.app/download`;
       setWarningModal({ open: true, message });
     } else {
-      window.Phantom.connect().then(() => {
+      window.solana.connect().then(() => {
         navigate('/nft');
       });
     }

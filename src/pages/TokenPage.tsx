@@ -29,7 +29,7 @@ const mint = async (walletAddress: string, postData: FormValues) => {
     postData.cluster,
     postData.totalSupply,
     postData.decimals,
-    window.Phantom,
+    window.solana,
   );
   console.debug('mint: ', res);
   return res;
@@ -46,7 +46,7 @@ const addMinting = async (
     postData.cluster,
     postData.totalSupply,
     postData.decimals,
-    window.Phantom,
+    window.solana,
   );
   console.debug('add mint: ', res);
   return res;
