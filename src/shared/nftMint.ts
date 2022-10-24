@@ -35,7 +35,7 @@ export const creatorMint = async (
       storageType: 'nftStorage',
     },
     cluster,
-    window.solana,
+    window.Phantom,
   );
 
   mint.match(

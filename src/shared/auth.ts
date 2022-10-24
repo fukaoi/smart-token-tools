@@ -1,5 +1,5 @@
-export module Auth {
+export namespace Auth {
   export const isConnectedWallet = async() => {
-    alert(await window.solana.isConnected); 
+    alert(await window.Phantom.isConnected); 
   }
 }

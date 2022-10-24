@@ -30,7 +30,7 @@ const FileUploadUI: FC<FileUploadUIProps> = ({
       return;
     }
 
-    reader.onload = (e: ProgressEvent<FileReader>) => {
+    reader.onload = () => {
       const result = reader.result as unknown as string;
       setImagePreview(result);
     };
