@@ -20,7 +20,7 @@ const MintedInfoTypography: FC<{message: string}> = ({message}) => {
       <Typography
         component='div'
         fontSize='16px'
-      > Your token id:
+      > Your mint:
       </Typography>
       <Typography
         component='div'
