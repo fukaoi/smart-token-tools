@@ -6,17 +6,17 @@ export const useSessionCheck = (
 ) => {
   const navigate = useNavigate();
   useEffect(() => {
-    if (window.solana) {
-      if (!window.solana.isConnected) {
+    if (window.Phantom) {
+      if (!window.Phantom.isConnected) {
         const message = 'Your session disconnected from phantom wallet';
         navigate('/', { state: { warning: message } });
       }
-      window.solana.connect().then((conn: any) => {
+      window.Phantom.connect().then((conn: any) => {
         setWalletAddress(conn.publicKey.toString());
       });
     }
     const id = setInterval(() => {
-      window.solana.connect({ onlyIfTrusted: true }).then((conn: any) => {
+      window.Phantom.connect().then((conn: any) => {
         setWalletAddress(conn.publicKey.toString());
       });
     }, 5000);

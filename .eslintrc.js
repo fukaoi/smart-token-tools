@@ -20,9 +20,11 @@ module.exports = {
     '@typescript-eslint/no-floating-promises': 0,
     '@typescript-eslint/no-unsafe-return': 0,
     '@typescript-eslint/no-unsafe-assignment': 0,
+    '@typescript-eslint/no-unsafe-call': 0,
     '@typescript-eslint/no-unsafe-argument': 0,
     '@typescript-eslint/no-non-null-assertion': 0,
     '@typescript-eslint/require-await': 0,
+    '@typescript-eslint/no-misused-promises': 0,
     'no-unused-vars': 'off',
     '@typescript-eslint/quotes': [
       'error',
