@@ -20,19 +20,11 @@ jobs:
       - name: setup npm
         run: | 
           npm ci
-          git config --global user.email "auto-exec@atonoy.co"
-          git config --global user.name "github actions"
-          npm version patch
       - uses: akhileshns/heroku-deploy@v3.12.12
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: 'smart-token-tool' #Must be unique in Heroku
           heroku_email: ${{secrets.HEROKU_EMAIL}}
-      # -----------------------------------
-      - name: Auto commit
-        uses: stefanzweifel/git-auto-commit-action@v4
-        with:
-          commit_message: Exec auto commit
       # -----------------------------------      
       - name: Auto tagging
         uses: butlerlogic/action-autotag@stable
