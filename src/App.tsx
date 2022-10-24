@@ -1,7 +1,6 @@
 import TokenPage from './pages/TokenPage';
 import TopPage from './pages/TopPage';
 import backImage from './assets/background-image.jpg';
-import corpLogoImage from './assets/atonoy-logo.png';
 import logoImage from './assets/smt-logo.svg';
 import { Grid, Box, useMediaQuery } from '@mui/material';
 import { Routes, Route, Link } from 'react-router-dom';
@@ -38,11 +37,6 @@ const styles = {
     fontSize: 'calc(10px + 2vmin)',
     color: 'white',
   },
-  footer: {
-    fontSize: '18px',
-    bottom: '10px',
-    width: '100%',
-  },
   corpLogoImage: {
     width: '120px',
   },
@@ -71,7 +65,6 @@ const styles = {
 };
 
 const App = () => {
-  const match1100 = useMediaQuery('(min-width:1150px)');
   const match1024 = useMediaQuery('(min-width:1024px)');
   const match600 = useMediaQuery('(min-width:600px)');
   if (!match600) {
@@ -132,17 +125,6 @@ const App = () => {
           <Route path="/nft-complete" element={<NftCompletePage />} />
         </Routes>
       </Box>
-      {match1100 && (
-        <Box sx={styles.footer}>
-          <a href="https://atonoy.co" target="_blank" rel="noreferrer">
-            <img
-              src={corpLogoImage}
-              style={styles.corpLogoImage}
-              alt="Atonoy"
-            />
-          </a>
-        </Box>
-      )}
     </Box>
   );
 };

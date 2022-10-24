@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router';
 import { Paper, Box, FormControl } from '@mui/material';
+import { ValidatorError } from '@solana-suite/nft';
 import { ControllerRenderProps, useForm } from 'react-hook-form';
 import TitleTypography from '../components/typography/TitleTypography';
 import AddressTypography from '../components/typography/AddressTypography';
@@ -17,7 +18,7 @@ import OptionalUI from '../components/ui-parts/OptionalUI';
 import Loading from '../components/Loading';
 import { useSessionCheck } from '../hooks/SessionCheck';
 import { validationRules } from '../shared/validation';
-import { addPublicKey, creatorMint, noCreatorMint } from '../shared/nftMint';
+import { addPublicKey, creatorMint } from '../shared/nftMint';
 
 export interface NFTFormValues {
   cluster: string;
@@ -49,7 +50,6 @@ const styles = {
 };
 
 const NftPage = () => {
-  useSessionCheck(console.log);
   const navigate = useNavigate();
 
   const [btnState, setBtnState] = useState({
@@ -66,6 +66,8 @@ const NftPage = () => {
   const [isShow, setIsShow] = useState(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
+  useSessionCheck(setWalletAddress);
+  
   const { handleSubmit, control } = useForm<NFTFormValues>({
     mode: 'onSubmit',
     defaultValues: {
@@ -77,7 +79,7 @@ const NftPage = () => {
       creators: [
         {
           address: '',
-          verified: false,
+          verified: true,
           share: 0,
         },
       ],
@@ -98,11 +100,9 @@ const NftPage = () => {
     }
 
     try {
-      console.log('data', data);
-
+      let creators = [];
       if (data.creators[0].address !== '') {
-        const creators = addPublicKey(data.creators);
-
+        creators = addPublicKey(data.creators);
         const sumShare = creators.reduce(
           (sum: number, i: { share: number }) => sum + i.share,
           0,
@@ -117,36 +117,25 @@ const NftPage = () => {
           });
           return;
         }
-
-        const mint = await creatorMint(
-          fileBuffer!,
-          data.name,
-          data.symbol,
-          data.description,
-          data.royalty,
-          creators,
-          data.cluster,
-        );
-
-        setBtnState({ title: 'Submit', isDisabled: false });
-        setIsLoading(false);
-        navigate('/nft-complete', { state: { mint } });
-      } else {
-        const mint = await noCreatorMint(
-          fileBuffer!,
-          data.name,
-          data.symbol,
-          data.description,
-          data.royalty,
-          data.cluster,
-        );
-
-        setBtnState({ title: 'Submit', isDisabled: false });
-        setIsLoading(false);
-        navigate('/nft-complete', { state: { mint } });
       }
+      const mint = await creatorMint(
+        fileBuffer!,
+        data.name,
+        data.symbol,
+        data.description,
+        data.royalty,
+        data.cluster,
+        creators,
+      );
+
+      setBtnState({ title: 'Submit', isDisabled: false });
+      setIsLoading(false);
+      navigate('/nft-complete', { state: { mint } });
     } catch (error) {
-      console.log(error);
+      console.error(error);
+      if (error instanceof ValidatorError) {
+        console.error('validation error: ', error.details);
+      }
       setBtnState({ title: 'Submit', isDisabled: false });
       setIsLoading(false);
       setErrorModal({ open: true, message: 'ERROR! Please try later again' });
@@ -157,7 +146,6 @@ const NftPage = () => {
     setOptionalBtnState(prevState => !prevState);
     setIsShow(prevState => !prevState);
   };
-
   useSessionCheck(setWalletAddress);
 
   return (

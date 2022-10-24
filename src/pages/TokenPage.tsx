@@ -86,7 +86,6 @@ const TokenPage = () => {
   };
 
   const onSubmit = async (data: FormValues) => {
-    console.log('data', data);
     setBtnState({ title: 'Processing', isDisabled: true });
     setIsLoading(true);
 
