@@ -1,7 +1,7 @@
 # SMT (Smart token tool)
 
+![License](https://img.shields.io/badge/license-MIT-blue.svg)
 [![Create Tag](https://github.com/atonoy/smart-token-tool/actions/workflows/tag.yml/badge.svg)](https://github.com/atonoy/smart-token-tool/actions/workflows/tag.yml)
-[![Deploy](https://github.com/atonoy/smart-token-tool/actions/workflows/deploy.yml/badge.svg)](https://github.com/atonoy/smart-token-tool/actions/workflows/deploy.yml)
 
 [SMT](https://smt.atonoy.co) is a service that you to easily issue tokens and nft for all free. All you need is a phantom wallet installed on your browser and you are ready to use it.
 
