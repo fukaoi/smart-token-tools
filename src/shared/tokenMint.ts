@@ -1,6 +1,11 @@
 import { PhantomSplToken } from '@solana-suite/phantom';
 
-export const mintToken = async (walletAddress: string, cluster: string, totalSupply: number, decimals: number) => {
+export const mintToken = async (
+  walletAddress: string,
+  cluster: string,
+  totalSupply: number,
+  decimals: number,
+) => {
   const res = await PhantomSplToken.mint(
     walletAddress.toPublicKey(),
     cluster,
@@ -14,7 +19,9 @@ export const mintToken = async (walletAddress: string, cluster: string, totalSup
 export const addMinting = async (
   tokenKey: string,
   walletAddress: string,
-  cluster: string, totalSupply: number, decimals: number
+  cluster: string,
+  totalSupply: number,
+  decimals: number,
 ) => {
   const res = await PhantomSplToken.add(
     tokenKey.toPublicKey(),

@@ -62,7 +62,12 @@ const TokenPage = () => {
 
     let mint = '';
     if (data.issueType === 'new') {
-      const res = await mintToken(walletAddress, data.cluster, data.totalSupply, data.decimals);
+      const res = await mintToken(
+        walletAddress,
+        data.cluster,
+        data.totalSupply,
+        data.decimals,
+      );
       if (res.isErr) {
         console.error(res);
         setIsLoading(false);
@@ -71,7 +76,13 @@ const TokenPage = () => {
         mint = res.value;
       }
     } else if (data.issueType === 'add' && data.tokenKey) {
-      const res = await addMinting(data.tokenKey, walletAddress, data.cluster, data.totalSupply, data.decimals);
+      const res = await addMinting(
+        data.tokenKey,
+        walletAddress,
+        data.cluster,
+        data.totalSupply,
+        data.decimals,
+      );
       if (res.isErr) {
         console.error(res);
         setIsLoading(false);
