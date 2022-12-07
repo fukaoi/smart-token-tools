@@ -31,7 +31,6 @@ const mint = async (walletAddress: string, postData: FormValues) => {
     postData.decimals,
     window.solana,
   );
-  console.debug('mint: ', res);
   return res;
 };
 
@@ -48,7 +47,6 @@ const addMinting = async (
     postData.decimals,
     window.solana,
   );
-  console.debug('add mint: ', res);
   return res;
 };
 
@@ -93,6 +91,7 @@ const TokenPage = () => {
     if (data.issueType === 'new') {
       const res = await mint(walletAddress, data);
       if (res.isErr) {
+        console.error(res);
         setIsLoading(false);
         setErrorModal({ open: true, message: res.error.message });
       } else {
@@ -101,6 +100,7 @@ const TokenPage = () => {
     } else if (data.issueType === 'add' && data.tokenKey) {
       const res = await addMinting(data.tokenKey, walletAddress, data);
       if (res.isErr) {
+        console.error(res);
         setIsLoading(false);
         setErrorModal({ open: true, message: res.error.message });
       } else {
@@ -110,6 +110,7 @@ const TokenPage = () => {
       setIsLoading(false);
       setErrorModal({ open: true, message: 'Error no match issue type' });
     }
+    console.log('mint: ', tokenId);
     tokenId.length !== 0 && navigate('/complete', { state: { tokenId } });
   };
 
