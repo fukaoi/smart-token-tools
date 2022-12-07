@@ -41,8 +41,7 @@ const styles = {
 
 const CompletePage = () => {
   const {state} = useLocation() as NavigateOptions;
-  const mint = state.mint as string;
-
+  const mint = state.tokenId as string;
   return (
     <>
       <TitleTypography title='Complete' />
