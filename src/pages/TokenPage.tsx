@@ -13,7 +13,7 @@ import Loading from '../components/Loading';
 import { useNavigate } from 'react-router-dom';
 import { useSessionCheck } from '../hooks/SessionCheck';
 import ErrorModal from '../components/modal/ErrorModal';
-import { SplTokenPhantom } from '@solana-suite/phantom';
+import { PhantomSplToken } from '@solana-suite/phantom';
 
 export interface FormValues {
   cluster: string;
@@ -24,7 +24,7 @@ export interface FormValues {
 }
 
 const mint = async (walletAddress: string, postData: FormValues) => {
-  const res = await SplTokenPhantom.mint(
+  const res = await PhantomSplToken.mint(
     walletAddress.toPublicKey(),
     postData.cluster,
     postData.totalSupply,
@@ -40,7 +40,7 @@ const addMinting = async (
   walletAddress: string,
   postData: FormValues,
 ) => {
-  const res = await SplTokenPhantom.addMinting(
+  const res = await PhantomSplToken.add(
     tokenKey.toPublicKey(),
     walletAddress.toPublicKey(),
     postData.cluster,

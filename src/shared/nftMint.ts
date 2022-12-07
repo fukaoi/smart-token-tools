@@ -1,4 +1,4 @@
-import { MetaplexPhantom } from '@solana-suite/phantom';
+import { PhantomMetaplex } from '@solana-suite/phantom';
 import { ValidatorError } from '@solana-suite/nft';
 
 export const addPublicKey = (creators: any) => {
@@ -24,7 +24,7 @@ export const creatorMint = async (
   cluster: string,
   creators?: any,
 ) => {
-  const mint = await MetaplexPhantom.mint(
+  const mint = await PhantomMetaplex.mint(
     {
       filePath,
       name,
