@@ -67,7 +67,7 @@ const NftPage = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   useSessionCheck(setWalletAddress);
-  
+
   const { handleSubmit, control } = useForm<NFTFormValues>({
     mode: 'onSubmit',
     defaultValues: {

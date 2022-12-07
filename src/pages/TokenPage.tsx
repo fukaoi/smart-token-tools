@@ -13,7 +13,7 @@ import Loading from '../components/Loading';
 import { useNavigate } from 'react-router-dom';
 import { useSessionCheck } from '../hooks/SessionCheck';
 import ErrorModal from '../components/modal/ErrorModal';
-import { PhantomSplToken } from '@solana-suite/phantom';
+import { mintToken, addMinting } from '../shared/tokenMint';
 
 export interface FormValues {
   cluster: string;
@@ -22,35 +22,6 @@ export interface FormValues {
   decimals: number;
   tokenKey?: string;
 }
-
-const mint = async (walletAddress: string, postData: FormValues) => {
-  const res = await PhantomSplToken.mint(
-    walletAddress.toPublicKey(),
-    postData.cluster,
-    postData.totalSupply,
-    postData.decimals,
-    window.solana,
-  );
-  console.debug('mint: ', res);
-  return res;
-};
-
-const addMinting = async (
-  tokenKey: string,
-  walletAddress: string,
-  postData: FormValues,
-) => {
-  const res = await PhantomSplToken.add(
-    tokenKey.toPublicKey(),
-    walletAddress.toPublicKey(),
-    postData.cluster,
-    postData.totalSupply,
-    postData.decimals,
-    window.solana,
-  );
-  console.debug('add mint: ', res);
-  return res;
-};
 
 const styles = {
   root: {
@@ -89,28 +60,42 @@ const TokenPage = () => {
     setBtnState({ title: 'Processing', isDisabled: true });
     setIsLoading(true);
 
-    let tokenId = '';
+    let mint = '';
     if (data.issueType === 'new') {
-      const res = await mint(walletAddress, data);
+      const res = await mintToken(
+        walletAddress,
+        data.cluster,
+        data.totalSupply,
+        data.decimals,
+      );
       if (res.isErr) {
+        console.error(res);
         setIsLoading(false);
         setErrorModal({ open: true, message: res.error.message });
       } else {
-        tokenId = res.value;
+        mint = res.value;
       }
     } else if (data.issueType === 'add' && data.tokenKey) {
-      const res = await addMinting(data.tokenKey, walletAddress, data);
+      const res = await addMinting(
+        data.tokenKey,
+        walletAddress,
+        data.cluster,
+        data.totalSupply,
+        data.decimals,
+      );
       if (res.isErr) {
+        console.error(res);
         setIsLoading(false);
         setErrorModal({ open: true, message: res.error.message });
       } else {
-        tokenId = res.value;
+        mint = res.value;
       }
     } else {
       setIsLoading(false);
       setErrorModal({ open: true, message: 'Error no match issue type' });
     }
-    tokenId.length !== 0 && navigate('/complete', { state: { tokenId } });
+    console.log('# mint: ', mint);
+    mint.length !== 0 && navigate('/complete', { state: { mint } });
   };
 
   useSessionCheck(setWalletAddress);
