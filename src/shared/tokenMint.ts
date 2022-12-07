@@ -1,11 +1,11 @@
 import { PhantomSplToken } from '@solana-suite/phantom';
 
-export const mintToken = async (walletAddress: string, postData: FormValues) => {
+export const mintToken = async (walletAddress: string, cluster: string, totalSupply: number, decimals: number) => {
   const res = await PhantomSplToken.mint(
     walletAddress.toPublicKey(),
-    postData.cluster,
-    postData.totalSupply,
-    postData.decimals,
+    cluster,
+    totalSupply,
+    decimals,
     window.solana,
   );
   return res;
@@ -14,14 +14,14 @@ export const mintToken = async (walletAddress: string, postData: FormValues) => 
 export const addMinting = async (
   tokenKey: string,
   walletAddress: string,
-  postData: FormValues,
+  cluster: string, totalSupply: number, decimals: number
 ) => {
   const res = await PhantomSplToken.add(
     tokenKey.toPublicKey(),
     walletAddress.toPublicKey(),
-    postData.cluster,
-    postData.totalSupply,
-    postData.decimals,
+    cluster,
+    totalSupply,
+    decimals,
     window.solana,
   );
   return res;

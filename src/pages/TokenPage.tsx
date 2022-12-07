@@ -13,7 +13,7 @@ import Loading from '../components/Loading';
 import { useNavigate } from 'react-router-dom';
 import { useSessionCheck } from '../hooks/SessionCheck';
 import ErrorModal from '../components/modal/ErrorModal';
-import { mintToken, addMinting } from "../shared/tokenMint.ts";
+import { mintToken, addMinting } from '../shared/tokenMint';
 
 export interface FormValues {
   cluster: string;
@@ -62,7 +62,7 @@ const TokenPage = () => {
 
     let mint = '';
     if (data.issueType === 'new') {
-      const res = await mintToken(walletAddress, data);
+      const res = await mintToken(walletAddress, data.cluster, data.totalSupply, data.decimals);
       if (res.isErr) {
         console.error(res);
         setIsLoading(false);
@@ -71,7 +71,7 @@ const TokenPage = () => {
         mint = res.value;
       }
     } else if (data.issueType === 'add' && data.tokenKey) {
-      const res = await addMinting(data.tokenKey, walletAddress, data);
+      const res = await addMinting(data.tokenKey, walletAddress, data.cluster, data.totalSupply, data.decimals);
       if (res.isErr) {
         console.error(res);
         setIsLoading(false);
@@ -84,7 +84,7 @@ const TokenPage = () => {
       setErrorModal({ open: true, message: 'Error no match issue type' });
     }
     console.log('# mint: ', mint);
-    tokenId.length !== 0 && navigate('/complete', { state: { mint } });
+    mint.length !== 0 && navigate('/complete', { state: { mint } });
   };
 
   useSessionCheck(setWalletAddress);
