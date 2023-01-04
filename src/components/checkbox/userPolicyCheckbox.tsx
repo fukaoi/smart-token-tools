@@ -26,11 +26,12 @@ const UserPolicyCheckBox: FC<{
                 color="primary"
                 style={{
                   color: 'white',
+                  marginTop: '7px',
                 }}
               />
             }
             label={
-              <p style={{ fontSize: '14px', fontWeight: 'bold' }}>
+              <p style={{ fontSize: '13px', fontWeight: 'bold' }}>
                 I agree to SMT
                 <Link
                   target="_blank"
