@@ -1,19 +1,23 @@
 import { TextField, Box } from '@mui/material';
 import HeadlineTypography from '../typography/HeadlineTypography';
-import { NFTFormValues } from '../../pages/NftPage';
-import { useController, UseControllerProps } from 'react-hook-form';
+import {
+  FieldValues,
+  useController,
+  UseControllerProps,
+} from 'react-hook-form';
 
-const NftNameTextField = (props: UseControllerProps<NFTFormValues>) => {
+const NameTextField = <T extends FieldValues>(props: UseControllerProps<T>) => {
   const { field, fieldState } = useController(props);
+  console.log(fieldState);
   return (
     <>
-      <HeadlineTypography message="Input NFT Name" />
+      <HeadlineTypography message="Input NFT name" />
       <Box sx={{ display: 'flex', mt: 2 }}>
         <TextField
           type="text"
           id="outlined-basic"
-          label="Input NFT Name"
-          placeholder="NFT NAME..."
+          label="Input NFT name"
+          placeholder="NFT name..."
           variant="outlined"
           size="small"
           error={fieldState.invalid}
@@ -25,4 +29,4 @@ const NftNameTextField = (props: UseControllerProps<NFTFormValues>) => {
   );
 };
 
-export default NftNameTextField;
+export default NameTextField;

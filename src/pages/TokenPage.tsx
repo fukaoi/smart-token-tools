@@ -14,9 +14,13 @@ import { useNavigate } from 'react-router-dom';
 import { useSessionCheck } from '../hooks/SessionCheck';
 import ErrorModal from '../components/modal/ErrorModal';
 import { mintToken, addMinting } from '../shared/tokenMint';
+import NameTextField from '../components/textField/NameTextField';
+import { validationRules } from '../shared/validation';
 
 export interface FormValues {
   cluster: string;
+  name: string;
+  symbol: string;
   issueType: string;
   totalSupply: number;
   decimals: number;
@@ -45,8 +49,10 @@ const TokenPage = () => {
     defaultValues: {
       cluster: 'devnet',
       issueType: 'new',
+      name: '',
+      symbol: '',
       totalSupply: 100000,
-      decimals: 2,
+      decimals: 1,
       tokenKey: '',
     },
   });
@@ -61,8 +67,12 @@ const TokenPage = () => {
     setIsLoading(true);
 
     let mint = '';
+    const fileBuffer = new ArrayBuffer(16);
     if (data.issueType === 'new') {
       const res = await mintToken(
+        fileBuffer,
+        data.name,
+        data.symbol,
         walletAddress,
         data.cluster,
         data.totalSupply,
@@ -110,6 +120,18 @@ const TokenPage = () => {
             <ClusterRadio control={control} name="cluster" />
             <Box sx={{ mb: 4 }} />
             <TokenIssueTypeRadio control={control} name="issueType" />
+            <Box sx={{ mb: 4 }} />
+            {watch('issueType') === 'new' && (
+              <>
+                <Box sx={{ mb: 1 }} />
+                <NameTextField<FormValues>
+                  control={control}
+                  name="name"
+                  rules={validationRules.name}
+                />
+              </>
+            )}
+
             <Box sx={{ mb: 4 }} />
             <TotalSupplyTextField control={control} name="totalSupply" />
             <Box sx={{ mb: 4 }} />

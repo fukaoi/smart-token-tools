@@ -8,7 +8,7 @@ import AddressTypography from '../components/typography/AddressTypography';
 import ClusterRadio from '../components/radio/ClusterRadio';
 import SubmitButton from '../components/button/SubmitButton';
 import ErrorModal from '../components/modal/ErrorModal';
-import NftNameTextField from '../components/textField/NftNameTextField';
+import NameTextField from '../components/textField/NameTextField';
 import SymbolTextField from '../components/textField/SymbolTextField';
 import OptionalButton from '../components/button/OptionalButton';
 import DescriptionTextField from '../components/textField/DescriptionTextField';
@@ -157,7 +157,7 @@ const NftPage = () => {
             <AddressTypography address={walletAddress} />
             <ClusterRadio control={control} name="cluster" />
             <Box sx={{ mb: 4 }} />
-            <NftNameTextField
+            <NameTextField<NFTFormValues>
               control={control}
               name="name"
               rules={validationRules.name}

@@ -7,7 +7,7 @@ const TotalSupplyTextField = (props: UseControllerProps<FormValues>) => {
   const {field} = useController(props);
   return (
     <>
-      <HeadlineTypography message='Input existed tokenKey' />
+      <HeadlineTypography message='Input minted token address' />
       <Box sx={{display: 'flex', mt: 2}}>
         <TextField
           type='text'
