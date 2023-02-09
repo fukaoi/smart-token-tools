@@ -15,6 +15,7 @@ import { useSessionCheck } from '../hooks/SessionCheck';
 import ErrorModal from '../components/modal/ErrorModal';
 import { mintToken, addMinting } from '../shared/tokenMint';
 import NameTextField from '../components/textField/NameTextField';
+import SymbolTextField from '../components/textField/SymbolTextField';
 import { validationRules } from '../shared/validation';
 
 export interface FormValues {
@@ -131,7 +132,17 @@ const TokenPage = () => {
                 />
               </>
             )}
-
+            <Box sx={{ mb: 4 }} />
+            {watch('issueType') === 'new' && (
+              <>
+                <Box sx={{ mb: 1 }} />
+                <SymbolTextField
+                  control={control}
+                  name="symbol"
+                  rules={validationRules.symbol}
+                />
+              </>
+            )}
             <Box sx={{ mb: 4 }} />
             <TotalSupplyTextField control={control} name="totalSupply" />
             <Box sx={{ mb: 4 }} />
