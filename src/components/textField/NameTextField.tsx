@@ -6,18 +6,22 @@ import {
   UseControllerProps,
 } from 'react-hook-form';
 
+const setTitle = (name: string) =>
+  name == 'nftName' ? 'Input NFT name' : 'Input Token name';
+
 const NameTextField = <T extends FieldValues>(props: UseControllerProps<T>) => {
   const { field, fieldState } = useController(props);
-  console.log(fieldState);
+  console.log(field);
+
   return (
     <>
-      <HeadlineTypography message="Input NFT name" />
+      <HeadlineTypography message={setTitle(field.name)} />
       <Box sx={{ display: 'flex', mt: 2 }}>
         <TextField
           type="text"
           id="outlined-basic"
-          label="Input NFT name"
-          placeholder="NFT name..."
+          label={setTitle(field.name)}
+          placeholder="original name..."
           variant="outlined"
           size="small"
           error={fieldState.invalid}

@@ -72,7 +72,7 @@ const NftPage = () => {
     mode: 'onSubmit',
     defaultValues: {
       cluster: 'devnet',
-      name: '',
+      nftName: '',
       symbol: '',
       description: '',
       royalty: 0,
@@ -120,7 +120,7 @@ const NftPage = () => {
       }
       const mint = await creatorMint(
         fileBuffer!,
-        data.name,
+        data.nftName,
         data.symbol,
         data.description,
         data.royalty,
@@ -159,7 +159,7 @@ const NftPage = () => {
             <Box sx={{ mb: 4 }} />
             <NameTextField<NFTFormValues>
               control={control}
-              name="name"
+              name="nftName"
               rules={validationRules.name}
             />
             <Box sx={{ mb: 4 }} />
