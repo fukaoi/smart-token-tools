@@ -10,18 +10,21 @@ import DecimalsTextField from '../components/textField/DecimalsTextField';
 import TokenKeyTextField from '../components/textField/TokenKeyTextField';
 import SubmitButton from '../components/button/SubmitButton';
 import Loading from '../components/Loading';
-import { useNavigate } from 'react-router-dom';
-import { useSessionCheck } from '../hooks/SessionCheck';
 import ErrorModal from '../components/modal/ErrorModal';
-import { mintToken, addMinting } from '../shared/tokenMint';
 import NameTextField from '../components/textField/NameTextField';
 import SymbolTextField from '../components/textField/SymbolTextField';
+import HeadlineTypography from '../components/typography/HeadlineTypography';
+import FileUploadUI from '../components/uiParts/FileUploadUI';
 import { validationRules } from '../shared/validation';
+import { mintToken, addMinting } from '../shared/tokenMint';
+import { useNavigate } from 'react-router-dom';
+import { useSessionCheck } from '../hooks/SessionCheck';
 
 export interface FormValues {
   cluster: string;
   name: string;
   symbol: string;
+  imagePreview?: string;
   issueType: string;
   totalSupply: number;
   decimals: number;
@@ -46,6 +49,10 @@ const TokenPage = () => {
     isDisabled: false,
   });
   const [errorModal, setErrorModal] = useState({ open: false, message: '' });
+  const [imagePreview, setImagePreview] = useState<File | string | undefined>(
+    undefined,
+  );
+  const [fileBuffer, setFileBuffer] = useState<ArrayBuffer>();
   const { handleSubmit, control, watch } = useForm<FormValues>({
     defaultValues: {
       cluster: 'devnet',
@@ -67,11 +74,14 @@ const TokenPage = () => {
     setBtnState({ title: 'Processing', isDisabled: true });
     setIsLoading(true);
 
+    if (!fileBuffer) {
+      setErrorModal({ open: true, message: 'Please Image Upload' });
+    }
+
     let mint = '';
-    const fileBuffer = new ArrayBuffer(16);
     if (data.issueType === 'new') {
       const res = await mintToken(
-        fileBuffer,
+        fileBuffer!,
         data.name,
         data.symbol,
         walletAddress,
@@ -153,6 +163,17 @@ const TokenPage = () => {
                 <TokenKeyTextField control={control} name="tokenKey" />
               </>
             )}
+            <Box sx={{ mb: 4 }} />
+            <HeadlineTypography message="Image Upload" />
+            <Box sx={{ mb: 4 }} />
+            <FileUploadUI
+              {...{
+                imagePreview,
+                setErrorModal,
+                setImagePreview,
+                setFileBuffer,
+              }}
+            />
           </Paper>
           <Box sx={{ mb: 6 }} />
           <Box>

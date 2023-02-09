@@ -31,7 +31,6 @@ export interface NFTFormValues {
   control?: any;
   field?: ControllerRenderProps;
   optional?: any;
-  name?: string;
 }
 
 export interface Creator {
