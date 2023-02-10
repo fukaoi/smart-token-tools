@@ -1,7 +1,7 @@
-import {FC} from 'react';
+import { FC } from 'react';
 import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
-import {Alert} from '@mui/material';
+import { Alert } from '@mui/material';
 
 const style = {
   alert: {
@@ -16,24 +16,24 @@ const style = {
     bgcolor: 'background.paper',
     boxShadow: 24,
     p: 1,
-  }
+  },
 };
 
-const InfoModal: FC<{open: boolean, onClose: any}> = ({open, onClose}) => {
+const InfoModal: FC<{ open: boolean; onClose: any }> = ({ open, onClose }) => {
   return (
     <>
       <Modal
         open={open}
         onClose={onClose}
-        aria-labelledby='modal-modal-title'
-        aria-describedby='modal-modal-description'
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
       >
         <Box sx={style.box}>
           <Alert
             sx={style.alert}
-            variant='filled'
-            severity='success'
-            color='info'
+            variant="filled"
+            severity="success"
+            color="info"
           >
             Faucet a success. Got 1 SOL
           </Alert>
@@ -41,5 +41,5 @@ const InfoModal: FC<{open: boolean, onClose: any}> = ({open, onClose}) => {
       </Modal>
     </>
   );
-}
+};
 export default InfoModal;

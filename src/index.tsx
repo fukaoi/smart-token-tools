@@ -21,7 +21,7 @@ if (container) {
           <App />
         </Router>
       </ThemeProvider>
-    </React.StrictMode>
+    </React.StrictMode>,
   );
 }
 reportWebVitals();

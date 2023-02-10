@@ -1,7 +1,7 @@
-import {FC} from 'react';
+import { FC } from 'react';
 import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
-import {Alert} from '@mui/material';
+import { Alert } from '@mui/material';
 
 const style = {
   alert: {
@@ -16,28 +16,28 @@ const style = {
     bgcolor: 'background.paper',
     boxShadow: 24,
     p: 1,
-  }
+  },
 };
 
 const WarningModal: FC<{
-  open: boolean,
-  onClose: any,
-  message: string
-}> = ({open, onClose, message}) => {
+  open: boolean;
+  onClose: any;
+  message: string;
+}> = ({ open, onClose, message }) => {
   return (
     <>
       <Modal
         open={open}
         onClose={onClose}
-        aria-labelledby='modal-modal-title'
-        aria-describedby='modal-modal-description'
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
       >
         <Box sx={style.box}>
           <Alert
             sx={style.alert}
-            variant='filled'
-            severity='warning'
-            color='success'
+            variant="filled"
+            severity="warning"
+            color="success"
           >
             {message}
           </Alert>
@@ -45,5 +45,5 @@ const WarningModal: FC<{
       </Modal>
     </>
   );
-}
+};
 export default WarningModal;

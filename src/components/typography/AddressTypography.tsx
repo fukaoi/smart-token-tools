@@ -1,5 +1,5 @@
-import {FC} from 'react';
-import {Box} from '@mui/system';
+import { FC } from 'react';
+import { Box } from '@mui/system';
 import Typography from '@mui/material/Typography';
 
 const styles = {
@@ -13,21 +13,18 @@ const styles = {
   },
 };
 
-const AddressTypography: FC<{address: string}> = ({address}) => {
+const AddressTypography: FC<{ address: string }> = ({ address }) => {
   return (
     <Box component="div" sx={styles.box}>
-      <Typography
-        component='div'
-        fontSize='16px'
-      > current your address:
+      <Typography component="div" fontSize="16px">
+        {' '}
+        current your address:
       </Typography>
-      <Typography
-        component='div'
-        fontSize='16px'
-      >{address}
+      <Typography component="div" fontSize="16px">
+        {address}
       </Typography>
     </Box>
   );
-}
+};
 
 export default AddressTypography;

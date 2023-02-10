@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Paper, Box, FormControl } from '@mui/material';
 import { useForm } from 'react-hook-form';
 import TitleTypography from '../components/typography/TitleTypography';
+import { ValidatorError } from '@solana-suite/shared-metaplex';
 import AddressTypography from '../components/typography/AddressTypography';
 import ClusterRadio from '../components/radio/ClusterRadio';
 import TokenIssueTypeRadio from '../components/radio/TokenIssueTypeRadio';
@@ -78,45 +79,41 @@ const TokenPage = () => {
       setErrorModal({ open: true, message: 'Please Image Upload' });
     }
 
-    let mint = '';
-    if (data.issueType === 'new') {
-      const res = await mintToken(
-        fileBuffer!,
-        data.name,
-        data.symbol,
-        walletAddress,
-        data.cluster,
-        data.totalSupply,
-        data.decimals,
-      );
-      if (res.isErr) {
-        console.error(res);
-        setIsLoading(false);
-        setErrorModal({ open: true, message: res.error.message });
+    try {
+      let mint = '';
+      if (data.issueType === 'new') {
+        mint = await mintToken(
+          fileBuffer!,
+          data.name,
+          data.symbol,
+          walletAddress,
+          data.cluster,
+          data.totalSupply,
+          data.decimals,
+        );
+      } else if (data.issueType === 'add' && data.tokenKey) {
+        mint = await addMinting(
+          data.tokenKey,
+          walletAddress,
+          data.cluster,
+          data.totalSupply,
+          data.decimals,
+        );
       } else {
-        mint = res.value;
-      }
-    } else if (data.issueType === 'add' && data.tokenKey) {
-      const res = await addMinting(
-        data.tokenKey,
-        walletAddress,
-        data.cluster,
-        data.totalSupply,
-        data.decimals,
-      );
-      if (res.isErr) {
-        console.error(res);
         setIsLoading(false);
-        setErrorModal({ open: true, message: res.error.message });
-      } else {
-        mint = res.value;
+        setErrorModal({ open: true, message: 'Error no match issue type' });
       }
-    } else {
+      console.log('# mint: ', mint);
+      mint.length !== 0 && navigate('/complete', { state: { mint } });
+    } catch (error) {
+      console.error(error);
+      if (error instanceof ValidatorError) {
+        console.error('validation error: ', error.details);
+      }
+      setBtnState({ title: 'Submit', isDisabled: false });
       setIsLoading(false);
-      setErrorModal({ open: true, message: 'Error no match issue type' });
+      setErrorModal({ open: true, message: (error as Error).message });
     }
-    console.log('# mint: ', mint);
-    mint.length !== 0 && navigate('/complete', { state: { mint } });
   };
 
   useSessionCheck(setWalletAddress);

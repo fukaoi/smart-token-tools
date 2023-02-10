@@ -1,9 +1,9 @@
-import { TextField, Box } from '@mui/material'
-import { NFTFormValues } from '../../pages/NftPage'
-import { useController, UseControllerProps } from 'react-hook-form'
+import { TextField, Box } from '@mui/material';
+import { NFTFormValues } from '../../pages/NftPage';
+import { useController, UseControllerProps } from 'react-hook-form';
 
 const WalletAddressTextField = (props: UseControllerProps<NFTFormValues>) => {
-  const { field } = useController(props)
+  const { field } = useController(props);
   return (
     <>
       <Box sx={{ display: 'flex', mt: 2 }}>
@@ -21,7 +21,7 @@ const WalletAddressTextField = (props: UseControllerProps<NFTFormValues>) => {
         />
       </Box>
     </>
-  )
-}
+  );
+};
 
-export default WalletAddressTextField
+export default WalletAddressTextField;

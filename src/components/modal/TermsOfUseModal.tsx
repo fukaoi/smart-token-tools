@@ -29,7 +29,6 @@ const TermsOfUseModal: FC<{ open: boolean; onClose: any }> = ({
   open,
   onClose,
 }) => {
-
   return (
     <>
       <Modal

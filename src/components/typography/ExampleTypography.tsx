@@ -1,5 +1,5 @@
-import {FC} from 'react';
-import {theme} from '../../shared/colorTheme';
+import { FC } from 'react';
+import { theme } from '../../shared/colorTheme';
 
 const styles = {
   pre: {
@@ -15,12 +15,13 @@ const styles = {
   },
 };
 
-const ExampleTypography: FC<{example: string}> = ({example}) => {
+const ExampleTypography: FC<{ example: string }> = ({ example }) => {
   return (
-    <pre style={styles.pre}>e.g:
+    <pre style={styles.pre}>
+      e.g:
       {example}
     </pre>
   );
-}
+};
 
 export default ExampleTypography;
