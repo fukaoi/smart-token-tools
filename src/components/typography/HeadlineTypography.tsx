@@ -1,5 +1,5 @@
 import Typography from '@mui/material/Typography';
-import {FC} from 'react';
+import { FC } from 'react';
 
 const styles = {
   headline: {
@@ -10,14 +10,11 @@ const styles = {
   },
 };
 
-const HeadlineTypography:FC<{message: string}> = ({message}) => {
-  return ( 
-  <Typography 
-    align='left' 
-    variant='h6' 
-    sx={styles.headline}
-  >{message}
-  </Typography>
+const HeadlineTypography: FC<{ message: string }> = ({ message }) => {
+  return (
+    <Typography align="left" variant="h6" sx={styles.headline}>
+      {message}
+    </Typography>
   );
 };
 

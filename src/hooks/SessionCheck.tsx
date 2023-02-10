@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 export const useSessionCheck = (
-  setWalletAddress: (address: string) => void
+  setWalletAddress: (address: string) => void,
 ) => {
   const navigate = useNavigate();
   useEffect(() => {

@@ -1,7 +1,7 @@
-import {FC} from 'react';
-import {Box} from '@mui/system';
+import { FC } from 'react';
+import { Box } from '@mui/system';
 import Typography from '@mui/material/Typography';
-import {theme} from '../../shared/colorTheme';
+import { theme } from '../../shared/colorTheme';
 
 const styles = {
   box: {
@@ -14,21 +14,18 @@ const styles = {
   },
 };
 
-const MintedInfoTypography: FC<{message: string}> = ({message}) => {
+const MintedInfoTypography: FC<{ message: string }> = ({ message }) => {
   return (
     <Box component="div" sx={styles.box}>
-      <Typography
-        component='div'
-        fontSize='16px'
-      > Your mint:
+      <Typography component="div" fontSize="16px">
+        {' '}
+        Your mint:
       </Typography>
-      <Typography
-        component='div'
-        fontSize='16px'
-      >{message}
+      <Typography component="div" fontSize="16px">
+        {message}
       </Typography>
     </Box>
   );
-}
+};
 
 export default MintedInfoTypography;

@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Paper, Box, FormControl } from '@mui/material';
 import { useForm } from 'react-hook-form';
 import TitleTypography from '../components/typography/TitleTypography';
+import { ValidatorError } from '@solana-suite/shared-metaplex';
 import AddressTypography from '../components/typography/AddressTypography';
 import ClusterRadio from '../components/radio/ClusterRadio';
 import TokenIssueTypeRadio from '../components/radio/TokenIssueTypeRadio';
@@ -10,13 +11,21 @@ import DecimalsTextField from '../components/textField/DecimalsTextField';
 import TokenKeyTextField from '../components/textField/TokenKeyTextField';
 import SubmitButton from '../components/button/SubmitButton';
 import Loading from '../components/Loading';
+import ErrorModal from '../components/modal/ErrorModal';
+import NameTextField from '../components/textField/NameTextField';
+import SymbolTextField from '../components/textField/SymbolTextField';
+import HeadlineTypography from '../components/typography/HeadlineTypography';
+import FileUploadUI from '../components/uiParts/FileUploadUI';
+import { validationRules } from '../shared/validation';
+import { mintToken, addMinting } from '../shared/tokenMint';
 import { useNavigate } from 'react-router-dom';
 import { useSessionCheck } from '../hooks/SessionCheck';
-import ErrorModal from '../components/modal/ErrorModal';
-import { mintToken, addMinting } from '../shared/tokenMint';
 
 export interface FormValues {
   cluster: string;
+  name: string;
+  symbol: string;
+  imagePreview?: string;
   issueType: string;
   totalSupply: number;
   decimals: number;
@@ -41,12 +50,18 @@ const TokenPage = () => {
     isDisabled: false,
   });
   const [errorModal, setErrorModal] = useState({ open: false, message: '' });
+  const [imagePreview, setImagePreview] = useState<File | string | undefined>(
+    undefined,
+  );
+  const [fileBuffer, setFileBuffer] = useState<ArrayBuffer>();
   const { handleSubmit, control, watch } = useForm<FormValues>({
     defaultValues: {
       cluster: 'devnet',
       issueType: 'new',
+      name: '',
+      symbol: '',
       totalSupply: 100000,
-      decimals: 2,
+      decimals: 1,
       tokenKey: '',
     },
   });
@@ -60,42 +75,45 @@ const TokenPage = () => {
     setBtnState({ title: 'Processing', isDisabled: true });
     setIsLoading(true);
 
-    let mint = '';
-    if (data.issueType === 'new') {
-      const res = await mintToken(
-        walletAddress,
-        data.cluster,
-        data.totalSupply,
-        data.decimals,
-      );
-      if (res.isErr) {
-        console.error(res);
-        setIsLoading(false);
-        setErrorModal({ open: true, message: res.error.message });
-      } else {
-        mint = res.value;
-      }
-    } else if (data.issueType === 'add' && data.tokenKey) {
-      const res = await addMinting(
-        data.tokenKey,
-        walletAddress,
-        data.cluster,
-        data.totalSupply,
-        data.decimals,
-      );
-      if (res.isErr) {
-        console.error(res);
-        setIsLoading(false);
-        setErrorModal({ open: true, message: res.error.message });
-      } else {
-        mint = res.value;
-      }
-    } else {
-      setIsLoading(false);
-      setErrorModal({ open: true, message: 'Error no match issue type' });
+    if (!fileBuffer) {
+      setErrorModal({ open: true, message: 'Please Image Upload' });
     }
-    console.log('# mint: ', mint);
-    mint.length !== 0 && navigate('/complete', { state: { mint } });
+
+    try {
+      let mint = '';
+      if (data.issueType === 'new') {
+        mint = await mintToken(
+          fileBuffer!,
+          data.name,
+          data.symbol,
+          walletAddress,
+          data.cluster,
+          data.totalSupply,
+          data.decimals,
+        );
+      } else if (data.issueType === 'add' && data.tokenKey) {
+        mint = await addMinting(
+          data.tokenKey,
+          walletAddress,
+          data.cluster,
+          data.totalSupply,
+          data.decimals,
+        );
+      } else {
+        setIsLoading(false);
+        setErrorModal({ open: true, message: 'Error no match issue type' });
+      }
+      console.log('# mint: ', mint);
+      mint.length !== 0 && navigate('/complete', { state: { mint } });
+    } catch (error) {
+      console.error(error);
+      if (error instanceof ValidatorError) {
+        console.error('validation error: ', error.details);
+      }
+      setBtnState({ title: 'Submit', isDisabled: false });
+      setIsLoading(false);
+      setErrorModal({ open: true, message: (error as Error).message });
+    }
   };
 
   useSessionCheck(setWalletAddress);
@@ -111,6 +129,28 @@ const TokenPage = () => {
             <Box sx={{ mb: 4 }} />
             <TokenIssueTypeRadio control={control} name="issueType" />
             <Box sx={{ mb: 4 }} />
+            {watch('issueType') === 'new' && (
+              <>
+                <Box sx={{ mb: 1 }} />
+                <NameTextField<FormValues>
+                  control={control}
+                  name="name"
+                  rules={validationRules.name}
+                />
+              </>
+            )}
+            <Box sx={{ mb: 4 }} />
+            {watch('issueType') === 'new' && (
+              <>
+                <Box sx={{ mb: 1 }} />
+                <SymbolTextField
+                  control={control}
+                  name="symbol"
+                  rules={validationRules.symbol}
+                />
+              </>
+            )}
+            <Box sx={{ mb: 4 }} />
             <TotalSupplyTextField control={control} name="totalSupply" />
             <Box sx={{ mb: 4 }} />
             <DecimalsTextField control={control} name="decimals" />
@@ -120,6 +160,17 @@ const TokenPage = () => {
                 <TokenKeyTextField control={control} name="tokenKey" />
               </>
             )}
+            <Box sx={{ mb: 4 }} />
+            <HeadlineTypography message="Image Upload" />
+            <Box sx={{ mb: 4 }} />
+            <FileUploadUI
+              {...{
+                imagePreview,
+                setErrorModal,
+                setImagePreview,
+                setFileBuffer,
+              }}
+            />
           </Paper>
           <Box sx={{ mb: 6 }} />
           <Box>

@@ -90,7 +90,7 @@ const TopPage = () => {
   // raise warning other page
   useEffect(() => {
     if (state?.warning !== undefined) {
-      setWarningModal({ open: true, message: state.warning  });
+      setWarningModal({ open: true, message: state.warning });
     }
   }, [state]);
 

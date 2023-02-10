@@ -1,10 +1,10 @@
 import TitleTypography from '../components/typography/TitleTypography';
 import CompleteBackground from '../assets/complete-background.png';
 import MintedInfoTypography from '../components/typography/MintedInfoTypography';
-import {Paper, Link, Box} from '@mui/material';
+import { Paper, Link, Box } from '@mui/material';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
-import {useLocation} from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 
 const styles = {
   container: {
@@ -23,10 +23,10 @@ const styles = {
     maxWidth: '800px',
     maxHeight: 'auto',
     marginLeft: '4em',
-    marginRight: '4em'
+    marginRight: '4em',
   },
   cardAction: {
-    justifyContent: 'center'
+    justifyContent: 'center',
   },
   root: {
     marginTop: '1em',
@@ -36,27 +36,28 @@ const styles = {
   },
   link: {
     textDecoration: 'none',
-  }
+  },
 };
 
 const CompletePage = () => {
-  const {state} = useLocation() as NavigateOptions;
+  const { state } = useLocation() as NavigateOptions;
   const mint = state.mint as string;
   return (
     <>
-      <TitleTypography title='Complete' />
+      <TitleTypography title="Complete" />
       <Box style={styles.container}>
         <Paper sx={styles.root}>
-          <img alt="complete" src={CompleteBackground} style={styles.cardMedia} />
-          <Typography
-            component='div'
-            fontSize='26px'
-            sx={{mt: 1, mb: 3}}
-          >Your token issuing was success!!
+          <img
+            alt="complete"
+            src={CompleteBackground}
+            style={styles.cardMedia}
+          />
+          <Typography component="div" fontSize="26px" sx={{ mt: 1, mb: 3 }}>
+            Your token issuing was success!!
           </Typography>
           <MintedInfoTypography message={mint} />
           <Link sx={styles.link} href={mint.toExplorerUrl()}>
-            <Button size='large'>See your token info at Explorer</Button>
+            <Button size="large">See your token info at Explorer</Button>
           </Link>
         </Paper>
       </Box>

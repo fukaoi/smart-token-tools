@@ -1,19 +1,45 @@
 import { PhantomSplToken } from '@solana-suite/phantom';
+import { ValidatorError } from '@solana-suite/shared-metaplex';
 
 export const mintToken = async (
+  filePath: ArrayBuffer,
+  name: string,
+  symbol: string,
   walletAddress: string,
   cluster: string,
   totalSupply: number,
   decimals: number,
 ) => {
-  const res = await PhantomSplToken.mint(
+  const royalty = 100;
+  const storageType = 'nftStorage';
+
+  const mint = await PhantomSplToken.mint(
+    {
+      name,
+      symbol,
+      filePath,
+      royalty,
+      storageType,
+    },
     walletAddress.toPublicKey(),
     cluster,
     totalSupply,
     decimals,
     window.solana,
   );
-  return res;
+
+  mint.match(
+    (ok: any) => {
+      console.debug('mint: ', ok);
+    },
+    (err: Error) => {
+      console.error('err:', err);
+      if ('details' in err) {
+        console.error((err as ValidatorError).details);
+      }
+    },
+  );
+  return mint.unwrap();
 };
 
 export const addMinting = async (
@@ -23,7 +49,7 @@ export const addMinting = async (
   totalSupply: number,
   decimals: number,
 ) => {
-  const res = await PhantomSplToken.add(
+  const mint = await PhantomSplToken.add(
     tokenKey.toPublicKey(),
     walletAddress.toPublicKey(),
     cluster,
@@ -31,5 +57,17 @@ export const addMinting = async (
     decimals,
     window.solana,
   );
-  return res;
+
+  mint.match(
+    (ok: any) => {
+      console.debug('mint: ', ok);
+    },
+    (err: Error) => {
+      console.error('err:', err);
+      if ('details' in err) {
+        console.error((err as ValidatorError).details);
+      }
+    },
+  );
+  return mint.unwrap();
 };

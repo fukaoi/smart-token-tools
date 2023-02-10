@@ -1,5 +1,5 @@
 import { PhantomMetaplex } from '@solana-suite/phantom';
-import { ValidatorError } from '@solana-suite/nft';
+import { ValidatorError } from '@solana-suite/shared-metaplex';
 
 export const addPublicKey = (creators: any) => {
   const res = creators.map(

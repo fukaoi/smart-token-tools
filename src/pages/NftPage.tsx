@@ -1,14 +1,14 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router';
 import { Paper, Box, FormControl } from '@mui/material';
-import { ValidatorError } from '@solana-suite/nft';
+import { ValidatorError } from '@solana-suite/shared-metaplex';
 import { ControllerRenderProps, useForm } from 'react-hook-form';
 import TitleTypography from '../components/typography/TitleTypography';
 import AddressTypography from '../components/typography/AddressTypography';
 import ClusterRadio from '../components/radio/ClusterRadio';
 import SubmitButton from '../components/button/SubmitButton';
 import ErrorModal from '../components/modal/ErrorModal';
-import NftNameTextField from '../components/textField/NftNameTextField';
+import NameTextField from '../components/textField/NameTextField';
 import SymbolTextField from '../components/textField/SymbolTextField';
 import OptionalButton from '../components/button/OptionalButton';
 import DescriptionTextField from '../components/textField/DescriptionTextField';
@@ -31,7 +31,6 @@ export interface NFTFormValues {
   control?: any;
   field?: ControllerRenderProps;
   optional?: any;
-  name?: string;
 }
 
 export interface Creator {
@@ -72,7 +71,7 @@ const NftPage = () => {
     mode: 'onSubmit',
     defaultValues: {
       cluster: 'devnet',
-      name: '',
+      nftName: '',
       symbol: '',
       description: '',
       royalty: 0,
@@ -120,7 +119,7 @@ const NftPage = () => {
       }
       const mint = await creatorMint(
         fileBuffer!,
-        data.name,
+        data.nftName,
         data.symbol,
         data.description,
         data.royalty,
@@ -138,7 +137,7 @@ const NftPage = () => {
       }
       setBtnState({ title: 'Submit', isDisabled: false });
       setIsLoading(false);
-      setErrorModal({ open: true, message: 'ERROR! Please try later again' });
+      setErrorModal({ open: true, message: (error as Error).message });
     }
   };
 
@@ -157,9 +156,9 @@ const NftPage = () => {
             <AddressTypography address={walletAddress} />
             <ClusterRadio control={control} name="cluster" />
             <Box sx={{ mb: 4 }} />
-            <NftNameTextField
+            <NameTextField<NFTFormValues>
               control={control}
-              name="name"
+              name="nftName"
               rules={validationRules.name}
             />
             <Box sx={{ mb: 4 }} />
