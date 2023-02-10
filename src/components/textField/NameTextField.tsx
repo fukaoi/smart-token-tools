@@ -11,8 +11,6 @@ const setTitle = (name: string) =>
 
 const NameTextField = <T extends FieldValues>(props: UseControllerProps<T>) => {
   const { field, fieldState } = useController(props);
-  console.log(field);
-
   return (
     <>
       <HeadlineTypography message={setTitle(field.name)} />
