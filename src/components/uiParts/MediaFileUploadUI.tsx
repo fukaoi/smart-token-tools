@@ -22,6 +22,7 @@ const MediaFileUploadUI: FC<MediaFileUploadUIProps> = ({
 
     const reader = new FileReader();
     const file = e.target.files[0];
+    alert(file.type);
     file.arrayBuffer().then(setMediaFileBuffer);
 
     // 100MB file size
@@ -39,6 +40,7 @@ const MediaFileUploadUI: FC<MediaFileUploadUIProps> = ({
     };
     reader.readAsDataURL(file);
   };
+  console.log(mediaPreview);
 
   const description = 'All file types can be uploaded';
 
