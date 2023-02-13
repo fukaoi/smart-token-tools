@@ -1,14 +1,14 @@
 import { Box, Button, ImageList, ImageListItem } from '@mui/material';
 import { FC } from 'react';
 
-export type FileUploadUIProps = {
+export type ImageFileUploadUIProps = {
   imagePreview: any;
   setErrorModal: any;
   setImagePreview: (file: File | string | undefined) => void;
   setFileBuffer: (buffer: ArrayBuffer) => void;
 };
 
-const FileUploadUI: FC<FileUploadUIProps> = ({
+const ImageFileUploadUI: FC<ImageFileUploadUIProps> = ({
   imagePreview,
   setImagePreview,
   setFileBuffer,
@@ -52,7 +52,7 @@ const FileUploadUI: FC<FileUploadUIProps> = ({
         />
         <Box sx={{ display: 'flex', mt: 2 }}>
           <Button variant="outlined" component="span">
-            Choose Image
+            Choose Image File
           </Button>
         </Box>
       </label>
@@ -76,4 +76,4 @@ const FileUploadUI: FC<FileUploadUIProps> = ({
     </>
   );
 };
-export default FileUploadUI;
+export default ImageFileUploadUI;

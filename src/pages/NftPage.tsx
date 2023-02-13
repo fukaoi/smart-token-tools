@@ -13,7 +13,7 @@ import SymbolTextField from '../components/textField/SymbolTextField';
 import OptionalButton from '../components/button/OptionalButton';
 import DescriptionTextField from '../components/textField/DescriptionTextField';
 import HeadlineTypography from '../components/typography/HeadlineTypography';
-import FileUploadUI from '../components/uiParts/FileUploadUI';
+import ImageFileUploadUI from '../components/uiParts/ImageFileUploadUI';
 import OptionalUI from '../components/uiParts/OptionalUI';
 import Loading from '../components/Loading';
 import { useSessionCheck } from '../hooks/SessionCheck';
@@ -174,9 +174,9 @@ const NftPage = () => {
               rules={validationRules.description}
             />
             <Box sx={{ mb: 4 }} />
-            <HeadlineTypography message="Image Upload" />
+            <HeadlineTypography message="Image file Upload" />
             <Box sx={{ mb: 4 }} />
-            <FileUploadUI
+            <ImageFileUploadUI
               {...{
                 imagePreview,
                 setErrorModal,

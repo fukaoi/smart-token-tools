@@ -15,7 +15,7 @@ import ErrorModal from '../components/modal/ErrorModal';
 import NameTextField from '../components/textField/NameTextField';
 import SymbolTextField from '../components/textField/SymbolTextField';
 import HeadlineTypography from '../components/typography/HeadlineTypography';
-import FileUploadUI from '../components/uiParts/FileUploadUI';
+import ImageFileUploadUI from '../components/uiParts/ImageFileUploadUI';
 import { validationRules } from '../shared/validation';
 import { mintToken, addMinting } from '../shared/tokenMint';
 import { useNavigate } from 'react-router-dom';
@@ -163,7 +163,7 @@ const TokenPage = () => {
             <Box sx={{ mb: 4 }} />
             <HeadlineTypography message="Image Upload" />
             <Box sx={{ mb: 4 }} />
-            <FileUploadUI
+            <ImageFileUploadUI
               {...{
                 imagePreview,
                 setErrorModal,

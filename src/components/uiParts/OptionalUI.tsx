@@ -1,10 +1,12 @@
 import { Box } from '@mui/material';
-import { FC } from 'react';
+import { FC, useState } from 'react';
 import { Control, useFieldArray } from 'react-hook-form';
 import RoyaltyTextField from '../textField/RoyaltyTextField';
 import CreatorUI from './CreatorUI';
 import AddCreatorButton from '../button/AddCreatorButton';
 import { NFTFormValues } from '../../pages/NftPage';
+import HeadlineTypography from '../typography/HeadlineTypography';
+import MediaFileUploadUI from '../uiParts/MediaFileUploadUI';
 import { validationRules } from '../../shared/validation';
 
 export type OptionalUIProps = {
@@ -17,7 +19,11 @@ const OptionalUI: FC<OptionalUIProps> = ({ isShow, control }) => {
     name: `creators`,
     control,
   });
-
+  const [mediaPreview, setMediaPreview] = useState<File | string | undefined>(
+    undefined,
+  );
+  const [mediaFileBuffer, setMediaFileBuffer] = useState<ArrayBuffer>();
+  const [errorModal, setErrorModal] = useState({ open: false, message: '' });
   const handleAddButton = () => {
     append({
       address: '',
@@ -35,9 +41,20 @@ const OptionalUI: FC<OptionalUIProps> = ({ isShow, control }) => {
         rules={validationRules.royalty}
       />
       <Box sx={{ mb: 4 }} />
+      <HeadlineTypography message="Optional media Upload" />
+      <Box sx={{ mb: 4 }} />
+      <MediaFileUploadUI
+        {...{
+          mediaPreview,
+          setErrorModal,
+          setMediaPreview,
+          setMediaFileBuffer,
+        }}
+      />
       <CreatorUI {...{ control, fields, remove }} />
       <Box sx={{ mb: 4 }} />
       <AddCreatorButton callbackFunc={handleAddButton} />
+      <Box sx={{ mb: 4 }} />
     </>
   ) : null;
 };
