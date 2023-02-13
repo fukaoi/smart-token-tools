@@ -23,7 +23,6 @@ const BackgroundBlur = ({ children }: { children: ReactNode }) => {
     }, 100);
   }, []);
 
-  console.log(style);
   return (
     <div id="bg-blur" style={style}>
       {children}
