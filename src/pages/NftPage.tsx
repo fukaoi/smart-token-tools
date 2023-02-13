@@ -19,6 +19,7 @@ import Loading from '../components/Loading';
 import { useSessionCheck } from '../hooks/SessionCheck';
 import { validationRules } from '../shared/validation';
 import { addPublicKey, creatorMint } from '../shared/nftMint';
+import BackgroundBlur from '../components/animation/BackgroundBlur';
 
 export interface NFTFormValues {
   cluster: string;
@@ -173,6 +174,9 @@ const NftPage = () => {
               name="description"
               rules={validationRules.description}
             />
+            <BackgroundBlur>
+              <div>aaaaaaaaaaaaaaaaaaaaaaaaa</div>
+            </BackgroundBlur>
             <Box sx={{ mb: 4 }} />
             <HeadlineTypography message="Image file Upload" />
             <Box sx={{ mb: 4 }} />

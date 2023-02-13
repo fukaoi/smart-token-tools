@@ -1,5 +1,6 @@
 import { Box, Button, ImageList, ImageListItem } from '@mui/material';
 import { FC } from 'react';
+import DescriptionTypography from '../typography/DescriptionTypography';
 
 export type MediaFileUploadUIProps = {
   mediaPreview: any;
@@ -39,8 +40,11 @@ const MediaFileUploadUI: FC<MediaFileUploadUIProps> = ({
     reader.readAsDataURL(file);
   };
 
+  const description = 'All file types can be uploaded';
+
   return (
     <>
+      <DescriptionTypography message={description} />
       <label htmlFor="media-upload">
         <input
           id="media-upload"
