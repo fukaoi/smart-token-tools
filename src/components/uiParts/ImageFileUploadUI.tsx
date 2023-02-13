@@ -1,5 +1,7 @@
 import { Box, Button, ImageList, ImageListItem } from '@mui/material';
 import { FC } from 'react';
+import DescriptionTypography from '../typography/DescriptionTypography';
+import ExampleTypography from '../typography/ExampleTypography';
 
 export type ImageFileUploadUIProps = {
   imagePreview: any;
@@ -37,8 +39,15 @@ const ImageFileUploadUI: FC<ImageFileUploadUIProps> = ({
     reader.readAsDataURL(file);
   };
 
+  const description = 'The following file types can be uploaded';
+  const example = `
+        png,  jpg,  gif,  svg
+    `;
+
   return (
     <>
+      <DescriptionTypography message={description} />
+      <ExampleTypography example={example} />
       <label htmlFor="image-upload">
         <input
           id="image-upload"

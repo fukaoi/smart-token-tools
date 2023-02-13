@@ -6,6 +6,7 @@ import { theme } from '../../shared/colorTheme';
 const styles = {
   box: {
     textAlign: 'left',
+    marginTop: '1em',
     marginBottom: '1em',
     marginLeft: '10px',
   },
