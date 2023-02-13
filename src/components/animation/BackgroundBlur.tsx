@@ -6,7 +6,7 @@ const styles = {
     transition: 'background-color 1s',
   },
   highlight: {
-    backgroundColor: '#FFB',
+    backgroundColor: '#7986cb',
     transition: '',
     transitionDuration: '0s',
   },

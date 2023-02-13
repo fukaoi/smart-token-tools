@@ -8,6 +8,7 @@ import { NFTFormValues } from '../../pages/NftPage';
 import HeadlineTypography from '../typography/HeadlineTypography';
 import MediaFileUploadUI from '../uiParts/MediaFileUploadUI';
 import { validationRules } from '../../shared/validation';
+import BackgroundBlur from '../animation/BackgroundBlur';
 
 export type OptionalUIProps = {
   isShow: boolean;
@@ -34,27 +35,29 @@ const OptionalUI: FC<OptionalUIProps> = ({ isShow, control }) => {
 
   return isShow ? (
     <>
-      <Box sx={{ mb: 4 }} />
-      <RoyaltyTextField
-        control={control}
-        name="royalty"
-        rules={validationRules.royalty}
-      />
-      <Box sx={{ mb: 4 }} />
-      <HeadlineTypography message="Optional media Upload" />
-      <Box sx={{ mb: 4 }} />
-      <MediaFileUploadUI
-        {...{
-          mediaPreview,
-          setErrorModal,
-          setMediaPreview,
-          setMediaFileBuffer,
-        }}
-      />
-      <CreatorUI {...{ control, fields, remove }} />
-      <Box sx={{ mb: 4 }} />
-      <AddCreatorButton callbackFunc={handleAddButton} />
-      <Box sx={{ mb: 4 }} />
+      <BackgroundBlur>
+        <Box sx={{ mb: 4 }} />
+        <RoyaltyTextField
+          control={control}
+          name="royalty"
+          rules={validationRules.royalty}
+        />
+        <Box sx={{ mb: 4 }} />
+        <HeadlineTypography message="Optional media Upload" />
+        <Box sx={{ mb: 4 }} />
+        <MediaFileUploadUI
+          {...{
+            mediaPreview,
+            setErrorModal,
+            setMediaPreview,
+            setMediaFileBuffer,
+          }}
+        />
+        <CreatorUI {...{ control, fields, remove }} />
+        <Box sx={{ mb: 4 }} />
+        <AddCreatorButton callbackFunc={handleAddButton} />
+        <Box sx={{ mb: 4 }} />
+      </BackgroundBlur>
     </>
   ) : null;
 };
