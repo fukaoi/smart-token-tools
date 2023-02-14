@@ -47,7 +47,6 @@ const ImageFileUploadUI: FC<ImageFileUploadUIProps> = ({
     <>
       <DescriptionTypography message={description} />
       <ExampleTypography example={example} />
-      <UploadedFileTypography fileName="test" />
       <label htmlFor="image-upload">
         <input
           id="image-upload"
@@ -66,21 +65,24 @@ const ImageFileUploadUI: FC<ImageFileUploadUIProps> = ({
         </Box>
       </label>
       {imagePreview ? (
-        <ImageList
-          sx={{ width: 300, height: 300 }}
-          variant="woven"
-          cols={1}
-          gap={1}
-        >
-          <ImageListItem>
-            <img
-              id="preview"
-              src={imagePreview}
-              alt="ImagePreview"
-              loading="lazy"
-            />
-          </ImageListItem>
-        </ImageList>
+        <>
+          <ImageList
+            sx={{ width: 300, height: 300 }}
+            variant="woven"
+            cols={1}
+            gap={1}
+          >
+            <ImageListItem>
+              <img
+                id="preview"
+                src={imagePreview}
+                alt="ImagePreview"
+                loading="lazy"
+              />
+            </ImageListItem>
+          </ImageList>
+          <UploadedFileTypography fileName="test" />
+        </>
       ) : null}
     </>
   );
