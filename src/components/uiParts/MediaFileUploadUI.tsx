@@ -1,5 +1,5 @@
 import { Box, Button, ImageList, ImageListItem } from '@mui/material';
-import { FC } from 'react';
+import { FC, useState } from 'react';
 import DescriptionTypography from '../typography/DescriptionTypography';
 import NoImage from '../../assets/no-image-available.jpg';
 import { FileUpload } from '../../shared/fileUpload';
@@ -13,26 +13,31 @@ export type MediaFileUploadUIProps = {
 
 type MediaFilePreviewFunc = (file: File | string | undefined) => void;
 
-const setMediaFile = (file: File, setMediaPreview: MediaFilePreviewFunc) => {
-  if (FileUpload.isImagePreviewFileType(file)) {
-    const reader = new FileReader();
-    reader.onload = () => {
-      setMediaPreview(reader.result as string);
-    };
-    reader.readAsDataURL(file);
-  } else {
-    setMediaPreview(NoImage);
-  }
-};
-
 const MediaFileUploadUI: FC<MediaFileUploadUIProps> = ({
   mediaPreview,
   setMediaFilePreview: setMediaPreview,
   setMediaFileBuffer,
   setErrorModal,
 }) => {
+  const description = 'All file types can be uploaded';
+  const warnDescription =
+    'This file type cant display image preview, but can upload blockchain storage';
+  const [message, setMessage] = useState(description);
+  const setMediaFile = (file: File) => {
+    if (FileUpload.isImagePreviewFileType(file)) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        setMediaPreview(reader.result as string);
+      };
+      reader.readAsDataURL(file);
+      setMessage(description);
+    } else {
+      setMediaPreview(NoImage);
+      setMessage(warnDescription);
+    }
+  };
+
   const handleOnAddImage = (e: React.ChangeEvent<HTMLInputElement>) => {
-    console.log(typeof e);
     if (FileUpload.isEmpty(e)) return;
     if (FileUpload.isMaxFileSize(e)) {
       setErrorModal({ open: true, message: 'ERROR! Max Image size is 100MB' });
@@ -43,14 +48,12 @@ const MediaFileUploadUI: FC<MediaFileUploadUIProps> = ({
 
     const file = e.target.files![0];
     file.arrayBuffer().then(setMediaFileBuffer);
-    setMediaFile(file, setMediaPreview);
+    setMediaFile(file);
   };
-
-  const description = 'All file types can be uploaded';
 
   return (
     <>
-      <DescriptionTypography message={description} />
+      <DescriptionTypography message={message} />
       <label htmlFor="media-upload">
         <input
           id="media-upload"
