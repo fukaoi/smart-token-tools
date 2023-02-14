@@ -61,6 +61,7 @@ const MediaFileUploadUI: FC<MediaFileUploadUIProps> = ({
           style={{ display: 'none' }}
           type="file"
           accept="*/*"
+          multiple
           onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
             handleOnAddImage(e)
           }

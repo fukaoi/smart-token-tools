@@ -1,12 +1,13 @@
 import { ReactNode, useEffect, useState } from 'react';
+import { theme } from '../../shared/colorTheme';
 
 const styles = {
   box: {
-    backgroundColor: '#fff',
+    backgroundColor: theme.palette.common.white,
     transition: 'background-color 1s',
   },
   highlight: {
-    backgroundColor: '#7986cb',
+    backgroundColor: theme.palette.primary.light,
     transition: '',
     transitionDuration: '0s',
   },

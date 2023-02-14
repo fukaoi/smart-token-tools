@@ -3,6 +3,7 @@ import { FC } from 'react';
 import { FileUpload } from '../../shared/fileUpload';
 import DescriptionTypography from '../typography/DescriptionTypography';
 import ExampleTypography from '../typography/ExampleTypography';
+import UploadedFileTypography from '../typography/UploadedFileTypography';
 
 export type ImageFileUploadUIProps = {
   imagePreview: any;
@@ -32,7 +33,6 @@ const ImageFileUploadUI: FC<ImageFileUploadUIProps> = ({
 
     reader.onload = () => {
       const result = reader.result as unknown as string;
-      console.log(result);
       setImagePreview(result);
     };
     reader.readAsDataURL(file);
@@ -47,6 +47,7 @@ const ImageFileUploadUI: FC<ImageFileUploadUIProps> = ({
     <>
       <DescriptionTypography message={description} />
       <ExampleTypography example={example} />
+      <UploadedFileTypography fileName="test" />
       <label htmlFor="image-upload">
         <input
           id="image-upload"

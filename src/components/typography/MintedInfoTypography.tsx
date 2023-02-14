@@ -7,7 +7,7 @@ const styles = {
   box: {
     background: theme.palette.blueGuradation.main,
     borderRadius: 3,
-    color: 'white',
+    color: theme.palette.common.white,
     padding: '5px',
     marginBottom: '1em',
     boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',

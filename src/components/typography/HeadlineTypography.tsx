@@ -1,11 +1,12 @@
 import Typography from '@mui/material/Typography';
 import { FC } from 'react';
+import { theme } from '../../shared/colorTheme';
 
 const styles = {
   headline: {
     padding: '3px 15px',
-    borderLeft: '3px solid #777777',
-    background: '#f1f1f1',
+    borderLeft: theme.palette.headLineBorder.main,
+    background: theme.palette.headLineBackground.main,
     marginBottom: '1.5',
   },
 };

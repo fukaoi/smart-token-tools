@@ -1,5 +1,5 @@
 import { createTheme } from '@mui/material/styles';
-import { indigo, deepOrange, grey } from '@mui/material/colors';
+import { indigo, deepOrange, grey, yellow } from '@mui/material/colors';
 
 declare module '@mui/material/styles/createPalette' {
   interface Palette {
@@ -7,6 +7,9 @@ declare module '@mui/material/styles/createPalette' {
     orangeGuradation: Palette['primary'];
     deepGrey: Palette['primary'];
     textBlack: Palette['primary'];
+    limeLight: Palette['primary'];
+    headLineBorder: Palette['primary'];
+    headLineBackground: Palette['primary'];
   }
 
   interface PaletteOptions {
@@ -14,6 +17,9 @@ declare module '@mui/material/styles/createPalette' {
     orangeGuradation: PaletteOptions['primary'];
     deepGrey: PaletteOptions['primary'];
     textBlack: PaletteOptions['primary'];
+    limeLight: PaletteOptions['primary'];
+    headLineBorder: PaletteOptions['primary'];
+    headLineBackground: PaletteOptions['primary'];
   }
 }
 
@@ -37,6 +43,15 @@ export const theme = createTheme({
     textBlack: {
       main: 'none solid rgb(0, 0, 0, 0, 0.87)',
       light: 'none solid rgb(0, 0, 0, 0, 0.6)',
+    },
+    limeLight: {
+      main: yellow[50],
+    },
+    headLineBorder: {
+      main: '3px solid #777777',
+    },
+    headLineBackground: {
+      main: '#f1f1f1',
     },
   },
 });
