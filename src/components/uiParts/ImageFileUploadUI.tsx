@@ -18,14 +18,14 @@ const ImageFileUploadUI: FC<ImageFileUploadUIProps> = ({
   setErrorModal,
 }) => {
   const handleOnAddImage = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setImagePreview(undefined);
-
     if (FileUpload.isEmpty(e) || !FileUpload.isImagePreviewFileType(e)) return;
     if (FileUpload.isMaxFileSize(e)) {
       setErrorModal({ open: true, message: 'ERROR! Max Image size is 100MB' });
       return;
     }
-    
+
+    setImagePreview(undefined);
+
     const reader = new FileReader();
     const file = e.target.files![0];
     file.arrayBuffer().then(setFileBuffer);
