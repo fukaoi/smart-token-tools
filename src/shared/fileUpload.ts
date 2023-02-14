@@ -4,14 +4,21 @@ export namespace FileUpload {
   export const isImagePreviewFileType = (
     e: React.ChangeEvent<HTMLInputElement> | File,
   ): boolean => {
+    console.log(e.type);
     if (e instanceof File) {
       const fileType = e.type;
-      if (/image\/(.*)/.test(fileType) && !/image\/tiff/.test(fileType)) {
+      if (
+        /image\/(.*)/.test(fileType) &&
+        !/image\/(tiff|psd|vnd|adobe|photoshop)/.test(fileType)
+      ) {
         return true;
       }
     } else {
       const fileType = e.target.files![0].type;
-      if (/image\/(.*)/.test(fileType) && !/image\/tiff/.test(fileType)) {
+      if (
+        /image\/(.*)/.test(fileType) &&
+        !/image\/(tiff|psd|vnd|adobe|photoshop)/.test(fileType)
+      ) {
         return true;
       }
     }
