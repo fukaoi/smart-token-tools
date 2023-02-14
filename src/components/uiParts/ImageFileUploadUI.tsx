@@ -1,5 +1,6 @@
 import { Box, Button, ImageList, ImageListItem } from '@mui/material';
 import { FC } from 'react';
+import { FileUpload } from '../../shared/fileUpload';
 import DescriptionTypography from '../typography/DescriptionTypography';
 import ExampleTypography from '../typography/ExampleTypography';
 
@@ -19,21 +20,19 @@ const ImageFileUploadUI: FC<ImageFileUploadUIProps> = ({
   const handleOnAddImage = (e: React.ChangeEvent<HTMLInputElement>) => {
     setImagePreview(undefined);
 
-    if (!e.target.files) return;
-    if (!e.target.files?.[0].type.match('image.*')) return;
-
-    const reader = new FileReader();
-    const file = e.target.files[0];
-    file.arrayBuffer().then(setFileBuffer);
-
-    // 100MB Image Size
-    if (100000000 < file.size) {
+    if (FileUpload.isEmpty(e) || !FileUpload.isImagePreviewFileType(e)) return;
+    if (FileUpload.isMaxFileSize(e)) {
       setErrorModal({ open: true, message: 'ERROR! Max Image size is 100MB' });
       return;
     }
+    
+    const reader = new FileReader();
+    const file = e.target.files![0];
+    file.arrayBuffer().then(setFileBuffer);
 
     reader.onload = () => {
       const result = reader.result as unknown as string;
+      console.log(result);
       setImagePreview(result);
     };
     reader.readAsDataURL(file);
@@ -41,7 +40,7 @@ const ImageFileUploadUI: FC<ImageFileUploadUIProps> = ({
 
   const description = 'The following file types can be uploaded';
   const example = `
-        png,  jpg,  gif,  svg
+        png,  jpg,  gif,  svg,  bmp,  webp 
     `;
 
   return (

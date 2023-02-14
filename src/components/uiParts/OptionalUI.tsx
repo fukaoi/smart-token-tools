@@ -9,6 +9,7 @@ import HeadlineTypography from '../typography/HeadlineTypography';
 import MediaFileUploadUI from '../uiParts/MediaFileUploadUI';
 import { validationRules } from '../../shared/validation';
 import BackgroundBlur from '../animation/BackgroundBlur';
+import ErrorModal from '../modal/ErrorModal';
 
 export type OptionalUIProps = {
   isShow: boolean;
@@ -20,9 +21,9 @@ const OptionalUI: FC<OptionalUIProps> = ({ isShow, control }) => {
     name: `creators`,
     control,
   });
-  const [mediaPreview, setMediaPreview] = useState<File | string | undefined>(
-    undefined,
-  );
+  const [mediaPreview, setMediaFilePreview] = useState<
+    File | string | undefined
+  >(undefined);
   const [mediaFileBuffer, setMediaFileBuffer] = useState<ArrayBuffer>();
   const [errorModal, setErrorModal] = useState({ open: false, message: '' });
   const handleAddButton = () => {
@@ -31,6 +32,9 @@ const OptionalUI: FC<OptionalUIProps> = ({ isShow, control }) => {
       share: 0,
       verified: false,
     });
+  };
+  const handleClose = () => {
+    setErrorModal({ open: false, message: '' });
   };
 
   return isShow ? (
@@ -49,7 +53,7 @@ const OptionalUI: FC<OptionalUIProps> = ({ isShow, control }) => {
           {...{
             mediaPreview,
             setErrorModal,
-            setMediaPreview,
+            setMediaFilePreview,
             setMediaFileBuffer,
           }}
         />
@@ -58,6 +62,11 @@ const OptionalUI: FC<OptionalUIProps> = ({ isShow, control }) => {
         <AddCreatorButton callbackFunc={handleAddButton} />
         <Box sx={{ mb: 4 }} />
       </BackgroundBlur>
+      <ErrorModal
+        open={errorModal.open}
+        onClose={handleClose}
+        message={errorModal.message}
+      />
     </>
   ) : null;
 };
