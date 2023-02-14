@@ -1,9 +1,24 @@
-import { Box, Button, ImageList, ImageListItem } from '@mui/material';
-import { FC } from 'react';
+import {
+  Box,
+  Button,
+  CardContent,
+  CardMedia,
+  ImageList,
+  ImageListItem,
+} from '@mui/material';
+import { FC, useState } from 'react';
 import { FileUpload } from '../../shared/fileUpload';
 import DescriptionTypography from '../typography/DescriptionTypography';
 import ExampleTypography from '../typography/ExampleTypography';
-import UploadedFileTypography from '../typography/UploadedFileTypography';
+import Card from '@mui/material/Card';
+import { Alert } from '@mui/material';
+import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
+
+const styles = {
+  card: {
+    marginTop: '1em',
+  },
+};
 
 export type ImageFileUploadUIProps = {
   imagePreview: any;
@@ -34,9 +49,12 @@ const ImageFileUploadUI: FC<ImageFileUploadUIProps> = ({
     reader.onload = () => {
       const result = reader.result as unknown as string;
       setImagePreview(result);
+      setFileName(file.name);
     };
     reader.readAsDataURL(file);
   };
+
+  const [fileName, setFileName] = useState('');
 
   const description = 'The following file types can be uploaded';
   const example = `
@@ -65,24 +83,29 @@ const ImageFileUploadUI: FC<ImageFileUploadUIProps> = ({
         </Box>
       </label>
       {imagePreview ? (
-        <>
-          <ImageList
-            sx={{ width: 300, height: 300 }}
-            variant="woven"
-            cols={1}
-            gap={1}
-          >
-            <ImageListItem>
-              <img
-                id="preview"
-                src={imagePreview}
-                alt="ImagePreview"
-                loading="lazy"
-              />
-            </ImageListItem>
-          </ImageList>
-          <UploadedFileTypography fileName="test" />
-        </>
+        <Card style={styles.card}>
+          <CardMedia>
+            <ImageList variant="woven" cols={1} gap={1}>
+              <ImageListItem>
+                <img
+                  id="preview"
+                  src={imagePreview}
+                  alt="ImagePreview"
+                  loading="lazy"
+                />
+              </ImageListItem>
+            </ImageList>
+            <CardContent>
+              <Alert
+                iconMapping={{
+                  success: <CheckCircleOutlineIcon fontSize="inherit" />,
+                }}
+              >
+                Upload! — {fileName}
+              </Alert>
+            </CardContent>
+          </CardMedia>
+        </Card>
       ) : null}
     </>
   );
