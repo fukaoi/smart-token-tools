@@ -4,7 +4,7 @@ import { ValidatorError } from '@solana-suite/shared-metaplex';
 export const addPublicKey = (creators: any) => {
   const res = creators.map(
     (item: { address: string; share: number; verified: boolean }) => {
-      const address = item.address.toPublicKey();
+      const address = item.address;
       return {
         address,
         share: item.share,
