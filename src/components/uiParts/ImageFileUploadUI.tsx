@@ -18,6 +18,13 @@ const styles = {
   card: {
     marginTop: '1em',
   },
+  image: {
+    width: '400px',
+    height: '400px',
+    marginTop: '1em',
+    marginLeft: 'auto',
+    marginRight: 'auto',
+  },
 };
 
 export type ImageFileUploadUIProps = {
@@ -85,7 +92,7 @@ const ImageFileUploadUI: FC<ImageFileUploadUIProps> = ({
       {imagePreview ? (
         <Card style={styles.card}>
           <CardMedia>
-            <ImageList variant="woven" cols={1} gap={1}>
+            <ImageList sx={styles.image} variant="woven" cols={1} gap={1}>
               <ImageListItem>
                 <img
                   id="preview"
