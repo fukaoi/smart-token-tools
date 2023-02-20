@@ -1,11 +1,15 @@
 import { Box } from '@mui/material';
-import { FC } from 'react';
+import { FC, useState } from 'react';
 import { Control, useFieldArray } from 'react-hook-form';
 import RoyaltyTextField from '../textField/RoyaltyTextField';
 import CreatorUI from './CreatorUI';
 import AddCreatorButton from '../button/AddCreatorButton';
 import { NFTFormValues } from '../../pages/NftPage';
+import HeadlineTypography from '../typography/HeadlineTypography';
+import MediaFileUploadUI from '../uiParts/MediaFileUploadUI';
 import { validationRules } from '../../shared/validation';
+import BackgroundBlur from '../animation/BackgroundBlur';
+import ErrorModal from '../modal/ErrorModal';
 
 export type OptionalUIProps = {
   isShow: boolean;
@@ -17,7 +21,11 @@ const OptionalUI: FC<OptionalUIProps> = ({ isShow, control }) => {
     name: `creators`,
     control,
   });
-
+  const [mediaPreview, setMediaFilePreview] = useState<
+    File | string | undefined
+  >(undefined);
+  const [mediaFileBuffer, setMediaFileBuffer] = useState<ArrayBuffer>();
+  const [errorModal, setErrorModal] = useState({ open: false, message: '' });
   const handleAddButton = () => {
     append({
       address: '',
@@ -25,19 +33,40 @@ const OptionalUI: FC<OptionalUIProps> = ({ isShow, control }) => {
       verified: false,
     });
   };
+  const handleClose = () => {
+    setErrorModal({ open: false, message: '' });
+  };
 
   return isShow ? (
     <>
-      <Box sx={{ mb: 4 }} />
-      <RoyaltyTextField
-        control={control}
-        name="royalty"
-        rules={validationRules.royalty}
+      <BackgroundBlur>
+        <Box sx={{ mb: 4 }} />
+        <RoyaltyTextField
+          control={control}
+          name="royalty"
+          rules={validationRules.royalty}
+        />
+        <Box sx={{ mb: 4 }} />
+        <HeadlineTypography message="Optional media Upload" />
+        <Box sx={{ mb: 4 }} />
+        <MediaFileUploadUI
+          {...{
+            mediaPreview,
+            setErrorModal,
+            setMediaFilePreview,
+            setMediaFileBuffer,
+          }}
+        />
+        <CreatorUI {...{ control, fields, remove }} />
+        <Box sx={{ mb: 4 }} />
+        <AddCreatorButton callbackFunc={handleAddButton} />
+        <Box sx={{ mb: 4 }} />
+      </BackgroundBlur>
+      <ErrorModal
+        open={errorModal.open}
+        onClose={handleClose}
+        message={errorModal.message}
       />
-      <Box sx={{ mb: 4 }} />
-      <CreatorUI {...{ control, fields, remove }} />
-      <Box sx={{ mb: 4 }} />
-      <AddCreatorButton callbackFunc={handleAddButton} />
     </>
   ) : null;
 };

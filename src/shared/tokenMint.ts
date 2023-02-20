@@ -50,8 +50,8 @@ export const addMinting = async (
   decimals: number,
 ) => {
   const mint = await PhantomSplToken.add(
-    tokenKey.toPublicKey(),
-    walletAddress.toPublicKey(),
+    tokenKey,
+    walletAddress,
     cluster,
     totalSupply,
     decimals,

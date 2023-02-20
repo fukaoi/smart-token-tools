@@ -1,10 +1,11 @@
 import { FC } from 'react';
 import { Box } from '@mui/system';
 import Typography from '@mui/material/Typography';
+import { theme } from '../../shared/colorTheme';
 
 const styles = {
   box: {
-    background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
+    background: theme.palette.orangeGuradation.main,
     borderRadius: 3,
     color: 'white',
     padding: '5px',

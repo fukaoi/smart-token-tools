@@ -44,7 +44,7 @@ const FaucetPage = () => {
 
   const onSubmit = async (walletAddress: string) => {
     setBtnState({ title: 'Processing', isDisabled: true });
-    const res = await Airdrop.request(walletAddress.toPublicKey());
+    const res = await Airdrop.request(walletAddress);
     if (res.isErr) {
       setErrorModal({ open: true, message: res.error.message });
     } else {
