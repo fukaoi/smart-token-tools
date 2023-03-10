@@ -1,18 +1,18 @@
 import { PhantomMetaplex } from '@solana-suite/phantom';
-import { ValidatorError } from '@solana-suite/shared-metaplex';
+import { ValidatorError, InputCreators } from '@solana-suite/shared-metaplex';
 
-export const addPublicKey = (creators: any) => {
-  const res = creators.map(
-    (item: { address: string; share: number; verified: boolean }) => {
+export const addPublicKey = (originalData: any): InputCreators[] => {
+  const creators = originalData.map(
+    (item: { address: string; share: number }) => {
       const address = item.address;
       return {
         address,
         share: item.share,
-        verified: item.verified,
+        authority: '',
       };
     },
   );
-  return res;
+  return creators;
 };
 
 export const creatorMint = async (

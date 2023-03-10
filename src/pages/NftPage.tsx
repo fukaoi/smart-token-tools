@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router';
 import { Paper, Box, FormControl } from '@mui/material';
-import { ValidatorError } from '@solana-suite/shared-metaplex';
+import { InputCreators, ValidatorError } from '@solana-suite/shared-metaplex';
 import { ControllerRenderProps, useForm } from 'react-hook-form';
 import TitleTypography from '../components/typography/TitleTypography';
 import AddressTypography from '../components/typography/AddressTypography';
@@ -78,7 +78,6 @@ const NftPage = () => {
       creators: [
         {
           address: '',
-          verified: true,
           share: 0,
         },
       ],
@@ -99,7 +98,7 @@ const NftPage = () => {
     }
 
     try {
-      let creators = [];
+      let creators: InputCreators[] = [];
       if (data.creators[0].address !== '') {
         creators = addPublicKey(data.creators);
         const sumShare = creators.reduce(
