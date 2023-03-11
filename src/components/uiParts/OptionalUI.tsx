@@ -21,10 +21,10 @@ const OptionalUI: FC<OptionalUIProps> = ({ isShow, control }) => {
     name: `creators`,
     control,
   });
-  const [mediaPreview, setMediaFilePreview] = useState<
-    File | string | undefined
-  >(undefined);
-  const [mediaFileBuffer, setMediaFileBuffer] = useState<ArrayBuffer>();
+  const [mediaFilesPreview, setMediaFilesPreview] = useState<
+    File[] | string[] | undefined
+  >([]);
+  const [_, setMediaFilesBuffer] = useState<ArrayBuffer[]>([]);
   const [errorModal, setErrorModal] = useState({ open: false, message: '' });
   const handleAddButton = () => {
     append({
@@ -51,10 +51,9 @@ const OptionalUI: FC<OptionalUIProps> = ({ isShow, control }) => {
         <Box sx={{ mb: 4 }} />
         <MediaFileUploadUI
           {...{
-            mediaPreview,
-            setErrorModal,
-            setMediaFilePreview,
-            setMediaFileBuffer,
+            mediaFilesPreview,
+            setMediaFilesPreview,
+            setMediaFilesBuffer,
           }}
         />
         <CreatorUI {...{ control, fields, remove }} />

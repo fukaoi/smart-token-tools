@@ -41,6 +41,7 @@ const ImageFileUploadUI: FC<ImageFileUploadUIProps> = ({
   setErrorModal,
 }) => {
   const handleOnAddImage = (e: React.ChangeEvent<HTMLInputElement>) => {
+    e.preventDefault();
     if (FileUpload.isEmpty(e) || !FileUpload.isImagePreviewFileType(e)) return;
     if (FileUpload.isMaxFileSize(e)) {
       setErrorModal({ open: true, message: 'ERROR! Max Image size is 100MB' });
@@ -54,8 +55,7 @@ const ImageFileUploadUI: FC<ImageFileUploadUIProps> = ({
     file.arrayBuffer().then(setFileBuffer);
 
     reader.onload = () => {
-      const result = reader.result as unknown as string;
-      setImagePreview(result);
+      setImagePreview(reader.result as string);
       setFileName(file.name);
     };
     reader.readAsDataURL(file);
@@ -108,7 +108,7 @@ const ImageFileUploadUI: FC<ImageFileUploadUIProps> = ({
                   success: <CheckCircleOutlineIcon fontSize="inherit" />,
                 }}
               >
-                Upload! — {fileName}
+                {fileName}
               </Alert>
             </CardContent>
           </CardMedia>
