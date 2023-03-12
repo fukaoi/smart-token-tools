@@ -14,6 +14,11 @@ import { Alert } from '@mui/material';
 import Card from '@mui/material/Card';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 
+   // files?: {
+   //      type?: string; => fileType
+   //      uri?: string;  => buffer
+   //      [key: string]: unknown => fileNames
+
 const styles = {
   card: {
     marginTop: '1em',
