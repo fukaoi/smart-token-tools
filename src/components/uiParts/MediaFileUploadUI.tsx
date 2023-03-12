@@ -48,62 +48,52 @@ const MediaFileUploadUI: FC<MediaFileUploadUIProps> = ({
 
   const handleOnAddMediaFile = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files![0];
-    // file.arrayBuffer().then(setMediaFilesBuffer);
-    const tempFilesPreview: string[] = mediaFilesPreview
-      ? mediaFilesPreview
-      : [];
-    const tempFilesName: string[] = filesName ? filesName : [];
+    file.arrayBuffer().then(buffer => setMediaFilesBuffer([buffer]));
     if (FileUpload.isImagePreviewFileType(file)) {
       const reader = new FileReader();
       reader.onload = () => {
-        tempFilesPreview.push(reader.result as string);
+        const result = reader.result as string;
+        setMediaFilesPreview([...mediaFilesPreview, result]);
       };
       reader.readAsDataURL(file);
       setMessage(description);
     } else {
-      tempFilesPreview.push(NoImage);
+      setMediaFilesPreview([...mediaFilesPreview, NoImage]);
       setMessage(warnDescription);
     }
-    tempFilesName.push(file.name);
-    setFilesName(tempFilesName);
-    setMediaFilesPreview(tempFilesPreview);
-    alert(file.name);
+    setFilesName([...filesName, file.name]);
   };
-
-  console.log('#mediaFilesPreview', mediaFilesPreview);
-  console.log('#filesname', filesName);
 
   return (
     <>
       <DescriptionTypography message={message} />
-      {mediaFilesPreview &&
-        mediaFilesPreview.map((element: string, i: number) => {
-          return (
-            <Card style={styles.card} key={i}>
-              <CardMedia>
-                <ImageList sx={styles.image} variant="woven" cols={1} gap={1}>
-                  <ImageListItem>
-                    <img
-                      id="mediaFilePreview"
-                      src={element}
-                      alt="mediaFilePreview"
-                      loading="lazy"
-                    />
-                  </ImageListItem>
-                </ImageList>
-                <CardContent>
-                  <Alert
-                    iconMapping={{
-                      success: <CheckCircleOutlineIcon fontSize="inherit" />,
-                    }}
-                  >
-                    {filesName[i]}
-                  </Alert>
-                </CardContent>
-              </CardMedia>
-            </Card>
-          );
-        })}
+      {mediaFilesPreview.map((element: string, i: number) => {
+        return (
+          <Card style={styles.card} key={i}>
+            <CardMedia>
+              <ImageList sx={styles.image} variant="woven" cols={1} gap={1}>
+                <ImageListItem>
+                  <img
+                    id="mediaFilePreview"
+                    src={element}
+                    alt="mediaFilePreview"
+                    loading="lazy"
+                  />
+                </ImageListItem>
+              </ImageList>
+              <CardContent>
+                <Alert
+                  iconMapping={{
+                    success: <CheckCircleOutlineIcon fontSize="inherit" />,
+                  }}
+                >
+                  {filesName[i]}
+                </Alert>
+              </CardContent>
+            </CardMedia>
+          </Card>
+        );
+      })}
       <label htmlFor="media-upload">
         <input
           id="media-upload"
