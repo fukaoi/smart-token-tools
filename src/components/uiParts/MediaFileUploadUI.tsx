@@ -43,7 +43,7 @@ const MediaFileUploadUI: FC<MediaFileUploadUIProps> = ({
   const warnDescription =
     'This file type cant display image preview, but can upload blockchain storage';
   const [message, setMessage] = useState(description);
-  const [mediaFiles, setMediaFiles] = useContext(MediaFilesContext);
+  const { mediaFiles, setMediaFiles } = useContext(MediaFilesContext);
 
   const handleOnAddMediaFile = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files![0];
@@ -52,11 +52,17 @@ const MediaFileUploadUI: FC<MediaFileUploadUIProps> = ({
       reader.onload = () => {
         const result = reader.result as string;
         setMediaFilesPreview([...mediaFilesPreview, result]);
-        setMediaFiles([{}]);
-        // setMediaFiles([
-        //   ...mediaFiles,
-        //   { fileName: file.name, fileType: file.type, bufer: [] },
-        // ]);
+        // setMediaFiles([]);
+        file.arrayBuffer().then(buffer => {
+          setMediaFiles([
+            ...mediaFiles,
+            {
+              fileName: file.name,
+              fileType: file.type,
+              buffer,
+            },
+          ]);
+        });
       };
       reader.readAsDataURL(file);
       setMessage(description);
@@ -64,7 +70,6 @@ const MediaFileUploadUI: FC<MediaFileUploadUIProps> = ({
       setMediaFilesPreview([...mediaFilesPreview, NoImage]);
       setMessage(warnDescription);
     }
-    // setFilesName([...filesName, file.name]);
   };
 
   return (
@@ -90,7 +95,7 @@ const MediaFileUploadUI: FC<MediaFileUploadUIProps> = ({
                     success: <CheckCircleOutlineIcon fontSize="inherit" />,
                   }}
                 >
-                  {mediaFiles[i].fileName}
+                  {mediaFiles[i] && mediaFiles[i].fileName}
                 </Alert>
               </CardContent>
             </CardMedia>

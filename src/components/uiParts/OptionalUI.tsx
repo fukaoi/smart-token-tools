@@ -4,7 +4,7 @@ import { Control, useFieldArray } from 'react-hook-form';
 import RoyaltyTextField from '../textField/RoyaltyTextField';
 import CreatorUI from './CreatorUI';
 import AddCreatorButton from '../button/AddCreatorButton';
-import { type } from '../../pages/NftPage';
+import { NFTFormValues } from '../../pages/NftPage';
 import HeadlineTypography from '../typography/HeadlineTypography';
 import MediaFileUploadUI from '../uiParts/MediaFileUploadUI';
 import { validationRules } from '../../shared/validation';
@@ -13,7 +13,7 @@ import ErrorModal from '../modal/ErrorModal';
 
 export type OptionalUIProps = {
   isShow: boolean;
-  control?: Control<type>;
+  control?: Control<NFTFormValues>;
 };
 
 const OptionalUI: FC<OptionalUIProps> = ({ isShow, control }) => {

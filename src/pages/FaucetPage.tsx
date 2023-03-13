@@ -15,7 +15,7 @@ export type FormValues = {
   totalSupply: number;
   decimals: number;
   tokenKey?: string;
-}
+};
 
 const styles = {
   container: {
