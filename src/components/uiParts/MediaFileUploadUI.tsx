@@ -6,18 +6,14 @@ import {
   CardContent,
   CardMedia,
 } from '@mui/material';
-import { FC, useEffect, useState } from 'react';
+import { FC, useContext, useState } from 'react';
 import DescriptionTypography from '../typography/DescriptionTypography';
 import NoImage from '../../assets/no-image-available.jpg';
 import { FileUpload } from '../../shared/fileUpload';
 import { Alert } from '@mui/material';
 import Card from '@mui/material/Card';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
-
-   // files?: {
-   //      type?: string; => fileType
-   //      uri?: string;  => buffer
-   //      [key: string]: unknown => fileNames
+import { MediaFilesContext } from '../../types/context';
 
 const styles = {
   card: {
@@ -35,7 +31,6 @@ const styles = {
 export type MediaFileUploadUIProps = {
   mediaFilesPreview: any;
   setMediaFilesPreview: MediaFilePreviewFunc;
-  setMediaFilesBuffer: (buffer: ArrayBuffer[]) => void;
 };
 
 type MediaFilePreviewFunc = (file: File[] | string[] | undefined) => void;
@@ -43,22 +38,25 @@ type MediaFilePreviewFunc = (file: File[] | string[] | undefined) => void;
 const MediaFileUploadUI: FC<MediaFileUploadUIProps> = ({
   mediaFilesPreview,
   setMediaFilesPreview,
-  setMediaFilesBuffer,
 }) => {
   const description = 'All file types can be uploaded';
   const warnDescription =
     'This file type cant display image preview, but can upload blockchain storage';
   const [message, setMessage] = useState(description);
-  const [filesName, setFilesName] = useState<string[]>([]);
+  const [mediaFiles, setMediaFiles] = useContext(MediaFilesContext);
 
   const handleOnAddMediaFile = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files![0];
-    file.arrayBuffer().then(buffer => setMediaFilesBuffer([buffer]));
     if (FileUpload.isImagePreviewFileType(file)) {
       const reader = new FileReader();
       reader.onload = () => {
         const result = reader.result as string;
         setMediaFilesPreview([...mediaFilesPreview, result]);
+        setMediaFiles([{}]);
+        // setMediaFiles([
+        //   ...mediaFiles,
+        //   { fileName: file.name, fileType: file.type, bufer: [] },
+        // ]);
       };
       reader.readAsDataURL(file);
       setMessage(description);
@@ -66,7 +64,7 @@ const MediaFileUploadUI: FC<MediaFileUploadUIProps> = ({
       setMediaFilesPreview([...mediaFilesPreview, NoImage]);
       setMessage(warnDescription);
     }
-    setFilesName([...filesName, file.name]);
+    // setFilesName([...filesName, file.name]);
   };
 
   return (
@@ -92,7 +90,7 @@ const MediaFileUploadUI: FC<MediaFileUploadUIProps> = ({
                     success: <CheckCircleOutlineIcon fontSize="inherit" />,
                   }}
                 >
-                  {filesName[i]}
+                  {mediaFiles[i].fileName}
                 </Alert>
               </CardContent>
             </CardMedia>

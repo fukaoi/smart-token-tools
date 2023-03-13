@@ -9,7 +9,7 @@ import { Airdrop } from '@solana-suite/core';
 import ErrorModal from '../components/modal/ErrorModal';
 import { useSessionCheck } from '../hooks/SessionCheck';
 
-export interface FormValues {
+export type FormValues = {
   cluster: string;
   issueType: string;
   totalSupply: number;

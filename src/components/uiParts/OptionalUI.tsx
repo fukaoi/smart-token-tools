@@ -4,7 +4,7 @@ import { Control, useFieldArray } from 'react-hook-form';
 import RoyaltyTextField from '../textField/RoyaltyTextField';
 import CreatorUI from './CreatorUI';
 import AddCreatorButton from '../button/AddCreatorButton';
-import { NFTFormValues } from '../../pages/NftPage';
+import { type } from '../../pages/NftPage';
 import HeadlineTypography from '../typography/HeadlineTypography';
 import MediaFileUploadUI from '../uiParts/MediaFileUploadUI';
 import { validationRules } from '../../shared/validation';
@@ -13,7 +13,7 @@ import ErrorModal from '../modal/ErrorModal';
 
 export type OptionalUIProps = {
   isShow: boolean;
-  control?: Control<NFTFormValues>;
+  control?: Control<type>;
 };
 
 const OptionalUI: FC<OptionalUIProps> = ({ isShow, control }) => {
@@ -24,7 +24,6 @@ const OptionalUI: FC<OptionalUIProps> = ({ isShow, control }) => {
   const [mediaFilesPreview, setMediaFilesPreview] = useState<
     File[] | string[] | undefined
   >([]);
-  const [_, setMediaFilesBuffer] = useState<ArrayBuffer[]>([]);
   const [errorModal, setErrorModal] = useState({ open: false, message: '' });
   const handleAddButton = () => {
     append({
@@ -53,7 +52,6 @@ const OptionalUI: FC<OptionalUIProps> = ({ isShow, control }) => {
           {...{
             mediaFilesPreview,
             setMediaFilesPreview,
-            setMediaFilesBuffer,
           }}
         />
         <CreatorUI {...{ control, fields, remove }} />
