@@ -83,6 +83,12 @@ const NftPage = () => {
           share: 0,
         },
       ],
+      // properties: {
+      //   files:[{
+      //     filePath: '',
+      //     fileType: '',
+      //   }]
+      // }
     },
   });
 
@@ -126,6 +132,7 @@ const NftPage = () => {
         data.royalty,
         data.cluster,
         creators,
+        mediaFiles,
       );
 
       setBtnState({ title: 'Submit', isDisabled: false });

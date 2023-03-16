@@ -1,5 +1,10 @@
 import { PhantomMetaplex } from '@solana-suite/phantom';
-import { ValidatorError, InputCreators } from '@solana-suite/shared-metaplex';
+import {
+  ValidatorError,
+  InputCreators,
+  MetadataProperties,
+} from '@solana-suite/shared-metaplex';
+import { MediaFiles } from '../types/context';
 
 export const addPublicKey = (originalData: any): InputCreators[] => {
   const creators = originalData.map(
@@ -22,7 +27,8 @@ export const creatorMint = async (
   description: string,
   royalty: number,
   cluster: string,
-  creators?: any,
+  creators?: InputCreators[],
+  properties?: MediaFiles[],
 ) => {
   const mint = await PhantomMetaplex.mint(
     {
@@ -33,6 +39,7 @@ export const creatorMint = async (
       royalty,
       creators,
       storageType: 'nftStorage',
+      properties,
     },
     cluster,
     window.solana,
