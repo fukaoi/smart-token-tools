@@ -14,6 +14,7 @@ import { Alert } from '@mui/material';
 import Card from '@mui/material/Card';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import { MediaFilesContext } from '../../types/context';
+import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 
 const styles = {
   card: {
@@ -25,6 +26,9 @@ const styles = {
     marginTop: '1em',
     marginLeft: 'auto',
     marginRight: 'auto',
+  },
+  closedButton: {
+    marginTop: '10px',
   },
 };
 
@@ -96,12 +100,16 @@ const MediaFileUploadUI: FC<MediaFileUploadUIProps> = ({
                   }}
                 >
                   {mediaFiles[i] && mediaFiles[i].fileName}
+                  <Button sx={styles.closedButton} onClick={alert}>
+                    <HighlightOffIcon />
+                  </Button>
                 </Alert>
               </CardContent>
             </CardMedia>
           </Card>
         );
       })}
+
       <label htmlFor="media-upload">
         <input
           id="media-upload"
@@ -113,7 +121,6 @@ const MediaFileUploadUI: FC<MediaFileUploadUIProps> = ({
             handleOnAddMediaFile(e)
           }
         />
-
         <Box sx={{ display: 'flex', mt: 3 }}>
           <Button variant="outlined" component="span">
             Add Media File
