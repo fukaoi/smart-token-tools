@@ -6,6 +6,16 @@ import {
 } from '@solana-suite/shared-metaplex';
 import { MediaFiles } from '../types/context';
 
+const toMetadataProperties = (input: MediaFiles[]) => {
+  return input.map(file => {
+    return {
+      type: file.fileType,
+      filePath: file.buffer,
+      fileName: file.fileName,
+    };
+  });
+};
+
 export const addPublicKey = (originalData: any): InputCreators[] => {
   const creators = originalData.map(
     (item: { address: string; share: number }) => {
@@ -28,8 +38,16 @@ export const creatorMint = async (
   royalty: number,
   cluster: string,
   creators?: InputCreators[],
-  properties?: MediaFiles[],
+  mediaFiles?: MediaFiles[],
 ) => {
+  const storageType = 'nftStorage';
+  const properties: MetadataProperties = {};
+  if (mediaFiles && mediaFiles?.length > 0) {
+    const converted = toMetadataProperties(mediaFiles);
+    properties.files = converted;
+    console.log(mediaFiles, converted);
+  }
+
   const mint = await PhantomMetaplex.mint(
     {
       filePath,
@@ -38,7 +56,7 @@ export const creatorMint = async (
       description,
       royalty,
       creators,
-      storageType: 'nftStorage',
+      storageType,
       properties,
     },
     cluster,
