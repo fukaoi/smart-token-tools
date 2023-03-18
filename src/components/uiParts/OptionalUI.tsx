@@ -29,7 +29,6 @@ const OptionalUI: FC<OptionalUIProps> = ({ isShow, control }) => {
     append({
       address: '',
       share: 0,
-      verified: false,
     });
   };
   const handleClose = () => {

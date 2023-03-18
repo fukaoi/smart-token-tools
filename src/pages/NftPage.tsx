@@ -36,7 +36,6 @@ export type NFTFormValues = {
 
 export type Creator = {
   address: string;
-  verified: boolean;
   share: number;
 };
 
@@ -83,12 +82,6 @@ const NftPage = () => {
           share: 0,
         },
       ],
-      // properties: {
-      //   files:[{
-      //     filePath: '',
-      //     fileType: '',
-      //   }]
-      // }
     },
   });
 

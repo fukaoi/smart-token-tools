@@ -14,7 +14,6 @@ import { Alert } from '@mui/material';
 import Card from '@mui/material/Card';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import { MediaFilesContext } from '../../types/context';
-import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 
 const styles = {
   card: {
@@ -76,6 +75,13 @@ const MediaFileUploadUI: FC<MediaFileUploadUIProps> = ({
     }
   };
 
+  const deleteMediaFile = (index: number) => {
+    mediaFiles.splice(index, 1);
+    mediaFilesPreview.splice(index, 1);
+    setMediaFiles([...mediaFiles]);
+    setMediaFilesPreview([...mediaFilesPreview]);
+  };
+
   return (
     <>
       <DescriptionTypography message={message} />
@@ -95,14 +101,14 @@ const MediaFileUploadUI: FC<MediaFileUploadUIProps> = ({
               </ImageList>
               <CardContent>
                 <Alert
+                  onClose={_ => {
+                    deleteMediaFile(i);
+                  }}
                   iconMapping={{
                     success: <CheckCircleOutlineIcon fontSize="inherit" />,
                   }}
                 >
                   {mediaFiles[i] && mediaFiles[i].fileName}
-                  <Button sx={styles.closedButton} onClick={alert}>
-                    <HighlightOffIcon />
-                  </Button>
                 </Alert>
               </CardContent>
             </CardMedia>
