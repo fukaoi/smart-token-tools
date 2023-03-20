@@ -40,8 +40,6 @@ const CreatorUI: FC<CreatorUIProps> = ({ control, fields, remove }) => {
             rules={validationRules.share}
           />
           <Box sx={{ mb: 4 }} />
-          <HeadlineTypography message="Select Verified" />
-          <Box sx={{ mb: 4 }} />
           {index > 0 && (
             <DeleteIcon sx={styles.rightButton} onClick={() => remove(index)} />
           )}
