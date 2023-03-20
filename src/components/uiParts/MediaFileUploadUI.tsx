@@ -55,17 +55,6 @@ const MediaFileUploadUI: FC<MediaFileUploadUIProps> = ({
       reader.onload = () => {
         const result = reader.result as string;
         setMediaFilesPreview([...mediaFilesPreview, result]);
-        // setMediaFiles([]);
-        file.arrayBuffer().then(buffer => {
-          setMediaFiles([
-            ...mediaFiles,
-            {
-              fileName: file.name,
-              fileType: file.type,
-              buffer,
-            },
-          ]);
-        });
       };
       reader.readAsDataURL(file);
       setMessage(description);
@@ -73,6 +62,16 @@ const MediaFileUploadUI: FC<MediaFileUploadUIProps> = ({
       setMediaFilesPreview([...mediaFilesPreview, NoImage]);
       setMessage(warnDescription);
     }
+    file.arrayBuffer().then(buffer => {
+      setMediaFiles([
+        ...mediaFiles,
+        {
+          fileName: file.name,
+          fileType: file.type,
+          buffer,
+        },
+      ]);
+    });
   };
 
   const deleteMediaFile = (index: number) => {
