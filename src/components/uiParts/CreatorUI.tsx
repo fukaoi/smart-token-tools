@@ -6,7 +6,6 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import HeadlineTypography from '../typography/HeadlineTypography';
 import WalletAddressTextField from '../textField/WalletAddressTextField';
 import ShareTextField from '../textField/ShareTextField';
-import VerifiedRadio from '../radio/VerifiedRadio';
 import { NFTFormValues } from '../../pages/NftPage';
 import { validationRules } from '../../shared/validation';
 
@@ -42,10 +41,6 @@ const CreatorUI: FC<CreatorUIProps> = ({ control, fields, remove }) => {
           />
           <Box sx={{ mb: 4 }} />
           <HeadlineTypography message="Select Verified" />
-          <VerifiedRadio
-            control={control}
-            name={`creators.${index}.verified`}
-          />
           <Box sx={{ mb: 4 }} />
           {index > 0 && (
             <DeleteIcon sx={styles.rightButton} onClick={() => remove(index)} />

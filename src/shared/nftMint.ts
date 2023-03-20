@@ -1,18 +1,33 @@
 import { PhantomMetaplex } from '@solana-suite/phantom';
-import { ValidatorError } from '@solana-suite/shared-metaplex';
+import {
+  ValidatorError,
+  InputCreators,
+  MetadataProperties,
+} from '@solana-suite/shared-metaplex';
+import { MediaFiles } from '../types/context';
 
-export const addPublicKey = (creators: any) => {
-  const res = creators.map(
-    (item: { address: string; share: number; verified: boolean }) => {
+const toMetadataProperties = (input: MediaFiles[]) => {
+  return input.map(file => {
+    return {
+      type: file.fileType,
+      filePath: file.buffer,
+      fileName: file.fileName,
+    };
+  });
+};
+
+export const addPublicKey = (originalData: any): InputCreators[] => {
+  const creators = originalData.map(
+    (item: { address: string; share: number }) => {
       const address = item.address;
       return {
         address,
         share: item.share,
-        verified: item.verified,
+        authority: '',
       };
     },
   );
-  return res;
+  return creators;
 };
 
 export const creatorMint = async (
@@ -22,8 +37,17 @@ export const creatorMint = async (
   description: string,
   royalty: number,
   cluster: string,
-  creators?: any,
+  creators?: InputCreators[],
+  mediaFiles?: MediaFiles[],
 ) => {
+  const storageType = 'nftStorage';
+  const properties: MetadataProperties = {};
+  if (mediaFiles && mediaFiles?.length > 0) {
+    const converted = toMetadataProperties(mediaFiles);
+    properties.files = converted;
+    console.log(mediaFiles, converted);
+  }
+
   const mint = await PhantomMetaplex.mint(
     {
       filePath,
@@ -32,7 +56,8 @@ export const creatorMint = async (
       description,
       royalty,
       creators,
-      storageType: 'nftStorage',
+      storageType,
+      properties,
     },
     cluster,
     window.solana,

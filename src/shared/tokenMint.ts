@@ -21,7 +21,7 @@ export const mintToken = async (
       royalty,
       storageType,
     },
-    walletAddress.toPublicKey(),
+    walletAddress,
     cluster,
     totalSupply,
     decimals,

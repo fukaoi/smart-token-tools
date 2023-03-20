@@ -4,7 +4,6 @@ export namespace FileUpload {
   export const isImagePreviewFileType = (
     e: React.ChangeEvent<HTMLInputElement> | File,
   ): boolean => {
-    console.log(e.type);
     if (e instanceof File) {
       const fileType = e.type;
       if (

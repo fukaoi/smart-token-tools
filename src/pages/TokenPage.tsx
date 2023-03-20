@@ -21,7 +21,7 @@ import { mintToken, addMinting } from '../shared/tokenMint';
 import { useNavigate } from 'react-router-dom';
 import { useSessionCheck } from '../hooks/SessionCheck';
 
-export interface FormValues {
+export type FormValues = {
   cluster: string;
   name: string;
   symbol: string;
@@ -30,7 +30,7 @@ export interface FormValues {
   totalSupply: number;
   decimals: number;
   tokenKey?: string;
-}
+};
 
 const styles = {
   root: {

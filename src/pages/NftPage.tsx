@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router';
 import { Paper, Box, FormControl } from '@mui/material';
-import { ValidatorError } from '@solana-suite/shared-metaplex';
+import { InputCreators, ValidatorError } from '@solana-suite/shared-metaplex';
 import { ControllerRenderProps, useForm } from 'react-hook-form';
 import TitleTypography from '../components/typography/TitleTypography';
 import AddressTypography from '../components/typography/AddressTypography';
@@ -19,8 +19,9 @@ import Loading from '../components/Loading';
 import { useSessionCheck } from '../hooks/SessionCheck';
 import { validationRules } from '../shared/validation';
 import { addPublicKey, creatorMint } from '../shared/nftMint';
+import { MediaFilesContext, MediaFiles } from '../types/context';
 
-export interface NFTFormValues {
+export type NFTFormValues = {
   cluster: string;
   nftName: string;
   symbol: string;
@@ -31,13 +32,12 @@ export interface NFTFormValues {
   control?: any;
   field?: ControllerRenderProps;
   optional?: any;
-}
+};
 
-export interface Creator {
+export type Creator = {
   address: string;
-  verified: boolean;
   share: number;
-}
+};
 
 const styles = {
   root: {
@@ -64,6 +64,7 @@ const NftPage = () => {
   const [errorModal, setErrorModal] = useState({ open: false, message: '' });
   const [isShow, setIsShow] = useState(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [mediaFiles, setMediaFiles] = useState<MediaFiles[]>([]);
 
   useSessionCheck(setWalletAddress);
 
@@ -78,7 +79,6 @@ const NftPage = () => {
       creators: [
         {
           address: '',
-          verified: true,
           share: 0,
         },
       ],
@@ -99,7 +99,7 @@ const NftPage = () => {
     }
 
     try {
-      let creators = [];
+      let creators: InputCreators[] = [];
       if (data.creators[0].address !== '') {
         creators = addPublicKey(data.creators);
         const sumShare = creators.reduce(
@@ -125,6 +125,7 @@ const NftPage = () => {
         data.royalty,
         data.cluster,
         creators,
+        mediaFiles,
       );
 
       setBtnState({ title: 'Submit', isDisabled: false });
@@ -189,12 +190,19 @@ const NftPage = () => {
               isOpen={optionalBtnState}
               callbackFunc={handleOptionalButton}
             />
-            <OptionalUI
-              {...{
-                isShow,
-                control,
+            <MediaFilesContext.Provider
+              value={{
+                mediaFiles,
+                setMediaFiles,
               }}
-            />
+            >
+              <OptionalUI
+                {...{
+                  isShow,
+                  control,
+                }}
+              />
+            </MediaFilesContext.Provider>
           </Paper>
           <Box sx={{ mb: 6 }} />
           <Box>

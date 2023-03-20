@@ -11,13 +11,18 @@ const styles = {
     marginBottom: '1em',
     marginLeft: '10px',
   },
+  title: {
+    fontSize: '80%',
+    paddingTop: '0.4em',
+    marginBottom: '1em',
+  },
 };
 
 const DescriptionTypography: FC<{ message: string }> = ({ message }) => {
   return (
     <Box component="div" sx={styles.box}>
       <Alert severity="info">
-        <AlertTitle>Description</AlertTitle>
+        <AlertTitle style={styles.title}>Usage information</AlertTitle>
         <Typography
           component="div"
           fontSize="15px"
