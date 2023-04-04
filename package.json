@@ -1,6 +1,6 @@
 {
   "name": "smart-token-tool",
-  "version": "1.6.8",
+  "version": "1.6.9",
   "dependencies": {
     "@emotion/react": "^11.7.1",
     "@emotion/styled": "^11.6.0",
