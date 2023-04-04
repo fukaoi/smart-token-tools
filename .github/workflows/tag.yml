@@ -5,8 +5,8 @@ on:
     branches:
       - main
     paths-ignore:
-      - "README.md"
-      - ".github/workflows/*.yml"
+      - 'README.md'
+      - '.github/workflows/*.yml'
 
   workflow_dispatch:
 
@@ -18,7 +18,8 @@ jobs:
       matrix:
         node-version: [16.x]
     steps:
+      - run: npm version patch
       - uses: actions/checkout@v3
       - uses: Klemensas/action-autotag@stable
         with:
-          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+          GITHUB_TOKEN: '${{ secrets.GITHUB_TOKEN }}'
