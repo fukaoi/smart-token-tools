@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router';
 import { Paper, Box, FormControl } from '@mui/material';
-import { InputCreators, ValidatorError } from '@solana-suite/shared-metaplex';
+import { User, ValidatorError } from '@solana-suite/shared-metaplex';
 import { ControllerRenderProps, useForm } from 'react-hook-form';
 import TitleTypography from '../components/typography/TitleTypography';
 import AddressTypography from '../components/typography/AddressTypography';
@@ -18,7 +18,7 @@ import OptionalUI from '../components/uiParts/OptionalUI';
 import Loading from '../components/Loading';
 import { useSessionCheck } from '../hooks/SessionCheck';
 import { validationRules } from '../shared/validation';
-import { addPublicKey, creatorMint } from '../shared/nftMint';
+import { addCreator, creatorMint } from '../shared/nftMint';
 import { MediaFilesContext, MediaFiles } from '../types/context';
 
 export type NFTFormValues = {
@@ -99,9 +99,9 @@ const NftPage = () => {
     }
 
     try {
-      let creators: InputCreators[] = [];
+      let creators: User.Creators[] = [];
       if (data.creators[0].address !== '') {
-        creators = addPublicKey(data.creators);
+        creators = addCreator(data.creators);
         const sumShare = creators.reduce(
           (sum: number, i: { share: number }) => sum + i.share,
           0,

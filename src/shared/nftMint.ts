@@ -1,9 +1,5 @@
 import { PhantomMetaplex } from '@solana-suite/phantom';
-import {
-  ValidatorError,
-  InputCreators,
-  MetadataProperties,
-} from '@solana-suite/shared-metaplex';
+import { ValidatorError, User } from '@solana-suite/shared-metaplex';
 import { MediaFiles } from '../types/context';
 
 const toMetadataProperties = (input: MediaFiles[]) => {
@@ -16,14 +12,13 @@ const toMetadataProperties = (input: MediaFiles[]) => {
   });
 };
 
-export const addPublicKey = (originalData: any): InputCreators[] => {
+export const addCreator = (originalData: any): User.Creators[] => {
   const creators = originalData.map(
     (item: { address: string; share: number }) => {
       const address = item.address;
       return {
         address,
         share: item.share,
-        authority: '',
       };
     },
   );
@@ -37,16 +32,21 @@ export const creatorMint = async (
   description: string,
   royalty: number,
   cluster: string,
-  creators?: InputCreators[],
+  creators?: User.Creators[],
   mediaFiles?: MediaFiles[],
 ) => {
   const storageType = 'nftStorage';
-  const properties: MetadataProperties = {};
+  const properties: User.Properties = {};
   if (mediaFiles && mediaFiles?.length > 0) {
     const converted = toMetadataProperties(mediaFiles);
     properties.files = converted;
-    console.log(mediaFiles, converted);
   }
+
+  if (creators && creators.length < 1) {
+    creators = undefined;
+  }
+
+  console.log(creators);
 
   const mint = await PhantomMetaplex.mint(
     {
@@ -55,7 +55,7 @@ export const creatorMint = async (
       symbol,
       description,
       royalty,
-      creators,
+      creators: creators,
       storageType,
       properties,
     },
