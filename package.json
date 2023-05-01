@@ -2,7 +2,7 @@
   "name": "smart-token-tool",
   "version": "1.6.9",
   "dependencies": {
-    "@emotion/react": "^11.7.1",
+    "@emotion/react": "^11.10.8",
     "@emotion/styled": "^11.10.8",
     "@mui/icons-material": "^5.8.4",
     "@mui/material": "^5.12.2",
