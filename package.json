@@ -5,7 +5,7 @@
     "@emotion/react": "^11.7.1",
     "@emotion/styled": "^11.6.0",
     "@mui/icons-material": "^5.8.4",
-    "@mui/material": "^5.12.1",
+    "@mui/material": "^5.12.2",
     "@mui/system": "latest",
     "@solana-suite/phantom": "latest",
     "assert": "^2.0.0",
