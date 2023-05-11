@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router';
-import { Paper, Box, FormControl } from '@mui/material';
-import { User, ValidatorError } from '@solana-suite/shared-metaplex';
+import { Box, FormControl, Paper } from '@mui/material';
+import { UserSideOutput, ValidatorError } from '@solana-suite/shared-metaplex';
 import { ControllerRenderProps, useForm } from 'react-hook-form';
 import TitleTypography from '../components/typography/TitleTypography';
 import AddressTypography from '../components/typography/AddressTypography';
@@ -19,7 +19,7 @@ import Loading from '../components/Loading';
 import { useSessionCheck } from '../hooks/SessionCheck';
 import { validationRules } from '../shared/validation';
 import { addCreator, creatorMint } from '../shared/nftMint';
-import { MediaFilesContext, MediaFiles } from '../types/context';
+import { MediaFiles, MediaFilesContext } from '../types/context';
 
 export type NFTFormValues = {
   cluster: string;
@@ -99,7 +99,7 @@ const NftPage = () => {
     }
 
     try {
-      let creators: User.Creators[] = [];
+      let creators: UserSideOutput.Creators[] = [];
       if (data.creators[0].address !== '') {
         creators = addCreator(data.creators);
         const sumShare = creators.reduce(

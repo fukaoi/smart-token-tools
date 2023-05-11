@@ -1,5 +1,9 @@
 import { PhantomMetaplex } from '@solana-suite/phantom';
-import { ValidatorError, User } from '@solana-suite/shared-metaplex';
+import {
+  InfraSideInput,
+  UserSideOutput,
+  ValidatorError,
+} from '@solana-suite/shared-metaplex';
 import { MediaFiles } from '../types/context';
 
 const toMetadataProperties = (input: MediaFiles[]) => {
@@ -12,7 +16,7 @@ const toMetadataProperties = (input: MediaFiles[]) => {
   });
 };
 
-export const addCreator = (originalData: any): User.Creators[] => {
+export const addCreator = (originalData: any): UserSideOutput.Creators[] => {
   const creators = originalData.map(
     (item: { address: string; share: number }) => {
       const address = item.address;
@@ -32,11 +36,11 @@ export const creatorMint = async (
   description: string,
   royalty: number,
   cluster: string,
-  creators?: User.Creators[],
+  creators?: UserSideOutput.Creators[],
   mediaFiles?: MediaFiles[],
 ) => {
   const storageType = 'nftStorage';
-  const properties: User.Properties = {};
+  const properties: InfraSideInput.Properties = {};
   if (mediaFiles && mediaFiles?.length > 0) {
     const converted = toMetadataProperties(mediaFiles);
     properties.files = converted;
