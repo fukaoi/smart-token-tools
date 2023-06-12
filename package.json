@@ -35,7 +35,7 @@
     "react-scripts": "^5.0.1",
     "css-select": "^5.1.0",
     "tslint": "^6.1.3",
-    "typescript": "^5.0.4"
+    "typescript": "^5.1.3"
   },
   "scripts": {
     "dev": "react-app-rewired start",
