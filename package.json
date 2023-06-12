@@ -18,7 +18,7 @@
     "react-router-dom": "^6.11.2",
     "stream-browserify": "^3.0.0",
     "util": "^0.12.4",
-    "web-vitals": "^2.1.4"
+    "web-vitals": "^3.3.2"
   },
   "devDependencies": {
     "@types/node": "^20.2.5",
