@@ -26,7 +26,7 @@
     "@types/react-dom": "^18.2.17",
     "@types/react-router-dom": "^5.3.3",
     "@typescript-eslint/eslint-plugin": "^5.61.0",
-    "@typescript-eslint/parser": "^6.12.0",
+    "@typescript-eslint/parser": "^6.13.2",
     "eslint-config-prettier": "^9.0.0",
     "eslint-plugin-prettier": "^4.2.1",
     "jspdf": "^2.3.1",
