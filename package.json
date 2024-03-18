@@ -7,7 +7,7 @@
     "@mui/icons-material": "^5.15.9",
     "@mui/material": "^5.15.11",
     "@mui/system": "latest",
-    "@solana-suite/phantom": "0.6.8",
+    "@solana-suite/phantom": "0.7.10",
     "@solana/spl-token": "0.3.8",
     "assert": "^2.1.0",
     "crypto-browserify": "^3.12.0",
