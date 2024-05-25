@@ -12,7 +12,7 @@ const TotalSupplyTextField = (props: UseControllerProps<FormValues>) => {
         <TextField
           type="text"
           id="outlined-basic"
-          label="tokenKey"
+          label="token address"
           placeholder="xxxAzoHMxxxn8by8oxxx"
           variant="outlined"
           size="small"

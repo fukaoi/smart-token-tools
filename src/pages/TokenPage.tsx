@@ -75,7 +75,7 @@ const TokenPage = () => {
     setBtnState({ title: 'Processing', isDisabled: true });
     setIsLoading(true);
 
-    if (!fileBuffer) {
+    if (data.issueType === 'new' && !fileBuffer) {
       setErrorModal({ open: true, message: 'Please Image Upload' });
     }
 
