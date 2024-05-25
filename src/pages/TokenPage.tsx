@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Paper, Box, FormControl } from '@mui/material';
+import { Box, FormControl, Paper } from '@mui/material';
 import { useForm } from 'react-hook-form';
 import TitleTypography from '../components/typography/TitleTypography';
 import { ValidatorError } from '@solana-suite/shared-metaplex';
@@ -17,7 +17,7 @@ import SymbolTextField from '../components/textField/SymbolTextField';
 import HeadlineTypography from '../components/typography/HeadlineTypography';
 import ImageFileUploadUI from '../components/uiParts/ImageFileUploadUI';
 import { validationRules } from '../shared/validation';
-import { mintToken, addMinting } from '../shared/tokenMint';
+import { addMinting, mintToken } from '../shared/tokenMint';
 import { useNavigate } from 'react-router-dom';
 import { useSessionCheck } from '../hooks/SessionCheck';
 
@@ -156,21 +156,26 @@ const TokenPage = () => {
             <DecimalsTextField control={control} name="decimals" />
             {watch('issueType') === 'add' && (
               <>
-                <Box sx={{ mb: 1 }} />
+                <Box sx={{ mb: 4 }} />
                 <TokenKeyTextField control={control} name="tokenKey" />
               </>
             )}
             <Box sx={{ mb: 4 }} />
-            <HeadlineTypography message="Image Upload" />
-            <Box sx={{ mb: 4 }} />
-            <ImageFileUploadUI
-              {...{
-                imagePreview,
-                setErrorModal,
-                setImagePreview,
-                setFileBuffer,
-              }}
-            />
+
+            {watch('issueType') === 'new' && (
+              <>
+                <HeadlineTypography message="Image Upload" />
+                <Box sx={{ mb: 4 }} />
+                <ImageFileUploadUI
+                  {...{
+                    imagePreview,
+                    setErrorModal,
+                    setImagePreview,
+                    setFileBuffer,
+                  }}
+                />
+              </>
+            )}
           </Paper>
           <Box sx={{ mb: 6 }} />
           <Box>

@@ -1,4 +1,4 @@
-import { PhantomSplToken } from '@solana-suite/phantom';
+import { PhantomSplToken } from '@solana-suite/phantom-v0.6';
 import { ValidatorError } from '@solana-suite/shared-metaplex';
 
 export const mintToken = async (

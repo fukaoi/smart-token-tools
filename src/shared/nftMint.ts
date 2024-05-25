@@ -1,4 +1,4 @@
-import { PhantomMetaplex } from '@solana-suite/phantom';
+import { PhantomMetaplex } from '@solana-suite/phantom-v0.6';
 import {
   InfraSideInput,
   UserSideOutput,

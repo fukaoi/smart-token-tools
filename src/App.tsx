@@ -9,7 +9,7 @@ import CompletePage from './pages/CompletePage';
 import NftCompletePage from './pages/NftCompletePage';
 import FaucetPage from './pages/FaucetPage';
 import { Device } from './shared/device';
-import { Phantom } from '@solana-suite/phantom';
+import { Phantom } from '@solana-suite/phantom-v0.6';
 
 declare global {
   interface Window {
