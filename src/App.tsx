@@ -2,14 +2,14 @@ import TokenPage from './pages/TokenPage';
 import TopPage from './pages/TopPage';
 import backImage from './assets/background-image.jpg';
 import logoImage from './assets/smt-logo.svg';
-import { Grid, Box, useMediaQuery } from '@mui/material';
-import { Routes, Route, Link } from 'react-router-dom';
+import { Box, Grid, useMediaQuery } from '@mui/material';
+import { Link, Route, Routes } from 'react-router-dom';
 import NftPage from './pages/NftPage';
 import CompletePage from './pages/CompletePage';
 import NftCompletePage from './pages/NftCompletePage';
 import FaucetPage from './pages/FaucetPage';
 import { Device } from './shared/device';
-import { Phantom } from '@solana-suite/phantom-v0.6';
+import { Phantom } from '@solana-suite/phantom';
 
 declare global {
   interface Window {

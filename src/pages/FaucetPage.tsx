@@ -1,11 +1,11 @@
 import TitleTypography from '../components/typography/TitleTypography';
 import DescriptionTypography from '../components/typography/DescriptionTypography';
 import AddressTypography from '../components/typography/AddressTypography';
-import { Paper, Box } from '@mui/material';
+import { Box, Paper } from '@mui/material';
 import SubmitButton from '../components/button/SubmitButton';
 import InfoModal from '../components/modal/InfoModal';
 import { useState } from 'react';
-import { Airdrop } from '@solana-suite/core';
+import { Airdrop } from '@solana-suite/airdrop';
 import ErrorModal from '../components/modal/ErrorModal';
 import { useSessionCheck } from '../hooks/SessionCheck';
 

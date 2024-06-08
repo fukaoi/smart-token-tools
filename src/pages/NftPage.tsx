@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router';
 import { Box, FormControl, Paper } from '@mui/material';
-import { UserSideOutput, ValidatorError } from '@solana-suite/shared-metaplex';
+import { ValidatorError } from '@solana-suite/utils';
 import { ControllerRenderProps, useForm } from 'react-hook-form';
 import TitleTypography from '../components/typography/TitleTypography';
 import AddressTypography from '../components/typography/AddressTypography';

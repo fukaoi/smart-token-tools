@@ -1,9 +1,5 @@
-import { PhantomMetaplex } from '@solana-suite/phantom-v0.6';
-import {
-  InfraSideInput,
-  UserSideOutput,
-  ValidatorError,
-} from '@solana-suite/shared-metaplex';
+import { PhantomMetaplex } from '@solana-suite/phantom';
+import { ValidatorError } from '@solana-suite/utils';
 import { MediaFiles } from '../types/context';
 
 const toMetadataProperties = (input: MediaFiles[]) => {

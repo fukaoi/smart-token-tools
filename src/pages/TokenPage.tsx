@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Box, FormControl, Paper } from '@mui/material';
 import { useForm } from 'react-hook-form';
 import TitleTypography from '../components/typography/TitleTypography';
-import { ValidatorError } from '@solana-suite/shared-metaplex';
+import { ValidatorError } from '@solana-suite/utils';
 import AddressTypography from '../components/typography/AddressTypography';
 import ClusterRadio from '../components/radio/ClusterRadio';
 import TokenIssueTypeRadio from '../components/radio/TokenIssueTypeRadio';
