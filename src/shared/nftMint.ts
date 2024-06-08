@@ -1,4 +1,4 @@
-import { PhantomMetaplex } from '@solana-suite/phantom';
+import { InputNftMetadata, PhantomRegularNft } from '@solana-suite/phantom';
 import { ValidatorError } from '@solana-suite/utils';
 import { MediaFiles } from '../types/context';
 
@@ -12,7 +12,7 @@ const toMetadataProperties = (input: MediaFiles[]) => {
   });
 };
 
-export const addCreator = (originalData: any): UserSideOutput.Creators[] => {
+export const addCreator = (originalData: any): InputNftMetadata.Creators[] => {
   const creators = originalData.map(
     (item: { address: string; share: number }) => {
       const address = item.address;
@@ -32,11 +32,11 @@ export const creatorMint = async (
   description: string,
   royalty: number,
   cluster: string,
-  creators?: UserSideOutput.Creators[],
+  creators?: InputNftMetadata.Creators[],
   mediaFiles?: MediaFiles[],
 ) => {
   const storageType = 'nftStorage';
-  const properties: InfraSideInput.Properties = {};
+  const properties: InputNftMetadata.Properties = {};
   if (mediaFiles && mediaFiles?.length > 0) {
     const converted = toMetadataProperties(mediaFiles);
     properties.files = converted;
@@ -48,7 +48,7 @@ export const creatorMint = async (
 
   console.log(creators);
 
-  const mint = await PhantomMetaplex.mint(
+  const mint = await PhantomRegularNft.mint(
     {
       filePath,
       name,
