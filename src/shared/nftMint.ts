@@ -1,4 +1,8 @@
-import { InputCreators, PhantomRegularNft } from '@solana-suite/phantom';
+import {
+  InputCreators,
+  PhantomRegularNft,
+  Properties,
+} from '@solana-suite/phantom';
 import { ValidatorError } from '@solana-suite/utils';
 import { MediaFiles } from '../types/context';
 

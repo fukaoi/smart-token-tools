@@ -2,7 +2,7 @@ const webpack = require('webpack');
 
 module.exports = function override(webpackConfig) {
   webpackConfig.module.rules.push({
-    test: /.mjs$/,
+    test: /.mjs|.cjs$/,
     include: /node_modules/,
     resolve: {
       fullySpecified: false,
@@ -25,6 +25,8 @@ module.exports = function override(webpackConfig) {
     fs: false,
     path: false,
     zlib: false,
+    events: false,
+    vm: false,
   });
   webpackConfig.resolve.fallback = fallback;
 
