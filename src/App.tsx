@@ -9,11 +9,11 @@ import CompletePage from './pages/CompletePage';
 import NftCompletePage from './pages/NftCompletePage';
 import FaucetPage from './pages/FaucetPage';
 import { Device } from './shared/device';
-import { Phantom } from '@solana-suite/phantom';
+import { PhantomProvider } from '@solana-suite/phantom';
 
 declare global {
   interface Window {
-    solana: Phantom;
+    solana: PhantomProvider;
   }
   interface NavigateOptions {
     state: {

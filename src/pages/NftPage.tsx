@@ -20,7 +20,7 @@ import { useSessionCheck } from '../hooks/SessionCheck';
 import { validationRules } from '../shared/validation';
 import { addCreator, creatorMint } from '../shared/nftMint';
 import { MediaFiles, MediaFilesContext } from '../types/context';
-import { InputNftMetadata } from '@solana-suite/phantom';
+import { InputCreators } from '@solana-suite/phantom';
 
 export type NFTFormValues = {
   cluster: string;
@@ -100,7 +100,7 @@ const NftPage = () => {
     }
 
     try {
-      let creators: InputNftMetadata.Creators[] = [];
+      let creators: InputCreators[] = [];
       if (data.creators[0].address !== '') {
         creators = addCreator(data.creators);
         const sumShare = creators.reduce(

@@ -1,4 +1,4 @@
-import { InputNftMetadata, PhantomRegularNft } from '@solana-suite/phantom';
+import { InputCreators, PhantomRegularNft } from '@solana-suite/phantom';
 import { ValidatorError } from '@solana-suite/utils';
 import { MediaFiles } from '../types/context';
 
@@ -12,7 +12,7 @@ const toMetadataProperties = (input: MediaFiles[]) => {
   });
 };
 
-export const addCreator = (originalData: any): InputNftMetadata.Creators[] => {
+export const addCreator = (originalData: any): InputCreators[] => {
   const creators = originalData.map(
     (item: { address: string; share: number }) => {
       const address = item.address;
@@ -32,11 +32,11 @@ export const creatorMint = async (
   description: string,
   royalty: number,
   cluster: string,
-  creators?: InputNftMetadata.Creators[],
+  creators?: InputCreators[],
   mediaFiles?: MediaFiles[],
 ) => {
   const storageType = 'nftStorage';
-  const properties: InputNftMetadata.Properties = {};
+  const properties: Properties = {};
   if (mediaFiles && mediaFiles?.length > 0) {
     const converted = toMetadataProperties(mediaFiles);
     properties.files = converted;
