@@ -32,7 +32,7 @@
     "eslint-plugin-prettier": "^4.2.1",
     "jspdf": "^2.3.1",
     "nth-check": "^2.1.1",
-    "prettier": "^2.8.4",
+    "prettier": "^3.3.2",
     "react-scripts": "^5.0.1",
     "css-select": "^5.1.0",
     "tslint": "^6.1.3",
