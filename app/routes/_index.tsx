@@ -1,3 +1,5 @@
+"use client";
+
 import WarningModal from "../components/modal/WarningModal";
 import SubmitButton from "../components/button/SubmitButton";
 import Typography from "@mui/material/Typography";
