@@ -1,5 +1,5 @@
 import { ReactNode, useEffect, useState } from 'react';
-import { theme } from '../../shared/colorTheme';
+import { theme } from '../../utils/colorTheme';
 
 const styles = {
   box: {
