@@ -1,8 +1,8 @@
-import { FC, useState } from 'react';
-import Checkbox from '@mui/material/Checkbox';
-import { FormControlLabel, FormGroup, Link } from '@mui/material';
-import OpenInNewIcon from '@mui/icons-material/OpenInNew';
-import TermsOfUseModal from '../../components/modal/TermsOfUseModal';
+import { FC, useState } from "react";
+import Checkbox from "@mui/material/Checkbox";
+import { FormControlLabel, FormGroup, Link } from "@mui/material";
+import { OpenInNew } from "@mui/icons-material";
+import TermsOfUseModal from "../../components/modal/TermsOfUseModal";
 
 const UserPolicyCheckBox: FC<{
   callbackFunc?: (event?: any) => void;
@@ -16,7 +16,7 @@ const UserPolicyCheckBox: FC<{
 
   return (
     <>
-      <div style={{ position: 'relative', top: '30px' }}>
+      <div style={{ position: "relative", top: "30px" }}>
         <FormGroup>
           <FormControlLabel
             value="agree"
@@ -25,26 +25,26 @@ const UserPolicyCheckBox: FC<{
               <Checkbox
                 color="primary"
                 style={{
-                  color: 'white',
-                  marginTop: '7px',
+                  color: "white",
+                  marginTop: "7px",
                 }}
               />
             }
             label={
-              <p style={{ fontSize: '13px', fontWeight: 'bold' }}>
+              <p style={{ fontSize: "13px", fontWeight: "bold" }}>
                 I agree to SMT
                 <Link
                   target="_blank"
                   color="inherit"
-                  style={{ marginLeft: '5px', borderBottom: '15px ,#87cef' }}
-                  onClick={e => {
+                  style={{ marginLeft: "5px", borderBottom: "15px ,#87cef" }}
+                  onClick={(e) => {
                     e.preventDefault();
                     setBtnState(true);
                   }}
                 >
                   terms & conditions
-                  <OpenInNewIcon
-                    style={{ position: 'relative', top: '5px', left: '5px' }}
+                  <OpenInNew
+                    style={{ position: "relative", top: "5px", left: "5px" }}
                   />
                 </Link>
               </p>

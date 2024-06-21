@@ -1,8 +1,13 @@
-import { vitePlugin as remix } from "@remix-run/dev";
-import { defineConfig } from "vite";
-import tsconfigPaths from "vite-tsconfig-paths";
+import { vitePlugin as remix } from '@remix-run/dev';
+import { defineConfig } from 'vite';
+import tsconfigPaths from 'vite-tsconfig-paths';
+import { cjsInterop } from "vite-plugin-cjs-interop";
 
 export default defineConfig({
+  ssr: {
+    noExternal: process.env.NODE_ENV === 'production' ? [/^@mui\//] : [], // or  `['@mui/**']`
+  },
+
   plugins: [
     remix({
       future: {
@@ -12,5 +17,9 @@ export default defineConfig({
       },
     }),
     tsconfigPaths(),
+    process.env.NODE_ENV === 'development' &&
+    cjsInterop({
+      dependencies: ['@mui/material/*'],
+    }),
   ],
 });
