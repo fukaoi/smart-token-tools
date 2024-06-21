@@ -13,6 +13,7 @@ import Button from "@mui/material/Button";
 import { Box, Link } from "@mui/material";
 import { Device } from "../utils/device";
 import UserPolicyCheckBox from "../components/checkbox/userPolicyCheckbox";
+import defaultSxConfig from "@mui/system/styleFunctionSx/defaultSxConfig";
 
 const styles = {
   message: {
@@ -69,7 +70,7 @@ function WellComeMessage() {
   );
 }
 
-export default function Index() {
+const Index = () => {
   const [warningModal, setWarningModal] = useState({
     open: false,
     message: "",
@@ -163,4 +164,6 @@ export default function Index() {
       />
     </>
   );
-}
+};
+
+export default Index;
