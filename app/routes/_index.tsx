@@ -13,7 +13,6 @@ import Button from "@mui/material/Button";
 import { Box, Link } from "@mui/material";
 import { Device } from "../utils/device";
 import UserPolicyCheckBox from "../components/checkbox/userPolicyCheckbox";
-import defaultSxConfig from "@mui/system/styleFunctionSx/defaultSxConfig";
 
 const styles = {
   message: {
@@ -101,13 +100,9 @@ const Index = () => {
   const connectHandler = () => {
     const title = "Processing";
     setBtnState({ title, isDisabled: true });
-    if (Device.isSmartPhone()) {
-      const message = `Sorry. Only available for PC access`;
-      setWarningModal({ open: true, message });
-    } else if (!window.solana) {
-      const message = `You will need Phantom wallet to access.
-       Please install it from the URL below.
-       https://phantom.app/download`;
+    if (!window.solana) {
+      const message = `You will need Solana Wallet to access.
+        please install Solana Wallet`;
       setWarningModal({ open: true, message });
     } else {
       window.solana.connect().then(() => {
@@ -128,18 +123,13 @@ const Index = () => {
           />
           <CardContent>
             <Typography gutterBottom variant="h5" component="div">
-              Need. Install Phantom wallet for Desktop
+              Need. Install Solana Wallet
             </Typography>
             <Typography variant="body2" color="text.secondary">
-              SMT only allows connections to phantom wallet, you must first
-              install the phantom wallet extension on a phatom browser.
+              SMT only allows connections to solana wallet, you must first
+              install the solana wallet extension or wallet app for smartphone.
             </Typography>
           </CardContent>
-          <CardActions sx={styles.cardAction}>
-            <Link sx={styles.link} href="https://phantom.app/download">
-              <Button size="small">Learn More</Button>
-            </Link>
-          </CardActions>
         </Card>
       </Box>
       <Box style={styles.policyBox}>

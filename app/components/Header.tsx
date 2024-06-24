@@ -1,3 +1,4 @@
+import { Link } from "@remix-run/react";
 import logoImage from "../assets/smt-logo.svg";
 import { Box, Grid } from "@mui/material";
 
@@ -35,34 +36,30 @@ const Header = () => {
         justifyContent="center"
         sx={styles.grid}
       >
-        <Grid item xs={3}>
+        <Grid item xs={12}>
           <Box sx={styles.logoImage}>
             <a href="/">
               <img src={logoImage} alt="Smart token tool" />
             </a>
           </Box>
         </Grid>
-        {
-          /*
-          <Grid item xs={6}>
-            <Box style={styles.naviLink}>
-              <Link to="/token" style={styles.link}>
-                Token
-              </Link>
-            </Box>
-            <Box style={styles.naviLink}>
-              <Link to="/nft" style={styles.link}>
-                NFT
-              </Link>
-            </Box>
-            <Box style={styles.naviLink}>
-              <Link to="/faucet" style={styles.link}>
-                Faucet
-              </Link>
-            </Box>
-          </Grid>
-         */
-        }
+        <Grid item xs={6}>
+          <Box style={styles.naviLink}>
+            <Link to="/token" style={styles.link}>
+              Token
+            </Link>
+          </Box>
+          <Box style={styles.naviLink}>
+            <Link to="/nft" style={styles.link}>
+              NFT
+            </Link>
+          </Box>
+          <Box style={styles.naviLink}>
+            <Link to="/faucet" style={styles.link}>
+              Faucet
+            </Link>
+          </Box>
+        </Grid>
       </Grid>
     </Box>
   );
