@@ -39,7 +39,7 @@ const Header = () => {
         <Grid item xs={12}>
           <Box sx={styles.logoImage}>
             <a href="/">
-              <img src={logoImage} alt="Smart token tool" />
+              <img src={logoImage} alt="Smart token tool" width={400} height={112} />
             </a>
           </Box>
         </Grid>
