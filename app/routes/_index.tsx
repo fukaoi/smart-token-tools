@@ -2,6 +2,7 @@
 
 import WarningModal from "../components/modal/WarningModal";
 import SubmitButton from "../components/button/SubmitButton";
+import WalletConnectButton from "../components/button/WalletConnectButton";
 import Typography from "@mui/material/Typography";
 import { useEffect, useState } from "react";
 import Card from "@mui/material/Card";
@@ -14,6 +15,7 @@ import { Box, Link } from "@mui/material";
 import { Device } from "../utils/device";
 import UserPolicyCheckBox from "../components/checkbox/userPolicyCheckbox";
 import { height } from "@mui/system";
+import { Wallet } from "@mui/icons-material";
 
 const styles = {
   message: {
@@ -142,7 +144,18 @@ const Index = () => {
             isChecked={isChecked}
           />
           <Box style={styles.submit}>
-            <SubmitButton
+            {
+              /*
+
+ <SubmitButton
+              isDisabled={btnState.isDisabled}
+              title={btnState.title}
+              callbackFunc={connectHandler}
+            />
+
+            */
+            }
+            <WalletConnectButton
               isDisabled={btnState.isDisabled}
               title={btnState.title}
               callbackFunc={connectHandler}
