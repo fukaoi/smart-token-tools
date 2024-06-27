@@ -65,7 +65,7 @@ function WellComeMessage() {
         LETS TOKEN ISSUE EASY AND QUICKLY
       </Typography>
       <Typography component="div" fontSize="2.4em" fontWeight="bold">
-        TOKEN AND NFT
+        TOKEN AND NFT TOOLS
       </Typography>
     </Box>
   );
