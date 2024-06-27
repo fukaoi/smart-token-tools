@@ -1,7 +1,6 @@
 import { FC, useState } from "react";
 import Checkbox from "@mui/material/Checkbox";
 import { FormControlLabel, FormGroup, Link } from "@mui/material";
-import { OpenInNew } from "@mui/icons-material";
 import TermsOfUseModal from "../../components/modal/TermsOfUseModal";
 
 const UserPolicyCheckBox: FC<{
@@ -31,7 +30,7 @@ const UserPolicyCheckBox: FC<{
               />
             }
             label={
-              <p style={{ fontSize: "13px", fontWeight: "bold" }}>
+              <p style={{ fontSize: "20px" }}>
                 I agree to SMT
                 <Link
                   target="_blank"
@@ -43,9 +42,6 @@ const UserPolicyCheckBox: FC<{
                   }}
                 >
                   terms & conditions
-                  <OpenInNew
-                    style={{ position: "relative", top: "5px", left: "5px" }}
-                  />
                 </Link>
               </p>
             }

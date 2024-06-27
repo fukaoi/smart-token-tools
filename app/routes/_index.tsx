@@ -8,7 +8,7 @@ import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
-import PhantomMarkLogo from "../assets/phantom-logo-mark.png";
+import SolanaCircleLogo from "../assets/solana-logo-circle.svg";
 import Button from "@mui/material/Button";
 import { Box, Link } from "@mui/material";
 import { Device } from "../utils/device";
@@ -35,7 +35,7 @@ const styles = {
   cardContainer: {
     position: "relative",
     top: "4em",
-    maxWidth: 300,
+    maxWidth: 500,
     maxHeight: "500px",
     marginLeft: "4em",
     marginRight: "4em",
@@ -52,7 +52,7 @@ const styles = {
     marginTop: "6.5em",
   },
   policyCard: {
-    width: 300,
+    width: 400,
   },
 };
 
@@ -74,7 +74,7 @@ const Index = () => {
     open: false,
     message: "",
   });
-  const title = "Getting start";
+  const title = "Connect Wallet";
   const [btnState, setBtnState] = useState({
     title: title,
     isDisabled: true,
@@ -119,7 +119,7 @@ const Index = () => {
           <CardMedia
             sx={styles.cardMedia}
             component="img"
-            image={PhantomMarkLogo}
+            image={SolanaCircleLogo}
           />
           <CardContent>
             <Typography gutterBottom variant="h5" component="div">

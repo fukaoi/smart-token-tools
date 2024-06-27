@@ -1,6 +1,7 @@
 import { Link } from "@remix-run/react";
 import logoImage from "../assets/smt-logo.svg";
 import { Box, Grid } from "@mui/material";
+import { padding } from "@mui/system";
 
 const styles = {
   navi: {
@@ -22,7 +23,7 @@ const styles = {
     height: "10vh",
   },
   logoImage: {
-    alignItems: "center",
+    paddingTop: "1em",
     marginBottom: "0",
   },
 };
@@ -39,7 +40,12 @@ const Header = () => {
         <Grid item xs={12}>
           <Box sx={styles.logoImage}>
             <a href="/">
-              <img src={logoImage} alt="Smart token tool" width={400} height={112} />
+              <img
+                src={logoImage}
+                alt="Smart token tool"
+                width={500}
+                height={142}
+              />
             </a>
           </Box>
         </Grid>
