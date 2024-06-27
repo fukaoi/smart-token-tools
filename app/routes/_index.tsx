@@ -62,7 +62,7 @@ function WellComeMessage() {
   return (
     <Box style={styles.message}>
       <Typography component="div" fontSize="23px" fontWeight="500">
-        LETS TOKEN ISSUE EASY AND QUICKLY
+        LETS TOKEN / NFT ISSUE EASY AND QUICKLY
       </Typography>
       <Typography component="div" fontSize="2.4em" fontWeight="bold">
         TOKEN AND NFT TOOLS
