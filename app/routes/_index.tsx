@@ -13,6 +13,7 @@ import Button from "@mui/material/Button";
 import { Box, Link } from "@mui/material";
 import { Device } from "../utils/device";
 import UserPolicyCheckBox from "../components/checkbox/userPolicyCheckbox";
+import { height } from "@mui/system";
 
 const styles = {
   message: {
@@ -30,6 +31,7 @@ const styles = {
     flexWrap: "wrap" as const,
   },
   cardMedia: {
+    height: "100%",
     textAlign: "center",
   },
   cardContainer: {
