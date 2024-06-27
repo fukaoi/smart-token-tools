@@ -8,7 +8,7 @@ import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
-import SolanaCircleLogo from "../assets/solana-logo-circle.svg";
+import SolanaCircleLogo from "../assets/solana-logo-card.svg";
 import Button from "@mui/material/Button";
 import { Box, Link } from "@mui/material";
 import { Device } from "../utils/device";
@@ -31,8 +31,8 @@ const styles = {
     flexWrap: "wrap" as const,
   },
   cardMedia: {
-    height: "100%",
     textAlign: "center",
+    height: 121,
   },
   cardContainer: {
     position: "relative",
