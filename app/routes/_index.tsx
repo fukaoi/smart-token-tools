@@ -14,7 +14,7 @@ import Button from "@mui/material/Button";
 import { Box, Link } from "@mui/material";
 import { Device } from "../utils/device";
 import UserPolicyCheckBox from "../components/checkbox/userPolicyCheckbox";
-import { height } from "@mui/system";
+import { height, textAlign } from "@mui/system";
 import { Wallet } from "@mui/icons-material";
 
 const styles = {
@@ -54,10 +54,10 @@ const styles = {
   policyBox: {
     display: "flex",
     justifyContent: "center",
-    marginTop: "6.5em",
+    marginTop: "7em",
   },
   policyCard: {
-    width: 400,
+    width: 500,
   },
 };
 
@@ -139,22 +139,7 @@ const Index = () => {
       </Box>
       <Box style={styles.policyBox}>
         <Box sx={styles.policyCard}>
-          <UserPolicyCheckBox
-            callbackFunc={toggleCheckbox}
-            isChecked={isChecked}
-          />
           <Box style={styles.submit}>
-            {
-              /*
-
- <SubmitButton
-              isDisabled={btnState.isDisabled}
-              title={btnState.title}
-              callbackFunc={connectHandler}
-            />
-
-            */
-            }
             <WalletConnectButton
               isDisabled={btnState.isDisabled}
               title={btnState.title}

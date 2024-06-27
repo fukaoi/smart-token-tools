@@ -1,5 +1,12 @@
-import React, { FC, useMemo } from "react";
-import { styled } from "@mui/system";
+import React, { CSSProperties, FC, useMemo } from "react";
+import {
+  Box,
+  fontSize,
+  fontStyle,
+  style,
+  styled,
+  textAlign,
+} from "@mui/system";
 import Button from "@mui/material/Button";
 import SubmitButton from "./SubmitButton";
 import { theme } from "../../utils/colorTheme";
@@ -8,7 +15,6 @@ import {
   WalletProvider,
 } from "@solana/wallet-adapter-react";
 import { WalletAdapterNetwork } from "@solana/wallet-adapter-base";
-import { UnsafeBurnerWalletAdapter } from "@solana/wallet-adapter-wallets";
 import {
   WalletDisconnectButton,
   WalletModalProvider,
@@ -17,16 +23,18 @@ import {
 import { clusterApiUrl } from "@solana/web3.js";
 import "@solana/wallet-adapter-react-ui/styles.css";
 
-const StyledButton = styled(Button)({
+// const StyledButton = styled(Button)({
+const styles: CSSProperties = {
   background: theme.palette.blueGuradation.main,
-  borderRadius: 3,
-  borderColor: "red",
-  color: "white",
+  borderRadius: 12,
   width: "280px",
   height: "60px",
-  position: "relative",
-  textTransform: "capitalize",
-});
+  fontSize: "20px",
+  fontWeight: 550,
+  justifyContent: "center",
+  display: "block",
+  margin: "auto",
+};
 
 const WalletConnectButton: FC<{
   title: string;
@@ -52,7 +60,7 @@ const WalletConnectButton: FC<{
        * instantiate its legacy wallet adapter here. Common legacy adapters can be found
        * in the npm package `@solana/wallet-adapter-wallets`.
        */
-      new UnsafeBurnerWalletAdapter(),
+      // new UnsafeBurnerWalletAdapter(),
     ],
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [network],
@@ -61,7 +69,9 @@ const WalletConnectButton: FC<{
     <ConnectionProvider endpoint={endpoint}>
       <WalletProvider wallets={wallets} autoConnect>
         <WalletModalProvider>
-          <WalletMultiButton />
+          <Box style={styles}>
+            <WalletMultiButton style={styles} />
+          </Box>
         </WalletModalProvider>
       </WalletProvider>
     </ConnectionProvider>

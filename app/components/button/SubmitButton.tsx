@@ -5,9 +5,7 @@ import { theme } from "../../utils/colorTheme";
 
 const StyledButton = styled(Button)({
   background: theme.palette.blueGuradation.main,
-  borderRadius: 3,
-  borderColor: "red",
-  color: "white",
+  borderRadius: 12,
   width: "280px",
   height: "60px",
   position: "relative",
