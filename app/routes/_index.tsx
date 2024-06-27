@@ -38,6 +38,7 @@ const styles = {
     position: "relative",
     top: "4em",
     maxWidth: 500,
+    marginTop: "2em",
     maxHeight: "500px",
     marginLeft: "4em",
     marginRight: "4em",
@@ -127,7 +128,7 @@ const Index = () => {
             <Typography gutterBottom variant="h5" component="div">
               Need. Install Solana Wallet
             </Typography>
-            <Typography variant="body2" color="text.secondary">
+            <Typography fontSize={20} color="text.secondary">
               SMT only allows connections to solana wallet, you must first
               install the solana wallet extension or wallet app for smartphone.
             </Typography>
