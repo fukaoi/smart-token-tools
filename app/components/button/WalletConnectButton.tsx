@@ -1,4 +1,4 @@
-import React, { CSSProperties, FC, useMemo } from "react";
+import { useMemo } from "react";
 import { Box } from "@mui/system";
 import { theme } from "../../utils/colorTheme";
 import {
@@ -13,11 +13,7 @@ import {
 import { clusterApiUrl } from "@solana/web3.js";
 import "@solana/wallet-adapter-react-ui/styles.css";
 
-const WalletConnectButton: FC<{
-  title: string;
-  callbackFunc?: (event?: any) => void;
-  isDisabled?: boolean;
-}> = ({ title, callbackFunc, isDisabled = false }) => {
+const WalletConnectButton = () => {
   const network = WalletAdapterNetwork.Devnet;
 
   // You can also provide a custom RPC endpoint.

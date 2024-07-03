@@ -106,11 +106,7 @@ const Index = () => {
           <Box
             sx={{ width: "100%", marginTop: "1.5em", marginBottom: "1em" }}
           >
-            <WalletConnectButton
-              isDisabled={btnState.isDisabled}
-              title={btnState.title}
-              callbackFunc={connectHandler}
-            />
+            <WalletConnectButton />
           </Box>
         </Box>
       </Box>
