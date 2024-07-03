@@ -3,9 +3,6 @@ import logoImage from "../../assets/smt-logo.svg";
 import { Box, Grid } from "@mui/material";
 
 const styles = {
-  navi: {
-    justifyContent: "left",
-  },
   naviLink: {
     letterSpacing: "3px",
     fontSize: "20px",
@@ -17,26 +14,26 @@ const styles = {
     textDecoration: "none",
     color: "white",
   },
-  grid: {
-    height: "10vh",
-  },
-  logoImage: {
-    paddingTop: "1em",
-    marginBottom: "0",
-  },
 };
 
 const Header = () => {
   return (
-    <Box sx={styles.navi}>
+    <Box sx={{ justifyContent: "left" }}>
       <Grid
         container
         alignItems="center"
         justifyContent="center"
-        sx={styles.grid}
+        sx={{
+          height: "10vh",
+        }}
       >
         <Grid item xs={3}>
-          <Box sx={styles.logoImage}>
+          <Box
+            sx={{
+              paddingTop: "1em",
+              marginBottom: "0",
+            }}
+          >
             <a href="/">
               <img
                 src={logoImage}
