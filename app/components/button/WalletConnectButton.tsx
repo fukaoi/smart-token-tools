@@ -1,14 +1,5 @@
 import React, { CSSProperties, FC, useMemo } from "react";
-import {
-  Box,
-  fontSize,
-  fontStyle,
-  style,
-  styled,
-  textAlign,
-} from "@mui/system";
-import Button from "@mui/material/Button";
-import SubmitButton from "./SubmitButton";
+import { Box } from "@mui/system";
 import { theme } from "../../utils/colorTheme";
 import {
   ConnectionProvider,
@@ -16,25 +7,11 @@ import {
 } from "@solana/wallet-adapter-react";
 import { WalletAdapterNetwork } from "@solana/wallet-adapter-base";
 import {
-  WalletDisconnectButton,
   WalletModalProvider,
   WalletMultiButton,
 } from "@solana/wallet-adapter-react-ui";
 import { clusterApiUrl } from "@solana/web3.js";
 import "@solana/wallet-adapter-react-ui/styles.css";
-
-// const StyledButton = styled(Button)({
-const styles: CSSProperties = {
-  background: theme.palette.blueGuradation.main,
-  borderRadius: 12,
-  width: "280px",
-  height: "60px",
-  fontSize: "20px",
-  fontWeight: 550,
-  justifyContent: "center",
-  display: "block",
-  margin: "auto",
-};
 
 const WalletConnectButton: FC<{
   title: string;
@@ -69,8 +46,20 @@ const WalletConnectButton: FC<{
     <ConnectionProvider endpoint={endpoint}>
       <WalletProvider wallets={wallets} autoConnect>
         <WalletModalProvider>
-          <Box style={styles}>
-            <WalletMultiButton style={styles} />
+          <Box>
+            <WalletMultiButton
+              style={{
+                background: theme.palette.blueGuradation.main,
+                borderRadius: 10,
+                width: "280px",
+                height: "60px",
+                fontSize: "20px",
+                fontWeight: 550,
+                justifyContent: "center",
+                display: "block",
+                margin: "auto",
+              }}
+            />
           </Box>
         </WalletModalProvider>
       </WalletProvider>

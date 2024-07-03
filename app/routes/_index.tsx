@@ -1,78 +1,14 @@
 "use client";
 
 import WarningModal from "../components/modal/WarningModal";
-import SubmitButton from "../components/button/SubmitButton";
 import WalletConnectButton from "../components/button/WalletConnectButton";
 import Typography from "@mui/material/Typography";
 import { useEffect, useState } from "react";
 import Card from "@mui/material/Card";
-import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import SolanaCircleLogo from "../assets/solana-logo-card.svg";
-import Button from "@mui/material/Button";
-import { Box, Link } from "@mui/material";
-import { Device } from "../utils/device";
-import UserPolicyCheckBox from "../components/checkbox/userPolicyCheckbox";
-import { height, textAlign } from "@mui/system";
-import { Wallet } from "@mui/icons-material";
-
-const styles = {
-  message: {
-    position: "relative" as const,
-    top: "2em",
-  },
-  submit: {
-    width: "100%",
-    marginTop: "1.5em",
-    marginBottom: "1em",
-  },
-  container: {
-    display: "flex",
-    justifyContent: "center",
-    flexWrap: "wrap" as const,
-  },
-  cardMedia: {
-    textAlign: "center",
-    height: 121,
-  },
-  cardContainer: {
-    position: "relative",
-    top: "4em",
-    maxWidth: 500,
-    marginTop: "2em",
-    maxHeight: "500px",
-    marginLeft: "4em",
-    marginRight: "4em",
-  },
-  cardAction: {
-    justifyContent: "center",
-  },
-  link: {
-    textDecoration: "none",
-  },
-  policyBox: {
-    display: "flex",
-    justifyContent: "center",
-    marginTop: "7em",
-  },
-  policyCard: {
-    width: 500,
-  },
-};
-
-function WellComeMessage() {
-  return (
-    <Box style={styles.message}>
-      <Typography component="div" fontSize="23px" fontWeight="500">
-        LETS TOKEN / NFT ISSUE EASY AND QUICKLY
-      </Typography>
-      <Typography component="div" fontSize="2.4em" fontWeight="bold">
-        TOKEN AND NFT TOOLS
-      </Typography>
-    </Box>
-  );
-}
+import { Box } from "@mui/material";
 
 const Index = () => {
   const [warningModal, setWarningModal] = useState({
@@ -85,11 +21,6 @@ const Index = () => {
     isDisabled: true,
   });
   const [isChecked, setIsChecked] = useState(false);
-
-  const toggleCheckbox = () => {
-    setIsChecked(!isChecked);
-    setBtnState((prevState) => ({ title, isDisabled: !prevState.isDisabled }));
-  };
 
   // useEffect(() => {
   //   if (state?.warning !== undefined) {
@@ -118,11 +49,34 @@ const Index = () => {
 
   return (
     <>
-      <WellComeMessage />
-      <Box style={styles.container}>
-        <Card sx={styles.cardContainer}>
+      <Box sx={{ position: "relative" as const, top: "2em" }}>
+        <Typography component="div" fontSize="23px" fontWeight="500">
+          LETS TOKEN / NFT ISSUE EASY AND QUICKLY
+        </Typography>
+        <Typography component="div" fontSize="2.4em" fontWeight="bold">
+          TOKEN AND NFT TOOLS
+        </Typography>
+      </Box>
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          flexWrap: "wrap" as const,
+        }}
+      >
+        <Card
+          sx={{
+            position: "relative",
+            top: "4em",
+            maxWidth: 500,
+            marginTop: "2em",
+            maxHeight: "500px",
+            marginLeft: "4em",
+            marginRight: "4em",
+          }}
+        >
           <CardMedia
-            sx={styles.cardMedia}
+            sx={{ textAlign: "center", height: 121 }}
             component="img"
             image={SolanaCircleLogo}
           />
@@ -137,9 +91,21 @@ const Index = () => {
           </CardContent>
         </Card>
       </Box>
-      <Box style={styles.policyBox}>
-        <Box sx={styles.policyCard}>
-          <Box style={styles.submit}>
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          marginTop: "7em",
+        }}
+      >
+        <Box
+          sx={{
+            width: 500,
+          }}
+        >
+          <Box
+            sx={{ width: "100%", marginTop: "1.5em", marginBottom: "1em" }}
+          >
             <WalletConnectButton
               isDisabled={btnState.isDisabled}
               title={btnState.title}
