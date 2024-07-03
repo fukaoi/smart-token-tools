@@ -50,7 +50,6 @@ const WalletConnectButton: FC<{
             <WalletMultiButton
               style={{
                 background: theme.palette.blueGuradation.main,
-                borderRadius: 10,
                 width: "280px",
                 height: "60px",
                 fontSize: "20px",
