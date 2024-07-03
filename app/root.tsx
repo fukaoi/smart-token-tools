@@ -5,7 +5,6 @@ import {
   Scripts,
   ScrollRestoration,
 } from "@remix-run/react";
-import "./tailwind.css";
 import Header from "./components/Header";
 import backImage from "./assets/background-image.svg";
 import { Box } from "@mui/system";

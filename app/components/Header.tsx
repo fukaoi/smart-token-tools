@@ -1,12 +1,10 @@
 import { Link } from "@remix-run/react";
 import logoImage from "../assets/smt-logo.svg";
 import { Box, Grid } from "@mui/material";
-import { padding } from "@mui/system";
 
 const styles = {
   navi: {
-    paddingLeft: "3%",
-    paddingRight: "3%",
+    justifyContent: "left",
   },
   naviLink: {
     letterSpacing: "3px",
@@ -37,7 +35,7 @@ const Header = () => {
         justifyContent="center"
         sx={styles.grid}
       >
-        <Grid item xs={12}>
+        <Grid item xs={3}>
           <Box sx={styles.logoImage}>
             <a href="/">
               <img
@@ -66,6 +64,7 @@ const Header = () => {
             </Link>
           </Box>
         </Grid>
+        <Grid item xs={3}></Grid>
       </Grid>
     </Box>
   );
