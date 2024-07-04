@@ -59,6 +59,7 @@ const Index = () => {
       </Box>
       <Box
         sx={{
+          height: "100%",
           display: "flex",
           justifyContent: "center",
           flexWrap: "wrap" as const,

@@ -9,23 +9,6 @@ import Header from "./components/parts/Header";
 import backImage from "./assets/background-image.svg";
 import { Box } from "@mui/system";
 
-const styles = {
-  root: {
-    position: "relative" as const,
-    textAlign: "center" as const,
-    backgroundSize: "cover",
-    backgroundImage:
-      `linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url(${backImage})`,
-    backgroundPosition: "center",
-    minHeight: "100vh",
-    maxHeight: "100%",
-    width: "100%",
-    alignItems: "center",
-    fontSize: "calc(10px + 2vmin)",
-    color: "white",
-  },
-};
-
 export function Layout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
@@ -36,7 +19,22 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Links />
       </head>
       <body>
-        <Box sx={styles.root}>
+        <Box
+          sx={{
+            position: "relative" as const,
+            textAlign: "center" as const,
+            backgroundSize: "cover",
+            backgroundImage:
+              `linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url(${backImage})`,
+            backgroundPosition: "center",
+            minHeight: "100vh",
+            maxHeight: "100%",
+            width: "100%",
+            alignItems: "center",
+            fontSize: "calc(10px + 2vmin)",
+            color: "white",
+          }}
+        >
           <Header />
           {children}
         </Box>

@@ -18,20 +18,16 @@ const styles = {
 
 const Header = () => {
   return (
-    <Box sx={{ justifyContent: "left" }}>
+    <Box>
       <Grid
         container
         alignItems="center"
         justifyContent="center"
-        sx={{
-          height: "10vh",
-        }}
       >
         <Grid item xs={3}>
           <Box
             sx={{
-              paddingTop: "1em",
-              marginBottom: "0",
+              paddingTop: "0.5em",
             }}
           >
             <a href="/">
