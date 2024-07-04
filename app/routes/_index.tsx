@@ -1,6 +1,4 @@
 "use client";
-
-import WalletConnectButton from "../components/button/WalletConnectButton";
 import Typography from "@mui/material/Typography";
 import { useEffect, useState } from "react";
 import Card from "@mui/material/Card";
@@ -11,9 +9,11 @@ import { Box } from "@mui/material";
 import { useWallet } from "@solana/wallet-adapter-react";
 import SubmitButton from "~/components/button/SubmitButton";
 import { WalletMultiButton } from "@solana/wallet-adapter-react-ui";
+import { redirect, useNavigate } from "@remix-run/react";
 
 const Index = () => {
   const title = "Connect Wallet";
+  const navigate = useNavigate();
   const [btnState, setBtnState] = useState({
     title: title,
     isDisabled: true,
@@ -22,7 +22,10 @@ const Index = () => {
 
   useEffect(() => {
     console.log("# publicKey: ", publicKey?.toString());
-  });
+    if (publicKey !== undefined) {
+      navigate("/nft");
+    }
+  }, [publicKey]);
 
   const handleClose = () => {
     setBtnState({ title, isDisabled: true });
@@ -104,11 +107,6 @@ const Index = () => {
           <Box
             sx={{ width: "100%", marginTop: "1.5em", marginBottom: "1em" }}
           >
-            <SubmitButton
-              title="Wallet connect"
-              isDisabled={false}
-              onClick={connectHandler}
-            />
             <WalletMultiButton onClick={connectHandler} />
           </Box>
         </Box>
