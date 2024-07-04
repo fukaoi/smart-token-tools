@@ -1,6 +1,5 @@
 "use client";
 
-import WarningModal from "../components/modal/WarningModal";
 import WalletConnectButton from "../components/button/WalletConnectButton";
 import Typography from "@mui/material/Typography";
 import { useEffect, useState } from "react";
@@ -9,27 +8,23 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import SolanaCircleLogo from "../assets/solana-logo-card.svg";
 import { Box } from "@mui/material";
+import { useWallet } from "@solana/wallet-adapter-react";
+import SubmitButton from "~/components/button/SubmitButton";
+import { WalletMultiButton } from "@solana/wallet-adapter-react-ui";
 
 const Index = () => {
-  const [warningModal, setWarningModal] = useState({
-    open: false,
-    message: "",
-  });
   const title = "Connect Wallet";
   const [btnState, setBtnState] = useState({
     title: title,
     isDisabled: true,
   });
-  const [isChecked, setIsChecked] = useState(false);
+  const { publicKey } = useWallet();
 
-  // useEffect(() => {
-  //   if (state?.warning !== undefined) {
-  //     setWarningModal({ open: true, message: state.warning });
-  //   }
-  // }, [state]);
+  useEffect(() => {
+    console.log("# publicKey: ", publicKey?.toString());
+  });
 
   const handleClose = () => {
-    setWarningModal({ open: false, message: "" });
     setBtnState({ title, isDisabled: true });
   };
 
@@ -39,9 +34,11 @@ const Index = () => {
     if (!window.solana) {
       const message = `You will need Solana Wallet to access.
         please install Solana Wallet`;
-      setWarningModal({ open: true, message });
+      alert;
+      message;
     } else {
       window.solana.connect().then(() => {
+        alert(1);
         // navigate('/nft');
       });
     }
@@ -107,15 +104,15 @@ const Index = () => {
           <Box
             sx={{ width: "100%", marginTop: "1.5em", marginBottom: "1em" }}
           >
-            <WalletConnectButton />
+            <SubmitButton
+              title="Wallet connect"
+              isDisabled={false}
+              onClick={connectHandler}
+            />
+            <WalletMultiButton onClick={connectHandler} />
           </Box>
         </Box>
       </Box>
-      <WarningModal
-        open={warningModal.open}
-        onClose={handleClose}
-        message={warningModal.message}
-      />
     </>
   );
 };

@@ -14,14 +14,14 @@ const StyledButton = styled(Button)({
 
 const SubmitButton: FC<{
   title: string;
-  callbackFunc?: (event?: any) => void;
+  onClick?: (event?: any) => void;
   isDisabled?: boolean;
-}> = ({ title, callbackFunc, isDisabled = false }) => {
+}> = ({ title, onClick, isDisabled = false }) => {
   return (
     <StyledButton
       disabled={isDisabled}
       type="submit"
-      onClick={callbackFunc}
+      onClick={onClick}
       style={{ fontWeight: "550", fontSize: "20px" }}
     >
       {title}

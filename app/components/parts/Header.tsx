@@ -1,6 +1,7 @@
 import { Link } from "@remix-run/react";
 import logoImage from "../../assets/smt-logo.svg";
 import { Box, Grid } from "@mui/material";
+import { useWallet } from "@solana/wallet-adapter-react";
 
 const styles = {
   naviLink: {
@@ -17,6 +18,8 @@ const styles = {
 };
 
 const Header = () => {
+  const { publicKey } = useWallet();
+
   return (
     <Box>
       <Grid
@@ -40,21 +43,26 @@ const Header = () => {
           </Box>
         </Grid>
         <Grid item xs={6}>
-          <Box style={styles.naviLink}>
-            <Link to="/token" style={styles.link}>
-              Token
-            </Link>
-          </Box>
-          <Box style={styles.naviLink}>
-            <Link to="/nft" style={styles.link}>
-              NFT
-            </Link>
-          </Box>
-          <Box style={styles.naviLink}>
-            <Link to="/faucet" style={styles.link}>
-              Faucet
-            </Link>
-          </Box>
+          {publicKey &&
+            (
+              <>
+                <Box style={styles.naviLink}>
+                  <Link to="/token" style={styles.link}>
+                    Token
+                  </Link>
+                </Box>
+                <Box style={styles.naviLink}>
+                  <Link to="/nft" style={styles.link}>
+                    NFT
+                  </Link>
+                </Box>
+                <Box style={styles.naviLink}>
+                  <Link to="/faucet" style={styles.link}>
+                    Faucet
+                  </Link>
+                </Box>
+              </>
+            )}
         </Grid>
         <Grid item xs={3}></Grid>
       </Grid>

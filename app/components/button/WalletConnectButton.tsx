@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { useEffect, useMemo } from "react";
 import { Box } from "@mui/system";
 import { theme } from "../../utils/colorTheme";
 import {
@@ -12,12 +12,17 @@ import {
 } from "@solana/wallet-adapter-react-ui";
 import { clusterApiUrl } from "@solana/web3.js";
 import "@solana/wallet-adapter-react-ui/styles.css";
+// import { useConnection, useWallet } from "@solana/wallet-adapter-react";
 
 const WalletConnectButton = () => {
+  // const { publicKey } = useWallet();
   const network = WalletAdapterNetwork.Devnet;
 
   // You can also provide a custom RPC endpoint.
   const endpoint = useMemo(() => clusterApiUrl(network), [network]);
+  // useEffect(() => {
+  //   console.log(publicKey);
+  // }, []);
 
   const wallets = useMemo(
     () => [
