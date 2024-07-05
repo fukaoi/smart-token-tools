@@ -1,29 +1,23 @@
 "use client";
 import Typography from "@mui/material/Typography";
-import { useEffect, useState } from "react";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import SolanaCircleLogo from "../assets/solana-logo-card.svg";
 import { Box, Button, ListItem, ListItemText } from "@mui/material";
 import { useWallet } from "@solana/wallet-adapter-react";
-import { redirect, useNavigate } from "@remix-run/react";
-import BackgroundBlur from "~/components/animation/BackgroundBlur";
+import { useNavigate } from "@remix-run/react";
+import { WalletName } from "@solana/wallet-adapter-base";
 
 const Index = () => {
-  const title = "Connect Wallet";
   const navigate = useNavigate();
-  const [btnState, setBtnState] = useState({
-    title: title,
-    isDisabled: true,
-  });
-  const { select, wallets, publicKey, disconnect } = useWallet();
+  const { select, wallets, publicKey } = useWallet();
 
-  const connectHandler = (selectedButton: string) => {
-    const title = "Processing";
-    setBtnState({ title, isDisabled: true });
-    console.log(selectedButton);
-    if (publicKey !== undefined) {
+  const connectHandler = (selectedButton: WalletName) => {
+    if (!publicKey) {
+      select(selectedButton);
+    } else {
+      console.log("# publicKey: ", publicKey);
       navigate("/nft");
     }
   };
@@ -88,22 +82,23 @@ const Index = () => {
           }}
         >
           {wallets.filter((wallet) => wallet.readyState === "Installed")
-            .length >
-            0
+              .length >
+              0
             ? (
               wallets
                 .filter((wallet) => wallet.readyState === "Installed")
                 .map((wallet) => (
                   <ListItem
+                    key={wallet.adapter.name}
                     sx={{
-                      backgroundColor: "#333333",
+                      backgroundColor: "rgba(3,3,3, 0.6)",
                       marginBottom: "12px",
                       borderRadius: "4px",
                     }}
                   >
                     <Button
                       key={wallet.adapter.name}
-                      onClick={() => connectHandler(wallet.adapter.name)}
+                      onClick={() => (wallet.adapter.name)}
                     >
                       <img
                         src={wallet.adapter.icon}
@@ -124,7 +119,7 @@ const Index = () => {
                 ))
             )
             : (
-              <Typography>
+              <Typography fontSize={20}>
                 No wallet found. Please download a supported Solana wallet
               </Typography>
             )}
