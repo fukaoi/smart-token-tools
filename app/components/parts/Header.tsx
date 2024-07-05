@@ -36,7 +36,7 @@ const Header = () => {
               <img
                 src={logoImage}
                 alt="Smart token tool"
-                width={350}
+                width={"55%"}
               />
             </a>
           </Box>
