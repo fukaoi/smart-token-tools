@@ -5,11 +5,10 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import SolanaCircleLogo from "../assets/solana-logo-card.svg";
-import { Box, Button } from "@mui/material";
+import { Box, Button, ListItem, ListItemText } from "@mui/material";
 import { useWallet } from "@solana/wallet-adapter-react";
-import SubmitButton from "~/components/button/SubmitButton";
-import { WalletMultiButton } from "@solana/wallet-adapter-react-ui";
 import { redirect, useNavigate } from "@remix-run/react";
+import BackgroundBlur from "~/components/animation/BackgroundBlur";
 
 const Index = () => {
   const title = "Connect Wallet";
@@ -19,15 +18,6 @@ const Index = () => {
     isDisabled: true,
   });
   const { select, wallets, publicKey, disconnect } = useWallet();
-  // console.log(select, wallets);
-
-  useEffect(() => {
-    console.log("# publicKey: ", publicKey?.toString());
-  }, [publicKey]);
-
-  const handleClose = () => {
-    setBtnState({ title, isDisabled: true });
-  };
 
   const connectHandler = (selectedButton: string) => {
     const title = "Processing";
@@ -92,25 +82,25 @@ const Index = () => {
       >
         <Box
           sx={{
-            width: 500,
+            width: 350,
+            marginTop: "0.2em",
+            marginBottom: "1em",
           }}
         >
-          <Box
-            sx={{ width: "100%", marginTop: "1.5em", marginBottom: "1em" }}
-          >
-            {
-              /*
-<WalletMultiButton />
-            */
-            }
-
-            {wallets.filter((wallet) => wallet.readyState === "Installed")
-              .length >
-              0
-              ? (
-                wallets
-                  .filter((wallet) => wallet.readyState === "Installed")
-                  .map((wallet) => (
+          {wallets.filter((wallet) => wallet.readyState === "Installed")
+            .length >
+            0
+            ? (
+              wallets
+                .filter((wallet) => wallet.readyState === "Installed")
+                .map((wallet) => (
+                  <ListItem
+                    sx={{
+                      backgroundColor: "#333333",
+                      marginBottom: "12px",
+                      borderRadius: "4px",
+                    }}
+                  >
                     <Button
                       key={wallet.adapter.name}
                       onClick={() => connectHandler(wallet.adapter.name)}
@@ -118,17 +108,26 @@ const Index = () => {
                       <img
                         src={wallet.adapter.icon}
                         alt={wallet.adapter.name}
+                        width={"50 %"}
+                        height={"50 %"}
+                        style={{ marginRight: "1em" }}
                       />
-                      {wallet.adapter.name}
+                      <ListItemText
+                        primary={wallet.adapter.name}
+                        sx={{
+                          textDecoration: "none",
+                          color: "white",
+                        }}
+                      />
                     </Button>
-                  ))
-              )
-              : (
-                <Typography>
-                  No wallet found. Please download a supported Solana wallet
-                </Typography>
-              )}
-          </Box>
+                  </ListItem>
+                ))
+            )
+            : (
+              <Typography>
+                No wallet found. Please download a supported Solana wallet
+              </Typography>
+            )}
         </Box>
       </Box>
     </>

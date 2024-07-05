@@ -1,12 +1,11 @@
-import { Link } from "@remix-run/react";
 import logoImage from "../../assets/smt-logo.svg";
 import { Box, Grid } from "@mui/material";
-import { useWallet } from "@solana/wallet-adapter-react";
+import { Link, useLocation } from "@remix-run/react";
 
 const styles = {
   naviLink: {
     letterSpacing: "3px",
-    fontSize: "20px",
+    fontSize: "30px",
     display: "inline-block",
     marginLeft: "20px",
     marginRight: "20px",
@@ -18,7 +17,7 @@ const styles = {
 };
 
 const Header = () => {
-  const { publicKey } = useWallet();
+  const location = useLocation();
 
   return (
     <Box>
@@ -43,7 +42,7 @@ const Header = () => {
           </Box>
         </Grid>
         <Grid item xs={6}>
-          {publicKey &&
+          {location.pathname !== "/" &&
             (
               <>
                 <Box style={styles.naviLink}>
