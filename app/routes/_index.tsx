@@ -1,17 +1,22 @@
 "use client";
+
 import Typography from "@mui/material/Typography";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
-import SolanaCircleLogo from "../assets/solana-logo-card.svg";
-import { Box, Button, ListItem, ListItemText } from "@mui/material";
+import SolanaCircleLogo from "~/assets/solana-logo-card.svg";
+import { Box } from "@mui/material";
+import { WalletName } from "@solana/wallet-adapter-base";
 import { useWallet } from "@solana/wallet-adapter-react";
 import { useNavigate } from "@remix-run/react";
-import { WalletName } from "@solana/wallet-adapter-base";
+import { lazy } from "react";
+const WalletConnectButton = lazy(() =>
+  import("~/components/button/WalletConnectButton")
+);
 
 const Index = () => {
   const navigate = useNavigate();
-  const { select, wallets, publicKey } = useWallet();
+  const { select, publicKey } = useWallet();
 
   const connectHandler = (selectedButton: WalletName) => {
     if (!publicKey) {
@@ -81,48 +86,7 @@ const Index = () => {
             marginBottom: "1em",
           }}
         >
-          {wallets.filter((wallet) => wallet.readyState === "Installed")
-              .length >
-              0
-            ? (
-              wallets
-                .filter((wallet) => wallet.readyState === "Installed")
-                .map((wallet) => (
-                  <ListItem
-                    key={wallet.adapter.name}
-                    sx={{
-                      backgroundColor: "rgba(3,3,3, 0.6)",
-                      marginBottom: "12px",
-                      borderRadius: "4px",
-                    }}
-                  >
-                    <Button
-                      key={wallet.adapter.name}
-                      onClick={() => (wallet.adapter.name)}
-                    >
-                      <img
-                        src={wallet.adapter.icon}
-                        alt={wallet.adapter.name}
-                        width={"50 %"}
-                        height={"50 %"}
-                        style={{ marginRight: "1em" }}
-                      />
-                      <ListItemText
-                        primary={wallet.adapter.name}
-                        sx={{
-                          textDecoration: "none",
-                          color: "white",
-                        }}
-                      />
-                    </Button>
-                  </ListItem>
-                ))
-            )
-            : (
-              <Typography fontSize={20}>
-                No wallet found. Please download a supported Solana wallet
-              </Typography>
-            )}
+          <WalletConnectButton onClick={connectHandler} />
         </Box>
       </Box>
     </>
