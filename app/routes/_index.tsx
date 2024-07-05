@@ -5,7 +5,7 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import SolanaCircleLogo from "../assets/solana-logo-card.svg";
-import { Box } from "@mui/material";
+import { Box, Button } from "@mui/material";
 import { useWallet } from "@solana/wallet-adapter-react";
 import SubmitButton from "~/components/button/SubmitButton";
 import { WalletMultiButton } from "@solana/wallet-adapter-react-ui";
@@ -18,32 +18,23 @@ const Index = () => {
     title: title,
     isDisabled: true,
   });
-  const { publicKey } = useWallet();
+  const { select, wallets, publicKey, disconnect } = useWallet();
+  // console.log(select, wallets);
 
   useEffect(() => {
     console.log("# publicKey: ", publicKey?.toString());
-    if (publicKey !== undefined) {
-      navigate("/nft");
-    }
   }, [publicKey]);
 
   const handleClose = () => {
     setBtnState({ title, isDisabled: true });
   };
 
-  const connectHandler = () => {
+  const connectHandler = (selectedButton: string) => {
     const title = "Processing";
     setBtnState({ title, isDisabled: true });
-    if (!window.solana) {
-      const message = `You will need Solana Wallet to access.
-        please install Solana Wallet`;
-      alert;
-      message;
-    } else {
-      window.solana.connect().then(() => {
-        alert(1);
-        // navigate('/nft');
-      });
+    console.log(selectedButton);
+    if (publicKey !== undefined) {
+      navigate("/nft");
     }
   };
 
@@ -69,7 +60,7 @@ const Index = () => {
           sx={{
             position: "relative",
             top: "4em",
-            maxWidth: 500,
+            maxWidth: 400,
             marginTop: "2em",
             maxHeight: "500px",
             marginLeft: "4em",
@@ -107,7 +98,36 @@ const Index = () => {
           <Box
             sx={{ width: "100%", marginTop: "1.5em", marginBottom: "1em" }}
           >
-            <WalletMultiButton onClick={connectHandler} />
+            {
+              /*
+<WalletMultiButton />
+            */
+            }
+
+            {wallets.filter((wallet) => wallet.readyState === "Installed")
+              .length >
+              0
+              ? (
+                wallets
+                  .filter((wallet) => wallet.readyState === "Installed")
+                  .map((wallet) => (
+                    <Button
+                      key={wallet.adapter.name}
+                      onClick={() => connectHandler(wallet.adapter.name)}
+                    >
+                      <img
+                        src={wallet.adapter.icon}
+                        alt={wallet.adapter.name}
+                      />
+                      {wallet.adapter.name}
+                    </Button>
+                  ))
+              )
+              : (
+                <Typography>
+                  No wallet found. Please download a supported Solana wallet
+                </Typography>
+              )}
           </Box>
         </Box>
       </Box>
