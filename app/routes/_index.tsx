@@ -1,5 +1,3 @@
-"use client";
-
 import Typography from "@mui/material/Typography";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
@@ -81,7 +79,7 @@ const Index = () => {
       >
         <Box
           sx={{
-            width: 350,
+            width: "auto",
             marginTop: "0.2em",
             marginBottom: "1em",
           }}
