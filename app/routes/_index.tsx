@@ -1,3 +1,5 @@
+"use client";
+
 import Typography from "@mui/material/Typography";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
@@ -8,9 +10,11 @@ import { WalletName } from "@solana/wallet-adapter-base";
 import { useWallet } from "@solana/wallet-adapter-react";
 import { useNavigate } from "@remix-run/react";
 import { lazy } from "react";
-const WalletConnectButton = lazy(() =>
-  import("~/components/button/WalletConnectButton")
-);
+// const WalletConnectButton = lazy(() =>
+//   import("~/components/button/WalletConnectButton")
+// );
+
+import WalletConnectButton from '~/components/button/WalletConnectButton';
 
 const Index = () => {
   const navigate = useNavigate();
