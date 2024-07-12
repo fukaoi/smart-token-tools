@@ -5,10 +5,19 @@ import { Link, useLocation } from "@remix-run/react";
 const styles = {
   naviLink: {
     letterSpacing: "3px",
-    fontSize: "30px",
+    fontSize: "20px",
     display: "inline-block",
     marginLeft: "20px",
-    marginRight: "20px",
+    marginRight: "10px",
+    width: "200px",
+    backgroundColor: "rgba(3,3,3, 0.6)",
+    marginBottom: "12px",
+    borderRadius: "1px",
+    paddingTop: "10px",
+    paddingBottom: "10px",
+    "&:hover": {
+      backgroundColor: "rgba(16, 130, 105, 0.6)",
+    },
   },
   link: {
     textDecoration: "none",
@@ -45,21 +54,21 @@ const Header = () => {
           {location.pathname !== "/" &&
             (
               <>
-                <Box style={styles.naviLink}>
-                  <Link to="/token" style={styles.link}>
+                <Link to="/token" style={styles.link}>
+                  <Box style={styles.naviLink}>
                     Token
-                  </Link>
-                </Box>
-                <Box style={styles.naviLink}>
-                  <Link to="/nft" style={styles.link}>
+                  </Box>
+                </Link>
+                <Link to="/nft" style={styles.link}>
+                  <Box style={styles.naviLink}>
                     NFT
-                  </Link>
-                </Box>
-                <Box style={styles.naviLink}>
-                  <Link to="/faucet" style={styles.link}>
+                  </Box>
+                </Link>
+                <Link to="/faucet" style={styles.link}>
+                  <Box style={styles.naviLink}>
                     Faucet
-                  </Link>
-                </Box>
+                  </Box>
+                </Link>
               </>
             )}
         </Grid>
