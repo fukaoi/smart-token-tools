@@ -1,4 +1,4 @@
-import { Button, ListItem, ListItemText } from "@mui/material";
+import { Button, ListItem, ListItemButton, ListItemText } from "@mui/material";
 import { useWallet, Wallet } from "@solana/wallet-adapter-react";
 import Typography from "@mui/material/Typography";
 import { FC } from "react";
@@ -17,34 +17,36 @@ const WalletConnectButton: FC<{ onClick: (selectedWallet: Wallet) => void }> = (
           wallets
             .filter((wallet) => wallet.readyState === "Installed")
             .map((wallet) => (
-              <ListItem
+              <ListItemButton
                 key={wallet.adapter.name}
+                onClick={() => onClick(wallet)}
                 sx={{
+                  width: "250px",
                   backgroundColor: "rgba(3,3,3, 0.6)",
                   marginBottom: "12px",
                   borderRadius: "4px",
+                  paddingTop: "10px",
+                  paddingBottom: "10px",
+                  "&:hover": {
+                    backgroundColor: "rgba(16, 130, 105, 0.6)",
+                  },
                 }}
               >
-                <Button
-                  key={wallet.adapter.name}
-                  onClick={() => onClick(wallet)}
-                >
-                  <img
-                    src={wallet.adapter.icon}
-                    alt={wallet.adapter.name}
-                    width={"50 %"}
-                    height={"50 %"}
-                    style={{ marginRight: "1em" }}
-                  />
-                  <ListItemText
-                    primary={wallet.adapter.name}
-                    sx={{
-                      textDecoration: "none",
-                      color: "white",
-                    }}
-                  />
-                </Button>
-              </ListItem>
+                <img
+                  src={wallet.adapter.icon}
+                  alt={wallet.adapter.name}
+                  width={"35px"}
+                  height={"35px"}
+                  style={{ marginRight: "1em" }}
+                />
+                <ListItemText
+                  primary={wallet.adapter.name}
+                  sx={{
+                    textDecoration: "none",
+                    color: "white",
+                  }}
+                />
+              </ListItemButton>
             ))
         )
         : (
