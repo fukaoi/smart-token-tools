@@ -72,14 +72,13 @@ const Index = () => {
         sx={{
           display: "flex",
           justifyContent: "center",
-          marginTop: "7em",
+          marginTop: "6em",
         }}
       >
         <Box
           sx={{
             width: "auto",
-            marginTop: "0.2em",
-            marginBottom: "1em",
+            marginBottom: "2em",
           }}
         >
           <WalletConnectButton onClick={connectHandler} />

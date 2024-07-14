@@ -10,11 +10,11 @@ const styles = {
     marginLeft: "20px",
     marginRight: "10px",
     width: "200px",
-    backgroundColor: "rgba(3,3,3, 0.6)",
+    backgroundColor: "rgba(3,3,3, 0.4)",
     marginBottom: "12px",
     borderRadius: "1px",
     paddingTop: "10px",
-    "box-shadow": "0 10px 25px 0 rgba(0, 0, 0, .5)",
+    boxShadow: "0 10px 25px 0 rgba(0, 0, 0, .5)",
     paddingBottom: "10px",
     "&:hover": {
       backgroundColor: "rgba(16, 130, 105, 0.6)",
@@ -30,7 +30,7 @@ const Header = () => {
   const location = useLocation();
 
   return (
-    <Box>
+    <Box sx={{ marginBottom: "3em" }}>
       <Grid
         container
         alignItems="center"
@@ -51,7 +51,7 @@ const Header = () => {
             </a>
           </Box>
         </Grid>
-        <Grid item xs={6}>
+        <Grid item xs={6} sx={{paddingTop: "1em"}}>
           {location.pathname !== "/" &&
             (
               <>

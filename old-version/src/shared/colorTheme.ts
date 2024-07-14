@@ -1,5 +1,5 @@
 import { createTheme } from '@mui/material/styles';
-import { indigo, deepOrange, grey, yellow } from '@mui/material/colors';
+import { deepOrange, grey, indigo, yellow } from '@mui/material/colors';
 
 declare module '@mui/material/styles/createPalette' {
   interface Palette {
@@ -41,8 +41,8 @@ export const theme = createTheme({
       main: grey[600],
     },
     textBlack: {
-      main: 'none solid rgb(0, 0, 0, 0, 0.87)',
-      light: 'none solid rgb(0, 0, 0, 0, 0.6)',
+      main: 'none solid rgba(0, 0, 0, 0, 0.87)',
+      light: 'none solid rgba(0, 0, 0, 0, 0.6)',
     },
     limeLight: {
       main: yellow[50],
