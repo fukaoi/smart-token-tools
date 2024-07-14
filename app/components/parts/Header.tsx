@@ -14,6 +14,7 @@ const styles = {
     marginBottom: "12px",
     borderRadius: "1px",
     paddingTop: "10px",
+    "box-shadow": "0 10px 25px 0 rgba(0, 0, 0, .5)",
     paddingBottom: "10px",
     "&:hover": {
       backgroundColor: "rgba(16, 130, 105, 0.6)",
