@@ -6,6 +6,7 @@ import SubmitButton from "../components/button/SubmitButton";
 import InfoModal from "../components/modal/InfoModal";
 import { useState } from "react";
 import ErrorModal from "../components/modal/ErrorModal";
+import { useWallet } from "@solana/wallet-adapter-react";
 
 export type FormValues = {
   cluster: string;
@@ -32,11 +33,15 @@ const styles = {
 const Faucet = () => {
   const [open, setOpen] = useState(false);
   const [errorModal, setErrorModal] = useState({ open: false, message: "" });
-  const [walletAddress, setWalletAddress] = useState<string>("");
   const [btnState, setBtnState] = useState({
     title: "Confirm",
     isDisabled: false,
   });
+
+  const { publicKey, wallets } = useWallet();
+
+  console.log(publicKey, wallets);
+  const walletAddress = publicKey ? publicKey.toString() : "";
 
   const onSubmit = async (walletAddress: string) => {
     setBtnState({ title: "Processing", isDisabled: true });

@@ -13,12 +13,14 @@ const WalletConnectButton = lazy(() =>
 
 const Index = () => {
   const navigate = useNavigate();
-  const { publicKey } = useWallet();
+  const { publicKey, connect, wallets } = useWallet();
 
   const connectHandler = (wallet: Wallet) => {
+    console.log("_index: ", wallet.adapter);
     if (!publicKey) {
-      wallet.adapter.connect().then(() => {
-        navigate("/nft");
+      wallets[1].adapter.connect().then((res) => {
+        console.log("res:", res);
+        // navigate("/nft");
       });
     }
   };

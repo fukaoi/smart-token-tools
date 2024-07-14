@@ -10,7 +10,7 @@ const styles = {
     marginLeft: "20px",
     marginRight: "10px",
     width: "200px",
-    backgroundColor: "rgba(3,3,3, 0.4)",
+    backgroundColor: "rgba(3,3,3, 0.5)",
     marginBottom: "12px",
     borderRadius: "1px",
     paddingTop: "10px",

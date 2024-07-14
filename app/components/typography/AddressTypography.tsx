@@ -6,11 +6,10 @@ import { theme } from '../../utils/colorTheme';
 const styles = {
   box: {
     background: theme.palette.orangeGuradation.main,
-    borderRadius: 3,
+    borderRadius: 1,
     color: 'white',
     padding: '5px',
     marginBottom: '1em',
-    boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
   },
 };
 
