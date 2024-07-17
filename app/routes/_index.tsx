@@ -6,22 +6,42 @@ import SolanaCircleLogo from "~/assets/solana-logo-card.svg";
 import { Box } from "@mui/material";
 import { useWallet, Wallet } from "@solana/wallet-adapter-react";
 import { useNavigate } from "@remix-run/react";
-import { lazy } from "react";
+import { lazy, useEffect } from "react";
 const WalletConnectButton = lazy(() =>
   import("~/components/button/WalletConnectButton")
 );
 
 const Index = () => {
   const navigate = useNavigate();
-  const { publicKey, connect, wallets } = useWallet();
+  const { publicKey, connect, wallets, select } = useWallet();
+
+  useEffect(() => {
+    if (publicKey) {
+      console.log("# connected publicKey: ", publicKey.toString());
+      navigate("/nft");
+    }
+  }, [publicKey]);
 
   const connectHandler = (wallet: Wallet) => {
-    console.log("_index: ", wallet.adapter);
-    if (!publicKey) {
-      wallets[1].adapter.connect().then((res) => {
-        console.log("res:", res);
-        // navigate("/nft");
+    if (publicKey) {
+      //   wallet.adapter.connect().then(() => {
+      //     console.log(
+      //       "publicKey:",
+      //       publicKey,
+      //       wallet.adapter.publicKey?.toString(),
+      //     );
+      navigate("/nft");
+      //   });
+    } else {
+      console.log("_index: ", wallet.adapter.publicKey?.toString());
+      wallet.adapter.connect().then(() => {
+        console.log(
+          "publicKey:",
+          publicKey,
+          wallet.adapter.publicKey?.toString(),
+        );
       });
+      navigate("/nft");
     }
   };
 
