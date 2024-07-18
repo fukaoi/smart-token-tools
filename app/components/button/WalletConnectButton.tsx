@@ -6,7 +6,7 @@ import { FC } from "react";
 const WalletConnectButton: FC<{ onClick: (selectedWallet: Wallet) => void }> = (
   { onClick },
 ) => {
-  const { wallets } = useWallet();
+  const { wallets, select } = useWallet();
 
   return (
     <>
@@ -19,7 +19,8 @@ const WalletConnectButton: FC<{ onClick: (selectedWallet: Wallet) => void }> = (
             .map((wallet) => (
               <ListItemButton
                 key={wallet.adapter.name}
-                onClick={() => onClick(wallet)}
+                // onClick={() => onClick(wallet)}
+                onClick={() => select(wallet.adapter.name)}
                 sx={{
                   width: "250px",
                   backgroundColor: "rgba(3,3,3, 0.6)",
