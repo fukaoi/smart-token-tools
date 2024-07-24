@@ -1,4 +1,4 @@
-import { Button, ListItem, ListItemButton, ListItemText } from "@mui/material";
+import { ListItemButton, ListItemText } from "@mui/material";
 import { useWallet, Wallet } from "@solana/wallet-adapter-react";
 import Typography from "@mui/material/Typography";
 import { FC } from "react";

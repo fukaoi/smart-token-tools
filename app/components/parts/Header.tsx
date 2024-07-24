@@ -3,7 +3,7 @@ import { Box, Grid } from "@mui/material";
 import { Link, useLocation } from "@remix-run/react";
 
 const styles = {
-  naviLink: {
+  box: {
     letterSpacing: "3px",
     fontSize: "20px",
     display: "inline-block",
@@ -17,7 +17,7 @@ const styles = {
     boxShadow: "0 10px 25px 0 rgba(0, 0, 0, .5)",
     paddingBottom: "10px",
     "&:hover": {
-      backgroundColor: "rgba(16, 130, 105, 0.6)",
+      backgroundColor: "rgb(1, 130, 105, 0.5)",
     },
   },
   link: {
@@ -51,22 +51,22 @@ const Header = () => {
             </a>
           </Box>
         </Grid>
-        <Grid item xs={6} sx={{paddingTop: "1em"}}>
+        <Grid item xs={6} sx={{ paddingTop: "1em" }}>
           {location.pathname !== "/" &&
             (
               <>
                 <Link to="/token" style={styles.link}>
-                  <Box style={styles.naviLink}>
+                  <Box sx={styles.box}>
                     Token
                   </Box>
                 </Link>
                 <Link to="/nft" style={styles.link}>
-                  <Box style={styles.naviLink}>
+                  <Box sx={styles.box}>
                     NFT
                   </Box>
                 </Link>
                 <Link to="/faucet" style={styles.link}>
-                  <Box style={styles.naviLink}>
+                  <Box sx={styles.box}>
                     Faucet
                   </Box>
                 </Link>
