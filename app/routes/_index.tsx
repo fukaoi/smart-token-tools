@@ -18,31 +18,19 @@ const Index = () => {
   useEffect(() => {
     if (publicKey) {
       console.log("# connected publicKey: ", publicKey.toString());
-      navigate("/nft");
     }
   }, [publicKey]);
 
   const connectHandler = (wallet: Wallet) => {
-    if (publicKey) {
-      //   wallet.adapter.connect().then(() => {
-      //     console.log(
-      //       "publicKey:",
-      //       publicKey,
-      //       wallet.adapter.publicKey?.toString(),
-      //     );
+    console.log("_index: ", wallet.adapter.publicKey?.toString());
+    wallet.adapter.connect().then(() => {
+      console.log(
+        "publicKey:",
+        publicKey,
+        wallet.adapter.publicKey?.toString(),
+      );
       navigate("/nft");
-      //   });
-    } else {
-      console.log("_index: ", wallet.adapter.publicKey?.toString());
-      wallet.adapter.connect().then(() => {
-        console.log(
-          "publicKey:",
-          publicKey,
-          wallet.adapter.publicKey?.toString(),
-        );
-      });
-      navigate("/nft");
-    }
+    });
   };
 
   return (
