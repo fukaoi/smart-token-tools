@@ -8,28 +8,8 @@ import { useEffect, useState } from "react";
 import ErrorModal from "../components/modal/ErrorModal";
 import { useWallet } from "@solana/wallet-adapter-react";
 import { useNavigate } from "@remix-run/react";
-
-export type FormValues = {
-  cluster: string;
-  issueType: string;
-  totalSupply: number;
-  decimals: number;
-  tokenKey?: string;
-};
-
-const styles = {
-  container: {
-    display: "flex",
-    justifyContent: "center",
-    flexWrap: "wrap",
-  },
-  root: {
-    marginTop: "1em",
-    minWidth: "20em",
-    maxWidth: "20em",
-    padding: "1.2em",
-  },
-};
+import { createUmi } from "@metaplex-foundation/umi-bundle-defaults";
+import { WalletAdapterNetwork } from "@solana/wallet-adapter-base";
 
 const Faucet = () => {
   const [open, setOpen] = useState(false);
@@ -48,13 +28,15 @@ const Faucet = () => {
     if (publicKey) {
       setAddress(publicKey.toString());
     } else {
-      setErrorModal({ open: true, message: "Can't connect your wallet" });
       navigate("/");
     }
   }, [publicKey]);
 
   const onSubmit = async () => {
     setBtnState({ title: "Processing", isDisabled: true });
+    const network = WalletAdapterNetwork.Devnet;
+    const umi = createUmi(network);
+
     const res = false;
     if (res) {
       setErrorModal({ open: true, message: "error" });
@@ -72,8 +54,15 @@ const Faucet = () => {
   return (
     <>
       <TitleTypography title="FAUCET" />
-      <Box sx={styles.container}>
-        <Paper sx={styles.root}>
+      <Box sx={{ display: "flex", justifyContent: "center", flexWrap: "wrap" }}>
+        <Paper
+          sx={{
+            marginTop: "1em",
+            minWidth: "20em",
+            maxWidth: "20em",
+            padding: "1.2em",
+          }}
+        >
           <AddressTypography address={address} />
           <DescriptionTypography message={description} />
         </Paper>
