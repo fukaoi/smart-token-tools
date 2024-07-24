@@ -4,12 +4,16 @@ import Button from "@mui/material/Button";
 import { theme } from "../../utils/colorTheme";
 
 const StyledButton = styled(Button)({
-  background: theme.palette.blueGuradation.main,
-  borderRadius: 12,
-  width: "280px",
-  height: "60px",
+  background: theme.palette.primary.main,
+  boxShadow: "0 10px 25px 0 rgba(0, 0, 0, .5)",
+  borderRadius: "4px",
+  width: "150px",
   position: "relative",
   textTransform: "capitalize",
+  color: "white",
+  "&:hover": {
+    backgroundColor: "rgb(1, 130, 105, 0.5)",
+  },
 });
 
 const SubmitButton: FC<{
@@ -22,7 +26,6 @@ const SubmitButton: FC<{
       disabled={isDisabled}
       type="submit"
       onClick={onClick}
-      style={{ fontWeight: "550", fontSize: "20px" }}
     >
       {title}
     </StyledButton>

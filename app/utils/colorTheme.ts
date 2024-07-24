@@ -1,5 +1,5 @@
 import { createTheme } from '@mui/material/styles';
-import { deepOrange, grey, indigo, yellow } from '@mui/material/colors';
+import { grey, indigo, purple, yellow, green } from '@mui/material/colors';
 
 declare module '@mui/material/styles/createPalette' {
   interface Palette {
@@ -26,16 +26,17 @@ declare module '@mui/material/styles/createPalette' {
 export const theme = createTheme({
   palette: {
     primary: {
-      main: indigo[500],
+      main: purple[700],
+      light: purple[400],
     },
     secondary: {
-      main: deepOrange[500],
+      main: green[500],
     },
     orangeGuradation: {
-      main: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
+      main: 'linear-gradient(45deg, indigo 30%, #FF8E53 90%)',
     },
     blueGuradation: {
-      main: 'linear-gradient(45deg, rgb(33, 150, 243) 30%, rgb(33, 203, 243) 90%)',
+      main: 'linear-gradient(45deg, #7554ce 30%, #018269 90%)',
     },
     deepGrey: {
       main: grey[600],

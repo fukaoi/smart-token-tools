@@ -4,9 +4,10 @@ import AddressTypography from "../components/typography/AddressTypography";
 import { Box, Paper } from "@mui/material";
 import SubmitButton from "../components/button/SubmitButton";
 import InfoModal from "../components/modal/InfoModal";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ErrorModal from "../components/modal/ErrorModal";
 import { useWallet } from "@solana/wallet-adapter-react";
+import { useNavigate } from "@remix-run/react";
 
 export type FormValues = {
   cluster: string;
@@ -32,18 +33,27 @@ const styles = {
 
 const Faucet = () => {
   const [open, setOpen] = useState(false);
+  const navigate = useNavigate();
   const [errorModal, setErrorModal] = useState({ open: false, message: "" });
   const [btnState, setBtnState] = useState({
-    title: "Confirm",
+    title: "SUBMIT",
     isDisabled: false,
   });
 
-  const { publicKey, wallets } = useWallet();
+  const [address, setAddress] = useState("");
 
-  console.log(publicKey, wallets);
-  const walletAddress = publicKey ? publicKey.toString() : "";
+  const { publicKey } = useWallet();
 
-  const onSubmit = async (walletAddress: string) => {
+  useEffect(() => {
+    if (publicKey) {
+      setAddress(publicKey.toString());
+    } else {
+      setErrorModal({ open: true, message: "Can't connect your wallet" });
+      navigate("/");
+    }
+  }, [publicKey]);
+
+  const onSubmit = async () => {
     setBtnState({ title: "Processing", isDisabled: true });
     const res = false;
     if (res) {
@@ -64,7 +74,7 @@ const Faucet = () => {
       <TitleTypography title="FAUCET" />
       <Box sx={styles.container}>
         <Paper sx={styles.root}>
-          <AddressTypography address={walletAddress} />
+          <AddressTypography address={address} />
           <DescriptionTypography message={description} />
         </Paper>
       </Box>

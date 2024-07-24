@@ -5,11 +5,11 @@ import { Link, useLocation } from "@remix-run/react";
 const styles = {
   box: {
     letterSpacing: "3px",
-    fontSize: "20px",
+    fontSize: "17px",
     display: "inline-block",
     marginLeft: "20px",
     marginRight: "10px",
-    width: "200px",
+    width: "140px",
     backgroundColor: "rgba(3,3,3, 0.5)",
     marginBottom: "12px",
     borderRadius: "1px",
