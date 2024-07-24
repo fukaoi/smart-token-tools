@@ -6,31 +6,26 @@ import SolanaCircleLogo from "~/assets/solana-logo-card.svg";
 import { Box } from "@mui/material";
 import { useWallet, Wallet } from "@solana/wallet-adapter-react";
 import { useNavigate } from "@remix-run/react";
-import { lazy, useEffect } from "react";
+import { lazy, useEffect, useState } from "react";
 const WalletConnectButton = lazy(() =>
   import("~/components/button/WalletConnectButton")
 );
 
 const Index = () => {
   const navigate = useNavigate();
-  const { publicKey, connect, wallets, select } = useWallet();
+  const { publicKey, select } = useWallet();
+  const [clicked, setClicked] = useState(false);
 
   useEffect(() => {
-    if (publicKey) {
-      console.log("# connected publicKey: ", publicKey.toString());
+    if (publicKey && clicked) {
+      navigate("/nft");
     }
-  }, [publicKey]);
+  }, [clicked, publicKey]);
 
   const connectHandler = (wallet: Wallet) => {
-    console.log("_index: ", wallet.adapter.publicKey?.toString());
-    wallet.adapter.connect().then(() => {
-      console.log(
-        "publicKey:",
-        publicKey,
-        wallet.adapter.publicKey?.toString(),
-      );
-      navigate("/nft");
-    });
+    console.log(wallet);
+    select(wallet.adapter.name);
+    setClicked(true);
   };
 
   return (
