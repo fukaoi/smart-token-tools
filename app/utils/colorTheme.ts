@@ -1,9 +1,8 @@
 import { createTheme } from '@mui/material/styles';
-import { grey, indigo, purple, yellow, green } from '@mui/material/colors';
+import { grey, purple, yellow, teal } from '@mui/material/colors';
 
 declare module '@mui/material/styles/createPalette' {
   interface Palette {
-    blueGuradation: Palette['primary'];
     orangeGuradation: Palette['primary'];
     deepGrey: Palette['primary'];
     textBlack: Palette['primary'];
@@ -13,7 +12,6 @@ declare module '@mui/material/styles/createPalette' {
   }
 
   interface PaletteOptions {
-    blueGuradation: PaletteOptions['primary'];
     orangeGuradation: PaletteOptions['primary'];
     deepGrey: PaletteOptions['primary'];
     textBlack: PaletteOptions['primary'];
@@ -30,13 +28,11 @@ export const theme = createTheme({
       light: purple[400],
     },
     secondary: {
-      main: green[500],
+      main: teal[600],
+      light: teal[300],
     },
     orangeGuradation: {
       main: 'linear-gradient(45deg, indigo 30%, #FF8E53 90%)',
-    },
-    blueGuradation: {
-      main: 'linear-gradient(45deg, #7554ce 30%, #018269 90%)',
     },
     deepGrey: {
       main: grey[600],

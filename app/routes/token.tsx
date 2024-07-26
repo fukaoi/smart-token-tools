@@ -16,29 +16,9 @@ import SymbolTextField from "../components/textField/SymbolTextField";
 import HeadlineTypography from "../components/typography/HeadlineTypography";
 import ImageFileUploadUI from "../components/parts/ImageFileUploadUI";
 import { validationRules } from "../utils/validation";
-// import { addMinting, mintToken } from "../utils/tokenMint";
 import { useNavigate } from "@remix-run/react";
 import { useWallet } from "@solana/wallet-adapter-react";
-
-export type FormValues = {
-  cluster: string;
-  name: string;
-  symbol: string;
-  imagePreview?: string;
-  issueType: string;
-  totalSupply: number;
-  decimals: number;
-  tokenKey?: string;
-};
-
-const styles = {
-  root: {
-    marginTop: "1em",
-    minWidth: "20em",
-    maxWidth: "20em",
-    padding: "1.2em",
-  },
-};
+import { TokenFormValues } from "~/types";
 
 const Token = () => {
   const navigate = useNavigate();
@@ -54,7 +34,7 @@ const Token = () => {
     undefined,
   );
   const [fileBuffer, setFileBuffer] = useState<ArrayBuffer>();
-  const { handleSubmit, control, watch } = useForm<FormValues>({
+  const { handleSubmit, control, watch } = useForm<TokenFormValues>({
     defaultValues: {
       cluster: "devnet",
       issueType: "new",
@@ -79,7 +59,7 @@ const Token = () => {
     setBtnState({ title: "Confirm", isDisabled: false });
   };
 
-  const onSubmit = async (data: FormValues) => {
+  const onSubmit = async (data: TokenFormValues) => {
     setBtnState({ title: "Processing", isDisabled: true });
     setIsLoading(true);
 
@@ -125,7 +105,14 @@ const Token = () => {
       <TitleTypography title="TOKEN" />
       <form onSubmit={handleSubmit(onSubmit)}>
         <FormControl>
-          <Paper sx={styles.root}>
+          <Paper sx={
+            {
+              marginTop: "1em",
+              minWidth: "20em",
+              maxWidth: "20em",
+              padding: "1.2em",
+            }
+          }>
             <AddressTypography address={address} />
             <ClusterRadio control={control} name="cluster" />
             <Box sx={{ mb: 4 }} />
@@ -134,7 +121,7 @@ const Token = () => {
             {watch("issueType") === "new" && (
               <>
                 <Box sx={{ mb: 1 }} />
-                <NameTextField<FormValues>
+                <NameTextField<TokenFormValues>
                   control={control}
                   name="name"
                   rules={validationRules.name}

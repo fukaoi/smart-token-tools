@@ -1,9 +1,9 @@
-import Radio from '@mui/material/Radio';
-import RadioGroup from '@mui/material/RadioGroup';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import HeadlineTypography from '../typography/HeadlineTypography';
-import { FormValues } from '../../pages/TokenPage';
-import { useController, UseControllerProps } from 'react-hook-form';
+import Radio from "@mui/material/Radio";
+import RadioGroup from "@mui/material/RadioGroup";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import HeadlineTypography from "../typography/HeadlineTypography";
+import { FormValues } from "../../routes/token";
+import { useController, UseControllerProps } from "react-hook-form";
 
 const TokenIssueTypeRadio = (props: UseControllerProps<FormValues>) => {
   const { field } = useController(props);
@@ -11,8 +11,16 @@ const TokenIssueTypeRadio = (props: UseControllerProps<FormValues>) => {
     <>
       <HeadlineTypography message="Select token issue type" />
       <RadioGroup aria-labelledby="issueType" defaultValue="new" {...field}>
-        <FormControlLabel value="new" control={<Radio />} label="New" />
-        <FormControlLabel value="add" control={<Radio />} label="Add" />
+        <FormControlLabel
+          value="new"
+          control={<Radio color="primary" />}
+          label="New"
+        />
+        <FormControlLabel
+          value="add"
+          control={<Radio color="secondary" />}
+          label="Add"
+        />
       </RadioGroup>
     </>
   );
