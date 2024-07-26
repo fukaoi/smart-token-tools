@@ -7,7 +7,7 @@ import {
   ImageListItem,
 } from '@mui/material';
 import { FC, useState } from 'react';
-import { FileUpload } from '../../shared/fileUpload';
+import { FileUpload } from '../../utils/fileUpload';
 import DescriptionTypography from '../typography/DescriptionTypography';
 import ExampleTypography from '../typography/ExampleTypography';
 import Card from '@mui/material/Card';

@@ -1,9 +1,9 @@
-import Radio from '@mui/material/Radio';
-import RadioGroup from '@mui/material/RadioGroup';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import HeadlineTypography from '../typography/HeadlineTypography';
-import { useController, UseControllerProps } from 'react-hook-form';
-import { Constants } from '@solana-suite/utils';
+import Radio from "@mui/material/Radio";
+import RadioGroup from "@mui/material/RadioGroup";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import HeadlineTypography from "../typography/HeadlineTypography";
+import { useController, UseControllerProps } from "react-hook-form";
+import { WalletAdapterNetwork } from "@solana/wallet-adapter-base";
 
 const ClusterRadio = (props: UseControllerProps<any>) => {
   const { field } = useController(props);
@@ -12,17 +12,22 @@ const ClusterRadio = (props: UseControllerProps<any>) => {
       <HeadlineTypography message="Select your using network cluster" />
       <RadioGroup
         aria-labelledby="cluster"
-        defaultValue={Constants.Cluster.dev}
+        defaultValue={WalletAdapterNetwork.Devnet}
         {...field}
       >
         <FormControlLabel
-          value={Constants.Cluster.prdMetaplex}
-          control={<Radio color="secondary" />}
+          value={"custom-rpc"}
+          control={<Radio color="warning" />}
+          label="Custom RPC"
+        />
+        <FormControlLabel
+          value={WalletAdapterNetwork.Mainnet}
+          control={<Radio color="primary" />}
           label="Mainnet-beta"
         />
         <FormControlLabel
-          value={Constants.Cluster.dev}
-          control={<Radio color="warning" />}
+          value={WalletAdapterNetwork.Devnet}
+          control={<Radio color="secondary" />}
           label="Devnet"
         />
       </RadioGroup>
