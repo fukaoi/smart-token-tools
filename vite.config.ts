@@ -2,16 +2,15 @@ import { vitePlugin as remix } from '@remix-run/dev';
 import { defineConfig } from 'vite';
 import tsconfigPaths from 'vite-tsconfig-paths';
 import { cjsInterop } from 'vite-plugin-cjs-interop';
-import path from 'path';
-import react from '@vitejs/plugin-react';
 import nodePolyfills from 'rollup-plugin-polyfill-node';
-
+// import react from '@vitejs/plugin-react';
 export default defineConfig({
   ssr: {
     noExternal: process.env.NODE_ENV === 'production' ? [/^@mui\//] : [], // or  `['@mui/**']`
   },
 
   plugins: [
+    // react(),
     nodePolyfills(),
     remix({
       ssr: false,
@@ -29,16 +28,19 @@ export default defineConfig({
   ],
   resolve: {
     alias: {
+      process: 'process/browser',
+      buffer: 'buffer',
       crypto: 'crypto-browserify',
-      // 'isomorphic-fetch': path.resolve(
-      // __dirname,
-      // 'node_modules/isomorphic-fetch'
-      // ),
+      stream: 'stream-browserify',
+      assert: 'assert',
+      http: 'stream-http',
+      https: 'https-browserify',
+      os: 'os-browserify',
+      url: 'url',
+      util: 'util',
     },
   },
   define: {
-    process: {},
     global: {},
-    prototype: {},
   },
 });

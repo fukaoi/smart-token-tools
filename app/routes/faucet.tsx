@@ -8,8 +8,10 @@ import { useEffect, useState } from "react";
 import ErrorModal from "../components/modal/ErrorModal";
 import { useWallet } from "@solana/wallet-adapter-react";
 import { useNavigate } from "@remix-run/react";
+import { publicKey as convertPublicKey, sol } from "@metaplex-foundation/umi";
 import { createUmi } from "@metaplex-foundation/umi-bundle-defaults";
 import { WalletAdapterNetwork } from "@solana/wallet-adapter-base";
+import { clusterApiUrl } from "@solana/web3.js";
 
 const Faucet = () => {
   const [open, setOpen] = useState(false);
@@ -34,14 +36,15 @@ const Faucet = () => {
 
   const onSubmit = async () => {
     setBtnState({ title: "Processing", isDisabled: true });
-    const network = WalletAdapterNetwork.Devnet;
-    const umi = createUmi(network);
-
-    const res = false;
-    if (res) {
-      setErrorModal({ open: true, message: "error" });
-    } else {
+    const endPoint = clusterApiUrl(WalletAdapterNetwork.Devnet);
+    const umi = createUmi(endPoint);
+    try {
+      await umi.rpc.airdrop(convertPublicKey(address), sol(1));
       setOpen(true);
+    } catch (error) {
+      if (error instanceof Error) {
+        setErrorModal({ open: true, message: error.message });
+      }
     }
   };
 
