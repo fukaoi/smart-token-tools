@@ -2,7 +2,9 @@ import { vitePlugin as remix } from '@remix-run/dev';
 import { defineConfig } from 'vite';
 import tsconfigPaths from 'vite-tsconfig-paths';
 import { cjsInterop } from 'vite-plugin-cjs-interop';
+import path from 'path';
 import react from '@vitejs/plugin-react';
+import nodePolyfills from 'rollup-plugin-polyfill-node';
 
 export default defineConfig({
   ssr: {
@@ -10,7 +12,7 @@ export default defineConfig({
   },
 
   plugins: [
-    // react(),
+    nodePolyfills(),
     remix({
       ssr: false,
       future: {
@@ -28,11 +30,15 @@ export default defineConfig({
   resolve: {
     alias: {
       crypto: 'crypto-browserify',
-      'node-fetch': 'isomorphic-fetch',
+      // 'isomorphic-fetch': path.resolve(
+      // __dirname,
+      // 'node_modules/isomorphic-fetch'
+      // ),
     },
   },
   define: {
     process: {},
     global: {},
+    prototype: {},
   },
 });
