@@ -1,5 +1,4 @@
 import { Box, TextField } from "@mui/material";
-import HeadlineTypography from "../typography/HeadlineTypography";
 import {
   FieldValues,
   useController,
@@ -12,12 +11,11 @@ const CustomRpcTextFiled = <T extends FieldValues>(
   const { field, fieldState } = useController(props);
   return (
     <>
-      <HeadlineTypography message={'Custom RPC URL'} />
-      <Box sx={{ display: "flex", mt: 2 }}>
+      <Box sx={{ display: "flex", mb: 2 }}>
         <TextField
           type="text"
           id="outlined-basic"
-          label={'custom-rpc-url'}
+          label={"custom-rpc-url"}
           placeholder="original name..."
           variant="outlined"
           size="small"

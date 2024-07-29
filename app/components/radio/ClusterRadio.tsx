@@ -3,12 +3,13 @@ import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import HeadlineTypography from "../typography/HeadlineTypography";
-import { useController, UseControllerProps } from "react-hook-form";
+import { useController, UseControllerProps, useForm } from "react-hook-form";
 import { WalletAdapterNetwork } from "@solana/wallet-adapter-base";
 import CustomRpcTextFiled from "../textField/CustomRpcTextField";
 
 const ClusterRadio = (props: UseControllerProps<any>) => {
   const { field } = useController(props);
+  const { control } = useForm();
   const [selectedCustomRpc, setSelectedCustomRpc] = useState(false);
   const handleCustomRpc = (clusterName: string) => {
     if (clusterName === "custom-rpc") {
@@ -32,9 +33,7 @@ const ClusterRadio = (props: UseControllerProps<any>) => {
           label="Custom RPC"
           onChange={() => handleCustomRpc("custom-rpc")}
         />
-        {selectedCustomRpc && (
-          <CustomRpcTextFiled />
-        )}
+        {selectedCustomRpc && <CustomRpcTextFiled control={control} name="custom-rpc" />}
         <FormControlLabel
           value={WalletAdapterNetwork.Mainnet}
           control={<Radio color="primary" />}
