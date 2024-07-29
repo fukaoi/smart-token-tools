@@ -1,5 +1,5 @@
 import { TextField, Box } from '@mui/material';
-import HeadlineTypography from '../typography/HeadlineTypography';
+import SugbHeadlineTypography from '../typography/HeadlineTypography';
 import { NFTFormValues } from '../../pages/NftPage';
 import { useController, UseControllerProps } from 'react-hook-form';
 
@@ -7,7 +7,7 @@ const DescriptionTextField = (props: UseControllerProps<NFTFormValues>) => {
   const { field, fieldState } = useController(props);
   return (
     <>
-      <HeadlineTypography message="Input Description" />
+      <SugbHeadlineTypography message="Input Description" />
       <Box sx={{ display: 'flex', mt: 2 }}>
         <TextField
           type="text"

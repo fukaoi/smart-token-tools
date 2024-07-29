@@ -7,13 +7,13 @@ import ClusterRadio from "../components/radio/ClusterRadio";
 import TokenIssueTypeRadio from "../components/radio/TokenIssueTypeRadio";
 import TotalSupplyTextField from "../components/textField/TotalSupplyTextField";
 import DecimalsTextField from "../components/textField/DecimalsTextField";
-import TokenKeyTextField from "../components/textField/TokenKeyTextField";
+import TokenAddressTextField from "../components/textField/TokenAddressTextField";
 import SubmitButton from "../components/button/SubmitButton";
 import Loading from "../components/animation/Loading";
 import ErrorModal from "../components/modal/ErrorModal";
 import NameTextField from "../components/textField/NameTextField";
 import SymbolTextField from "../components/textField/SymbolTextField";
-import HeadlineTypography from "../components/typography/HeadlineTypography";
+import SugbHeadlineTypography from "../components/typography/HeadlineTypography";
 import ImageFileUploadUI from "../components/parts/ImageFileUploadUI";
 import { validationRules } from "../utils/validation";
 import { useNavigate } from "@remix-run/react";
@@ -66,6 +66,8 @@ const Token = () => {
     if (data.issueType === "new" && !fileBuffer) {
       setErrorModal({ open: true, message: "Please Image Upload" });
     }
+
+    console.log(data);
 
     try {
       let mint = "";
@@ -146,14 +148,14 @@ const Token = () => {
             {watch("issueType") === "add" && (
               <>
                 <Box sx={{ mb: 4 }} />
-                <TokenKeyTextField control={control} name="tokenKey" />
+                <TokenAddressTextField control={control} name="tokenKey" />
               </>
             )}
             <Box sx={{ mb: 4 }} />
 
             {watch("issueType") === "new" && (
               <>
-                <HeadlineTypography message="Image Upload" />
+                <SugbHeadlineTypography message="Image Upload" />
                 <Box sx={{ mb: 4 }} />
                 <ImageFileUploadUI
                   {...{

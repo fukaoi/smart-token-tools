@@ -1,14 +1,14 @@
-import { TextField, Box } from '@mui/material';
-import HeadlineTypography from '../typography/HeadlineTypography';
-import { FormValues } from '../../pages/TokenPage';
-import { useController, UseControllerProps } from 'react-hook-form';
+import { Box, TextField } from "@mui/material";
+import HeadlineTypography from "../typography/HeadlineTypography";
+import { TokenFormValues } from "../../types";
+import { useController, UseControllerProps } from "react-hook-form";
 
-const TotalSupplyTextField = (props: UseControllerProps<FormValues>) => {
+const TotalSupplyTextField = (props: UseControllerProps<TokenFormValues>) => {
   const { field } = useController(props);
   return (
     <>
       <HeadlineTypography message="Input minted token address" />
-      <Box sx={{ display: 'flex', mt: 2 }}>
+      <Box sx={{ display: "flex", mt: 2 }}>
         <TextField
           type="text"
           id="outlined-basic"
