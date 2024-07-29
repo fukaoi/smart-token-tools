@@ -1,6 +1,6 @@
 import { TextField, Box } from '@mui/material';
 import SugbHeadlineTypography from '../typography/HeadlineTypography';
-import { NFTFormValues } from '../../pages/NftPage';
+import { NFTFormValues } from '~/types';
 import { useController, UseControllerProps } from 'react-hook-form';
 
 const DescriptionTextField = (props: UseControllerProps<NFTFormValues>) => {

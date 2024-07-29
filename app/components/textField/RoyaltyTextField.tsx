@@ -1,6 +1,6 @@
 import { TextField, Box } from '@mui/material';
-import HeadlineTypography from '../typography/HeadlineTypography';
-import { NFTFormValues } from '../../pages/NftPage';
+import HeadlineTypography from '~/components/typography/HeadlineTypography';
+import { NFTFormValues } from '~/types';
 import { useController, UseControllerProps } from 'react-hook-form';
 
 const RoyaltyTextField = (props: UseControllerProps<NFTFormValues>) => {

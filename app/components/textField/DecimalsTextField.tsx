@@ -1,13 +1,14 @@
-import { TextField, Box } from '@mui/material';
-import SugbHeadlineTypography from '../typography/HeadlineTypography';
-import DescriptionTypography from '../typography/DescriptionTypography';
-import ExampleTypography from '../typography/ExampleTypography';
-import { useController, UseControllerProps } from 'react-hook-form';
-import { TokenFormValues } from "../../types";
+import { Box, TextField } from "@mui/material";
+import SugbHeadlineTypography from "~/components/typography/HeadlineTypography";
+import DescriptionTypography from "~/components/typography/DescriptionTypography";
+import ExampleTypography from "~/components/typography/ExampleTypography";
+import { useController, UseControllerProps } from "react-hook-form";
+import { TokenFormValues } from "~/types";
 
 const DecimalsTextField = (props: UseControllerProps<TokenFormValues>) => {
   const { field } = useController(props);
-  const description = `The value of this setting specifies the number of decimal points in the token. 
+  const description =
+    `The value of this setting specifies the number of decimal points in the token. 
      Please refer to the example below.`;
   const example = `
      0 decimals:  1000,         10000,           1
@@ -20,7 +21,7 @@ const DecimalsTextField = (props: UseControllerProps<TokenFormValues>) => {
       <SugbHeadlineTypography message="Input token decimals" />
       <DescriptionTypography message={description} />
       <ExampleTypography example={example} />
-      <Box sx={{ display: 'flex', mt: 2 }}>
+      <Box sx={{ display: "flex", mt: 2 }}>
         <TextField
           type="text"
           minRows={100}

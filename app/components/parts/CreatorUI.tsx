@@ -1,13 +1,13 @@
-import { Box } from '@mui/material';
-import { FC } from 'react';
-import { Control } from 'react-hook-form';
-import { Divider } from '@mui/material';
-import DeleteIcon from '@mui/icons-material/Delete';
-import HeadlineTypography from '../typography/HeadlineTypography';
-import WalletAddressTextField from '../textField/WalletAddressTextField';
-import ShareTextField from '../textField/ShareTextField';
-import { NFTFormValues } from '../../pages/NftPage';
-import { validationRules } from '../../shared/validation';
+import { Box } from "@mui/material";
+import { FC } from "react";
+import { Control } from "react-hook-form";
+import { Divider } from "@mui/material";
+import DeleteIcon from "@mui/icons-material/Delete";
+import HeadlineTypography from "../typography/HeadlineTypography";
+import WalletAddressTextField from "../textField/WalletAddressTextField";
+import ShareTextField from "../textField/ShareTextField";
+import { NFTFormValues } from "~/types";
+import { validationRules } from "~/utils/validation";
 
 export type CreatorUIProps = {
   fields?: any;
@@ -17,8 +17,8 @@ export type CreatorUIProps = {
 
 const styles = {
   rightButton: {
-    cursor: 'pointer',
-    paddingLeft: '80%',
+    cursor: "pointer",
+    paddingLeft: "80%",
   },
 };
 
@@ -41,7 +41,10 @@ const CreatorUI: FC<CreatorUIProps> = ({ control, fields, remove }) => {
           />
           <Box sx={{ mb: 4 }} />
           {index > 0 && (
-            <DeleteIcon sx={styles.rightButton} onClick={() => remove(index)} />
+            <DeleteIcon
+              sx={styles.rightButton}
+              onClick={() => remove(index)}
+            />
           )}
           <Box sx={{ mb: 3 }} />
           <Divider />

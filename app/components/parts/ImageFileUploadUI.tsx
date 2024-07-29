@@ -7,9 +7,9 @@ import {
   ImageListItem,
 } from '@mui/material';
 import { FC, useState } from 'react';
-import { FileUpload } from '../../utils/fileUpload';
-import DescriptionTypography from '../typography/DescriptionTypography';
-import ExampleTypography from '../typography/ExampleTypography';
+import { FileUpload } from '~/utils/fileUpload';
+import DescriptionTypography from '~/components/typography/DescriptionTypography';
+import ExampleTypography from '~/components/typography/ExampleTypography';
 import Card from '@mui/material/Card';
 import { Alert } from '@mui/material';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';

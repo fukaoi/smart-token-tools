@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { Box } from '@mui/system';
 import Typography from '@mui/material/Typography';
-import { theme } from '../../utils/colorTheme';
+import { theme } from '~/utils/colorTheme';
 
 const styles = {
   box: {

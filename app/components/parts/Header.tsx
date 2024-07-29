@@ -1,4 +1,4 @@
-import logoImage from "../../assets/smt-logo.svg";
+import logoImage from "~/assets/smt-logo.svg";
 import { Box, Grid } from "@mui/material";
 import { Link, useLocation } from "@remix-run/react";
 

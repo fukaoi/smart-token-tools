@@ -1,7 +1,7 @@
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
-import { NFTFormValues } from '../../pages/NftPage';
+import { NFTFormValues } from '~/types';
 import { useController, UseControllerProps } from 'react-hook-form';
 
 const VerifiedRadio = (props: UseControllerProps<NFTFormValues>) => {

@@ -1,33 +1,33 @@
 import {
   Box,
   Button,
-  ImageList,
-  ImageListItem,
   CardContent,
   CardMedia,
-} from '@mui/material';
-import { FC, useContext, useState } from 'react';
-import DescriptionTypography from '../typography/DescriptionTypography';
-import NoImage from '../../assets/no-image-available.jpg';
-import { FileUpload } from '../../shared/fileUpload';
-import { Alert } from '@mui/material';
-import Card from '@mui/material/Card';
-import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
-import { MediaFilesContext } from '../../types/context';
+  ImageList,
+  ImageListItem,
+} from "@mui/material";
+import { FC, useContext, useState } from "react";
+import DescriptionTypography from "~/components/typography/DescriptionTypography";
+import NoImage from "~/assets/no-image-available.jpg";
+import { FileUpload } from "~/utils/fileUpload";
+import { Alert } from "@mui/material";
+import Card from "@mui/material/Card";
+import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
+import { MediaFilesContext } from "~/types";
 
 const styles = {
   card: {
-    marginTop: '1em',
+    marginTop: "1em",
   },
   image: {
-    width: '200px',
-    height: '200px',
-    marginTop: '1em',
-    marginLeft: 'auto',
-    marginRight: 'auto',
+    width: "200px",
+    height: "200px",
+    marginTop: "1em",
+    marginLeft: "auto",
+    marginRight: "auto",
   },
   closedButton: {
-    marginTop: '10px',
+    marginTop: "10px",
   },
 };
 
@@ -42,9 +42,9 @@ const MediaFileUploadUI: FC<MediaFileUploadUIProps> = ({
   mediaFilesPreview,
   setMediaFilesPreview,
 }) => {
-  const description = 'All file types can be uploaded';
+  const description = "All file types can be uploaded";
   const warnDescription =
-    'This file type cant display image preview, but can upload blockchain storage';
+    "This file type cant display image preview, but can upload blockchain storage";
   const [message, setMessage] = useState(description);
   const { mediaFiles, setMediaFiles } = useContext(MediaFilesContext);
 
@@ -62,7 +62,7 @@ const MediaFileUploadUI: FC<MediaFileUploadUIProps> = ({
       setMediaFilesPreview([...mediaFilesPreview, NoImage]);
       setMessage(warnDescription);
     }
-    file.arrayBuffer().then(buffer => {
+    file.arrayBuffer().then((buffer) => {
       setMediaFiles([
         ...mediaFiles,
         {
@@ -100,7 +100,7 @@ const MediaFileUploadUI: FC<MediaFileUploadUIProps> = ({
               </ImageList>
               <CardContent>
                 <Alert
-                  onClose={_ => {
+                  onClose={(_) => {
                     deleteMediaFile(i);
                   }}
                   iconMapping={{
@@ -119,14 +119,13 @@ const MediaFileUploadUI: FC<MediaFileUploadUIProps> = ({
         <input
           id="media-upload"
           name="media-upload"
-          style={{ display: 'none' }}
+          style={{ display: "none" }}
           type="file"
           accept="*/*"
           onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-            handleOnAddMediaFile(e)
-          }
+            handleOnAddMediaFile(e)}
         />
-        <Box sx={{ display: 'flex', mt: 3 }}>
+        <Box sx={{ display: "flex", mt: 3 }}>
           <Button variant="outlined" component="span">
             Add Media File
           </Button>

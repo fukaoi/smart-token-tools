@@ -1,11 +1,11 @@
-import TitleTypography from "../components/typography/TitleTypography";
-import DescriptionTypography from "../components/typography/DescriptionTypography";
-import AddressTypography from "../components/typography/AddressTypography";
+import TitleTypography from "~/components/typography/TitleTypography";
+import DescriptionTypography from "~/components/typography/DescriptionTypography";
+import AddressTypography from "~/components/typography/AddressTypography";
 import { Box, Paper } from "@mui/material";
-import SubmitButton from "../components/button/SubmitButton";
-import InfoModal from "../components/modal/InfoModal";
+import SubmitButton from "~/components/button/SubmitButton";
+import InfoModal from "~/components/modal/InfoModal";
 import { useEffect, useState } from "react";
-import ErrorModal from "../components/modal/ErrorModal";
+import ErrorModal from "~/components/modal/ErrorModal";
 import { useWallet } from "@solana/wallet-adapter-react";
 import { useNavigate } from "@remix-run/react";
 import { publicKey as convertPublicKey, sol } from "@metaplex-foundation/umi";

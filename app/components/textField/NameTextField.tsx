@@ -1,5 +1,5 @@
 import { TextField, Box } from '@mui/material';
-import HeadlineTypography from '../typography/HeadlineTypography';
+import HeadlineTypography from '~/components/typography/HeadlineTypography';
 import {
   FieldValues,
   useController,

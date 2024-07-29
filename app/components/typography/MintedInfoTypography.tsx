@@ -1,11 +1,11 @@
 import { FC } from 'react';
 import { Box } from '@mui/system';
 import Typography from '@mui/material/Typography';
-import { theme } from '../../utils/colorTheme';
+import { theme } from '~/utils/colorTheme';
 
 const styles = {
   box: {
-    background: theme.palette.blueGuradation.main,
+    background: theme.palette.primary.main,
     borderRadius: 3,
     color: theme.palette.common.white,
     padding: '5px',

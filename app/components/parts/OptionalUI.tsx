@@ -1,13 +1,13 @@
 import { Box } from '@mui/material';
 import { FC, useState } from 'react';
 import { Control, useFieldArray } from 'react-hook-form';
-import RoyaltyTextField from '../textField/RoyaltyTextField';
+import RoyaltyTextField from '~/components/textField/RoyaltyTextField';
 import CreatorUI from './CreatorUI';
 import AddCreatorButton from '../button/AddCreatorButton';
-import { NFTFormValues } from '../../pages/NftPage';
-import HeadlineTypography from '../typography/HeadlineTypography';
-import MediaFileUploadUI from '../uiParts/MediaFileUploadUI';
-import { validationRules } from '../../shared/validation';
+import { NFTFormValues } from '~/types';
+import HeadlineTypography from '~/components/typography/HeadlineTypography';
+import MediaFileUploadUI from '~/components/parts/MediaFileUploadUI';
+import { validationRules } from '~/utils/validation';
 import BackgroundBlur from '../animation/BackgroundBlur';
 import ErrorModal from '../modal/ErrorModal';
 

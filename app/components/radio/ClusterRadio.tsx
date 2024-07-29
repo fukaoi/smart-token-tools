@@ -2,10 +2,10 @@ import { useState } from "react";
 import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
-import HeadlineTypography from "../typography/HeadlineTypography";
+import HeadlineTypography from "~/components/typography/HeadlineTypography";
 import { useController, UseControllerProps, useForm } from "react-hook-form";
 import { WalletAdapterNetwork } from "@solana/wallet-adapter-base";
-import CustomRpcTextFiled from "../textField/CustomRpcTextField";
+import CustomRpcTextFiled from "~/components/textField/CustomRpcTextField";
 
 const ClusterRadio = (props: UseControllerProps<any>) => {
   const { field } = useController(props);
