@@ -76,7 +76,7 @@ const Token = () => {
       setErrorModal({ open: true, message: "Please Image Upload" });
     }
 
-    console.log(data);
+    console.log("@@@ datra: ", data);
 
     try {
       let mint = "";

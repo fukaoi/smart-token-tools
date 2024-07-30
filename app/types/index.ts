@@ -9,7 +9,7 @@ export type TokenFormValues = {
   issueType: string;
   totalSupply: number;
   decimals: number;
-  tokenKey?: string;
+  tokenAddress?: string;
 };
 
 export type Creator = {
