@@ -3,7 +3,7 @@ import DescriptionTypography from "~/components/typography/DescriptionTypography
 import AddressTypography from "~/components/typography/AddressTypography";
 import { Box, Paper } from "@mui/material";
 import SubmitButton from "~/components/button/SubmitButton";
-import InfoModal from "~/components/modal/InfoModal";
+import FaucetCompleteModal from "~/components/modal/FaucetCompleteModal";
 import { useEffect, useState } from "react";
 import ErrorModal from "~/components/modal/ErrorModal";
 import { useWallet } from "@solana/wallet-adapter-react";
@@ -77,7 +77,7 @@ const Faucet = () => {
           isDisabled={btnState.isDisabled}
           onClick={onSubmit}
         />
-        <InfoModal open={open} onClose={handleClose} />
+        <FaucetCompleteModal open={open} onClose={handleClose} />
       </Box>
       <Box sx={{ mb: 10 }} />
       <ErrorModal

@@ -19,7 +19,7 @@ const style = {
   },
 };
 
-const InfoModal: FC<{ open: boolean; onClose: any }> = ({ open, onClose }) => {
+const FaucetCompleteModal: FC<{ open: boolean; onClose: any }> = ({ open, onClose }) => {
   return (
     <>
       <Modal
@@ -42,4 +42,4 @@ const InfoModal: FC<{ open: boolean; onClose: any }> = ({ open, onClose }) => {
     </>
   );
 };
-export default InfoModal;
+export default FaucetCompleteModal;

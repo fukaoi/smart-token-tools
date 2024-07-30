@@ -11,9 +11,10 @@ import TokenAddressTextField from "~/components/textField/TokenAddressTextField"
 import SubmitButton from "~/components/button/SubmitButton";
 import Loading from "~/components/animation/Loading";
 import ErrorModal from "~/components/modal/ErrorModal";
+import CompletedMintModal from "~/components/modal/CompletedMintModal";
 import NameTextField from "~/components/textField/NameTextField";
 import SymbolTextField from "~/components/textField/SymbolTextField";
-import SugbHeadlineTypography from "~/components/typography/HeadlineTypography";
+import HeadlineTypography from "~/components/typography/HeadlineTypography";
 import ImageFileUploadUI from "~/components/parts/ImageFileUploadUI";
 import { validationRules } from "~/utils/validation";
 import { useNavigate } from "@remix-run/react";
@@ -21,14 +22,16 @@ import { useWallet } from "@solana/wallet-adapter-react";
 import { TokenFormValues } from "~/types";
 
 const Token = () => {
+  const btnTitle = "SUBMIT";
   const navigate = useNavigate();
   const [address, setAddress] = useState("");
   const { publicKey } = useWallet();
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [btnState, setBtnState] = useState({
-    title: "SUBMIT",
+    title: btnTitle,
     isDisabled: false,
   });
+  const [completeModal, setCompleteModal] = useState(false);
   const [errorModal, setErrorModal] = useState({ open: false, message: "" });
   const [imagePreview, setImagePreview] = useState<File | string | undefined>(
     undefined,
@@ -54,13 +57,19 @@ const Token = () => {
     }
   }, [publicKey]);
 
-  const handleClose = () => {
+  const handleErrorClose = () => {
     setErrorModal({ open: false, message: "" });
-    setBtnState({ title: "Confirm", isDisabled: false });
+    setBtnState({ title: btnTitle, isDisabled: false });
+  };
+
+  const handleSuccessClose = () => {
+    setIsLoading(false);
+    setCompleteModal(false);
+    setBtnState({ title: btnTitle, isDisabled: false });
   };
 
   const onSubmit = async (data: TokenFormValues) => {
-    setBtnState({ title: "Processing", isDisabled: true });
+    setBtnState({ title: "PROCESSING", isDisabled: true });
     setIsLoading(true);
 
     if (data.issueType === "new" && !fileBuffer) {
@@ -93,8 +102,9 @@ const Token = () => {
         setIsLoading(false);
         setErrorModal({ open: true, message: "Error no match issue type" });
       }
+      mint = "testete";
       console.log("# mint: ", mint);
-      mint.length !== 0 && navigate("/complete", { state: { mint } });
+      mint.length !== 0 && setCompleteModal(true);
     } catch (error) {
       setBtnState({ title: "Submit", isDisabled: false });
       setIsLoading(false);
@@ -107,14 +117,14 @@ const Token = () => {
       <TitleTypography title="TOKEN" />
       <form onSubmit={handleSubmit(onSubmit)}>
         <FormControl>
-          <Paper sx={
-            {
+          <Paper
+            sx={{
               marginTop: "1em",
               minWidth: "20em",
               maxWidth: "20em",
               padding: "1.2em",
-            }
-          }>
+            }}
+          >
             <AddressTypography address={address} />
             <ClusterRadio control={control} name="cluster" />
             <Box sx={{ mb: 4 }} />
@@ -155,7 +165,7 @@ const Token = () => {
 
             {watch("issueType") === "new" && (
               <>
-                <SugbHeadlineTypography message="Image Upload" />
+                <HeadlineTypography message="Image Upload" />
                 <Box sx={{ mb: 4 }} />
                 <ImageFileUploadUI
                   {...{
@@ -178,9 +188,10 @@ const Token = () => {
           <Box sx={{ mb: 10 }} />
         </FormControl>
       </form>
+      <CompletedMintModal open={completeModal} onClose={handleSuccessClose} />
       <ErrorModal
         open={errorModal.open}
-        onClose={handleClose}
+        onClose={handleErrorClose}
         message={errorModal.message}
       />
       <Loading isLoading={isLoading} />
