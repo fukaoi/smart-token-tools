@@ -14,29 +14,34 @@ const CompletedMintModal: FC<{ open: boolean; onClose: any }> = (
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <Box sx={
-
-          {
+        <Box
+          sx={{
             position: "absolute" as const,
             top: "50%",
             left: "50%",
             transform: "translate(-50%, -50%)",
-            width: 800,
-            height: 500,
+            width: 400,
             bgcolor: "background.paper",
             boxShadow: 24,
             p: 1,
-          }
-        }>
+          }}
+        >
           <Alert
-            sx={{
-              fontSize: "1.2em",
-            }}
+            sx={{ fontSize: "1.2em" }}
             variant="filled"
             severity="success"
-            color="info"
+            color="primary"
           >
-          Complte mint 
+            Mint Completed
+            <br />
+            <a
+              href=""
+              style={{
+                color: "white",
+              }}
+            >
+              Click explorer url
+            </a>
           </Alert>
         </Box>
       </Modal>
