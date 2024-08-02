@@ -1,7 +1,7 @@
 import { ControllerRenderProps } from 'react-hook-form';
 import { createContext, Dispatch, SetStateAction } from 'react';
 
-export type TokenFormValues = {
+export type TokenMetadata = {
   cluster: string;
   name: string;
   symbol: string;
@@ -17,9 +17,9 @@ export type Creator = {
   share: number;
 };
 
-export type NFTFormValues = {
+export type NFTMetadata = {
   cluster: string;
-  nftName: string;
+  name: string;
   symbol: string;
   description: string;
   imagePreview?: string;
