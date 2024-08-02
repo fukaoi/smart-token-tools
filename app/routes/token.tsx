@@ -17,15 +17,14 @@ import SymbolTextField from "~/components/textField/SymbolTextField";
 import HeadlineTypography from "~/components/typography/HeadlineTypography";
 import ImageFileUploadUI from "~/components/parts/ImageFileUploadUI";
 import { validationRules } from "~/utils/validation";
-import { useNavigate } from "@remix-run/react";
-import { useWallet } from "@solana/wallet-adapter-react";
 import { TokenFormValues } from "~/types";
+import { useWallet } from "@solana/wallet-adapter-react";
+import { useNavigate } from "@remix-run/react";
 
 const Token = () => {
   const btnTitle = "SUBMIT";
-  const navigate = useNavigate();
   const [address, setAddress] = useState("");
-  const { publicKey } = useWallet();
+  const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [btnState, setBtnState] = useState({
     title: btnTitle,
@@ -45,9 +44,11 @@ const Token = () => {
       symbol: "",
       totalSupply: 100000,
       decimals: 1,
-      tokenKey: "",
+      tokenAddress: "",
     },
   });
+
+  const { publicKey } = useWallet();
 
   useEffect(() => {
     if (publicKey) {
@@ -90,7 +91,7 @@ const Token = () => {
         //   data.totalSupply,
         //   data.decimals,
         // );
-      } else if (data.issueType === "add" && data.tokenKey) {
+      } else if (data.issueType === "add" && data.tokenAddress) {
         // mint = await addMinting(
         //   data.tokenKey,
         //   address,
@@ -158,7 +159,7 @@ const Token = () => {
             {watch("issueType") === "add" && (
               <>
                 <Box sx={{ mb: 4 }} />
-                <TokenAddressTextField control={control} name="tokenKey" />
+                <TokenAddressTextField control={control} name="tokenAddress" />
               </>
             )}
             <Box sx={{ mb: 4 }} />
