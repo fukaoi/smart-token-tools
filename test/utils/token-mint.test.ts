@@ -3,7 +3,7 @@ import { expect, test } from 'vitest'
 import { tokenMint } from '~/utils/token-mint'
 
 test('Mint token', () => {
-  const owner = '';
+  const walletAdapter = '';
   const file = '';
   const metadata = {
     name: 'smt',
@@ -12,6 +12,6 @@ test('Mint token', () => {
     tokenSupply: 1000000,
   }
   
-  const res = tokenMint('devnet', owner, file, metadata);
+  const res = tokenMint('devnet', walletAdapter, file, metadata);
   expect(res).toBeTruthy();
 })
