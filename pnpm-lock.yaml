@@ -23,6 +23,9 @@ dependencies:
   '@metaplex-foundation/umi-bundle-defaults':
     specifier: ^0.9.2
     version: 0.9.2(@metaplex-foundation/umi@0.9.2)(@solana/web3.js@1.95.1)
+  '@metaplex-foundation/umi-uploader-irys':
+    specifier: ^0.9.2
+    version: 0.9.2(@metaplex-foundation/umi@0.9.2)(@solana/web3.js@1.95.1)(arweave@1.15.1)
   '@mui/icons-material':
     specifier: ^5.15.20
     version: 5.16.5(@mui/material@5.16.5)(@types/react@18.3.3)(react@18.3.1)
@@ -2687,6 +2690,16 @@ packages:
       - debug
     dev: false
 
+  /@irys/query@0.0.1:
+    resolution: {integrity: sha512-7TCyR+Qn+F54IQQx5PlERgqNwgIQik8hY55iZl/silTHhCo1MI2pvx5BozqPUVCc8/KqRsc2nZd8Bc29XGUjRQ==}
+    engines: {node: '>=16.10.0'}
+    dependencies:
+      async-retry: 1.3.3
+      axios: 1.7.3
+    transitivePeerDependencies:
+      - debug
+    dev: false
+
   /@irys/query@0.0.8:
     resolution: {integrity: sha512-J8zCZDos2vFogSbroCJHZJq5gnPZEal01Iy3duXAotjIMgrI2ElDANiqEbaP1JAImR1jdUo1ChJnZB7MRLN9Hw==}
     engines: {node: '>=16.10.0'}
@@ -2695,6 +2708,44 @@ packages:
       axios: 1.7.3
     transitivePeerDependencies:
       - debug
+    dev: false
+
+  /@irys/sdk@0.0.2(arweave@1.15.1):
+    resolution: {integrity: sha512-un/e/CmTpgT042gDwCN3AtISrR9OYGMY6V+442pFmSWKrwrsDoIXZ8VlLiYKnrtTm+yquGhjfYy0LDqGWq41pA==}
+    engines: {node: '>=16.10.0'}
+    hasBin: true
+    dependencies:
+      '@ethersproject/bignumber': 5.7.0
+      '@ethersproject/contracts': 5.7.0
+      '@ethersproject/providers': 5.7.2
+      '@ethersproject/wallet': 5.7.0
+      '@irys/query': 0.0.1
+      '@near-js/crypto': 0.0.3
+      '@near-js/keystores-browser': 0.0.3
+      '@near-js/providers': 0.0.4
+      '@near-js/transactions': 0.1.1
+      '@solana/web3.js': 1.95.1
+      '@supercharge/promise-pool': 3.2.0
+      algosdk: 1.24.1
+      aptos: 1.8.5
+      arbundles: 0.10.1(arweave@1.15.1)
+      async-retry: 1.3.3
+      axios: 1.7.3
+      base64url: 3.0.1
+      bignumber.js: 9.1.2
+      bs58: 5.0.0
+      commander: 8.3.0
+      csv: 5.5.3
+      inquirer: 8.2.6
+      js-sha256: 0.9.0
+      mime-types: 2.1.35
+      near-seed-phrase: 0.2.1
+    transitivePeerDependencies:
+      - arweave
+      - bufferutil
+      - debug
+      - encoding
+      - utf-8-validate
     dev: false
 
   /@irys/sdk@0.2.9(arweave@1.15.1):
@@ -3157,6 +3208,26 @@ packages:
       '@solana/web3.js': 1.95.1
     dev: false
 
+  /@metaplex-foundation/umi-uploader-irys@0.9.2(@metaplex-foundation/umi@0.9.2)(@solana/web3.js@1.95.1)(arweave@1.15.1):
+    resolution: {integrity: sha512-rPwxIaHqVoqL1ATbKvYMeZUeG35IR47dti4HomoXjXM557uD7zNzRCYUS1VYWpY4/ypDNFVzXjtP7j5DCM7yzA==}
+    peerDependencies:
+      '@metaplex-foundation/umi': ^0.9.2
+      '@solana/web3.js': ^1.72.0
+    dependencies:
+      '@irys/sdk': 0.0.2(arweave@1.15.1)
+      '@metaplex-foundation/umi': 0.9.2
+      '@metaplex-foundation/umi-web3js-adapters': 0.9.2(@metaplex-foundation/umi@0.9.2)(@solana/web3.js@1.95.1)
+      '@solana/web3.js': 1.95.1
+      bignumber.js: 9.1.2
+      buffer: 6.0.3
+    transitivePeerDependencies:
+      - arweave
+      - bufferutil
+      - debug
+      - encoding
+      - utf-8-validate
+    dev: false
+
   /@metaplex-foundation/umi-web3js-adapters@0.9.2(@metaplex-foundation/umi@0.9.2)(@solana/web3.js@1.95.1):
     resolution: {integrity: sha512-RQqUTtHYY9fmEMnq7s3Hiv/81flGaoI0ZVVoafnFVaQLnxU6QBKxtboRZHk43XtD9CiFh5f9izrMJX7iK7KlOA==}
     peerDependencies:
@@ -3482,6 +3553,10 @@ packages:
 
   /@noble/ed25519@1.7.3:
     resolution: {integrity: sha512-iR8GBkDt0Q3GyaVcIu7mSsVIqnFbkbRzGLWlvhwunacoLwt4J3swfKhfaM6rN6WY+TBGoYT1GtT1mIh2/jGbRQ==}
+    dev: false
+
+  /@noble/hashes@1.1.3:
+    resolution: {integrity: sha512-CE0FCR57H2acVI5UOzIGSSIYxZ6v/HOhDR0Ro9VLyhnzLwx0o8W1mmgaqlEUx4049qJDlIBRztv5k+MM8vbO3A==}
     dev: false
 
   /@noble/hashes@1.4.0:
@@ -4566,6 +4641,13 @@ packages:
     dependencies:
       '@noble/curves': 1.4.2
       '@noble/hashes': 1.4.0
+      '@scure/base': 1.1.7
+    dev: false
+
+  /@scure/bip39@1.1.0:
+    resolution: {integrity: sha512-pwrPOS16VeTKg98dYXQyIjJEcWfz7/1YJIwxUEPFfQPtc86Ym/1sVgQ2RLoD43AazMk2l/unK4ITySSpW2+82w==}
+    dependencies:
+      '@noble/hashes': 1.1.3
       '@scure/base': 1.1.7
     dev: false
 
@@ -6950,6 +7032,48 @@ packages:
     resolution: {integrity: sha512-Quji6+8kLBC3NnBeo14nPDq0+2jUs5s3/xEye+udFHumHhRk4M7aAMXp/PBJqkKYGuuyR9M/6Dq7d2AViiGmhw==}
     dev: false
 
+  /aptos@1.8.5:
+    resolution: {integrity: sha512-iQxliWesNHjGQ5YYXCyss9eg4+bDGQWqAZa73vprqGQ9tungK0cRjUI2fmnp63Ed6UG6rurHrL+b0ckbZAOZZQ==}
+    engines: {node: '>=11.0.0'}
+    dependencies:
+      '@noble/hashes': 1.1.3
+      '@scure/bip39': 1.1.0
+      axios: 0.27.2
+      form-data: 4.0.0
+      tweetnacl: 1.0.3
+    transitivePeerDependencies:
+      - debug
+    dev: false
+
+  /arbundles@0.10.1(arweave@1.15.1):
+    resolution: {integrity: sha512-QYFepxessLCirvRkQK9iQmjxjHz+s50lMNGRwZwpyPWLohuf6ISyj1gkFXJHlMT+rNSrsHxb532glHnKbjwu3A==}
+    dependencies:
+      '@ethersproject/bytes': 5.7.0
+      '@ethersproject/hash': 5.7.0
+      '@ethersproject/providers': 5.7.2
+      '@ethersproject/signing-key': 5.7.0
+      '@ethersproject/transactions': 5.7.0
+      '@ethersproject/wallet': 5.7.0
+      '@irys/arweave': 0.0.2
+      '@noble/ed25519': 1.7.3
+      base64url: 3.0.1
+      bs58: 4.0.1
+      keccak: 3.0.4
+      secp256k1: 5.0.0
+    optionalDependencies:
+      '@randlabs/myalgo-connect': 1.4.2
+      algosdk: 1.24.1
+      arweave-stream-tx: 1.2.2(arweave@1.15.1)
+      multistream: 4.1.0
+      tmp-promise: 3.0.3
+    transitivePeerDependencies:
+      - arweave
+      - bufferutil
+      - debug
+      - encoding
+      - utf-8-validate
+    dev: false
+
   /arbundles@0.11.1(arweave@1.15.1):
     resolution: {integrity: sha512-H1hyI98VTggH7pyxaa6jKuzB3UYHKSwRQChT2pJp8uGGv20FQEQjug/n+mza4yM8dMcLHwXji0PLpmKQKoJs+g==}
     dependencies:
@@ -7228,6 +7352,15 @@ packages:
     resolution: {integrity: sha512-QbUdXJVTpvUTHU7871ppZkdOLBeGUKBQWHkHrvN2V9IQWGMt61zf3B45BtzjxEJzYuj0JBjBZP/hmYS/R9pmAw==}
     engines: {node: '>=4'}
     dev: true
+
+  /axios@0.27.2:
+    resolution: {integrity: sha512-t+yRIyySRTp/wua5xEr+z1q60QmLq8ABsS5O9Me1AsE5dfKqgnCFzwiCZZ/cGNd1lq4/7akDWMxdhVlucjmnOQ==}
+    dependencies:
+      follow-redirects: 1.15.6
+      form-data: 4.0.0
+    transitivePeerDependencies:
+      - debug
+    dev: false
 
   /axios@1.6.2:
     resolution: {integrity: sha512-7i24Ri4pmDRfJTR7LDBhsOTtcm+9kjX5WiY1X3wIisx6G9So3pfMkEiU7emUBe46oceVImccTEM3k6C5dbVW8A==}
