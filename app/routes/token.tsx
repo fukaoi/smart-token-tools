@@ -17,9 +17,10 @@ import SymbolTextField from "~/components/textField/SymbolTextField";
 import HeadlineTypography from "~/components/typography/HeadlineTypography";
 import ImageFileUploadUI from "~/components/parts/ImageFileUploadUI";
 import { validationRules } from "~/utils/validation";
-import { TokenFormValues } from "~/types";
+import { TokenMetadata } from "~/types";
 import { useWallet } from "@solana/wallet-adapter-react";
 import { useNavigate } from "@remix-run/react";
+import { mintToken } from "~/utils/mint-token";
 
 const Token = () => {
   const btnTitle = "SUBMIT";
@@ -30,13 +31,14 @@ const Token = () => {
     title: btnTitle,
     isDisabled: false,
   });
+  const { wallet } = useWallet();
   const [completeModal, setCompleteModal] = useState(false);
   const [errorModal, setErrorModal] = useState({ open: false, message: "" });
   const [imagePreview, setImagePreview] = useState<File | string | undefined>(
     undefined,
   );
   const [fileBuffer, setFileBuffer] = useState<ArrayBuffer>();
-  const { handleSubmit, control, watch } = useForm<TokenFormValues>({
+  const { handleSubmit, control, watch } = useForm<TokenMetadata>({
     defaultValues: {
       cluster: "devnet",
       issueType: "new",
@@ -69,7 +71,7 @@ const Token = () => {
     setBtnState({ title: btnTitle, isDisabled: false });
   };
 
-  const onSubmit = async (data: TokenFormValues) => {
+  const onSubmit = async (data: TokenMetadata) => {
     setBtnState({ title: "PROCESSING", isDisabled: true });
     setIsLoading(true);
 
@@ -77,20 +79,14 @@ const Token = () => {
       setErrorModal({ open: true, message: "Please Image Upload" });
     }
 
-    console.log("@@@ datra: ", data);
-
     try {
       let mint = "";
       if (data.issueType === "new") {
-        // mint = await mintToken(
-        //   fileBuffer!,
-        //   data.name,
-        //   data.symbol,
-        //   address,
-        //   data.cluster,
-        //   data.totalSupply,
-        //   data.decimals,
-        // );
+        console.debug(data);
+        mint = await mintToken(
+          wallet!.adapter,
+          data,
+        );
       } else if (data.issueType === "add" && data.tokenAddress) {
         // mint = await addMinting(
         //   data.tokenKey,
@@ -110,6 +106,7 @@ const Token = () => {
       setBtnState({ title: "Submit", isDisabled: false });
       setIsLoading(false);
       setErrorModal({ open: true, message: (error as Error).message });
+      console.error('# mintToken: ', error);
     }
   };
 
@@ -134,7 +131,7 @@ const Token = () => {
             {watch("issueType") === "new" && (
               <>
                 <Box sx={{ mb: 1 }} />
-                <NameTextField<TokenFormValues>
+                <NameTextField<TokenMetadata>
                   control={control}
                   name="name"
                   rules={validationRules.name}

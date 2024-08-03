@@ -1,7 +1,6 @@
 import bs from 'bs58';
 import {
   generateSigner,
-  GenericFile,
   percentAmount,
   transactionBuilder,
 } from '@metaplex-foundation/umi';
@@ -13,19 +12,18 @@ import {
 } from '@metaplex-foundation/mpl-token-metadata';
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults';
 import { findAssociatedTokenPda } from '@metaplex-foundation/mpl-toolbox';
-import { SPL_TOKEN_2022_PROGRAM_ID } from '~/utils//config';
+import { fetchClusterApiUrl, SPL_TOKEN_2022_PROGRAM_ID } from '~/utils//config';
 import { TokenMetadata } from '~/types';
 import { irysUploader } from '@metaplex-foundation/umi-uploader-irys';
 import { walletAdapterIdentity } from '@metaplex-foundation/umi-signer-wallet-adapters';
 import { WalletAdapter } from '@solana/wallet-adapter-base';
 
-export const tokenMint = async (
-  cluster: string,
+export const mintToken = async (
   walletAdapter: WalletAdapter,
-  file: GenericFile,
   metadata: TokenMetadata
 ) => {
-  const umi = createUmi(cluster);
+  ``;
+  const umi = createUmi(fetchClusterApiUrl(metadata.cluster));
   umi.use(walletAdapterIdentity(walletAdapter));
   umi.use(mplTokenMetadata());
   umi.use(irysUploader());
@@ -36,7 +34,7 @@ export const tokenMint = async (
     tokenProgramId: SPL_TOKEN_2022_PROGRAM_ID,
   });
 
-  const uploadedImage = await umi.uploader.upload([file]);
+  const uploadedImage = await umi.uploader.upload([metadata.file]);
   const uploadedJson = await umi.uploader.uploadJson({
     name: metadata.name,
     symbol: metadata.symbol,

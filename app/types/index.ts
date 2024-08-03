@@ -1,11 +1,13 @@
 import { ControllerRenderProps } from 'react-hook-form';
 import { createContext, Dispatch, SetStateAction } from 'react';
+import { GenericFile } from '@metaplex-foundation/umi';
 
 export type TokenMetadata = {
   cluster: string;
   name: string;
   symbol: string;
   imagePreview?: string;
+  file: GenericFile;
   issueType: string;
   totalSupply: number;
   decimals: number;
@@ -23,6 +25,7 @@ export type NFTMetadata = {
   symbol: string;
   description: string;
   imagePreview?: string;
+  file: GenericFile;
   creators: Creator[];
   royalty?: number;
   control?: any;
@@ -43,5 +46,5 @@ export const MediaFilesContext = createContext<{
   {} as {
     mediaFiles: MediaFiles[];
     setMediaFiles: Dispatch<SetStateAction<MediaFiles[]>>;
-  },
+  }
 );
