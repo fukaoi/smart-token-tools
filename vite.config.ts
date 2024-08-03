@@ -25,10 +25,4 @@ export default defineConfig({
       dependencies: ['@mui/material/*'],
     }),
   ],
-  define: {
-    // global: {},
-    'process.browser': null,
-    // 'process.version': ['v20.0.0'],
-    'process.env.NODE_DEBUG': false,
-  },
 });
