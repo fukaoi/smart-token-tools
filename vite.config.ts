@@ -3,14 +3,13 @@ import { defineConfig } from 'vite';
 import tsconfigPaths from 'vite-tsconfig-paths';
 import { cjsInterop } from 'vite-plugin-cjs-interop';
 import nodePolyfills from 'rollup-plugin-polyfill-node';
-// import react from '@vitejs/plugin-react';
+
 export default defineConfig({
   ssr: {
     noExternal: process.env.NODE_ENV === 'production' ? [/^@mui\//] : [], // or  `['@mui/**']`
   },
 
   plugins: [
-    // react(),
     nodePolyfills(),
     remix({
       ssr: false,
@@ -28,7 +27,6 @@ export default defineConfig({
   ],
   resolve: {
     alias: {
-      // process: 'process/browser',
       process: 'process',
       buffer: 'buffer',
       crypto: 'crypto-browserify',
@@ -43,5 +41,7 @@ export default defineConfig({
   },
   define: {
     global: {},
+    'process.browser': null,
+    'process.version': ["v20.0.0"],
   },
 });

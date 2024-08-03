@@ -9,7 +9,7 @@ import {
 import { FC, useContext, useState } from "react";
 import DescriptionTypography from "~/components/typography/DescriptionTypography";
 import NoImage from "~/assets/no-image-available.jpg";
-import { FileUpload } from "~/utils/fileUpload";
+import { Validation } from "~/utils/validation";
 import { Alert } from "@mui/material";
 import Card from "@mui/material/Card";
 import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
@@ -50,7 +50,7 @@ const MediaFileUploadUI: FC<MediaFileUploadUIProps> = ({
 
   const handleOnAddMediaFile = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files![0];
-    if (FileUpload.isImagePreviewFileType(file)) {
+    if (Validation.isImagePreviewFileType(file)) {
       const reader = new FileReader();
       reader.onload = () => {
         const result = reader.result as string;

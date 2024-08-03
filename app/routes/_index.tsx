@@ -11,10 +11,6 @@ const WalletConnectButton = lazy(() =>
   import("~/components/button/WalletConnectButton")
 );
 
-import process from 'process';
-
-console.log(process);
-
 const Index = () => {
   const navigate = useNavigate();
   const { publicKey, select } = useWallet();

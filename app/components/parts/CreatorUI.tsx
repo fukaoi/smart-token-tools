@@ -6,13 +6,13 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import HeadlineTypography from "../typography/HeadlineTypography";
 import WalletAddressTextField from "../textField/WalletAddressTextField";
 import ShareTextField from "../textField/ShareTextField";
-import { NFTFormValues } from "~/types";
+import { NFTMetadata } from "~/types";
 import { validationRules } from "~/utils/validation";
 
 export type CreatorUIProps = {
   fields?: any;
   remove?: any;
-  control?: Control<NFTFormValues>;
+  control?: Control<NFTMetadata>;
 };
 
 const styles = {

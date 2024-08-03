@@ -5,25 +5,25 @@ import {
   CardMedia,
   ImageList,
   ImageListItem,
-} from '@mui/material';
-import { FC, useState } from 'react';
-import { FileUpload } from '~/utils/fileUpload';
-import DescriptionTypography from '~/components/typography/DescriptionTypography';
-import ExampleTypography from '~/components/typography/ExampleTypography';
-import Card from '@mui/material/Card';
-import { Alert } from '@mui/material';
-import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
+} from "@mui/material";
+import { FC, useState } from "react";
+import { Validation } from "~/utils/validation";
+import DescriptionTypography from "~/components/typography/DescriptionTypography";
+import ExampleTypography from "~/components/typography/ExampleTypography";
+import Card from "@mui/material/Card";
+import { Alert } from "@mui/material";
+import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 
 const styles = {
   card: {
-    marginTop: '1em',
+    marginTop: "1em",
   },
   image: {
-    width: '400px',
-    height: '400px',
-    marginTop: '1em',
-    marginLeft: 'auto',
-    marginRight: 'auto',
+    width: "400px",
+    height: "400px",
+    marginTop: "1em",
+    marginLeft: "auto",
+    marginRight: "auto",
   },
 };
 
@@ -42,9 +42,9 @@ const ImageFileUploadUI: FC<ImageFileUploadUIProps> = ({
 }) => {
   const handleOnAddImage = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
-    if (FileUpload.isEmpty(e) || !FileUpload.isImagePreviewFileType(e)) return;
-    if (FileUpload.isMaxFileSize(e)) {
-      setErrorModal({ open: true, message: 'ERROR! Max Image size is 100MB' });
+    if (Validation.isEmpty(e) || !Validation.isImagePreviewFileType(e)) return;
+    if (Validation.isMaxFileSize(e)) {
+      setErrorModal({ open: true, message: "ERROR! Max Image size is 100MB" });
       return;
     }
 
@@ -61,9 +61,9 @@ const ImageFileUploadUI: FC<ImageFileUploadUIProps> = ({
     reader.readAsDataURL(file);
   };
 
-  const [fileName, setFileName] = useState('');
+  const [fileName, setFileName] = useState("");
 
-  const description = 'The following file types can be uploaded';
+  const description = "The following file types can be uploaded";
   const example = `
         png,  jpg,  gif,  svg,  bmp,  webp 
     `;
@@ -76,44 +76,45 @@ const ImageFileUploadUI: FC<ImageFileUploadUIProps> = ({
         <input
           id="image-upload"
           name="image-upload"
-          style={{ display: 'none' }}
+          style={{ display: "none" }}
           type="file"
           accept="image/*"
           onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-            handleOnAddImage(e)
-          }
+            handleOnAddImage(e)}
         />
-        <Box sx={{ display: 'flex', mt: 2 }}>
+        <Box sx={{ display: "flex", mt: 2 }}>
           <Button variant="outlined" component="span">
             Choose Image File
           </Button>
         </Box>
       </label>
-      {imagePreview ? (
-        <Card style={styles.card}>
-          <CardMedia>
-            <ImageList sx={styles.image} variant="woven" cols={1} gap={1}>
-              <ImageListItem>
-                <img
-                  id="preview"
-                  src={imagePreview}
-                  alt="ImagePreview"
-                  loading="lazy"
-                />
-              </ImageListItem>
-            </ImageList>
-            <CardContent>
-              <Alert
-                iconMapping={{
-                  success: <CheckCircleOutlineIcon fontSize="inherit" />,
-                }}
-              >
-                {fileName}
-              </Alert>
-            </CardContent>
-          </CardMedia>
-        </Card>
-      ) : null}
+      {imagePreview
+        ? (
+          <Card style={styles.card}>
+            <CardMedia>
+              <ImageList sx={styles.image} variant="woven" cols={1} gap={1}>
+                <ImageListItem>
+                  <img
+                    id="preview"
+                    src={imagePreview}
+                    alt="ImagePreview"
+                    loading="lazy"
+                  />
+                </ImageListItem>
+              </ImageList>
+              <CardContent>
+                <Alert
+                  iconMapping={{
+                    success: <CheckCircleOutlineIcon fontSize="inherit" />,
+                  }}
+                >
+                  {fileName}
+                </Alert>
+              </CardContent>
+            </CardMedia>
+          </Card>
+        )
+        : null}
     </>
   );
 };
