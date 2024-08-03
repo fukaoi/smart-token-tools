@@ -18,7 +18,7 @@ const Index = () => {
 
   useEffect(() => {
     if (publicKey && clicked) {
-      navigate("/nft");
+      navigate("/token");
     }
   }, [clicked, publicKey]);
 

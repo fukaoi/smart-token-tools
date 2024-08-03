@@ -21,6 +21,7 @@ import { TokenMetadata } from "~/types";
 import { useWallet } from "@solana/wallet-adapter-react";
 import { useNavigate } from "@remix-run/react";
 import { mintToken } from "~/utils/mint-token";
+import { GenericFile } from "@metaplex-foundation/umi";
 
 const Token = () => {
   const btnTitle = "SUBMIT";
@@ -37,7 +38,7 @@ const Token = () => {
   const [imagePreview, setImagePreview] = useState<File | string | undefined>(
     undefined,
   );
-  const [fileBuffer, setFileBuffer] = useState<ArrayBuffer>();
+  const [genericFile, setGenericFile] = useState<GenericFile>();
   const { handleSubmit, control, watch } = useForm<TokenMetadata>({
     defaultValues: {
       cluster: "devnet",
@@ -75,14 +76,14 @@ const Token = () => {
     setBtnState({ title: "PROCESSING", isDisabled: true });
     setIsLoading(true);
 
-    if (data.issueType === "new" && !fileBuffer) {
+    if (data.issueType === "new" && !genericFile) {
       setErrorModal({ open: true, message: "Please Image Upload" });
     }
 
     try {
       let mint = "";
       if (data.issueType === "new") {
-        console.debug(data);
+        data.file = genericFile!;
         mint = await mintToken(
           wallet!.adapter,
           data,
@@ -106,7 +107,7 @@ const Token = () => {
       setBtnState({ title: "Submit", isDisabled: false });
       setIsLoading(false);
       setErrorModal({ open: true, message: (error as Error).message });
-      console.error('# mintToken: ', error);
+      console.error("# mintToken: ", error);
     }
   };
 
@@ -170,7 +171,7 @@ const Token = () => {
                     imagePreview,
                     setErrorModal,
                     setImagePreview,
-                    setFileBuffer,
+                    setGenericFileBuffer: setGenericFile,
                   }}
                 />
               </>
