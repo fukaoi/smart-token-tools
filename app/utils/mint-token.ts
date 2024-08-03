@@ -34,12 +34,14 @@ export const mintToken = async (
     tokenProgramId: SPL_TOKEN_2022_PROGRAM_ID,
   });
 
-  const uploadedImage = await umi.uploader.upload([metadata.file]);
-  const uploadedJson = await umi.uploader.uploadJson({
+  const uploadedImageUrl = await umi.uploader.upload([metadata.file]);
+  const uploadedJsonUrl = await umi.uploader.uploadJson({
     name: metadata.name,
     symbol: metadata.symbol,
-    image: uploadedImage,
+    image: uploadedImageUrl,
   });
+
+  console.debug('# uploadedJsonUrl: ', uploadedJsonUrl);
 
   const transaction = transactionBuilder()
     .add(
@@ -49,7 +51,7 @@ export const mintToken = async (
         name: metadata.name,
         symbol: metadata.symbol,
         decimals: metadata.decimals,
-        uri: uploadedJson,
+        uri: uploadedJsonUrl,
         sellerFeeBasisPoints: percentAmount(5.5),
         splTokenProgram: SPL_TOKEN_2022_PROGRAM_ID,
         tokenStandard: TokenStandard.Fungible,
