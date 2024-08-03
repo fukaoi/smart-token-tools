@@ -18,10 +18,10 @@ export enum BundlrUrl {
 
 export const fetchClusterApiUrl = (cluster: string): string => {
   let network: Cluster;
-  if (cluster === ' devnet') {
-    network = WalletAdapterNetwork.Devnet;
-  } else {
+  if (cluster === 'mainnet') {
     network = WalletAdapterNetwork.Mainnet;
+  } else {
+    network = WalletAdapterNetwork.Devnet;
   }
   return clusterApiUrl(network);
 };
