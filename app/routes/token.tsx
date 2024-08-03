@@ -81,10 +81,10 @@ const Token = () => {
     }
 
     try {
-      let mint = "";
+      let signature = "";
       if (data.issueType === "new") {
         data.file = genericFile!;
-        mint = await mintToken(
+        signature = await mintToken(
           wallet!.adapter,
           data,
         );
@@ -100,9 +100,7 @@ const Token = () => {
         setIsLoading(false);
         setErrorModal({ open: true, message: "Error no match issue type" });
       }
-      mint = "testete";
-      console.log("# mint: ", mint);
-      mint.length !== 0 && setCompleteModal(true);
+      signature.length !== 0 && setCompleteModal(true);
     } catch (error) {
       setBtnState({ title: "Submit", isDisabled: false });
       setIsLoading(false);

@@ -3,8 +3,8 @@ import Modal from "@mui/material/Modal";
 import Box from "@mui/material/Box";
 import { Alert } from "@mui/material";
 
-const CompletedMintModal: FC<{ open: boolean; onClose: any }> = (
-  { open, onClose },
+const CompletedMintModal: FC<{ open: boolean; onClose: any, signature: string }> = (
+  { open, onClose, signature },
 ) => {
   return (
     <>
@@ -35,16 +35,16 @@ const CompletedMintModal: FC<{ open: boolean; onClose: any }> = (
             Mint Completed
             <br />
             <a
-              href=""
-              style={{
-                color: "white",
-              }}
+              href=`https://solscan.io/token/${signature}?cluster=devnet`
+            style={{
+              color: "white",
+            }}
             >
-              Click explorer url
-            </a>
-          </Alert>
-        </Box>
-      </Modal>
+            Click explorer url
+          </a>
+        </Alert>
+      </Box>
+    </Modal >
     </>
   );
 };
