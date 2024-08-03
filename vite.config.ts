@@ -25,20 +25,6 @@ export default defineConfig({
       dependencies: ['@mui/material/*'],
     }),
   ],
-  resolve: {
-    alias: {
-      process: 'process',
-      buffer: 'buffer',
-      crypto: 'crypto-js',
-      stream: 'stream-browserify',
-      assert: 'assert',
-      http: 'stream-http',
-      https: 'https-browserify',
-      os: 'os-browserify',
-      url: 'url',
-      util: 'util',
-    },
-  },
   define: {
     // global: {},
     'process.browser': null,
