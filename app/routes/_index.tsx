@@ -7,6 +7,7 @@ import { Box } from "@mui/material";
 import { useWallet, Wallet } from "@solana/wallet-adapter-react";
 import { useNavigate } from "@remix-run/react";
 import { lazy, useEffect, useState } from "react";
+
 const WalletConnectButton = lazy(() =>
   import("~/components/button/WalletConnectButton")
 );

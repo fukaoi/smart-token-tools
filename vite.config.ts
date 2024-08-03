@@ -21,28 +21,28 @@ export default defineConfig({
     }),
     tsconfigPaths(),
     process.env.NODE_ENV === 'development' &&
-      cjsInterop({
-        dependencies: ['@mui/material/*'],
-      }),
+    cjsInterop({
+      dependencies: ['@mui/material/*'],
+    }),
   ],
-  // resolve: {
-  //   alias: {
-  //     process: 'process',
-  //     buffer: 'buffer',
-  //     crypto: 'crypto-browserify',
-  //     stream: 'stream-browserify',
-  //     assert: 'assert',
-  //     http: 'stream-http',
-  //     https: 'https-browserify',
-  //     os: 'os-browserify',
-  //     url: 'url',
-  //     util: 'util',
-  //   },
-  // },
+  resolve: {
+    alias: {
+      process: 'process',
+      buffer: 'buffer',
+      crypto: 'crypto-js',
+      stream: 'stream-browserify',
+      assert: 'assert',
+      http: 'stream-http',
+      https: 'https-browserify',
+      os: 'os-browserify',
+      url: 'url',
+      util: 'util',
+    },
+  },
   define: {
-    global: {},
+    // global: {},
     'process.browser': null,
-    'process.version': ['v20.0.0'],
+    // 'process.version': ['v20.0.0'],
     'process.env.NODE_DEBUG': false,
   },
 });
