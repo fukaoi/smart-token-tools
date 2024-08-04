@@ -26,6 +26,7 @@ import { GenericFile } from "@metaplex-foundation/umi";
 const Token = () => {
   const btnTitle = "SUBMIT";
   const [address, setAddress] = useState("");
+  const [mintAddress, setMintAddress] = useState("");
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [btnState, setBtnState] = useState({
@@ -81,13 +82,14 @@ const Token = () => {
     }
 
     try {
-      let signature = "";
       if (data.issueType === "new") {
         data.file = genericFile!;
-        signature = await mintToken(
+        const res = await mintToken(
           wallet!.adapter,
           data,
         );
+        setMintAddress(res.mint);
+        res.signature.length !== 0 && setCompleteModal(true);
       } else if (data.issueType === "add" && data.tokenAddress) {
         // mint = await addMinting(
         //   data.tokenKey,
@@ -100,7 +102,6 @@ const Token = () => {
         setIsLoading(false);
         setErrorModal({ open: true, message: "Error no match issue type" });
       }
-      signature.length !== 0 && setCompleteModal(true);
     } catch (error) {
       setBtnState({ title: "Submit", isDisabled: false });
       setIsLoading(false);
@@ -185,7 +186,11 @@ const Token = () => {
           <Box sx={{ mb: 10 }} />
         </FormControl>
       </form>
-      <CompletedMintModal open={completeModal} onClose={handleSuccessClose} />
+      <CompletedMintModal
+        open={completeModal}
+        onClose={handleSuccessClose}
+        mint={mintAddress}
+      />
       <ErrorModal
         open={errorModal.open}
         onClose={handleErrorClose}

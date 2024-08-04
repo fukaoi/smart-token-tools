@@ -21,7 +21,7 @@ import { WalletAdapter } from '@solana/wallet-adapter-base';
 export const mintToken = async (
   walletAdapter: WalletAdapter,
   metadata: TokenMetadata
-) => {
+): Promise<{ signature: string; mint: string }> => {
   ``;
   const umi = createUmi(fetchClusterApiUrl(metadata.cluster));
   umi.use(walletAdapterIdentity(walletAdapter));
@@ -69,5 +69,8 @@ export const mintToken = async (
       })
     );
   const res = await transaction.sendAndConfirm(umi);
-  return bs.encode(res.signature);
+  return {
+    signature: bs.encode(res.signature),
+    mint: mint.publicKey.toString(),
+  };
 };
