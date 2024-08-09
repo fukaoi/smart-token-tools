@@ -27,7 +27,6 @@ const Index = () => {
   }, [clicked, publicKey]);
 
   const connectHandler = (wallet: Wallet) => {
-    console.debug(wallet);
     select(wallet.adapter.name);
     setClicked(true);
   };
