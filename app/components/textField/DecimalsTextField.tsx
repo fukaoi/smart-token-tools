@@ -3,9 +3,9 @@ import SugbHeadlineTypography from "~/components/typography/HeadlineTypography";
 import DescriptionTypography from "~/components/typography/DescriptionTypography";
 import ExampleTypography from "~/components/typography/ExampleTypography";
 import { useController, UseControllerProps } from "react-hook-form";
-import { TokenFormValues } from "~/types";
+import { TokenMetadata } from "~/types";
 
-const DecimalsTextField = (props: UseControllerProps<TokenFormValues>) => {
+const DecimalsTextField = (props: UseControllerProps<TokenMetadata>) => {
   const { field } = useController(props);
   const description =
     `The value of this setting specifies the number of decimal points in the token. 

@@ -1,14 +1,14 @@
-import { TextField, Box } from '@mui/material';
-import SugbHeadlineTypography from '../typography/HeadlineTypography';
-import { NFTFormValues } from '~/types';
-import { useController, UseControllerProps } from 'react-hook-form';
+import { Box, TextField } from "@mui/material";
+import SugbHeadlineTypography from "../typography/HeadlineTypography";
+import { NFTMetadata } from "~/types";
+import { useController, UseControllerProps } from "react-hook-form";
 
-const DescriptionTextField = (props: UseControllerProps<NFTFormValues>) => {
+const DescriptionTextField = (props: UseControllerProps<NFTMetadata>) => {
   const { field, fieldState } = useController(props);
   return (
     <>
       <SugbHeadlineTypography message="Input Description" />
-      <Box sx={{ display: 'flex', mt: 2 }}>
+      <Box sx={{ display: "flex", mt: 2 }}>
         <TextField
           type="text"
           id="outlined-basic"

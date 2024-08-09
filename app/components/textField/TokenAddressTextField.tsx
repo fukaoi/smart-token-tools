@@ -1,9 +1,9 @@
 import { Box, TextField } from "@mui/material";
 import HeadlineTypography from "~/components/typography/HeadlineTypography";
-import { TokenFormValues } from "~/types";
+import { TokenMetadata } from "~/types";
 import { useController, UseControllerProps } from "react-hook-form";
 
-const TotalSupplyTextField = (props: UseControllerProps<TokenFormValues>) => {
+const TotalSupplyTextField = (props: UseControllerProps<TokenMetadata>) => {
   const { field } = useController(props);
   return (
     <>

@@ -1,8 +1,8 @@
 import { Box, TextField } from "@mui/material";
-import { NFTFormValues } from "~/types";
+import { NFTMetadata } from "~/types";
 import { useController, UseControllerProps } from "react-hook-form";
 
-const ShareTextField = (props: UseControllerProps<NFTFormValues>) => {
+const ShareTextField = (props: UseControllerProps<NFTMetadata>) => {
   const { field, fieldState } = useController(props);
 
   return (

@@ -1,14 +1,14 @@
-import { TextField, Box } from '@mui/material';
-import HeadlineTypography from '~/components/typography/HeadlineTypography';
-import { NFTFormValues } from '~/types';
-import { useController, UseControllerProps } from 'react-hook-form';
+import { Box, TextField } from "@mui/material";
+import HeadlineTypography from "~/components/typography/HeadlineTypography";
+import { NFTMetadata } from "~/types";
+import { useController, UseControllerProps } from "react-hook-form";
 
-const RoyaltyTextField = (props: UseControllerProps<NFTFormValues>) => {
+const RoyaltyTextField = (props: UseControllerProps<NFTMetadata>) => {
   const { field, fieldState } = useController(props);
   return (
     <>
       <HeadlineTypography message="Input Royalty" />
-      <Box sx={{ display: 'flex', mt: 2 }}>
+      <Box sx={{ display: "flex", mt: 2 }}>
         <TextField
           type="text"
           minRows={100}

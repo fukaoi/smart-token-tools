@@ -73,7 +73,9 @@ const Token = () => {
     setBtnState({ title: btnTitle, isDisabled: false });
   };
 
-  const onSubmit = async (data: TokenMetadata) => {
+  // const onSubmit = async (data: TokenMetadata) => {
+  const onSubmit = async (data: any) => {
+    console.log(data);
     setBtnState({ title: "PROCESSING", isDisabled: true });
     setIsLoading(true);
 

@@ -1,12 +1,12 @@
-import { TextField, Box } from '@mui/material';
-import { NFTFormValues } from '~/types';
-import { useController, UseControllerProps } from 'react-hook-form';
+import { Box, TextField } from "@mui/material";
+import { NFTMetadata } from "~/types";
+import { useController, UseControllerProps } from "react-hook-form";
 
-const WalletAddressTextField = (props: UseControllerProps<NFTFormValues>) => {
+const WalletAddressTextField = (props: UseControllerProps<NFTMetadata>) => {
   const { field } = useController(props);
   return (
     <>
-      <Box sx={{ display: 'flex', mt: 2 }}>
+      <Box sx={{ display: "flex", mt: 2 }}>
         <TextField
           type="text"
           minRows={100}

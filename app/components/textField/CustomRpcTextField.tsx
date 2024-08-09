@@ -8,19 +8,18 @@ import {
 const CustomRpcTextFiled = <T extends FieldValues>(
   props: UseControllerProps<T>,
 ) => {
-  const { field, fieldState } = useController(props);
+  const { field } = useController(props);
   return (
     <>
       <Box sx={{ display: "flex", mb: 2 }}>
         <TextField
           type="text"
           id="outlined-basic"
-          label={"custom-rpc-url"}
-          placeholder="original name..."
+          label="custom-rpc-url"
+          placeholder="https://..."
           variant="outlined"
           size="small"
-          error={fieldState.invalid}
-          helperText={fieldState.error?.message}
+          error={false}
           {...field}
         />
       </Box>
