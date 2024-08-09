@@ -11,7 +11,7 @@ const ClusterRadio = (props: UseControllerProps<any>) => {
   const { field } = useController(props);
   const { control } = useForm();
   const [selectedCustomRpc, setSelectedCustomRpc] = useState(false);
-  const handleCustomRpc = (clusterName: string) => {
+  const handleClusterNetwork = (clusterName: string) => {
     if (clusterName === "custom-rpc") {
       setSelectedCustomRpc(true);
     } else {
@@ -31,20 +31,20 @@ const ClusterRadio = (props: UseControllerProps<any>) => {
           value={"custom-rpc"}
           control={<Radio color="warning" />}
           label="Custom RPC"
-          onChange={() => handleCustomRpc("custom-rpc")}
+          onChange={() => handleClusterNetwork("custom-rpc")}
         />
         {selectedCustomRpc && <CustomRpcTextFiled control={control} name="custom-rpc" />}
         <FormControlLabel
           value={WalletAdapterNetwork.Mainnet}
           control={<Radio color="primary" />}
           label="Mainnet-beta"
-          onChange={() => handleCustomRpc("mainet")}
+          onChange={() => handleClusterNetwork("mainet")}
         />
         <FormControlLabel
           value={WalletAdapterNetwork.Devnet}
           control={<Radio color="secondary" />}
           label="Devnet"
-          onChange={() => handleCustomRpc("devnet")}
+          onChange={() => handleClusterNetwork("devnet")}
         />
       </RadioGroup>
     </>
