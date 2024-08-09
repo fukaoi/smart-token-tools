@@ -1,23 +1,23 @@
 import { useState } from 'react';
 
-export const useSessionStorage = (key: string, initialValue: any) => {
+export const useStorage = (key: string) => {
   const [item, setInnerValue] = useState(() => {
     try {
-      const storageValue = window.sessionStorage.getItem(key);
+      const storageValue = window.localStorage.getItem(key);
       if (storageValue) {
         return JSON.parse(storageValue);
       } else {
-        return initialValue;
+        return null
       }
     } catch (error) {
-      return initialValue;
+      return null
     }
   });
 
   const setValue = (value: any) => {
     try {
       setInnerValue(value);
-      window.sessionStorage.setItem(key, JSON.stringify(value));
+      window.localStorage.setItem(key, JSON.stringify(value));
     } catch (error) {
       console.error(error);
     }
