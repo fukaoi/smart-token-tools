@@ -4,6 +4,7 @@ import { GenericFile } from '@metaplex-foundation/umi';
 
 export type TokenMetadata = {
   cluster: string;
+  customClusterUrl?: string;
   name: string;
   symbol: string;
   imagePreview?: string;

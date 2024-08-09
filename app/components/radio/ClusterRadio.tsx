@@ -33,7 +33,9 @@ const ClusterRadio = (props: UseControllerProps<any>) => {
           label="Custom RPC"
           onChange={() => handleClusterNetwork("custom-rpc")}
         />
-        {selectedCustomRpc && <CustomRpcTextFiled control={control} name="custom-rpc" />}
+        {selectedCustomRpc && (
+          <CustomRpcTextFiled control={control} name="customClusterUrl" />
+        )}
         <FormControlLabel
           value={WalletAdapterNetwork.Mainnet}
           control={<Radio color="primary" />}

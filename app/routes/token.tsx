@@ -43,6 +43,7 @@ const Token = () => {
   const { handleSubmit, control, watch } = useForm<TokenMetadata>({
     defaultValues: {
       cluster: "devnet",
+      customClusterUrl: "",
       issueType: "new",
       name: "",
       symbol: "",
