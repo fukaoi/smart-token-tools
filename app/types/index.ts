@@ -22,6 +22,7 @@ export type Creator = {
 
 export type NFTMetadata = {
   cluster: string;
+  customClusterUrl?: string;
   name: string;
   symbol: string;
   description: string;

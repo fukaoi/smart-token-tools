@@ -26,6 +26,7 @@ import { GenericFile } from "@metaplex-foundation/umi";
 const Token = () => {
   const btnTitle = "SUBMIT";
   const [address, setAddress] = useState("");
+  const [selectedCustomRpc, setSelectedCustomRpc] = useState(false);
   const [mintAddress, setMintAddress] = useState("");
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -72,6 +73,14 @@ const Token = () => {
     setIsLoading(false);
     setCompleteModal(false);
     setBtnState({ title: btnTitle, isDisabled: false });
+  };
+
+  const handleClusterNetwork = (clusterName: string) => {
+    if (clusterName === "custom-rpc") {
+      setSelectedCustomRpc(true);
+    } else {
+      setSelectedCustomRpc(false);
+    }
   };
 
   // const onSubmit = async (data: TokenMetadata) => {
@@ -127,7 +136,11 @@ const Token = () => {
             }}
           >
             <AddressTypography address={address} />
-            <ClusterRadio control={control} name="cluster" />
+            <ClusterRadio
+              control={control}
+              name="cluster"
+              onChange={handleClusterNetwork}
+            />
             <Box sx={{ mb: 4 }} />
             <TokenIssueTypeRadio control={control} name="issueType" />
             <Box sx={{ mb: 4 }} />

@@ -3,21 +3,19 @@ import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import HeadlineTypography from "~/components/typography/HeadlineTypography";
-import { useController, UseControllerProps, useForm } from "react-hook-form";
+import {
+  FieldValues,
+  useController,
+  UseControllerProps,
+} from "react-hook-form";
 import { WalletAdapterNetwork } from "@solana/wallet-adapter-base";
 import CustomRpcTextFiled from "~/components/textField/CustomRpcTextField";
 
-const ClusterRadio = (props: UseControllerProps<any>) => {
+const ClusterRadio = <T extends FieldValues>(
+  props: UseControllerProps<T>,
+  onChange: (value: string) => {},
+) => {
   const { field } = useController(props);
-  const { control } = useForm();
-  const [selectedCustomRpc, setSelectedCustomRpc] = useState(false);
-  const handleClusterNetwork = (clusterName: string) => {
-    if (clusterName === "custom-rpc") {
-      setSelectedCustomRpc(true);
-    } else {
-      setSelectedCustomRpc(false);
-    }
-  };
 
   return (
     <>
@@ -31,10 +29,13 @@ const ClusterRadio = (props: UseControllerProps<any>) => {
           value={"custom-rpc"}
           control={<Radio color="warning" />}
           label="Custom RPC"
-          onChange={() => handleClusterNetwork("custom-rpc")}
+          onChange("custom-rpc")
         />
         {selectedCustomRpc && (
-          <CustomRpcTextFiled control={control} name="customClusterUrl" />
+          <CustomRpcTextFiled
+            control={props.control}
+            name={props.name}
+          />
         )}
         <FormControlLabel
           value={WalletAdapterNetwork.Mainnet}
