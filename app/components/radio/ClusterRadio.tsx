@@ -10,12 +10,22 @@ import {
 } from "react-hook-form";
 import { WalletAdapterNetwork } from "@solana/wallet-adapter-base";
 import CustomRpcTextFiled from "~/components/textField/CustomRpcTextField";
+import { Path } from "@remix-run/react";
+import { TokenMetadata } from "~/types";
 
-const ClusterRadio = <T extends FieldValues>(
+const ClusterRadio = <T extends TokenMetadata>(
   props: UseControllerProps<T>,
-  onChange: (value: string) => {},
 ) => {
   const { field } = useController(props);
+  const [selectedCustomRpc, setSelectedCustomRpc] = useState(false);
+  const handleClusterNetwork = (clusterName: string) => {
+    if (clusterName === "custom-rpc") {
+      setSelectedCustomRpc(true);
+    } else {
+      setSelectedCustomRpc(false);
+    }
+  };
+  console.log(props);
 
   return (
     <>
@@ -29,14 +39,12 @@ const ClusterRadio = <T extends FieldValues>(
           value={"custom-rpc"}
           control={<Radio color="warning" />}
           label="Custom RPC"
-          onChange("custom-rpc")
+          onChange={() => handleClusterNetwork("custom-rpc")}
         />
-        {selectedCustomRpc && (
-          <CustomRpcTextFiled
-            control={props.control}
-            name={props.name}
-          />
-        )}
+        <CustomRpcTextFiled
+          control={props.control!}
+          name="symbol"
+        />
         <FormControlLabel
           value={WalletAdapterNetwork.Mainnet}
           control={<Radio color="primary" />}

@@ -4,8 +4,9 @@ import {
   useController,
   UseControllerProps,
 } from "react-hook-form";
+import { TokenMetadata } from "~/types";
 
-const CustomRpcTextFiled = <T extends FieldValues>(
+const CustomRpcTextFiled = <T extends TokenMetadata>(
   props: UseControllerProps<T>,
 ) => {
   const { field, fieldState } = useController(props);
