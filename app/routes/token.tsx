@@ -1,3 +1,4 @@
+import { DevTool } from "@hookform/devtools";
 import { useEffect, useState } from "react";
 import { Box, FormControl, Paper } from "@mui/material";
 import { useForm } from "react-hook-form";
@@ -42,13 +43,13 @@ const Token = () => {
   const [genericFile, setGenericFile] = useState<GenericFile>();
   const { handleSubmit, control, watch } = useForm<TokenMetadata>({
     defaultValues: {
-      cluster: "devnet",
+      cluster: "",
       customClusterUrl: "",
-      issueType: "new",
+      issueType: "",
       name: "",
       symbol: "",
-      totalSupply: 100000,
-      decimals: 1,
+      totalSupply: 0,
+      decimals: 0,
       tokenAddress: "",
     },
   });
@@ -189,6 +190,7 @@ const Token = () => {
           <Box sx={{ mb: 10 }} />
         </FormControl>
       </form>
+      <DevTool control={control} />
       <CompletedMintModal
         open={completeModal}
         onClose={handleSuccessClose}
