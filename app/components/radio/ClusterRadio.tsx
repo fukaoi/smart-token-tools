@@ -3,20 +3,16 @@ import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import HeadlineTypography from "~/components/typography/HeadlineTypography";
-import {
-  FieldValues,
-  useController,
-  UseControllerProps,
-} from "react-hook-form";
+import { useController, UseControllerProps } from "react-hook-form";
 import { WalletAdapterNetwork } from "@solana/wallet-adapter-base";
-import CustomRpcTextFiled from "~/components/textField/CustomRpcTextField";
-import { Path } from "@remix-run/react";
 import { TokenMetadata } from "~/types";
+import { Box } from "@mui/system";
+import { TextField } from "@mui/material";
 
 const ClusterRadio = <T extends TokenMetadata>(
   props: UseControllerProps<T>,
 ) => {
-  const { field } = useController(props);
+  const { field, fieldState } = useController(props);
   const [selectedCustomRpc, setSelectedCustomRpc] = useState(false);
   const handleClusterNetwork = (clusterName: string) => {
     if (clusterName === "custom-rpc") {
@@ -25,7 +21,6 @@ const ClusterRadio = <T extends TokenMetadata>(
       setSelectedCustomRpc(false);
     }
   };
-  console.log(props);
 
   return (
     <>
@@ -41,10 +36,21 @@ const ClusterRadio = <T extends TokenMetadata>(
           label="Custom RPC"
           onChange={() => handleClusterNetwork("custom-rpc")}
         />
-        <CustomRpcTextFiled
-          control={props.control!}
-          name="symbol"
-        />
+        {selectedCustomRpc && (
+          <Box sx={{ display: "flex", mb: 2 }}>
+            <TextField
+              type="text"
+              id="outlined-basic"
+              label="Custom rpc url"
+              placeholder="https://..."
+              variant="outlined"
+              size="small"
+              name="customClusterUrl"
+              // error={fieldState.invalid}
+              // helperText={fieldState.error?.message}
+            />
+          </Box>
+        )}
         <FormControlLabel
           value={WalletAdapterNetwork.Mainnet}
           control={<Radio color="primary" />}

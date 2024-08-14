@@ -22,7 +22,6 @@ import { useWallet } from "@solana/wallet-adapter-react";
 import { useNavigate } from "@remix-run/react";
 import { mintToken } from "~/utils/mint-token";
 import { GenericFile } from "@metaplex-foundation/umi";
-import CustomRpcTextFiled from "~/components/textField/CustomRpcTextField";
 
 const Token = () => {
   const btnTitle = "SUBMIT";
