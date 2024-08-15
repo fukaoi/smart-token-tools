@@ -49,7 +49,7 @@ const Token = () => {
       name: "",
       symbol: "",
       totalSupply: 1_000_000_000,
-      decimals: 3,
+      decimals: 5,
       tokenAddress: "",
     },
   });

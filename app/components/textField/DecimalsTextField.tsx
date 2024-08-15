@@ -11,7 +11,7 @@ const DecimalsTextField = (props: UseControllerProps<TokenMetadata>) => {
     `The value of this setting specifies the number of decimal points in the token. 
      Please refer to the example below.`;
   const example = `
-     0 decimals:  1000,                   1
+     0 decimals:  1000,                    1
      1 decimals:  1000.0,                0.1
      2 decimals:  1000.00,              0.01
      3 decimals:  1000.000,            0.001

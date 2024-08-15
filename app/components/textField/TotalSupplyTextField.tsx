@@ -10,7 +10,7 @@ const TotalSupplyTextField = (props: UseControllerProps<TokenMetadata>) => {
       <HeadlineTypography message="Input total supply number" />
       <Box sx={{ display: "flex", mt: 2 }}>
         <TextField
-          type="text"
+          type="number"
           id="outlined-basic"
           label="total supply"
           placeholder="100000, 99999999,,,"
