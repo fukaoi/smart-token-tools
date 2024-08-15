@@ -6,7 +6,7 @@ import TitleTypography from "~/components/typography/TitleTypography";
 import AddressTypography from "~/components/typography/AddressTypography";
 import ClusterRadio from "~/components/radio/ClusterRadio";
 import TokenIssueTypeRadio from "~/components/radio/TokenIssueTypeRadio";
-import TotalSupplyTextField from "~/components/text-field/TotalSupplyTextField";
+import TotalSupplyTextField from "~/components/number-input/TotalSupplyTextField";
 import DecimalsTextField from "~/components/text-field/DecimalsTextField";
 import TokenAddressTextField from "~/components/text-field/TokenAddressTextField";
 import SubmitButton from "~/components/button/SubmitButton";
@@ -23,7 +23,7 @@ import { useWallet } from "@solana/wallet-adapter-react";
 import { useNavigate } from "@remix-run/react";
 import { mintToken } from "~/utils/mint-token";
 import { GenericFile } from "@metaplex-foundation/umi";
-import DecimalsInput from "~/components/number-input/decimalsInput";
+import DecimalsInput from "~/components/number-input/DecimalsInput";
 
 const Token = () => {
   const btnTitle = "SUBMIT";
