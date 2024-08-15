@@ -6,15 +6,15 @@ import TitleTypography from "~/components/typography/TitleTypography";
 import AddressTypography from "~/components/typography/AddressTypography";
 import ClusterRadio from "~/components/radio/ClusterRadio";
 import TokenIssueTypeRadio from "~/components/radio/TokenIssueTypeRadio";
-import TotalSupplyTextField from "~/components/textField/TotalSupplyTextField";
-import DecimalsTextField from "~/components/textField/DecimalsTextField";
-import TokenAddressTextField from "~/components/textField/TokenAddressTextField";
+import TotalSupplyTextField from "~/components/textfield/TotalSupplyTextField";
+import DecimalsTextField from "~/components/textfield/DecimalsTextField";
+import TokenAddressTextField from "~/components/textfield/TokenAddressTextField";
 import SubmitButton from "~/components/button/SubmitButton";
 import Loading from "~/components/animation/Loading";
 import ErrorModal from "~/components/modal/ErrorModal";
 import CompletedMintModal from "~/components/modal/CompletedMintModal";
-import NameTextField from "~/components/textField/NameTextField";
-import SymbolTextField from "~/components/textField/SymbolTextField";
+import NameTextField from "~/components/textfield/NameTextField";
+import SymbolTextField from "~/components/textfield/SymbolTextField";
 import HeadlineTypography from "~/components/typography/HeadlineTypography";
 import ImageFileUploadUI from "~/components/parts/ImageFileUploadUI";
 import { validationRules } from "~/utils/validation";
@@ -23,6 +23,7 @@ import { useWallet } from "@solana/wallet-adapter-react";
 import { useNavigate } from "@remix-run/react";
 import { mintToken } from "~/utils/mint-token";
 import { GenericFile } from "@metaplex-foundation/umi";
+import NumberInputBasic from "~/components/numberinput/decimalsInput";
 
 const Token = () => {
   const btnTitle = "SUBMIT";
@@ -156,6 +157,8 @@ const Token = () => {
             <Box sx={{ mb: 4 }} />
             <TotalSupplyTextField control={control} name="totalSupply" />
             <Box sx={{ mb: 4 }} />
+
+            <NumberInputBasic />
             <DecimalsTextField control={control} name="decimals" />
             {watch("issueType") === "add" && (
               <>
