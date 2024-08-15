@@ -1,18 +1,16 @@
 import { useState } from "react";
 import HeadlineTypography from "~/components/typography/HeadlineTypography";
-import { useController, UseControllerProps, useForm } from "react-hook-form";
+import { useController, UseControllerProps } from "react-hook-form";
 import { WalletAdapterNetwork } from "@solana/wallet-adapter-base";
-import { TokenMetadata } from "~/types";
 import {
   Box,
-  Button,
   FormControlLabel,
   Radio,
   RadioGroup,
   TextField,
 } from "@mui/material";
 
-const ClusterRadio = <T extends TokenMetadata>(
+const ClusterRadio = (
   props: UseControllerProps<any>,
 ) => {
   const { field, fieldState } = useController(props);
@@ -44,6 +42,22 @@ const ClusterRadio = <T extends TokenMetadata>(
           label="Custom RPC"
           onChange={() => handleClusterNetwork("custom-rpc")}
         />
+        {selectedCustomRpc && (
+          <Box sx={{ display: "flex", mb: 2 }}>
+            <TextField
+              type="text"
+              id="outlined-basic"
+              label="Custom rpc url"
+              placeholder="https://..."
+              variant="outlined"
+              size="small"
+              error={fieldState.invalid}
+              helperText={fieldState.error?.message}
+              {...customRpcField.field}
+            />
+          </Box>
+        )}
+
         <FormControlLabel
           value={WalletAdapterNetwork.Mainnet}
           control={<Radio color="primary" />}
@@ -57,19 +71,6 @@ const ClusterRadio = <T extends TokenMetadata>(
           onChange={() => handleClusterNetwork("devnet")}
         />
       </RadioGroup>
-      {selectedCustomRpc && (
-        <Box sx={{ display: "flex", mb: 2 }}>
-          <TextField
-            type="text"
-            id="outlined-basic"
-            label="Custom rpc url"
-            placeholder="https://..."
-            variant="outlined"
-            size="small"
-            {...customRpcField.field}
-          />
-        </Box>
-      )}
     </>
   );
 };
