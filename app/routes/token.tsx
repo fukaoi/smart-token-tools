@@ -6,15 +6,15 @@ import TitleTypography from "~/components/typography/TitleTypography";
 import AddressTypography from "~/components/typography/AddressTypography";
 import ClusterRadio from "~/components/radio/ClusterRadio";
 import TokenIssueTypeRadio from "~/components/radio/TokenIssueTypeRadio";
-import TotalSupplyTextField from "~/components/textfield/TotalSupplyTextField";
-import DecimalsTextField from "~/components/textfield/DecimalsTextField";
-import TokenAddressTextField from "~/components/textfield/TokenAddressTextField";
+import TotalSupplyTextField from "~/components/text-field/TotalSupplyTextField";
+import DecimalsTextField from "~/components/text-field/DecimalsTextField";
+import TokenAddressTextField from "~/components/text-field/TokenAddressTextField";
 import SubmitButton from "~/components/button/SubmitButton";
 import Loading from "~/components/animation/Loading";
 import ErrorModal from "~/components/modal/ErrorModal";
 import CompletedMintModal from "~/components/modal/CompletedMintModal";
-import NameTextField from "~/components/textfield/NameTextField";
-import SymbolTextField from "~/components/textfield/SymbolTextField";
+import NameTextField from "~/components/text-field/NameTextField";
+import SymbolTextField from "~/components/text-field/SymbolTextField";
 import HeadlineTypography from "~/components/typography/HeadlineTypography";
 import ImageFileUploadUI from "~/components/parts/ImageFileUploadUI";
 import { validationRules } from "~/utils/validation";
@@ -23,7 +23,7 @@ import { useWallet } from "@solana/wallet-adapter-react";
 import { useNavigate } from "@remix-run/react";
 import { mintToken } from "~/utils/mint-token";
 import { GenericFile } from "@metaplex-foundation/umi";
-import NumberInputBasic from "~/components/numberinput/decimalsInput";
+import DecimalsInput from "~/components/number-input/decimalsInput";
 
 const Token = () => {
   const btnTitle = "SUBMIT";
@@ -39,14 +39,14 @@ const Token = () => {
   const [completeModal, setCompleteModal] = useState(false);
   const [errorModal, setErrorModal] = useState({ open: false, message: "" });
   const [imagePreview, setImagePreview] = useState<File | string | undefined>(
-    undefined,
+    undefined
   );
   const [genericFile, setGenericFile] = useState<GenericFile>();
   const { handleSubmit, control, watch } = useForm<TokenMetadata>({
     defaultValues: {
       cluster: "",
       customClusterUrl: "",
-      issueType: "",
+      issueType: "new",
       name: "",
       symbol: "",
       totalSupply: 1_000_000_000,
@@ -89,10 +89,7 @@ const Token = () => {
     try {
       if (data.issueType === "new") {
         data.file = genericFile!;
-        const res = await mintToken(
-          wallet!.adapter,
-          data,
-        );
+        const res = await mintToken(wallet!.adapter, data);
         setMintAddress(res.mint);
         res.signature.length !== 0 && setCompleteModal(true);
       } else if (data.issueType === "add" && data.tokenAddress) {
@@ -128,7 +125,6 @@ const Token = () => {
               padding: "1.2em",
             }}
           >
-            <NumberInputBasic />
             <AddressTypography address={address} />
             <ClusterRadio control={control} name="cluster" />
             <Box sx={{ mb: 4 }} />
@@ -159,7 +155,7 @@ const Token = () => {
             <TotalSupplyTextField control={control} name="totalSupply" />
             <Box sx={{ mb: 4 }} />
 
-            <DecimalsTextField control={control} name="decimals" />
+            <DecimalsInput control={control} name="decimals" />
             {watch("issueType") === "add" && (
               <>
                 <Box sx={{ mb: 4 }} />
