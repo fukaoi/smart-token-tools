@@ -128,6 +128,7 @@ const Token = () => {
               padding: "1.2em",
             }}
           >
+            <NumberInputBasic />
             <AddressTypography address={address} />
             <ClusterRadio control={control} name="cluster" />
             <Box sx={{ mb: 4 }} />
@@ -158,7 +159,6 @@ const Token = () => {
             <TotalSupplyTextField control={control} name="totalSupply" />
             <Box sx={{ mb: 4 }} />
 
-            <NumberInputBasic />
             <DecimalsTextField control={control} name="decimals" />
             {watch("issueType") === "add" && (
               <>
