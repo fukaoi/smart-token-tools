@@ -12,8 +12,8 @@ import {
 import { useStorage } from "~/utils/storage";
 
 const ClusterRadio = (props: UseControllerProps<any>) => {
-  const [storage] = useStorage("network");
   const { field, fieldState } = useController(props);
+  const [storage] = useStorage("network");
   const [selectedCustomRpc, setSelectedCustomRpc] = useState(false);
   const handleClusterNetwork = (clusterName: string) => {
     if (clusterName === "custom-rpc") {
@@ -24,6 +24,7 @@ const ClusterRadio = (props: UseControllerProps<any>) => {
   };
   const customRpcField = useController({
     name: "customClusterUrl",
+    defaultValue: storage.cluster.customClusterUrl,
     control: props.control,
     rules: { required: selectedCustomRpc },
   });
@@ -31,7 +32,7 @@ const ClusterRadio = (props: UseControllerProps<any>) => {
   return (
     <>
       <HeadlineTypography message="Select your using network cluster" />
-      <RadioGroup aria-labelledby="cluster" defaultValue={storage} {...field}>
+      <RadioGroup aria-labelledby="cluster" {...field}>
         <FormControlLabel
           value={"custom-rpc"}
           control={<Radio color="warning" />}

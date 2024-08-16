@@ -24,6 +24,7 @@ import { useNavigate } from "@remix-run/react";
 import { mintToken } from "~/utils/mint-token";
 import { GenericFile } from "@metaplex-foundation/umi";
 import DecimalsInput from "~/components/number-input/DecimalsInput";
+import { useStorage } from "~/utils/storage";
 
 const Token = () => {
   const btnTitle = "SUBMIT";
@@ -36,6 +37,7 @@ const Token = () => {
     isDisabled: false,
   });
   const { wallet } = useWallet();
+  const [storage, setStorage] = useStorage("network");
   const [completeModal, setCompleteModal] = useState(false);
   const [errorModal, setErrorModal] = useState({ open: false, message: "" });
   const [imagePreview, setImagePreview] = useState<File | string | undefined>(
@@ -44,8 +46,7 @@ const Token = () => {
   const [genericFile, setGenericFile] = useState<GenericFile>();
   const { handleSubmit, control, watch } = useForm<TokenMetadata>({
     defaultValues: {
-      cluster: "",
-      customClusterUrl: "",
+      cluster: storage.cluster,
       issueType: "new",
       name: "",
       symbol: "",
@@ -76,12 +77,13 @@ const Token = () => {
     setBtnState({ title: btnTitle, isDisabled: false });
   };
 
-  // const onSubmit = async (data: TokenMetadata) => {
-  const onSubmit = async (data: any) => {
-    console.log(data);
+  const onSubmit = async (data: TokenMetadata) => {
     setBtnState({ title: "PROCESSING", isDisabled: true });
     setIsLoading(true);
-
+    setStorage({
+      cluster: data.cluster,
+      customClusterUrl: data.customClusterUrl,
+    });
     if (data.issueType === "new" && !genericFile) {
       setErrorModal({ open: true, message: "Please Image Upload" });
     }
@@ -90,6 +92,7 @@ const Token = () => {
       if (data.issueType === "new") {
         data.file = genericFile!;
         const res = await mintToken(wallet!.adapter, data);
+        console.debug("# sig: ", res.signature);
         setMintAddress(res.mint);
         res.signature.length !== 0 && setCompleteModal(true);
       } else if (data.issueType === "add" && data.tokenAddress) {

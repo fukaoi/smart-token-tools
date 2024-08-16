@@ -3,10 +3,12 @@ import Modal from "@mui/material/Modal";
 import Box from "@mui/material/Box";
 import { Alert } from "@mui/material";
 
-const CompletedMintModal: FC<{ open: boolean; onClose: any; mint: string }> = (
-  { open, onClose, mint },
-) => {
-  const explorerUrl = `https://solscan.io/token/${mint}?cluster=devnet`;
+const CompletedMintModal: FC<{ open: boolean; onClose: any; mint: string }> = ({
+  open,
+  onClose,
+  mint,
+}) => {
+  const explorerUrl = `https://explorer.solana.com/address/${mint}/metadata?cluster=devnet`;
   return (
     <>
       <Modal
