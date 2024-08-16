@@ -189,7 +189,6 @@ const Token = () => {
           <Box sx={{ mb: 10 }} />
         </FormControl>
       </form>
-      <DevTool control={control} />
       <CompletedMintModal
         open={completeModal}
         onClose={handleSuccessClose}
@@ -201,6 +200,7 @@ const Token = () => {
         message={errorModal.message}
       />
       <Loading isLoading={isLoading} />
+      <DevTool control={control} />
     </>
   );
 };

@@ -9,10 +9,10 @@ import {
   RadioGroup,
   TextField,
 } from "@mui/material";
+import { useStorage } from "~/utils/storage";
 
-const ClusterRadio = (
-  props: UseControllerProps<any>,
-) => {
+const ClusterRadio = (props: UseControllerProps<any>) => {
+  const [storage] = useStorage("network");
   const { field, fieldState } = useController(props);
   const [selectedCustomRpc, setSelectedCustomRpc] = useState(false);
   const handleClusterNetwork = (clusterName: string) => {
@@ -31,11 +31,7 @@ const ClusterRadio = (
   return (
     <>
       <HeadlineTypography message="Select your using network cluster" />
-      <RadioGroup
-        aria-labelledby="cluster"
-        defaultValue={WalletAdapterNetwork.Devnet}
-        {...field}
-      >
+      <RadioGroup aria-labelledby="cluster" defaultValue={storage} {...field}>
         <FormControlLabel
           value={"custom-rpc"}
           control={<Radio color="warning" />}
