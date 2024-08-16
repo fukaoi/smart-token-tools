@@ -8,6 +8,7 @@ import {
   Radio,
   RadioGroup,
   TextField,
+  Checkbox,
 } from "@mui/material";
 import { useStorage } from "~/utils/storage";
 
@@ -15,12 +16,8 @@ const ClusterRadio = (props: UseControllerProps<any>) => {
   const { field, fieldState } = useController(props);
   const [storage] = useStorage("network");
   const [selectedCustomRpc, setSelectedCustomRpc] = useState(false);
-  const handleClusterNetwork = (clusterName: string) => {
-    if (clusterName === "custom-rpc") {
-      setSelectedCustomRpc(true);
-    } else {
-      setSelectedCustomRpc(false);
-    }
+  const handleClusterNetwork = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSelectedCustomRpc(event.target.checked);
   };
   const customRpcField = useController({
     name: "customClusterUrl",
@@ -28,46 +25,41 @@ const ClusterRadio = (props: UseControllerProps<any>) => {
     control: props.control,
     rules: { required: selectedCustomRpc },
   });
-
+  const label = { inputProps: { "aria-label": "Checkbox demo" } };
   return (
     <>
       <HeadlineTypography message="Select your using network cluster" />
       <RadioGroup aria-labelledby="cluster" {...field}>
         <FormControlLabel
-          value={"custom-rpc"}
-          control={<Radio color="warning" />}
-          label="Custom RPC"
-          onChange={() => handleClusterNetwork("custom-rpc")}
-        />
-        {selectedCustomRpc && (
-          <Box sx={{ display: "flex", mb: 2 }}>
-            <TextField
-              type="text"
-              id="outlined-basic"
-              label="Custom rpc url"
-              placeholder="https://..."
-              variant="outlined"
-              size="small"
-              error={fieldState.invalid}
-              helperText={fieldState.error?.message}
-              {...customRpcField.field}
-            />
-          </Box>
-        )}
-
-        <FormControlLabel
           value={WalletAdapterNetwork.Mainnet}
           control={<Radio color="primary" />}
           label="Mainnet-beta"
-          onChange={() => handleClusterNetwork("mainet")}
         />
         <FormControlLabel
           value={WalletAdapterNetwork.Devnet}
           control={<Radio color="secondary" />}
           label="Devnet"
-          onChange={() => handleClusterNetwork("devnet")}
+        />
+        <FormControlLabel
+          control={<Checkbox onChange={handleClusterNetwork} />}
+          label="Custom RPC URL"
         />
       </RadioGroup>
+      {selectedCustomRpc && (
+        <Box sx={{ display: "flex", mb: 2 }}>
+          <TextField
+            type="text"
+            id="outlined-basic"
+            label="Custom rpc url"
+            placeholder="https://..."
+            variant="outlined"
+            size="small"
+            error={fieldState.invalid}
+            helperText={fieldState.error?.message}
+            {...customRpcField.field}
+          />
+        </Box>
+      )}
     </>
   );
 };
