@@ -9,6 +9,7 @@ import {
   RadioGroup,
   TextField,
   Checkbox,
+  Typography,
 } from "@mui/material";
 import { useStorage } from "~/utils/storage";
 
@@ -42,7 +43,9 @@ const ClusterRadio = (props: UseControllerProps<any>) => {
         />
         <FormControlLabel
           control={<Checkbox onChange={handleClusterNetwork} />}
-          label="Custom RPC URL"
+          label={
+            <Typography sx={{ fontSize: "15px" }}>Custom RPC URL</Typography>
+          }
         />
       </RadioGroup>
       {selectedCustomRpc && (
