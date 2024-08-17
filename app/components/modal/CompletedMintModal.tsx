@@ -2,13 +2,15 @@ import { FC } from "react";
 import Modal from "@mui/material/Modal";
 import Box from "@mui/material/Box";
 import { Alert } from "@mui/material";
+import { useStorage } from "~/utils/storage";
 
 const CompletedMintModal: FC<{ open: boolean; onClose: any; mint: string }> = ({
   open,
   onClose,
   mint,
 }) => {
-  const explorerUrl = `https://explorer.solana.com/address/${mint}/metadata?cluster=devnet`;
+  const [storage] = useStorage("network");
+  const explorerUrl = `https://explorer.solana.com/address/${mint}/metadata?cluster=${storage.cluster}`;
   return (
     <>
       <Modal
