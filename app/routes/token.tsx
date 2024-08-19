@@ -44,15 +44,13 @@ const Token = () => {
     undefined
   );
   const [genericFile, setGenericFile] = useState<GenericFile>();
-  const { handleSubmit, control, watch } = useForm<TokenMetadata>({
+  const { handleSubmit, control } = useForm<TokenMetadata>({
     defaultValues: {
       cluster: storage.cluster,
-      issueType: "new",
       name: "",
       symbol: "",
       totalSupply: 1_000_000_000,
       decimals: 5,
-      tokenAddress: "",
     },
   });
 
@@ -84,29 +82,16 @@ const Token = () => {
       cluster: data.cluster,
       customClusterUrl: data.customClusterUrl,
     });
-    if (data.issueType === "new" && !genericFile) {
+    if (!genericFile) {
       setErrorModal({ open: true, message: "Please Image Upload" });
     }
 
     try {
-      if (data.issueType === "new") {
-        data.file = genericFile!;
-        const res = await mintToken(wallet!.adapter, data);
-        console.debug("# sig: ", res.signature);
-        setMintAddress(res.mint);
-        res.signature.length !== 0 && setCompleteModal(true);
-      } else if (data.issueType === "add" && data.tokenAddress) {
-        // mint = await addMinting(
-        //   data.tokenKey,
-        //   address,
-        //   data.cluster,
-        //   data.totalSupply,
-        //   data.decimals,
-        // );
-      } else {
-        setIsLoading(false);
-        setErrorModal({ open: true, message: "Error no match issue type" });
-      }
+      data.file = genericFile!;
+      const res = await mintToken(wallet!.adapter, data);
+      console.debug("# sig: ", res.signature);
+      setMintAddress(res.mint);
+      res.signature.length !== 0 && setCompleteModal(true);
     } catch (error) {
       setBtnState({ title: "Submit", isDisabled: false });
       setIsLoading(false);
@@ -131,56 +116,35 @@ const Token = () => {
             <AddressTypography address={address} />
             <ClusterRadio control={control} name="cluster" />
             <Box sx={{ mb: 4 }} />
-            <TokenIssueTypeRadio control={control} name="issueType" />
+            <NameTextField<TokenMetadata>
+              control={control}
+              name="name"
+              rules={validationRules.name}
+            />
             <Box sx={{ mb: 4 }} />
-            {watch("issueType") === "new" && (
-              <>
-                <Box sx={{ mb: 1 }} />
-                <NameTextField<TokenMetadata>
-                  control={control}
-                  name="name"
-                  rules={validationRules.name}
-                />
-              </>
-            )}
-            <Box sx={{ mb: 4 }} />
-            {watch("issueType") === "new" && (
-              <>
-                <Box sx={{ mb: 1 }} />
-                <SymbolTextField
-                  control={control}
-                  name="symbol"
-                  rules={validationRules.symbol}
-                />
-              </>
-            )}
+            <SymbolTextField
+              control={control}
+              name="symbol"
+              rules={validationRules.symbol}
+            />
             <Box sx={{ mb: 4 }} />
             <TotalSupplyTextField control={control} name="totalSupply" />
             <Box sx={{ mb: 4 }} />
 
             <DecimalsInput control={control} name="decimals" />
-            {watch("issueType") === "add" && (
-              <>
-                <Box sx={{ mb: 4 }} />
-                <TokenAddressTextField control={control} name="tokenAddress" />
-              </>
-            )}
             <Box sx={{ mb: 4 }} />
-
-            {watch("issueType") === "new" && (
-              <>
-                <HeadlineTypography message="Image Upload" />
-                <Box sx={{ mb: 4 }} />
-                <ImageFileUploadUI
-                  {...{
-                    imagePreview,
-                    setErrorModal,
-                    setImagePreview,
-                    setGenericFileBuffer: setGenericFile,
-                  }}
-                />
-              </>
-            )}
+            <>
+              <HeadlineTypography message="Image Upload" />
+              <Box sx={{ mb: 4 }} />
+              <ImageFileUploadUI
+                {...{
+                  imagePreview,
+                  setErrorModal,
+                  setImagePreview,
+                  setGenericFileBuffer: setGenericFile,
+                }}
+              />
+            </>
           </Paper>
           <Box sx={{ mb: 6 }} />
           <Box>

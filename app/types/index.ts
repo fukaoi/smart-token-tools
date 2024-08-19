@@ -1,6 +1,6 @@
-import { ControllerRenderProps } from 'react-hook-form';
-import { createContext, Dispatch, SetStateAction } from 'react';
-import { GenericFile } from '@metaplex-foundation/umi';
+import { ControllerRenderProps } from "react-hook-form";
+import { createContext, Dispatch, SetStateAction } from "react";
+import { GenericFile } from "@metaplex-foundation/umi";
 
 export type TokenMetadata = {
   cluster: string;
@@ -9,10 +9,8 @@ export type TokenMetadata = {
   symbol: string;
   imagePreview?: string;
   file: GenericFile;
-  issueType: string;
   totalSupply: number;
   decimals: number;
-  tokenAddress?: string;
 };
 
 export type Creator = {
