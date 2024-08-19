@@ -10,7 +10,7 @@ import { UserConfig, UserConfigFnPromise } from "vite";
 import { useController, UseControllerProps } from "react-hook-form";
 import { useControlled } from "@mui/material";
 import SugbHeadlineTypography from "~/components/typography/HeadlineTypography";
-import DescriptionTypography from "~/components/typography/DescriptionTypography";
+import UsageTypography from "~/components/typography/UsageTypography";
 import ExampleTypography from "~/components/typography/ExampleTypography";
 
 const NumberInput = React.forwardRef(function CustomNumberInput(
@@ -33,7 +33,7 @@ const NumberInput = React.forwardRef(function CustomNumberInput(
   return (
     <>
       <SugbHeadlineTypography message="Input token decimals" />
-      <DescriptionTypography message={description} />
+      <UsageTypography message={description} />
       <ExampleTypography example={example} />
       <BaseNumberInput
         slots={{

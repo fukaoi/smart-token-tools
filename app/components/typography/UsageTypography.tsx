@@ -18,7 +18,7 @@ const styles = {
   },
 };
 
-const DescriptionTypography: FC<{ message: string }> = ({ message }) => {
+const UsageTypography: FC<{ message: string }> = ({ message }) => {
   return (
     <Box component="div" sx={styles.box}>
       <Alert severity="info">
@@ -35,4 +35,4 @@ const DescriptionTypography: FC<{ message: string }> = ({ message }) => {
   );
 };
 
-export default DescriptionTypography;
+export default UsageTypography;

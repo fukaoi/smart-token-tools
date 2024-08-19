@@ -7,7 +7,7 @@ import {
   ImageListItem,
 } from "@mui/material";
 import { FC, useContext, useState } from "react";
-import DescriptionTypography from "~/components/typography/DescriptionTypography";
+import UsageTypography from "~/components/typography/UsageTypography";
 import NoImage from "~/assets/no-image-available.jpg";
 import { Validation } from "~/utils/validation";
 import { Alert } from "@mui/material";
@@ -83,7 +83,7 @@ const MediaFileUploadUI: FC<MediaFileUploadUIProps> = ({
 
   return (
     <>
-      <DescriptionTypography message={message} />
+      <UsageTypography message={message} />
       {mediaFilesPreview.map((element: string, i: number) => {
         return (
           <Card style={styles.card} key={i}>
@@ -123,7 +123,8 @@ const MediaFileUploadUI: FC<MediaFileUploadUIProps> = ({
           type="file"
           accept="*/*"
           onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-            handleOnAddMediaFile(e)}
+            handleOnAddMediaFile(e)
+          }
         />
         <Box sx={{ display: "flex", mt: 3 }}>
           <Button variant="outlined" component="span">

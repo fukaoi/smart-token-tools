@@ -8,7 +8,7 @@ import {
 } from "@mui/material";
 import { FC, useState } from "react";
 import { Validation } from "~/utils/validation";
-import DescriptionTypography from "~/components/typography/DescriptionTypography";
+import UsageTypography from "~/components/typography/UsageTypography";
 import ExampleTypography from "~/components/typography/ExampleTypography";
 import Card from "@mui/material/Card";
 import { Alert } from "@mui/material";
@@ -69,12 +69,12 @@ const ImageFileUploadUI: FC<ImageFileUploadUIProps> = ({
 
   const description = "The following file types can be uploaded";
   const example = `
-        png,  jpg,  gif,  svg,  bmp,  webp 
+        png,  jpg,  gif,  svg,  bmp,  webp
     `;
 
   return (
     <>
-      <DescriptionTypography message={description} />
+      <UsageTypography message={description} />
       <ExampleTypography example={example} />
       <label htmlFor="image-upload">
         <input
@@ -84,7 +84,8 @@ const ImageFileUploadUI: FC<ImageFileUploadUIProps> = ({
           type="file"
           accept="image/*"
           onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-            handleOnAddImage(e)}
+            handleOnAddImage(e)
+          }
         />
         <Box sx={{ display: "flex", mt: 2 }}>
           <Button variant="outlined" component="span">
@@ -92,33 +93,31 @@ const ImageFileUploadUI: FC<ImageFileUploadUIProps> = ({
           </Button>
         </Box>
       </label>
-      {imagePreview
-        ? (
-          <Card style={styles.card}>
-            <CardMedia>
-              <ImageList sx={styles.image} variant="woven" cols={1} gap={1}>
-                <ImageListItem>
-                  <img
-                    id="preview"
-                    src={imagePreview}
-                    alt="ImagePreview"
-                    loading="lazy"
-                  />
-                </ImageListItem>
-              </ImageList>
-              <CardContent>
-                <Alert
-                  iconMapping={{
-                    success: <CheckCircleOutlineIcon fontSize="inherit" />,
-                  }}
-                >
-                  {fileName}
-                </Alert>
-              </CardContent>
-            </CardMedia>
-          </Card>
-        )
-        : null}
+      {imagePreview ? (
+        <Card style={styles.card}>
+          <CardMedia>
+            <ImageList sx={styles.image} variant="woven" cols={1} gap={1}>
+              <ImageListItem>
+                <img
+                  id="preview"
+                  src={imagePreview}
+                  alt="ImagePreview"
+                  loading="lazy"
+                />
+              </ImageListItem>
+            </ImageList>
+            <CardContent>
+              <Alert
+                iconMapping={{
+                  success: <CheckCircleOutlineIcon fontSize="inherit" />,
+                }}
+              >
+                {fileName}
+              </Alert>
+            </CardContent>
+          </CardMedia>
+        </Card>
+      ) : null}
     </>
   );
 };
