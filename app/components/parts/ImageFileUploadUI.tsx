@@ -22,7 +22,7 @@ const styles = {
   image: {
     width: "400px",
     height: "400px",
-    marginTop: "1em",
+    marginTop: "15px",
     marginLeft: "auto",
     marginRight: "auto",
   },

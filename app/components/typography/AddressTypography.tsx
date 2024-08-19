@@ -8,11 +8,11 @@ const AddressTypography: FC<{ address: string }> = ({ address }) => {
     <Box
       component="div"
       sx={{
-        background: theme.palette.orangeGuradation.main,
+        background: theme.palette.purpleGuradation.main,
         borderRadius: 1,
         color: "white",
         padding: "5px",
-        marginBottom: "1em",
+        marginBottom: "15px",
       }}
     >
       <Typography component="div" fontSize="16px">

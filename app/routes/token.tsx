@@ -23,6 +23,7 @@ import { mintToken } from "~/utils/mint-token";
 import { GenericFile } from "@metaplex-foundation/umi";
 import DecimalsInput from "~/components/number-input/DecimalsInput";
 import { useStorage } from "~/utils/storage";
+import DescriptionTypography from "~/components/typography/DescriptionTypography";
 
 const Token = () => {
   const btnTitle = "SUBMIT";
@@ -112,6 +113,7 @@ const Token = () => {
             }}
           >
             <AddressTypography address={address} />
+            <DescriptionTypography message="test" />
             <ClusterRadio control={control} name="cluster" />
             <Box sx={{ mb: 4 }} />
             <NameTextField<TokenMetadata>
@@ -128,21 +130,17 @@ const Token = () => {
             <Box sx={{ mb: 4 }} />
             <TotalSupplyTextField control={control} name="totalSupply" />
             <Box sx={{ mb: 4 }} />
-
             <DecimalsInput control={control} name="decimals" />
             <Box sx={{ mb: 4 }} />
-            <>
-              <HeadlineTypography message="Image Upload" />
-              <Box sx={{ mb: 4 }} />
-              <ImageFileUploadUI
-                {...{
-                  imagePreview,
-                  setErrorModal,
-                  setImagePreview,
-                  setGenericFileBuffer: setGenericFile,
-                }}
-              />
-            </>
+            <HeadlineTypography message="Image Upload" />
+            <ImageFileUploadUI
+              {...{
+                imagePreview,
+                setErrorModal,
+                setImagePreview,
+                setGenericFileBuffer: setGenericFile,
+              }}
+            />
           </Paper>
           <Box sx={{ mb: 6 }} />
           <Box>

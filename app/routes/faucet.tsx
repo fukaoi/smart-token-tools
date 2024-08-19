@@ -1,5 +1,5 @@
 import TitleTypography from "~/components/typography/TitleTypography";
-import UsageTypography from "~/components/typography/UsageTypography";
+import DescriptionTypography from "~/components/typography/DescriptionTypography";
 import AddressTypography from "~/components/typography/AddressTypography";
 import { Box, Paper } from "@mui/material";
 import SubmitButton from "~/components/button/SubmitButton";
@@ -66,7 +66,7 @@ const Faucet = () => {
           }}
         >
           <AddressTypography address={address} />
-          <UsageTypography message={description} />
+          <DescriptionTypography message={description} />
         </Paper>
       </Box>
       <Box sx={{ mb: 6 }} />

@@ -8,10 +8,10 @@ const DescriptionTypography: FC<{ message: string }> = ({ message }) => {
     <Box
       component="div"
       sx={{
-        background: theme.palette.orangeGuradation.main,
+        background: "#cdeaf9",
         borderRadius: 1,
         color: "white",
-        padding: "5px",
+        padding: "15px",
         marginBottom: "1em",
       }}
     >

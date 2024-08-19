@@ -3,6 +3,7 @@ import { Box } from "@mui/system";
 import Typography from "@mui/material/Typography";
 import { theme } from "~/utils/colorTheme";
 import { AlertTitle, Alert } from "@mui/material";
+import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 
 const UsageTypography: FC<{ message: string }> = ({ message }) => {
   return (
@@ -10,28 +11,21 @@ const UsageTypography: FC<{ message: string }> = ({ message }) => {
       component="div"
       sx={{
         textAlign: "left",
-        marginTop: "1em",
-        marginBottom: "1em",
+        marginTop: "15px",
+        marginBottom: "15px",
         marginLeft: "10px",
       }}
     >
-      <Alert severity="info">
-        <AlertTitle
-          style={{
-            fontSize: "80%",
-            paddingTop: "0.4em",
-            marginBottom: "1em",
-          }}
-        >
-          Usage information
-        </AlertTitle>
-        <Typography
-          component="div"
-          fontSize="15px"
-          color={theme.palette.textBlack.light}
-        >
-          {message}
-        </Typography>
+      <Alert
+        iconMapping={{
+          success: <InfoOutlinedIcon fontSize="inherit" color="info" />,
+        }}
+        color="info"
+        style={{
+          fontSize: "15px",
+        }}
+      >
+        {message}
       </Alert>
     </Box>
   );
