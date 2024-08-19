@@ -1,9 +1,5 @@
 const Nft = () => {
-  return (
-    <>
-      nft page
-    </>
-  );
+  return <>Under Renewal...</>;
 };
 
 export default Nft;
