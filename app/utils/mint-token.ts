@@ -1,28 +1,27 @@
-import bs from 'bs58';
+import bs from "bs58";
 import {
   generateSigner,
   percentAmount,
   transactionBuilder,
-} from '@metaplex-foundation/umi';
+} from "@metaplex-foundation/umi";
 import {
   createV1,
   mintV1,
   mplTokenMetadata,
   TokenStandard,
-} from '@metaplex-foundation/mpl-token-metadata';
-import { createUmi } from '@metaplex-foundation/umi-bundle-defaults';
-import { findAssociatedTokenPda } from '@metaplex-foundation/mpl-toolbox';
-import { fetchClusterApiUrl, SPL_TOKEN_2022_PROGRAM_ID } from '~/utils//config';
-import { TokenMetadata } from '~/types';
-import { irysUploader } from '@metaplex-foundation/umi-uploader-irys';
-import { walletAdapterIdentity } from '@metaplex-foundation/umi-signer-wallet-adapters';
-import { WalletAdapter } from '@solana/wallet-adapter-base';
+} from "@metaplex-foundation/mpl-token-metadata";
+import { createUmi } from "@metaplex-foundation/umi-bundle-defaults";
+import { findAssociatedTokenPda } from "@metaplex-foundation/mpl-toolbox";
+import { fetchClusterApiUrl, SPL_TOKEN_2022_PROGRAM_ID } from "~/utils//config";
+import { TokenMetadata } from "~/types";
+import { irysUploader } from "@metaplex-foundation/umi-uploader-irys";
+import { walletAdapterIdentity } from "@metaplex-foundation/umi-signer-wallet-adapters";
+import { WalletAdapter } from "@solana/wallet-adapter-base";
 
 export const mintToken = async (
   walletAdapter: WalletAdapter,
   metadata: TokenMetadata
 ): Promise<{ signature: string; mint: string }> => {
-  ``;
   const umi = createUmi(fetchClusterApiUrl(metadata.cluster));
   umi.use(walletAdapterIdentity(walletAdapter));
   umi.use(mplTokenMetadata());
@@ -41,7 +40,7 @@ export const mintToken = async (
     image: uploadedImageUrl,
   });
 
-  console.debug('# uploadedJsonUrl: ', uploadedJsonUrl);
+  console.debug("# uploadedJsonUrl: ", uploadedJsonUrl);
 
   const transaction = transactionBuilder()
     .add(
