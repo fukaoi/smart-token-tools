@@ -4,25 +4,27 @@ import Typography from "@mui/material/Typography";
 import { theme } from "~/utils/colorTheme";
 import { AlertTitle, Alert } from "@mui/material";
 
-const styles = {
-  box: {
-    textAlign: "left",
-    marginTop: "1em",
-    marginBottom: "1em",
-    marginLeft: "10px",
-  },
-  title: {
-    fontSize: "80%",
-    paddingTop: "0.4em",
-    marginBottom: "1em",
-  },
-};
-
 const UsageTypography: FC<{ message: string }> = ({ message }) => {
   return (
-    <Box component="div" sx={styles.box}>
+    <Box
+      component="div"
+      sx={{
+        textAlign: "left",
+        marginTop: "1em",
+        marginBottom: "1em",
+        marginLeft: "10px",
+      }}
+    >
       <Alert severity="info">
-        <AlertTitle style={styles.title}>Usage information</AlertTitle>
+        <AlertTitle
+          style={{
+            fontSize: "80%",
+            paddingTop: "0.4em",
+            marginBottom: "1em",
+          }}
+        >
+          Usage information
+        </AlertTitle>
         <Typography
           component="div"
           fontSize="15px"

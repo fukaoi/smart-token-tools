@@ -3,7 +3,7 @@ import { Box } from "@mui/system";
 import Typography from "@mui/material/Typography";
 import { theme } from "~/utils/colorTheme";
 
-const AddressTypography: FC<{ address: string }> = ({ address }) => {
+const DescriptionTypography: FC<{ message: string }> = ({ message }) => {
   return (
     <Box
       component="div"
@@ -16,14 +16,10 @@ const AddressTypography: FC<{ address: string }> = ({ address }) => {
       }}
     >
       <Typography component="div" fontSize="16px">
-        {" "}
-        current your address:
-      </Typography>
-      <Typography component="div" fontSize="16px">
-        {address}
+        {message}
       </Typography>
     </Box>
   );
 };
 
-export default AddressTypography;
+export default DescriptionTypography;
