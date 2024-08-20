@@ -54,6 +54,7 @@ const Token = () => {
   });
 
   const { publicKey } = useWallet();
+  const description = "token is token exteions, arweave";
 
   useEffect(() => {
     if (publicKey) {
@@ -113,7 +114,7 @@ const Token = () => {
             }}
           >
             <AddressTypography address={address} />
-            <DescriptionTypography message="test" />
+            <DescriptionTypography message={description} />
             <ClusterRadio control={control} name="cluster" />
             <Box sx={{ mb: 4 }} />
             <NameTextField<TokenMetadata>

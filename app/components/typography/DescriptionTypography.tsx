@@ -1,23 +1,29 @@
 import { FC } from "react";
 import { Box } from "@mui/system";
 import Typography from "@mui/material/Typography";
+import { AlertTitle, Alert } from "@mui/material";
 import { theme } from "~/utils/colorTheme";
-
+import DescriptionOutlinedIcon from "@mui/icons-material/DescriptionOutlined";
 const DescriptionTypography: FC<{ message: string }> = ({ message }) => {
   return (
     <Box
       component="div"
       sx={{
-        background: "#cdeaf9",
-        borderRadius: 1,
-        color: "white",
-        padding: "15px",
-        marginBottom: "1em",
+        textAlign: "left",
+        marginTop: "15px",
+        marginBottom: "30px",
+        marginLeft: "10px",
       }}
     >
-      <Typography component="div" fontSize="16px">
+      <Alert
+        icon={false}
+        color="info"
+        style={{
+          fontSize: "15px",
+        }}
+      >
         {message}
-      </Typography>
+      </Alert>
     </Box>
   );
 };
