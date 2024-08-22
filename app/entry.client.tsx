@@ -4,7 +4,6 @@ import { startTransition } from "react";
 import { hydrateRoot } from "react-dom/client";
 import { CacheProvider } from "@emotion/react";
 import { ThemeProvider } from "@mui/material/styles";
-import CssBaseline from "@mui/material/CssBaseline";
 import ClientStyleContext from "./ClientStyleContext";
 import createEmotionCache from "./createEmotionCache";
 import { theme } from "./utils/colorTheme";
@@ -33,22 +32,13 @@ const ClientCacheProvider = ({ children }: ClientCacheProviderProps) => {
   );
 };
 
-// startTransition(() => {
-//   hydrateRoot(
-//     document,
-//     <ClientCacheProvider>
-//       <ThemeProvider theme={theme}>
-//         <CssBaseline />
-//         <RemixBrowser />
-//       </ThemeProvider>
-//     </ClientCacheProvider>
-//   );
-// });
 startTransition(() => {
   hydrateRoot(
     document,
-    <StrictMode>
-      <RemixBrowser />
-    </StrictMode>
+    <ClientCacheProvider>
+      <ThemeProvider theme={theme}>
+        <RemixBrowser />
+      </ThemeProvider>
+    </ClientCacheProvider>
   );
 });

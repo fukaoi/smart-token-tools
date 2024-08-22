@@ -1,7 +1,6 @@
 import CssBaseline from "@mui/material/CssBaseline";
 import logoImage from "~/assets/smt-logo.svg";
 import Box from "@mui/material/Box";
-import Grid from "@mui/material/Grid";
 import { Link, useLocation } from "@remix-run/react";
 
 const styles = {
