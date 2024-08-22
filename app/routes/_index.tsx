@@ -8,11 +8,10 @@ import { useWallet, Wallet } from "@solana/wallet-adapter-react";
 import { useNavigate } from "@remix-run/react";
 import { lazy, useEffect, useState } from "react";
 import Process from "process";
+global.process = Process;
 
-globalThis.process = Process;
-
-const WalletConnectButton = lazy(() =>
-  import("~/components/button/WalletConnectButton")
+const WalletConnectButton = lazy(
+  () => import("~/components/button/WalletConnectButton")
 );
 
 const Index = () => {

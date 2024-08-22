@@ -1,5 +1,7 @@
+import CssBaseline from "@mui/material/CssBaseline";
 import logoImage from "~/assets/smt-logo.svg";
-import { Box, Grid } from "@mui/material";
+import Box from "@mui/material/Box";
+import Grid from "@mui/material/Grid";
 import { Link, useLocation } from "@remix-run/react";
 
 const styles = {
@@ -30,51 +32,53 @@ const Header = () => {
   const location = useLocation();
 
   return (
-    <Box sx={{ marginBottom: "3em" }}>
-      <Grid
-        container
-        alignItems="center"
-        justifyContent="center"
+    <Box style={{ marginBottom: "3em" }}>
+      <CssBaseline />
+      <Box
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
       >
-        <Grid item xs={3}>
-          <Box
-            sx={{
-              paddingTop: "0.5em",
-            }}
-          >
-            <a href="/">
-              <img
-                src={logoImage}
-                alt="Smart token tool"
-                width={"60%"}
-              />
-            </a>
-          </Box>
-        </Grid>
-        <Grid item xs={6} sx={{ paddingTop: "1em" }}>
-          {location.pathname !== "/" &&
-            (
-              <>
-                <Link to="/token" style={styles.link}>
-                  <Box sx={styles.box}>
-                    Token
-                  </Box>
-                </Link>
-                <Link to="/nft" style={styles.link}>
-                  <Box sx={styles.box}>
-                    NFT
-                  </Box>
-                </Link>
-                <Link to="/faucet" style={styles.link}>
-                  <Box sx={styles.box}>
-                    Faucet
-                  </Box>
-                </Link>
-              </>
-            )}
-        </Grid>
-        <Grid item xs={3}></Grid>
-      </Grid>
+        <Box
+          style={{
+            flexBasis: "25%",
+            display: "flex",
+            justifyContent: "center",
+            paddingTop: "0.5em",
+          }}
+        >
+          <a href="/">
+            <img src={logoImage} alt="Smart token tool" width={"60%"} />
+          </a>
+        </Box>
+
+        <Box
+          style={{
+            flexBasis: "50%",
+            paddingTop: "1em",
+            display: "flex",
+            justifyContent: "space-around",
+          }}
+        >
+          {location.pathname !== "/" && (
+            <>
+              <Link to="/token" style={styles.link}>
+                <Box style={styles.box}>Token</Box>
+              </Link>
+              <Link to="/nft" style={styles.link}>
+                <Box style={styles.box}>NFT</Box>
+              </Link>
+              <Link to="/faucet" style={styles.link}>
+                <Box style={styles.box}>Faucet</Box>
+              </Link>
+            </>
+          )}
+        </Box>
+
+        <Box style={{ flexBasis: "25%" }}></Box>
+      </Box>
     </Box>
   );
 };

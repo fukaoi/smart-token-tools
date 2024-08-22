@@ -1,4 +1,13 @@
-import { useState } from 'react';
+import { useState } from "react";
+
+interface LocalStorage {
+  setItem: (a: any, b: any) => void;
+}
+declare global {
+  interface Window {
+    localStorage: LocalStorage;
+  }
+}
 
 export const useStorage = (key: string) => {
   const [item, setInnerValue] = useState(() => {
@@ -7,10 +16,10 @@ export const useStorage = (key: string) => {
       if (storageValue) {
         return JSON.parse(storageValue);
       } else {
-        return null
+        return null;
       }
     } catch (error) {
-      return null
+      return null;
     }
   });
 

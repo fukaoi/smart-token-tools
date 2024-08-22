@@ -1,14 +1,13 @@
-import { vitePlugin as remix } from '@remix-run/dev';
-import { defineConfig } from 'vite';
-import tsconfigPaths from 'vite-tsconfig-paths';
-import { cjsInterop } from 'vite-plugin-cjs-interop';
-import { nodePolyfills } from 'vite-plugin-node-polyfills';
+import { vitePlugin as remix } from "@remix-run/dev";
+import { defineConfig } from "vite";
+import tsconfigPaths from "vite-tsconfig-paths";
+import { cjsInterop } from "vite-plugin-cjs-interop";
+import { nodePolyfills } from "vite-plugin-node-polyfills";
 
 export default defineConfig({
   ssr: {
-    noExternal: process.env.NODE_ENV === 'production' ? [/^@mui\//] : [], // or  `['@mui/**']`
+    noExternal: process.env.NODE_ENV === "production" ? [/^@mui\//] : [], // or  `['@mui/**']`
   },
-
   plugins: [
     nodePolyfills(),
     remix({
@@ -20,9 +19,10 @@ export default defineConfig({
       },
     }),
     tsconfigPaths(),
-    process.env.NODE_ENV === 'development' &&
-    cjsInterop({
-      dependencies: ['@mui/material/*'],
-    }),
+    process.env.NODE_ENV === "development" &&
+      cjsInterop({
+        dependencies: ["@mui/material/*"],
+      }),
   ],
+  // define: {},
 });

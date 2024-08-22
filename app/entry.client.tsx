@@ -8,12 +8,13 @@ import CssBaseline from "@mui/material/CssBaseline";
 import ClientStyleContext from "./ClientStyleContext";
 import createEmotionCache from "./createEmotionCache";
 import { theme } from "./utils/colorTheme";
+import { StrictMode } from "react";
 
 interface ClientCacheProviderProps {
   children: React.ReactNode;
 }
 
-function ClientCacheProvider({ children }: ClientCacheProviderProps) {
+const ClientCacheProvider = ({ children }: ClientCacheProviderProps) => {
   const [cache, setCache] = React.useState(createEmotionCache());
 
   const clientStyleContextValue = React.useMemo(
@@ -22,7 +23,7 @@ function ClientCacheProvider({ children }: ClientCacheProviderProps) {
         setCache(createEmotionCache());
       },
     }),
-    [],
+    []
   );
 
   return (
@@ -30,16 +31,24 @@ function ClientCacheProvider({ children }: ClientCacheProviderProps) {
       <CacheProvider value={cache}>{children}</CacheProvider>
     </ClientStyleContext.Provider>
   );
-}
+};
 
+// startTransition(() => {
+//   hydrateRoot(
+//     document,
+//     <ClientCacheProvider>
+//       <ThemeProvider theme={theme}>
+//         <CssBaseline />
+//         <RemixBrowser />
+//       </ThemeProvider>
+//     </ClientCacheProvider>
+//   );
+// });
 startTransition(() => {
   hydrateRoot(
     document,
-    <ClientCacheProvider>
-      <ThemeProvider theme={theme}>
-        <CssBaseline />
-        <RemixBrowser />
-      </ThemeProvider>
-    </ClientCacheProvider>,
+    <StrictMode>
+      <RemixBrowser />
+    </StrictMode>
   );
 });

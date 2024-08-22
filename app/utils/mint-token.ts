@@ -22,6 +22,8 @@ export const mintToken = async (
   walletAdapter: WalletAdapter,
   metadata: TokenMetadata
 ): Promise<{ signature: string; mint: string }> => {
+  console.debug("# mintToken() walletAdapter: ", walletAdapter);
+  console.debug("# mintToken() metadata: ", metadata);
   const umi = createUmi(fetchClusterApiUrl(metadata.cluster));
   umi.use(walletAdapterIdentity(walletAdapter));
   umi.use(mplTokenMetadata());
