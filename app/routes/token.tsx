@@ -54,7 +54,8 @@ const Token = () => {
   });
 
   const { publicKey } = useWallet();
-  const description = "token is token exteions, arweave";
+  const description =
+    "TOKEN is minted using token extensions, and the metadata is uploaded to Arweave";
 
   useEffect(() => {
     if (publicKey) {
