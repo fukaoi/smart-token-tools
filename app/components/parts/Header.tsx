@@ -49,7 +49,12 @@ const Header = () => {
           }}
         >
           <a href="/">
-            <img src={logoImage} alt="Smart token tool" width={"60%"} />
+            <img
+              src={logoImage}
+              alt="Smart token tool"
+              width={"372"}
+              height={"85"}
+            />
           </a>
         </Box>
 
