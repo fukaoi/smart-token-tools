@@ -5,7 +5,7 @@
 
 [SMT](https://smt.solana-suite.org) is a service that you to easily issue tokens and nft for all free. All you need is a phantom wallet installed on your browser and you are ready to use it.
 
-### Architecture
+### Libraries in Use
 * [Remix(SPA Mode)](https://remix.run/)
 
 A full-stack web framework for building fast, scalable web applications with modern React.
