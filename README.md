@@ -12,6 +12,9 @@
 * [Metaplex umi framework(SPA Mode)](https://developers.metaplex.com/umi)
 > A framework from Metaplex for building decentralized applications (dApps) on Solana.
 
+* [anza-xyz/wallet-adapter](https://github.com/anza-xyz/wallet-adapter)
+> Modular TypeScript wallet adapters and components for Solana applications.
+
 <p align="center">
   <img src="https://github.com/user-attachments/assets/91bb7713-3c7e-4348-9100-a994feccc710" width="466px" height="525px" alt="SMT">
 </p>
