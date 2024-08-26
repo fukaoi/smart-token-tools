@@ -12,7 +12,7 @@
   },
   "dependencies": {
     "@emotion/styled": "^11.11.5",
-    "@irys/sdk": "^0.2.9",
+    "@irys/sdk": "^0.2.10",
     "@metaplex-foundation/mpl-token-metadata": "^3.2.1",
     "@metaplex-foundation/mpl-toolbox": "^0.9.4",
     "@metaplex-foundation/umi": "^0.9.2",
