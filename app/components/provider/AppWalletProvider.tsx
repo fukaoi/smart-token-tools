@@ -13,12 +13,10 @@ const AppWalletProvider = ({ children }: { children: React.ReactNode }) => {
   const network = WalletAdapterNetwork.Devnet;
   const endpoint = useMemo(() => clusterApiUrl(network), [network]);
 
-  // useEffect(() => {
-  //   const [storage, setStorage] = useStorage("network");
-  //   if (!storage) {
-  //     setStorage({ cluster: network });
-  //   }
-  // });
+  const [storage, setStorage] = useStorage("network");
+  if (!storage) {
+    setStorage({ cluster: network });
+  }
 
   const wallets = useMemo(() => [], [network]);
 

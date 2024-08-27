@@ -1,4 +1,4 @@
-import * as React from "react";
+import { lazy, ReactNode, useState, useMemo } from "react";
 import { RemixBrowser } from "@remix-run/react";
 import { startTransition } from "react";
 import { hydrateRoot } from "react-dom/client";
@@ -8,15 +8,17 @@ import ClientStyleContext from "./ClientStyleContext";
 import createEmotionCache from "./createEmotionCache";
 import { theme } from "./utils/colorTheme";
 import { StrictMode } from "react";
-
+const AppWalletProvider = lazy(
+  () => import("./components/provider/AppWalletProvider")
+);
 interface ClientCacheProviderProps {
-  children: React.ReactNode;
+  children: ReactNode;
 }
 
 const ClientCacheProvider = ({ children }: ClientCacheProviderProps) => {
-  const [cache, setCache] = React.useState(createEmotionCache());
+  const [cache, setCache] = useState(createEmotionCache());
 
-  const clientStyleContextValue = React.useMemo(
+  const clientStyleContextValue = useMemo(
     () => ({
       reset() {
         setCache(createEmotionCache());
@@ -37,7 +39,9 @@ startTransition(() => {
     document,
     <ClientCacheProvider>
       <ThemeProvider theme={theme}>
-        <RemixBrowser />
+        <AppWalletProvider>
+          <RemixBrowser />
+        </AppWalletProvider>
       </ThemeProvider>
     </ClientCacheProvider>
   );

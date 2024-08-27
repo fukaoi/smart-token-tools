@@ -7,7 +7,6 @@ import {
 } from "@remix-run/react";
 import Header from "./components/parts/Header";
 import backImage from "./assets/background-image.svg";
-import AppWalletProvider from "./components/provider/AppWalletProvider";
 import { hydrateRoot } from "react-dom/client";
 import { Box } from "@mui/material";
 import { useLocation } from "@remix-run/react";
@@ -63,7 +62,7 @@ export const Layout = ({ children }: { children: React.ReactNode }) => {
           }}
         >
           <Header />
-          <AppWalletProvider>{children}</AppWalletProvider>
+          {children}
           <ScrollRestoration />
           <Scripts />
         </Box>
