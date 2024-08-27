@@ -1,5 +1,6 @@
 import bs from "bs58";
 import {
+  createGenericFile,
   generateSigner,
   percentAmount,
   transactionBuilder,
@@ -22,9 +23,9 @@ export const mintToken = async (
   walletAdapter: WalletAdapter,
   metadata: TokenMetadata
 ): Promise<{ signature: string; mint: string }> => {
-  console.debug("# mintToken() walletAdapter: ", walletAdapter);
-  console.debug("# mintToken() metadata: ", metadata);
   const umi = createUmi(fetchClusterApiUrl(metadata.cluster));
+  console.debug("# mintToken() metadata: ", metadata);
+  console.debug("# cluster url: ", fetchClusterApiUrl(metadata.cluster));
   umi.use(walletAdapterIdentity(walletAdapter));
   umi.use(mplTokenMetadata());
   umi.use(irysUploader());
@@ -35,13 +36,23 @@ export const mintToken = async (
     tokenProgramId: SPL_TOKEN_2022_PROGRAM_ID,
   });
 
+  console.log(metadata.file);
+  const genericFile = createGenericFile(
+    metadata.file.buffer,
+    metadata.file.displayName,
+    {
+      contentType: "text/plain",
+    }
+  );
+  // const uploadedImageUrl = await umi.uploader.upload([genericFile]);
   const uploadedImageUrl = await umi.uploader.upload([metadata.file]);
+  console.debug("# uploadedJsonUrl: ", uploadedImageUrl);
+
   const uploadedJsonUrl = await umi.uploader.uploadJson({
     name: metadata.name,
     symbol: metadata.symbol,
     image: uploadedImageUrl,
   });
-
   console.debug("# uploadedJsonUrl: ", uploadedJsonUrl);
 
   const transaction = transactionBuilder()
