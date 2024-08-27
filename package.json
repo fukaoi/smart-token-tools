@@ -34,7 +34,7 @@
     "assert": "^2.1.0",
     "base": "link:@mui/base",
     "bs58": "^6.0.0",
-    "isbot": "^4.1.0",
+    "isbot": "^5.1.17",
     "process": "^0.11.10",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
