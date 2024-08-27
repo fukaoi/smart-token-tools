@@ -46,6 +46,7 @@ const Token = () => {
   const { handleSubmit, control } = useForm<TokenMetadata>({
     defaultValues: {
       cluster: storage.cluster,
+      customClusterUrl: storage.customClusterUrl,
       name: "",
       symbol: "",
       totalSupply: 1_000_000_000,

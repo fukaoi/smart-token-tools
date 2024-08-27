@@ -23,9 +23,12 @@ export const mintToken = async (
   walletAdapter: WalletAdapter,
   metadata: TokenMetadata
 ): Promise<{ signature: string; mint: string }> => {
-  const umi = createUmi(fetchClusterApiUrl(metadata.cluster));
+  const rpcUrl = metadata.customClusterUrl
+    ? metadata.customClusterUrl
+    : fetchClusterApiUrl(metadata.cluster);
+  const umi = createUmi(rpcUrl);
   console.debug("# mintToken() metadata: ", metadata);
-  console.debug("# cluster url: ", fetchClusterApiUrl(metadata.cluster));
+  console.debug("# rpc url: ", rpcUrl);
   umi.use(walletAdapterIdentity(walletAdapter));
   umi.use(mplTokenMetadata());
   umi.use(irysUploader());
