@@ -48,15 +48,15 @@ export const mintToken = async (
     }
   );
   // const uploadedImageUrl = await umi.uploader.upload([genericFile]);
-  // const uploadedImageUrl = await umi.uploader.upload([metadata.file]);
-  // console.debug("# uploadedContentUrl: ", uploadedImageUrl);
+  const uploadedImageUrl = await umi.uploader.upload([metadata.file]);
+  console.debug("# uploadedContentUrl: ", uploadedImageUrl);
 
-  // const uploadedJsonUrl = await umi.uploader.uploadJson({
-  //   name: metadata.name,
-  //   symbol: metadata.symbol,
-  //   image: uploadedImageUrl,
-  // });
-  // console.debug("# uploadedJsonUrl: ", uploadedJsonUrl);
+  const uploadedJsonUrl = await umi.uploader.uploadJson({
+    name: metadata.name,
+    symbol: metadata.symbol,
+    image: uploadedImageUrl,
+  });
+  console.debug("# uploadedJsonUrl: ", uploadedJsonUrl);
 
   const transaction = transactionBuilder()
     .add(
@@ -66,8 +66,8 @@ export const mintToken = async (
         name: metadata.name,
         symbol: metadata.symbol,
         decimals: metadata.decimals,
-        // uri: uploadedJsonUrl,
-        uri: "https://ipfs.filebase.io/ipfs/QmZYBqHGmcnoJQdoy7McorMoyALerLPNLbAciEsasEkc9p",
+        uri: uploadedJsonUrl,
+        // uri: "https://ipfs.filebase.io/ipfs/QmZYBqHGmcnoJQdoy7McorMoyALerLPNLbAciEsasEkc9p",
         sellerFeeBasisPoints: percentAmount(5.5),
         splTokenProgram: SPL_TOKEN_2022_PROGRAM_ID,
         tokenStandard: TokenStandard.Fungible,
@@ -88,7 +88,7 @@ export const mintToken = async (
   const { blockhash, lastValidBlockHeight } =
     await umi.rpc.getLatestBlockhash();
   const res = await transaction.sendAndConfirm(umi, {
-    send: { maxRetries: 5, commitment: "finalized" },
+    send: { maxRetries: 5, commitment: "finalized", skipPreflight: true },
     confirm: {
       strategy: {
         type: "blockhash",
@@ -97,11 +97,7 @@ export const mintToken = async (
       },
     },
   });
-  // const buildTransaction = await transaction.buildWithLatestBlockhash(umi);
-  // const tx = await umi.identity.signTransaction(buildTransaction);
-  // const res = await umi.rpc.sendTransaction(tx, { maxRetries: 5 });
   return {
-    // signature: bs.encode(res),
     signature: bs.encode(res.signature),
     mint: mint.publicKey.toString(),
   };
