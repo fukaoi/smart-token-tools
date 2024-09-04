@@ -85,13 +85,15 @@ export const mintToken = async (
       })
     );
 
+  const { blockhash, lastValidBlockHeight } =
+    await umi.rpc.getLatestBlockhash();
   const res = await transaction.sendAndConfirm(umi, {
-    send: { maxRetries: 3 },
+    send: { maxRetries: 5, commitment: "finalized" },
     confirm: {
       strategy: {
         type: "blockhash",
-        blockhash: "",
-        lastValidBlockHeight: 10,
+        blockhash,
+        lastValidBlockHeight,
       },
     },
   });
