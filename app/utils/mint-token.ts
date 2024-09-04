@@ -85,11 +85,22 @@ export const mintToken = async (
       })
     );
 
-  const buildTransaction = await transaction.buildWithLatestBlockhash(umi);
-  const tx = await umi.identity.signTransaction(buildTransaction);
-  const res = await umi.rpc.sendTransaction(tx, { maxRetries: 5 });
+  const res = await transaction.sendAndConfirm(umi, {
+    send: { maxRetries: 3 },
+    confirm: {
+      strategy: {
+        type: "blockhash",
+        blockhash: "",
+        lastValidBlockHeight: 10,
+      },
+    },
+  });
+  // const buildTransaction = await transaction.buildWithLatestBlockhash(umi);
+  // const tx = await umi.identity.signTransaction(buildTransaction);
+  // const res = await umi.rpc.sendTransaction(tx, { maxRetries: 5 });
   return {
-    signature: bs.encode(res),
+    // signature: bs.encode(res),
+    signature: bs.encode(res.signature),
     mint: mint.publicKey.toString(),
   };
 };
