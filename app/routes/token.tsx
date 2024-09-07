@@ -30,7 +30,6 @@ const Token = () => {
   const [address, setAddress] = useState("");
   const [mintAddress, setMintAddress] = useState("");
   const navigate = useNavigate();
-  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [btnState, setBtnState] = useState({
     title: btnTitle,
     isDisabled: false,
@@ -43,6 +42,7 @@ const Token = () => {
     undefined
   );
   const [genericFile, setGenericFile] = useState<GenericFile>();
+  const [loading, setLoading] = useState({ isLoading: false, message: "" });
   const { handleSubmit, control } = useForm<TokenMetadata>({
     defaultValues: {
       cluster: storage.cluster,
@@ -66,20 +66,23 @@ const Token = () => {
     }
   }, [publicKey]);
 
+  const handleProcessing = (message: string) => {
+    setLoading({ isLoading: true, message });
+  };
+
   const handleErrorClose = () => {
     setErrorModal({ open: false, message: "" });
     setBtnState({ title: btnTitle, isDisabled: false });
   };
 
   const handleSuccessClose = () => {
-    setIsLoading(false);
+    setLoading({ isLoading: false, message: "" });
     setCompleteModal(false);
     setBtnState({ title: btnTitle, isDisabled: false });
   };
 
   const onSubmit = async (data: TokenMetadata) => {
     setBtnState({ title: "PROCESSING", isDisabled: true });
-    setIsLoading(true);
     setStorage({
       cluster: data.cluster,
       customClusterUrl: data.customClusterUrl,
@@ -90,13 +93,13 @@ const Token = () => {
 
     try {
       data.file = genericFile!;
-      const res = await mintToken(wallet!.adapter, data);
+      const res = await mintToken(wallet!.adapter, data, handleProcessing);
       console.debug("# sig: ", res.signature);
       setMintAddress(res.mint);
       res.signature.length !== 0 && setCompleteModal(true);
     } catch (error) {
       setBtnState({ title: "Submit", isDisabled: false });
-      setIsLoading(false);
+      setLoading({ isLoading: false, message: "" });
       setErrorModal({ open: true, message: (error as Error).message });
       console.error("# mintToken: ", error);
     }
@@ -165,7 +168,7 @@ const Token = () => {
         onClose={handleErrorClose}
         message={errorModal.message}
       />
-      <Loading isLoading={isLoading} />
+      <Loading {...loading} />
       <DevTool control={control} />
     </>
   );

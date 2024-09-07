@@ -21,7 +21,8 @@ import { WalletAdapter } from "@solana/wallet-adapter-base";
 
 export const mintToken = async (
   walletAdapter: WalletAdapter,
-  metadata: TokenMetadata
+  metadata: TokenMetadata,
+  callbackHandle?: (message: string) => void
 ): Promise<{ signature: string; mint: string }> => {
   const rpcUrl = metadata.customClusterUrl
     ? metadata.customClusterUrl
@@ -39,6 +40,8 @@ export const mintToken = async (
     tokenProgramId: SPL_TOKEN_2022_PROGRAM_ID,
   });
 
+  callbackHandle && callbackHandle("Image Uploading");
+
   const genericFile = createGenericFile(
     metadata.file.buffer,
     metadata.file.displayName,
@@ -50,6 +53,7 @@ export const mintToken = async (
   );
   const uploadedImageUrl = await umi.uploader.upload([genericFile]);
   console.debug("# uploadedContentUrl: ", uploadedImageUrl);
+  callbackHandle && callbackHandle("Metadata Uploading");
 
   const uploadedJsonUrl = await umi.uploader.uploadJson({
     name: metadata.name,
@@ -57,6 +61,7 @@ export const mintToken = async (
     image: uploadedImageUrl,
   });
   console.debug("# uploadedJsonUrl: ", uploadedJsonUrl);
+  callbackHandle && callbackHandle("Minting NFT");
 
   const transaction = transactionBuilder()
     .add(
