@@ -46,7 +46,7 @@ const Token = () => {
   const { handleSubmit, control } = useForm<TokenMetadata>({
     defaultValues: {
       cluster: storage.cluster,
-      customClusterUrl: storage.customClusterUrl,
+      customClusterUrl: "",
       name: "",
       symbol: "",
       totalSupply: 1_000_000_000,
@@ -82,10 +82,12 @@ const Token = () => {
   };
 
   const onSubmit = async (data: TokenMetadata) => {
+    console.log(data);
     setBtnState({ title: "PROCESSING", isDisabled: true });
     setStorage({
       cluster: data.cluster,
-      customClusterUrl: data.customClusterUrl,
+      customClusterUrl:
+        data.customClusterUrl.length > 0 ? data.customClusterUrl : "",
     });
     if (!genericFile) {
       setErrorModal({ open: true, message: "Please Image Upload" });

@@ -17,13 +17,22 @@ const ClusterRadio = (props: UseControllerProps<any>) => {
   const { field, fieldState } = useController(props);
   const [storage] = useStorage("network");
   const [selectedCustomRpc, setSelectedCustomRpc] = useState(false);
+  const [customClusterUrl, setCustomClusterUrl] = useState(
+    storage.customClusterUrl
+  );
   const handleClusterNetwork = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSelectedCustomRpc(event.target.checked);
+    event.target.checked
+      ? setCustomClusterUrl(storage.customClusterUrl)
+      : setCustomClusterUrl("");
   };
+
+  console.log("# customClusterUrl", customClusterUrl);
+
   const customRpcField = useController({
     name: "customClusterUrl",
-    defaultValue: storage.cluster.customClusterUrl,
     control: props.control,
+    defaultValue: customClusterUrl,
     rules: { required: selectedCustomRpc },
   });
   const label = { inputProps: { "aria-label": "Checkbox demo" } };
