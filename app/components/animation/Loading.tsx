@@ -12,6 +12,7 @@ const Loading: FC<LoadingProps> = ({ isLoading, message }) => {
   return isLoading ? (
     <Backdrop open={isLoading}>
       <CircularProgress color="info" />
+      <br />
       {message && <ProcessingTypography message={message} />}
     </Backdrop>
   ) : null;

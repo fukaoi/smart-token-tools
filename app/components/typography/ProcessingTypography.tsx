@@ -6,7 +6,7 @@ import { theme } from "~/utils/colorTheme";
 import DescriptionOutlinedIcon from "@mui/icons-material/DescriptionOutlined";
 const ProcessingTypography: FC<{ message: string }> = ({ message }) => {
   return (
-    <Typography component="div" marginLeft={"15px"} fontSize={"25px"}>
+    <Typography component="div" marginLeft={"15px"}>
       {message}
     </Typography>
   );
