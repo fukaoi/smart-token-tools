@@ -43,11 +43,12 @@ export const mintToken = async (
     metadata.file.buffer,
     metadata.file.displayName,
     {
-      contentType: "text/plain",
+      contentType: metadata.file.contentType
+        ? metadata.file.contentType
+        : "image/png",
     }
   );
   const uploadedImageUrl = await umi.uploader.upload([genericFile]);
-  // const uploadedImageUrl = await umi.uploader.upload([metadata.file]);
   console.debug("# uploadedContentUrl: ", uploadedImageUrl);
 
   const uploadedJsonUrl = await umi.uploader.uploadJson({
@@ -66,7 +67,6 @@ export const mintToken = async (
         symbol: metadata.symbol,
         decimals: metadata.decimals,
         uri: uploadedJsonUrl,
-        // uri: "https://ipfs.filebase.io/ipfs/QmZYBqHGmcnoJQdoy7McorMoyALerLPNLbAciEsasEkc9p",
         sellerFeeBasisPoints: percentAmount(5.5),
         splTokenProgram: SPL_TOKEN_2022_PROGRAM_ID,
         tokenStandard: TokenStandard.Fungible,
