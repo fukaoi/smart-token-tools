@@ -67,6 +67,9 @@
     "vite-tsconfig-paths": "^5.0.1",
     "vitest": "^2.0.5"
   },
+  "workspaces": [
+    "packages/*"
+  ],
   "engines": {
     "node": ">=20.0.0"
   },

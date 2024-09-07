@@ -39,7 +39,6 @@ export const mintToken = async (
     tokenProgramId: SPL_TOKEN_2022_PROGRAM_ID,
   });
 
-  console.log(metadata.file);
   const genericFile = createGenericFile(
     metadata.file.buffer,
     metadata.file.displayName,
@@ -47,8 +46,8 @@ export const mintToken = async (
       contentType: "text/plain",
     }
   );
-  // const uploadedImageUrl = await umi.uploader.upload([genericFile]);
-  const uploadedImageUrl = await umi.uploader.upload([metadata.file]);
+  const uploadedImageUrl = await umi.uploader.upload([genericFile]);
+  // const uploadedImageUrl = await umi.uploader.upload([metadata.file]);
   console.debug("# uploadedContentUrl: ", uploadedImageUrl);
 
   const uploadedJsonUrl = await umi.uploader.uploadJson({
