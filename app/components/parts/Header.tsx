@@ -80,8 +80,7 @@ const Header = () => {
             </>
           )}
         </Box>
-
-        <Box style={{ flexBasis: "25%" }}></Box>
+        <Box style={{ flexBasis: "25%" }} />
       </Box>
     </Box>
   );

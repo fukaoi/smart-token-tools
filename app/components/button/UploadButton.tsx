@@ -26,7 +26,7 @@ const UploadButton: FC<{
   isDisabled?: boolean;
 }> = ({ title, callbackFunc, isDisabled = false }) => {
   return (
-    <label htmlFor={`upload-button`}>
+    <label htmlFor={"upload-button"}>
       <input
         accept="image/*"
         name={"upload-button"}

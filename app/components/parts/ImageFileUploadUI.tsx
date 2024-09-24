@@ -52,7 +52,7 @@ const ImageFileUploadUI: FC<ImageFileUploadUIProps> = ({
     setImagePreview(undefined);
 
     const reader = new FileReader();
-    const file = e.target.files![0];
+    const file = e.target.files?.[0];
     file.arrayBuffer().then((buffer) => {
       const genericFile = createGenericFile(new Uint8Array(buffer), file.name);
       setGenericFileBuffer(genericFile);

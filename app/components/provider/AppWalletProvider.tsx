@@ -18,7 +18,7 @@ const AppWalletProvider = ({ children }: { children: React.ReactNode }) => {
     setStorage({ cluster: network });
   }
 
-  const wallets = useMemo(() => [], [network]);
+  const wallets = useMemo(() => [], []);
 
   return (
     <ConnectionProvider endpoint={endpoint}>

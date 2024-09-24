@@ -18,7 +18,7 @@ export type OptionalUIProps = {
 
 const OptionalUI: FC<OptionalUIProps> = ({ isShow, control }) => {
   const { fields, append, remove } = useFieldArray({
-    name: `creators`,
+    name: "creators",
     control,
   });
   const [mediaFilesPreview, setMediaFilesPreview] = useState<
@@ -35,38 +35,36 @@ const OptionalUI: FC<OptionalUIProps> = ({ isShow, control }) => {
     setErrorModal({ open: false, message: "" });
   };
 
-  return isShow
-    ? (
-      <>
-        <BackgroundBlur>
-          <Box sx={{ mb: 4 }} />
-          <RoyaltyTextField
-            control={control}
-            name="royalty"
-            rules={validationRules.royalty}
-          />
-          <Box sx={{ mb: 4 }} />
-          <HeadlineTypography message="Optional media Upload" />
-          <Box sx={{ mb: 4 }} />
-          <MediaFileUploadUI
-            {...{
-              mediaFilesPreview,
-              setMediaFilesPreview,
-            }}
-          />
-          <CreatorUI {...{ control, fields, remove }} />
-          <Box sx={{ mb: 4 }} />
-          <AddCreatorButton callbackFunc={handleAddButton} />
-          <Box sx={{ mb: 4 }} />
-        </BackgroundBlur>
-        <ErrorModal
-          open={errorModal.open}
-          onClose={handleClose}
-          message={errorModal.message}
+  return isShow ? (
+    <>
+      <BackgroundBlur>
+        <Box sx={{ mb: 4 }} />
+        <RoyaltyTextField
+          control={control}
+          name="royalty"
+          rules={validationRules.royalty}
         />
-      </>
-    )
-    : null;
+        <Box sx={{ mb: 4 }} />
+        <HeadlineTypography message="Optional media Upload" />
+        <Box sx={{ mb: 4 }} />
+        <MediaFileUploadUI
+          {...{
+            mediaFilesPreview,
+            setMediaFilesPreview,
+          }}
+        />
+        <CreatorUI {...{ control, fields, remove }} />
+        <Box sx={{ mb: 4 }} />
+        <AddCreatorButton callbackFunc={handleAddButton} />
+        <Box sx={{ mb: 4 }} />
+      </BackgroundBlur>
+      <ErrorModal
+        open={errorModal.open}
+        onClose={handleClose}
+        message={errorModal.message}
+      />
+    </>
+  ) : null;
 };
 
 export default OptionalUI;

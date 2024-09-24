@@ -40,7 +40,7 @@ export const mintToken = async (
     tokenProgramId: SPL_TOKEN_2022_PROGRAM_ID,
   });
 
-  callbackHandle && callbackHandle("Image Uploading");
+  callbackHandle?.("Image Uploading");
 
   const genericFile = createGenericFile(
     metadata.file.buffer,
@@ -53,7 +53,7 @@ export const mintToken = async (
   );
   const uploadedImageUrl = await umi.uploader.upload([genericFile]);
   console.debug("# uploadedContentUrl: ", uploadedImageUrl);
-  callbackHandle && callbackHandle("Metadata Uploading");
+  callbackHandle?.("Metadata Uploading");
 
   const uploadedJsonUrl = await umi.uploader.uploadJson({
     name: metadata.name,
@@ -61,7 +61,7 @@ export const mintToken = async (
     image: uploadedImageUrl,
   });
   console.debug("# uploadedJsonUrl: ", uploadedJsonUrl);
-  callbackHandle && callbackHandle("Minting NFT");
+  callbackHandle?.("Minting NFT");
 
   const transaction = transactionBuilder()
     .add(

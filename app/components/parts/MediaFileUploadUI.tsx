@@ -84,9 +84,9 @@ const MediaFileUploadUI: FC<MediaFileUploadUIProps> = ({
   return (
     <>
       <UsageTypography message={message} />
-      {mediaFilesPreview.map((element: string, i: number) => {
+      {mediaFilesPreview.map((element: string) => {
         return (
-          <Card style={styles.card} key={i}>
+          <Card style={styles.card} key={element}>
             <CardMedia>
               <ImageList sx={styles.image} variant="woven" cols={1} gap={1}>
                 <ImageListItem>
@@ -107,7 +107,7 @@ const MediaFileUploadUI: FC<MediaFileUploadUIProps> = ({
                     success: <CheckCircleOutlineIcon fontSize="inherit" />,
                   }}
                 >
-                  {mediaFiles[i] && mediaFiles[i].fileName}
+                  {mediaFiles[i]?.fileName}
                 </Alert>
               </CardContent>
             </CardMedia>

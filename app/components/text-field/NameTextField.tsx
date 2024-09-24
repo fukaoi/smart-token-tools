@@ -7,7 +7,7 @@ import {
 } from "react-hook-form";
 
 const setTitle = (name: string) =>
-  name == "nftName" ? "Input NFT name" : "Input Token name";
+  name === "nftName" ? "Input NFT name" : "Input Token name";
 
 const NameTextField = <T extends FieldValues>(props: UseControllerProps<T>) => {
   const { field, fieldState } = useController(props);

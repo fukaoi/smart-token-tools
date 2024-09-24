@@ -21,7 +21,7 @@ const Index = () => {
     if (publicKey && clicked) {
       navigate("/token");
     }
-  }, [clicked, publicKey]);
+  }, [clicked, publicKey, navigate]);
 
   const connectHandler = (wallet: Wallet) => {
     select(wallet.adapter.name);

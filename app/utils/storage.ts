@@ -15,9 +15,8 @@ export const useStorage = (key: string) => {
       const storageValue = window.localStorage.getItem(key);
       if (storageValue) {
         return JSON.parse(storageValue);
-      } else {
-        return null;
       }
+      return null;
     } catch (error) {
       return null;
     }

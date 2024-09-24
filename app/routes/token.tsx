@@ -64,7 +64,7 @@ const Token = () => {
     } else {
       navigate("/");
     }
-  }, [publicKey]);
+  }, [publicKey, navigate]);
 
   const handleProcessing = (message: string) => {
     setLoading({ isLoading: true, message });
