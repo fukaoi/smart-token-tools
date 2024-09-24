@@ -54,7 +54,7 @@ export const mintToken = async (
     }
   );
   const uploadedImageUrl = await umi.uploader.upload([genericFile]);
-  console.debug("# uploadedContentUrl: ", uploadedImageUrl);
+  console.debug("# uploadedContentUrl: ", uploadedImageUrl[0]);
   callbackHandle?.("Metadata Uploading");
 
   const uploadedJsonUrl = await umi.uploader.uploadJson({
