@@ -1,7 +1,7 @@
 import { ListItemButton, ListItemText } from "@mui/material";
-import { useWallet, Wallet } from "@solana/wallet-adapter-react";
+import { useWallet, type Wallet } from "@solana/wallet-adapter-react";
 import Typography from "@mui/material/Typography";
-import { FC } from "react";
+import type { FC } from "react";
 
 const WalletConnectButton: FC<{ onClick: (selectedWallet: Wallet) => void }> = (
   { onClick },

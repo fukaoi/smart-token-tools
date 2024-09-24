@@ -1,13 +1,13 @@
 import * as React from "react";
 import {
-  NumberInputProps,
+  type NumberInputProps,
   Unstable_NumberInput as BaseNumberInput,
 } from "@mui/base/Unstable_NumberInput";
 import { styled } from "@mui/system";
 import RemoveIcon from "@mui/icons-material/Remove";
 import AddIcon from "@mui/icons-material/Add";
 import { UserConfig, UserConfigFnPromise } from "vite";
-import { useController, UseControllerProps } from "react-hook-form";
+import { useController, type UseControllerProps } from "react-hook-form";
 import { useControlled } from "@mui/material";
 import SugbHeadlineTypography from "~/components/typography/HeadlineTypography";
 import UsageTypography from "~/components/typography/UsageTypography";

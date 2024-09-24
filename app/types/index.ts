@@ -1,6 +1,6 @@
-import { ControllerRenderProps } from "react-hook-form";
-import { createContext, Dispatch, SetStateAction } from "react";
-import { GenericFile } from "@metaplex-foundation/umi";
+import type { ControllerRenderProps } from "react-hook-form";
+import { createContext, type Dispatch, type SetStateAction } from "react";
+import type { GenericFile } from "@metaplex-foundation/umi";
 
 export type TokenMetadata = {
   cluster: string;

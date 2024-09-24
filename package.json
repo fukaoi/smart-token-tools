@@ -12,6 +12,7 @@
     "typecheck": "tsc"
   },
   "dependencies": {
+    "@biomejs/biome": "^1.9.2",
     "@emotion/styled": "^11.13.0",
     "@irys/sdk": "^0.2.11",
     "@metaplex-foundation/mpl-token-metadata": "^3.2.1",
@@ -51,7 +52,6 @@
     "@types/react": "^18.3.5",
     "@types/react-dom": "^18.3.0",
     "autoprefixer": "^10.4.20",
-    "biome": "^0.3.3",
     "postcss": "^8.4.47",
     "sirv-cli": "^2.0.2",
     "typescript": "^5.5.4",

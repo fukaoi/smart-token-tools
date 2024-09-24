@@ -1,5 +1,5 @@
 import Typography from "@mui/material/Typography";
-import { FC } from "react";
+import type { FC } from "react";
 import { theme } from "~/utils/colorTheme";
 
 const HeadlineTypography: FC<{ message: string }> = ({ message }) => {

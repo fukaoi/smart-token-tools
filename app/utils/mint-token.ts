@@ -14,10 +14,10 @@ import {
 import { createUmi } from "@metaplex-foundation/umi-bundle-defaults";
 import { findAssociatedTokenPda } from "@metaplex-foundation/mpl-toolbox";
 import { fetchClusterApiUrl, SPL_TOKEN_2022_PROGRAM_ID } from "~/utils//config";
-import { TokenMetadata } from "~/types";
+import type { TokenMetadata } from "~/types";
 import { irysUploader } from "@metaplex-foundation/umi-uploader-irys";
 import { walletAdapterIdentity } from "@metaplex-foundation/umi-signer-wallet-adapters";
-import { WalletAdapter } from "@solana/wallet-adapter-base";
+import type { WalletAdapter } from "@solana/wallet-adapter-base";
 
 export const mintToken = async (
   walletAdapter: WalletAdapter,

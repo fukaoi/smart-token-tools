@@ -6,7 +6,7 @@ import {
   ImageList,
   ImageListItem,
 } from "@mui/material";
-import { FC, useContext, useState } from "react";
+import { type FC, useContext, useState } from "react";
 import UsageTypography from "~/components/typography/UsageTypography";
 import NoImage from "~/assets/no-image-available.jpg";
 import { Validation } from "~/utils/validation";

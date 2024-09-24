@@ -1,10 +1,10 @@
 import { Box } from "@mui/material";
-import { FC, useState } from "react";
-import { Control, useFieldArray } from "react-hook-form";
+import { type FC, useState } from "react";
+import { type Control, useFieldArray } from "react-hook-form";
 import RoyaltyTextField from "~/components/textField/RoyaltyTextField";
 import CreatorUI from "./CreatorUI";
 import AddCreatorButton from "../button/AddCreatorButton";
-import { NFTMetadata } from "~/types";
+import type { NFTMetadata } from "~/types";
 import HeadlineTypography from "~/components/typography/HeadlineTypography";
 import MediaFileUploadUI from "~/components/parts/MediaFileUploadUI";
 import { validationRules } from "~/utils/validation";

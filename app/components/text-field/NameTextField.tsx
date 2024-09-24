@@ -1,9 +1,9 @@
 import { Box, TextField } from "@mui/material";
 import HeadlineTypography from "~/components/typography/HeadlineTypography";
 import {
-  FieldValues,
+  type FieldValues,
   useController,
-  UseControllerProps,
+  type UseControllerProps,
 } from "react-hook-form";
 
 const setTitle = (name: string) =>
