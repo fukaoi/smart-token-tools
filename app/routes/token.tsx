@@ -158,16 +158,20 @@ const Token = () => {
           <Box sx={{ mb: 10 }} />
         </FormControl>
       </form>
-      <CompletedMintModal
-        open={completeModal}
-        onClose={handleSuccessClose}
-        mint={mintAddress}
-      />
-      <ErrorModal
-        open={errorModal.open}
-        onClose={handleErrorClose}
-        message={errorModal.message}
-      />
+      {completeModal && (
+        <CompletedMintModal
+          open={completeModal}
+          onClose={handleSuccessClose}
+          mint={mintAddress}
+        />
+      )}
+      {errorModal && (
+        <ErrorModal
+          open={errorModal.open}
+          onClose={handleErrorClose}
+          message={errorModal.message}
+        />
+      )}
       <Loading {...loading} />
       <DevTool control={control} />
     </>

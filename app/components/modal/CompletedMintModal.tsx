@@ -10,6 +10,7 @@ const CompletedMintModal: FC<{ open: boolean; onClose: any; mint: string }> = ({
   mint,
 }) => {
   const [storage] = useStorage("network");
+  console.info("# setted storage: ", storage.cluster);
   const explorerUrl = `https://explorer.solana.com/address/${mint}/metadata?cluster=${storage.cluster}`;
   return (
     <>
@@ -31,12 +32,7 @@ const CompletedMintModal: FC<{ open: boolean; onClose: any; mint: string }> = ({
             p: 1,
           }}
         >
-          <Alert
-            sx={{ fontSize: "1.2em" }}
-            variant="filled"
-            severity="success"
-            color="primary"
-          >
+          <Alert sx={{ fontSize: "1.2em" }} variant="filled" severity="success">
             Mint Completed
             <br />
             <a
