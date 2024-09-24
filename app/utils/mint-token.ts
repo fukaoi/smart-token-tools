@@ -19,6 +19,8 @@ import { irysUploader } from "@metaplex-foundation/umi-uploader-irys";
 import { walletAdapterIdentity } from "@metaplex-foundation/umi-signer-wallet-adapters";
 import type { WalletAdapter } from "@solana/wallet-adapter-base";
 
+const SELLER_FEE_BASIS_POINTS = 0;
+
 export const mintToken = async (
   walletAdapter: WalletAdapter,
   metadata: TokenMetadata,
@@ -72,7 +74,7 @@ export const mintToken = async (
         symbol: metadata.symbol,
         decimals: metadata.decimals,
         uri: uploadedJsonUrl,
-        sellerFeeBasisPoints: percentAmount(5.5),
+        sellerFeeBasisPoints: percentAmount(SELLER_FEE_BASIS_POINTS),
         splTokenProgram: SPL_TOKEN_2022_PROGRAM_ID,
         tokenStandard: TokenStandard.Fungible,
       })
@@ -83,7 +85,7 @@ export const mintToken = async (
         token,
         tokenOwner: umi.identity.publicKey,
         authority: umi.identity,
-        amount: metadata.totalSupply,
+        amount: calculateAmount(metadata.totalSupply, metadata.decimals),
         splTokenProgram: SPL_TOKEN_2022_PROGRAM_ID,
         tokenStandard: TokenStandard.Fungible,
       })
@@ -105,4 +107,8 @@ export const mintToken = async (
     signature: bs.encode(res.signature),
     mint: mint.publicKey.toString(),
   };
+};
+
+const calculateAmount = (amount: number, mintDecimal: number): number => {
+  return amount * 10 ** mintDecimal;
 };

@@ -84,7 +84,7 @@ const MediaFileUploadUI: FC<MediaFileUploadUIProps> = ({
   return (
     <>
       <UsageTypography message={message} />
-      {mediaFilesPreview.map((element: string) => {
+      {mediaFilesPreview.map((element: string, i: number) => {
         return (
           <Card style={styles.card} key={element}>
             <CardMedia>

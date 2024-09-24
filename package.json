@@ -7,7 +7,7 @@
   "scripts": {
     "build": "remix vite:build",
     "dev": "remix vite:dev --port 3000",
-    "lint": "",
+    "lint": "biome lint --fix app/",
     "preview": "sirv build/client --single",
     "typecheck": "tsc"
   },

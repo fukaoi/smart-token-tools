@@ -1,7 +1,7 @@
 import { Box } from "@mui/material";
 import { type FC, useState } from "react";
 import { type Control, useFieldArray } from "react-hook-form";
-import RoyaltyTextField from "~/components/textField/RoyaltyTextField";
+import RoyaltyTextField from "~/components/text-field/RoyaltyTextField";
 import CreatorUI from "./CreatorUI";
 import AddCreatorButton from "../button/AddCreatorButton";
 import type { NFTMetadata } from "~/types";
