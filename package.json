@@ -53,6 +53,7 @@
     "@typescript-eslint/eslint-plugin": "^8.5.0",
     "@typescript-eslint/parser": "^8.4.0",
     "autoprefixer": "^10.4.20",
+    "biome": "^0.3.3",
     "eslint": "^8.57.0",
     "eslint-import-resolver-typescript": "^3.6.3",
     "eslint-plugin-import": "^2.30.0",
@@ -68,9 +69,6 @@
     "vite-tsconfig-paths": "^5.0.1",
     "vitest": "^2.0.5"
   },
-  "workspaces": [
-    "packages"
-  ],
   "engines": {
     "node": ">=20.0.0"
   }
