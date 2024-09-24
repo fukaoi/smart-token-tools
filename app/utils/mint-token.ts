@@ -60,7 +60,7 @@ export const mintToken = async (
   const uploadedJsonUrl = await umi.uploader.uploadJson({
     name: metadata.name,
     symbol: metadata.symbol,
-    image: uploadedImageUrl,
+    image: uploadedImageUrl[0],
   });
   console.debug("# uploadedJsonUrl: ", uploadedJsonUrl);
   callbackHandle?.("Minting NFT");
