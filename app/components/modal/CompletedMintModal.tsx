@@ -45,6 +45,8 @@ const CompletedMintModal: FC<{ open: boolean; onClose: any; mint: string }> = ({
               style={{
                 color: "white",
               }}
+              rel="noreferrer"
+              target="_blank"
             >
               Click explorer url
             </a>

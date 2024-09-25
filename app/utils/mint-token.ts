@@ -34,7 +34,11 @@ export const mintToken = async (
   console.debug("# rpc url: ", rpcUrl);
   umi.use(walletAdapterIdentity(walletAdapter));
   umi.use(mplTokenMetadata());
-  umi.use(irysUploader());
+  umi.use(
+    irysUploader({
+      address: "https://devnet.irys.xyz",
+    })
+  );
   const mint = generateSigner(umi);
   const token = findAssociatedTokenPda(umi, {
     mint: mint.publicKey,
@@ -54,7 +58,7 @@ export const mintToken = async (
     }
   );
   const uploadedImageUrl = await umi.uploader.upload([genericFile]);
-  console.debug("# uploadedContentUrl: ", uploadedImageUrl[0]);
+  console.debug("# uploadedImageUrl: ", uploadedImageUrl[0]);
   callbackHandle?.("Metadata Uploading");
 
   const uploadedJsonUrl = await umi.uploader.uploadJson({
