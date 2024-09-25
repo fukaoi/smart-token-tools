@@ -173,7 +173,7 @@ const Token = () => {
         />
       )}
       <Loading {...loading} />
-      <DevTool control={control} />
+      {/*   <DevTool control={control} /> */}
     </>
   );
 };
