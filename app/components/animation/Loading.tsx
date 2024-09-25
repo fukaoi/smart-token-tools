@@ -1,4 +1,4 @@
-import { FC } from "react";
+import type { FC } from "react";
 import CircularProgress from "@mui/material/CircularProgress";
 import Backdrop from "@mui/material/Backdrop";
 import ProcessingTypography from "../typography/ProcessingTypography";

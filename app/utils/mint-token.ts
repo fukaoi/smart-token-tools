@@ -14,10 +14,12 @@ import {
 import { createUmi } from "@metaplex-foundation/umi-bundle-defaults";
 import { findAssociatedTokenPda } from "@metaplex-foundation/mpl-toolbox";
 import { fetchClusterApiUrl, SPL_TOKEN_2022_PROGRAM_ID } from "~/utils//config";
-import { TokenMetadata } from "~/types";
+import type { TokenMetadata } from "~/types";
 import { irysUploader } from "@metaplex-foundation/umi-uploader-irys";
 import { walletAdapterIdentity } from "@metaplex-foundation/umi-signer-wallet-adapters";
-import { WalletAdapter } from "@solana/wallet-adapter-base";
+import type { WalletAdapter } from "@solana/wallet-adapter-base";
+
+const SELLER_FEE_BASIS_POINTS = 0;
 
 export const mintToken = async (
   walletAdapter: WalletAdapter,
@@ -40,7 +42,7 @@ export const mintToken = async (
     tokenProgramId: SPL_TOKEN_2022_PROGRAM_ID,
   });
 
-  callbackHandle && callbackHandle("Image Uploading");
+  callbackHandle?.("Image Uploading");
 
   const genericFile = createGenericFile(
     metadata.file.buffer,
@@ -52,16 +54,16 @@ export const mintToken = async (
     }
   );
   const uploadedImageUrl = await umi.uploader.upload([genericFile]);
-  console.debug("# uploadedContentUrl: ", uploadedImageUrl);
-  callbackHandle && callbackHandle("Metadata Uploading");
+  console.debug("# uploadedContentUrl: ", uploadedImageUrl[0]);
+  callbackHandle?.("Metadata Uploading");
 
   const uploadedJsonUrl = await umi.uploader.uploadJson({
     name: metadata.name,
     symbol: metadata.symbol,
-    image: uploadedImageUrl,
+    image: uploadedImageUrl[0],
   });
   console.debug("# uploadedJsonUrl: ", uploadedJsonUrl);
-  callbackHandle && callbackHandle("Minting NFT");
+  callbackHandle?.("Minting NFT");
 
   const transaction = transactionBuilder()
     .add(
@@ -72,7 +74,7 @@ export const mintToken = async (
         symbol: metadata.symbol,
         decimals: metadata.decimals,
         uri: uploadedJsonUrl,
-        sellerFeeBasisPoints: percentAmount(5.5),
+        sellerFeeBasisPoints: percentAmount(SELLER_FEE_BASIS_POINTS),
         splTokenProgram: SPL_TOKEN_2022_PROGRAM_ID,
         tokenStandard: TokenStandard.Fungible,
       })
@@ -83,7 +85,7 @@ export const mintToken = async (
         token,
         tokenOwner: umi.identity.publicKey,
         authority: umi.identity,
-        amount: metadata.totalSupply,
+        amount: calculateAmount(metadata.totalSupply, metadata.decimals),
         splTokenProgram: SPL_TOKEN_2022_PROGRAM_ID,
         tokenStandard: TokenStandard.Fungible,
       })
@@ -105,4 +107,8 @@ export const mintToken = async (
     signature: bs.encode(res.signature),
     mint: mint.publicKey.toString(),
   };
+};
+
+const calculateAmount = (amount: number, mintDecimal: number): number => {
+  return amount * 10 ** mintDecimal;
 };

@@ -32,7 +32,7 @@ const Faucet = () => {
     } else {
       navigate("/");
     }
-  }, [publicKey]);
+  }, [publicKey, navigate]);
 
   const onSubmit = async () => {
     setBtnState({ title: "Processing", isDisabled: true });
@@ -52,7 +52,8 @@ const Faucet = () => {
     setOpen(false);
     setBtnState({ title: "Confirm", isDisabled: false });
   };
-  const description = `By pressing the submit button, you can receive 1SOL. This feature is only supported by devnet, so if you are on mainnet, you can buy SOLs on the exchange or have them sent to you from another address.`;
+  const description =
+    "By pressing the submit button, you can receive 1SOL. This feature is only supported by devnet, so if you are on mainnet, you can buy SOLs on the exchange or have them sent to you from another address.";
   return (
     <>
       <TitleTypography title="FAUCET" />

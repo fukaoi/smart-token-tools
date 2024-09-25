@@ -1,4 +1,4 @@
-import { FC } from "react";
+import type { FC } from "react";
 import { theme } from "~/utils/colorTheme";
 
 const ExampleTypography: FC<{ example: string }> = ({ example }) => {

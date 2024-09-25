@@ -1,5 +1,5 @@
-import { PublicKey, publicKey } from '@metaplex-foundation/umi';
-import { Cluster, clusterApiUrl } from '@solana/web3.js';
+import { type PublicKey, publicKey } from '@metaplex-foundation/umi';
+import { type Cluster, clusterApiUrl } from '@solana/web3.js';
 import {
   WalletAdapter,
   WalletAdapterNetwork,

@@ -1,12 +1,12 @@
 import { Box } from "@mui/material";
-import { FC } from "react";
-import { Control } from "react-hook-form";
+import type { FC } from "react";
+import type { Control } from "react-hook-form";
 import { Divider } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import HeadlineTypography from "../typography/HeadlineTypography";
 import WalletAddressTextField from "../textField/WalletAddressTextField";
 import ShareTextField from "../textField/ShareTextField";
-import { NFTMetadata } from "~/types";
+import type { NFTMetadata } from "~/types";
 import { validationRules } from "~/utils/validation";
 
 export type CreatorUIProps = {

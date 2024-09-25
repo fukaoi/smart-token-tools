@@ -6,14 +6,14 @@ import {
   ImageList,
   ImageListItem,
 } from "@mui/material";
-import { FC, useState } from "react";
+import { type FC, useState } from "react";
 import { Validation } from "~/utils/validation";
 import UsageTypography from "~/components/typography/UsageTypography";
 import ExampleTypography from "~/components/typography/ExampleTypography";
 import Card from "@mui/material/Card";
 import { Alert } from "@mui/material";
 import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
-import { createGenericFile, GenericFile } from "@metaplex-foundation/umi";
+import { createGenericFile, type GenericFile } from "@metaplex-foundation/umi";
 
 const styles = {
   card: {
@@ -52,7 +52,7 @@ const ImageFileUploadUI: FC<ImageFileUploadUIProps> = ({
     setImagePreview(undefined);
 
     const reader = new FileReader();
-    const file = e.target.files![0];
+    const file = e.target.files?.[0];
     file.arrayBuffer().then((buffer) => {
       const genericFile = createGenericFile(new Uint8Array(buffer), file.name);
       setGenericFileBuffer(genericFile);

@@ -4,7 +4,7 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import SolanaCircleLogo from "~/assets/solana-logo-card.svg";
 import { Box } from "@mui/material";
-import { useWallet, Wallet } from "@solana/wallet-adapter-react";
+import { useWallet, type Wallet } from "@solana/wallet-adapter-react";
 import { useNavigate } from "@remix-run/react";
 import { lazy, useEffect, useState } from "react";
 
@@ -21,7 +21,7 @@ const Index = () => {
     if (publicKey && clicked) {
       navigate("/token");
     }
-  }, [clicked, publicKey]);
+  }, [clicked, publicKey, navigate]);
 
   const connectHandler = (wallet: Wallet) => {
     select(wallet.adapter.name);

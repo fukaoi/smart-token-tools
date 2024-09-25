@@ -16,11 +16,11 @@ import SymbolTextField from "~/components/text-field/SymbolTextField";
 import HeadlineTypography from "~/components/typography/HeadlineTypography";
 import ImageFileUploadUI from "~/components/parts/ImageFileUploadUI";
 import { validationRules } from "~/utils/validation";
-import { TokenMetadata } from "~/types";
+import type { TokenMetadata } from "~/types";
 import { useWallet } from "@solana/wallet-adapter-react";
 import { useNavigate } from "@remix-run/react";
 import { mintToken } from "~/utils/mint-token";
-import { GenericFile } from "@metaplex-foundation/umi";
+import type { GenericFile } from "@metaplex-foundation/umi";
 import DecimalsInput from "~/components/number-input/DecimalsInput";
 import { useStorage } from "~/utils/storage";
 import DescriptionTypography from "~/components/typography/DescriptionTypography";
@@ -64,7 +64,7 @@ const Token = () => {
     } else {
       navigate("/");
     }
-  }, [publicKey]);
+  }, [publicKey, navigate]);
 
   const handleProcessing = (message: string) => {
     setLoading({ isLoading: true, message });
@@ -158,16 +158,20 @@ const Token = () => {
           <Box sx={{ mb: 10 }} />
         </FormControl>
       </form>
-      <CompletedMintModal
-        open={completeModal}
-        onClose={handleSuccessClose}
-        mint={mintAddress}
-      />
-      <ErrorModal
-        open={errorModal.open}
-        onClose={handleErrorClose}
-        message={errorModal.message}
-      />
+      {completeModal && (
+        <CompletedMintModal
+          open={completeModal}
+          onClose={handleSuccessClose}
+          mint={mintAddress}
+        />
+      )}
+      {errorModal && (
+        <ErrorModal
+          open={errorModal.open}
+          onClose={handleErrorClose}
+          message={errorModal.message}
+        />
+      )}
       <Loading {...loading} />
       <DevTool control={control} />
     </>

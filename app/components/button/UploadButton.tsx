@@ -1,4 +1,4 @@
-import { FC } from "react";
+import type { FC } from "react";
 import { styled } from "@mui/system";
 import Button from "@mui/material/Button";
 import { theme } from "~/utils/colorTheme";
@@ -26,7 +26,7 @@ const UploadButton: FC<{
   isDisabled?: boolean;
 }> = ({ title, callbackFunc, isDisabled = false }) => {
   return (
-    <label htmlFor={`upload-button`}>
+    <label htmlFor={"upload-button"}>
       <input
         accept="image/*"
         name={"upload-button"}

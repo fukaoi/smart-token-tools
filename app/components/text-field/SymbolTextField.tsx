@@ -2,8 +2,8 @@ import { TextField, Box } from '@mui/material';
 import HeadlineTypography from '~/components/typography/HeadlineTypography';
 import {
   useController,
-  UseControllerProps,
-  FieldValues,
+  type UseControllerProps,
+  type FieldValues,
 } from 'react-hook-form';
 
 const SymbolTextField = <T extends FieldValues>(

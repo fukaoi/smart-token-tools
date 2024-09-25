@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import type { FC } from 'react';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import { IconButton } from '@mui/material';
 

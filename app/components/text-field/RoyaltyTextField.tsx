@@ -1,7 +1,7 @@
 import { Box, TextField } from "@mui/material";
 import HeadlineTypography from "~/components/typography/HeadlineTypography";
-import { NFTMetadata } from "~/types";
-import { useController, UseControllerProps } from "react-hook-form";
+import type { NFTMetadata } from "~/types";
+import { useController, type UseControllerProps } from "react-hook-form";
 
 const RoyaltyTextField = (props: UseControllerProps<NFTMetadata>) => {
   const { field, fieldState } = useController(props);

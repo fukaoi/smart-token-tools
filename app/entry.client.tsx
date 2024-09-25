@@ -1,4 +1,4 @@
-import { lazy, ReactNode, useState, useMemo } from "react";
+import { lazy, type ReactNode, useState, useMemo } from "react";
 import { RemixBrowser } from "@remix-run/react";
 import { startTransition } from "react";
 import { hydrateRoot } from "react-dom/client";

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import HeadlineTypography from "~/components/typography/HeadlineTypography";
-import { useController, UseControllerProps } from "react-hook-form";
+import { useController, type UseControllerProps } from "react-hook-form";
 import { WalletAdapterNetwork } from "@solana/wallet-adapter-base";
 import {
   Box,

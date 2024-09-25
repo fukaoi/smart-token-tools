@@ -1,8 +1,9 @@
-import { FC } from "react";
+import type { FC } from "react";
 import Modal from "@mui/material/Modal";
 import Box from "@mui/material/Box";
 import { Alert } from "@mui/material";
 import { useStorage } from "~/utils/storage";
+import { WalletAdapterNetwork } from "@solana/wallet-adapter-base";
 
 const CompletedMintModal: FC<{ open: boolean; onClose: any; mint: string }> = ({
   open,
@@ -10,7 +11,12 @@ const CompletedMintModal: FC<{ open: boolean; onClose: any; mint: string }> = ({
   mint,
 }) => {
   const [storage] = useStorage("network");
-  const explorerUrl = `https://explorer.solana.com/address/${mint}/metadata?cluster=${storage.cluster}`;
+  console.info("# setted storage: ", storage.cluster);
+
+  let explorerUrl = `https://explorer.solana.com/address/${mint}/metadata?cluster=devnet`;
+  if (storage.cluster === WalletAdapterNetwork.Mainnet) {
+    explorerUrl = `https://solscan.io/token/${mint}`;
+  }
   return (
     <>
       <Modal
@@ -31,12 +37,7 @@ const CompletedMintModal: FC<{ open: boolean; onClose: any; mint: string }> = ({
             p: 1,
           }}
         >
-          <Alert
-            sx={{ fontSize: "1.2em" }}
-            variant="filled"
-            severity="success"
-            color="primary"
-          >
+          <Alert sx={{ fontSize: "1.2em" }} variant="filled" severity="success">
             Mint Completed
             <br />
             <a

@@ -1,6 +1,6 @@
 import { Box, TextField } from "@mui/material";
-import { NFTMetadata } from "~/types";
-import { useController, UseControllerProps } from "react-hook-form";
+import type { NFTMetadata } from "~/types";
+import { useController, type UseControllerProps } from "react-hook-form";
 
 const WalletAddressTextField = (props: UseControllerProps<NFTMetadata>) => {
   const { field } = useController(props);

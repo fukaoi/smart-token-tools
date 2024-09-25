@@ -1,4 +1,4 @@
-import { FC } from "react";
+import type { FC } from "react";
 import { Box } from "@mui/system";
 import Typography from "@mui/material/Typography";
 import { theme } from "~/utils/colorTheme";
