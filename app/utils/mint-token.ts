@@ -17,7 +17,10 @@ import { fetchClusterApiUrl, SPL_TOKEN_2022_PROGRAM_ID } from "~/utils//config";
 import type { TokenMetadata } from "~/types";
 import { irysUploader } from "@metaplex-foundation/umi-uploader-irys";
 import { walletAdapterIdentity } from "@metaplex-foundation/umi-signer-wallet-adapters";
-import type { WalletAdapter } from "@solana/wallet-adapter-base";
+import {
+  WalletAdapterNetwork,
+  type WalletAdapter,
+} from "@solana/wallet-adapter-base";
 
 const SELLER_FEE_BASIS_POINTS = 0;
 
@@ -34,11 +37,7 @@ export const mintToken = async (
   console.debug("# rpc url: ", rpcUrl);
   umi.use(walletAdapterIdentity(walletAdapter));
   umi.use(mplTokenMetadata());
-  umi.use(
-    irysUploader({
-      address: "https://devnet.irys.xyz",
-    })
-  );
+  umi.use(irysUploader());
   const mint = generateSigner(umi);
   const token = findAssociatedTokenPda(umi, {
     mint: mint.publicKey,
@@ -58,16 +57,18 @@ export const mintToken = async (
     }
   );
   const uploadedImageUrl = await umi.uploader.upload([genericFile]);
-  console.debug("# uploadedImageUrl: ", uploadedImageUrl[0]);
+  const imageUrl = fetchGatewayUrl(metadata.cluster, uploadedImageUrl[0]);
+  console.debug("# image url: ", imageUrl);
   callbackHandle?.("Metadata Uploading");
 
   const uploadedJsonUrl = await umi.uploader.uploadJson({
     name: metadata.name,
     symbol: metadata.symbol,
-    image: uploadedImageUrl[0],
+    image: imageUrl,
   });
-  console.debug("# uploadedJsonUrl: ", uploadedJsonUrl);
-  callbackHandle?.("Minting NFT");
+  const jsonUrl = fetchGatewayUrl(metadata.cluster, uploadedJsonUrl);
+  console.debug("# json url: ", jsonUrl);
+  callbackHandle?.("Minting SPL Token");
 
   const transaction = transactionBuilder()
     .add(
@@ -77,7 +78,7 @@ export const mintToken = async (
         name: metadata.name,
         symbol: metadata.symbol,
         decimals: metadata.decimals,
-        uri: uploadedJsonUrl,
+        uri: jsonUrl,
         sellerFeeBasisPoints: percentAmount(SELLER_FEE_BASIS_POINTS),
         splTokenProgram: SPL_TOKEN_2022_PROGRAM_ID,
         tokenStandard: TokenStandard.Fungible,
@@ -115,4 +116,12 @@ export const mintToken = async (
 
 const calculateAmount = (amount: number, mintDecimal: number): number => {
   return amount * 10 ** mintDecimal;
+};
+
+const fetchGatewayUrl = (cluster: string, uploadedUrl: string): string => {
+  console.log(cluster, WalletAdapterNetwork.Devnet);
+  if (cluster === WalletAdapterNetwork.Devnet) {
+    return uploadedUrl.replace("arweave.net", "gateway.irys.xyz");
+  }
+  return uploadedUrl;
 };
