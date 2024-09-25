@@ -17,15 +17,15 @@ jobs:
       matrix:
         node-version: [20.x]
     steps:
-      - uses: actions/checkout@v3
-      - uses: pnpm/action-setup@v3
+      - uses: actions/checkout@latest
+      - uses: pnpm/action-setup@latest
         with:
           version: 9
           run_install: |
             - recursive: true
               args: [--frozen-lockfile, --strict-peer-dependencies]
       - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@latest
         with:
           node-version: ${{ matrix.node-version }}
           cache: "pnpm"
