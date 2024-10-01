@@ -20,15 +20,16 @@ const NumberInput = React.forwardRef(function CustomNumberInput(
   const description = `The value of this setting specifies the number of decimal points in the token.
      Please refer to the example below.`;
   const example = `
-     0 decimals:  1000,                   1
-     1 decimals:  1000.0,                0.1
-     2 decimals:  1000.00,              0.01
-     3 decimals:  1000.000,            0.001
-     4 decimals:  1000.0000,          0.0001
-     5 decimals:  1000.00000,        0.00001
-     7 decimals:  1000.000000,      0.000001
-     8 decimals:  1000.0000000,    0.0000001
-     9 decimals:  1000.00000000,  0.00000001
+     0 decimals:  1000,                      1
+     1 decimals:  1000.0,                  0.1
+     2 decimals:  1000.00,                0.01
+     3 decimals:  1000.000,              0.001
+     4 decimals:  1000.0000,            0.0001
+     5 decimals:  1000.00000,          0.00001
+     6 decimals:  1000.000000,        0.000001
+     7 decimals:  1000.0000000,      0.0000001
+     8 decimals:  1000.00000000,    0.00000001
+     9 decimals:  1000.000000009,  0.000000001
     `;
   return (
     <>
