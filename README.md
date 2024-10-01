@@ -5,6 +5,10 @@
 
 [SMT](https://smt.solana-suite.org) is a service that you to easily issue tokens and nft for all free. All you need is a phantom wallet installed on your browser and you are ready to use it.
 
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/91bb7713-3c7e-4348-9100-a994feccc710" width="466px" height="525px" alt="SMT">
+</p>
+
 ### Libraries in Use
 * [Remix(SPA Mode)](https://remix.run/)
 
@@ -22,7 +26,15 @@ Modular TypeScript wallet adapters and components for Solana applications.
 
 MUI (Material-UI) is a popular React component library
 
+### Features
+* Faucet
 
-<p align="center">
-  <img src="https://github.com/user-attachments/assets/91bb7713-3c7e-4348-9100-a994feccc710" width="466px" height="525px" alt="SMT">
-</p>
+By pressing the submit button, you can receive 1SOL. This feature is only supported by devnet, so if you are on mainnet, you can buy SOLs on the exchange or have them sent to you from another address.
+
+* Token
+
+Token is minted using token extensions, and the metadata is uploaded to Arweave
+
+* NFT
+
+Under renewal...
