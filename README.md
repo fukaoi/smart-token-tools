@@ -29,11 +29,11 @@ MUI (Material-UI) is a popular React component library
 ### Features
 * Faucet
 
-By pressing the submit button, you can receive 1SOL. This feature is only supported by devnet, so if you are on mainnet, you can buy SOLs on the exchange or have them sent to you from another address.
+receive 1SOL. This feature is only supported by devnet.
 
 * Token
 
-Token is minted using token extensions, and the metadata is uploaded to Arweave
+Token is minted using token extensions, and the metadata is uploaded to Arweave.
 
 * NFT
 
