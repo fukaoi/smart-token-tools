@@ -12,7 +12,7 @@
     "typecheck": "tsc"
   },
   "dependencies": {
-    "@biomejs/biome": "^1.9.2",
+    "@biomejs/biome": "^1.9.3",
     "@emotion/styled": "^11.13.0",
     "@irys/sdk": "^0.2.11",
     "@metaplex-foundation/mpl-token-metadata": "^3.2.1",
