@@ -12,7 +12,11 @@ import {
   TokenStandard,
 } from "@metaplex-foundation/mpl-token-metadata";
 import { createUmi } from "@metaplex-foundation/umi-bundle-defaults";
-import { findAssociatedTokenPda } from "@metaplex-foundation/mpl-toolbox";
+import {
+  findAssociatedTokenPda,
+  setComputeUnitLimit,
+  setComputeUnitPrice,
+} from "@metaplex-foundation/mpl-toolbox";
 import { fetchClusterApiUrl, SPL_TOKEN_2022_PROGRAM_ID } from "~/utils//config";
 import type { TokenMetadata } from "~/types";
 import { irysUploader } from "@metaplex-foundation/umi-uploader-irys";
@@ -71,6 +75,8 @@ export const mintToken = async (
   callbackHandle?.("Minting SPL Token");
 
   const transaction = transactionBuilder()
+    .add(setComputeUnitLimit(umi, { units: 80000 }))
+    .add(setComputeUnitPrice(umi, { microLamports: 50000 }))
     .add(
       createV1(umi, {
         mint,
