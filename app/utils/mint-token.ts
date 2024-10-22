@@ -41,13 +41,15 @@ export const mintToken = async (
   console.debug("# rpc url: ", rpcUrl);
   umi.use(walletAdapterIdentity(walletAdapter));
   umi.use(mplTokenMetadata());
-  umi.use(irysUploader({ timeout: 60000, priceMultiplier: 1.1 }));
+  umi.use(irysUploader({ timeout: 60000, priceMultiplier: 1.2 }));
   const mint = generateSigner(umi);
   const token = findAssociatedTokenPda(umi, {
     mint: mint.publicKey,
     owner: umi.identity.publicKey,
     tokenProgramId: SPL_TOKEN_2022_PROGRAM_ID,
   });
+
+  console.log("#umi debug: ", umi);
 
   callbackHandle?.("Image Uploading");
 
