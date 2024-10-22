@@ -41,7 +41,7 @@ export const mintToken = async (
   console.debug("# rpc url: ", rpcUrl);
   umi.use(walletAdapterIdentity(walletAdapter));
   umi.use(mplTokenMetadata());
-  umi.use(irysUploader());
+  umi.use(irysUploader({ timeout: 60000, priceMultiplier: 1.1 }));
   const mint = generateSigner(umi);
   const token = findAssociatedTokenPda(umi, {
     mint: mint.publicKey,
