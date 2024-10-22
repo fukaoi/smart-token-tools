@@ -1,6 +1,13 @@
-import { DevTool } from "@hookform/devtools";
+// import { DevTool } from "@hookform/devtools";
 import { useEffect, useState } from "react";
-import { Box, FormControl, Paper } from "@mui/material";
+import {
+  Box,
+  FormControl,
+  Paper,
+  RadioGroup,
+  Radio,
+  FormControlLabel,
+} from "@mui/material";
 import { useForm } from "react-hook-form";
 import TitleTypography from "~/components/typography/TitleTypography";
 import AddressTypography from "~/components/typography/AddressTypography";
@@ -24,6 +31,7 @@ import type { GenericFile } from "@metaplex-foundation/umi";
 import DecimalsInput from "~/components/number-input/DecimalsInput";
 import { useStorage } from "~/utils/storage";
 import DescriptionTypography from "~/components/typography/DescriptionTypography";
+import MetadataJsonUrlTextField from "~/components/text-field/MetadataJsonUrlTextField";
 
 const Token = () => {
   const btnTitle = "SUBMIT";
@@ -43,12 +51,16 @@ const Token = () => {
   );
   const [genericFile, setGenericFile] = useState<GenericFile>();
   const [loading, setLoading] = useState({ isLoading: false, message: "" });
+  const [showImageUpload, setShowImageUpload] = useState<boolean | undefined>(
+    undefined
+  );
   const { handleSubmit, control } = useForm<TokenMetadata>({
     defaultValues: {
       cluster: storage.cluster,
       customClusterUrl: storage.customClusterUrl,
       name: "",
       symbol: "",
+      metadataJsonUrl: "",
       totalSupply: 1_000_000_000,
       decimals: 5,
     },
@@ -79,6 +91,14 @@ const Token = () => {
     setLoading({ isLoading: false, message: "" });
     setCompleteModal(false);
     setBtnState({ title: btnTitle, isDisabled: false });
+  };
+
+  const handleImageUploadChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    // if (event.target.value !== undefined) {
+    setShowImageUpload(event.target.value === "image");
+    // }
   };
 
   const onSubmit = async (data: TokenMetadata) => {
@@ -138,15 +158,40 @@ const Token = () => {
             <Box sx={{ mb: 4 }} />
             <DecimalsInput control={control} name="decimals" />
             <Box sx={{ mb: 4 }} />
-            <HeadlineTypography message="Image Upload" />
-            <ImageFileUploadUI
-              {...{
-                imagePreview,
-                setErrorModal,
-                setImagePreview,
-                setGenericFileBuffer: setGenericFile,
-              }}
-            />
+            <HeadlineTypography message="Image Upload or Set Metadata URL" />
+            <RadioGroup
+              aria-labelledby="demo-row-radio-buttons-group-label"
+              name="row-radio-buttons-group"
+              onChange={handleImageUploadChange}
+            >
+              <FormControlLabel
+                value="image"
+                control={<Radio />}
+                label="Image"
+              />
+              <FormControlLabel
+                value="metadata"
+                control={<Radio />}
+                label="Metadata URL"
+              />
+            </RadioGroup>
+            {showImageUpload && (
+              <ImageFileUploadUI
+                {...{
+                  imagePreview,
+                  setErrorModal,
+                  setImagePreview,
+                  setGenericFileBuffer: setGenericFile,
+                }}
+              />
+            )}
+            {showImageUpload === false && (
+              <MetadataJsonUrlTextField
+                control={control}
+                name="metadataJsonUrl"
+                rules={validationRules.description}
+              />
+            )}
           </Paper>
           <Box sx={{ mb: 6 }} />
           <Box>
