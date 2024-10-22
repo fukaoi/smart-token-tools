@@ -96,9 +96,7 @@ const Token = () => {
   const handleImageUploadChange = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
-    // if (event.target.value !== undefined) {
     setShowImageUpload(event.target.value === "image");
-    // }
   };
 
   const onSubmit = async (data: TokenMetadata) => {
@@ -158,7 +156,7 @@ const Token = () => {
             <Box sx={{ mb: 4 }} />
             <DecimalsInput control={control} name="decimals" />
             <Box sx={{ mb: 4 }} />
-            <HeadlineTypography message="Image Upload or Set Metadata URL" />
+            <HeadlineTypography message="Upload Image or Metadata URL" />
             <RadioGroup
               aria-labelledby="demo-row-radio-buttons-group-label"
               name="row-radio-buttons-group"
@@ -189,7 +187,7 @@ const Token = () => {
               <MetadataJsonUrlTextField
                 control={control}
                 name="metadataJsonUrl"
-                rules={validationRules.description}
+                rules={validationRules.url}
               />
             )}
           </Paper>
