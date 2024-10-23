@@ -105,9 +105,6 @@ const Token = () => {
       cluster: data.cluster,
       customClusterUrl: data.customClusterUrl,
     });
-    if (!genericFile) {
-      setErrorModal({ open: true, message: "Please Image Upload" });
-    }
 
     try {
       data.file = genericFile!;
@@ -118,7 +115,11 @@ const Token = () => {
     } catch (error) {
       setBtnState({ title: "Submit", isDisabled: false });
       setLoading({ isLoading: false, message: "" });
-      setErrorModal({ open: true, message: (error as Error).message });
+      const errorMessage =
+        (error as Error).message.length <= 1
+          ? "An error occurred"
+          : (error as Error).message;
+      setErrorModal({ open: true, message: errorMessage });
       console.error("# mintToken: ", error);
     }
   };
@@ -187,7 +188,7 @@ const Token = () => {
               <MetadataJsonUrlTextField
                 control={control}
                 name="metadataJsonUrl"
-                rules={validationRules.url}
+                // rules={validationRules.description}
               />
             )}
           </Paper>

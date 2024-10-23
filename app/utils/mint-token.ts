@@ -41,7 +41,7 @@ export const mintToken = async (
   console.debug("# rpc url: ", rpcUrl);
   umi.use(walletAdapterIdentity(walletAdapter));
   umi.use(mplTokenMetadata());
-  umi.use(irysUploader({ timeout: 60000, priceMultiplier: 1.2 }));
+  umi.use(irysUploader({ timeout: 60000, priceMultiplier: 1.1 }));
   const mint = generateSigner(umi);
   const token = findAssociatedTokenPda(umi, {
     mint: mint.publicKey,
@@ -49,35 +49,40 @@ export const mintToken = async (
     tokenProgramId: SPL_TOKEN_2022_PROGRAM_ID,
   });
 
-  console.log("#umi debug: ", umi);
+  let jsonUrl = "";
+  if (metadata.file) {
+    callbackHandle?.("Image Uploading");
 
-  callbackHandle?.("Image Uploading");
+    const genericFile = createGenericFile(
+      metadata.file.buffer,
+      metadata.file.displayName,
+      {
+        contentType: metadata.file.contentType
+          ? metadata.file.contentType
+          : "image/png",
+      }
+    );
+    const uploadedImageUrl = await umi.uploader.upload([genericFile]);
+    const imageUrl = fetchGatewayUrl(metadata.cluster, uploadedImageUrl[0]);
+    console.debug("# image url: ", imageUrl);
+    callbackHandle?.("Metadata Uploading");
 
-  const genericFile = createGenericFile(
-    metadata.file.buffer,
-    metadata.file.displayName,
-    {
-      contentType: metadata.file.contentType
-        ? metadata.file.contentType
-        : "image/png",
-    }
-  );
-  const uploadedImageUrl = await umi.uploader.upload([genericFile]);
-  const imageUrl = fetchGatewayUrl(metadata.cluster, uploadedImageUrl[0]);
-  console.debug("# image url: ", imageUrl);
-  callbackHandle?.("Metadata Uploading");
+    const uploadedJsonUrl = await umi.uploader.uploadJson({
+      name: metadata.name,
+      symbol: metadata.symbol,
+      image: imageUrl,
+    });
+    jsonUrl = fetchGatewayUrl(metadata.cluster, uploadedJsonUrl);
+    console.debug("# json url: ", jsonUrl);
+  } else if (metadata.metadataJsonUrl) {
+    jsonUrl = metadata.metadataJsonUrl;
+  } else {
+    throw new Error("No file or metadataJsonUrl provided");
+  }
 
-  const uploadedJsonUrl = await umi.uploader.uploadJson({
-    name: metadata.name,
-    symbol: metadata.symbol,
-    image: imageUrl,
-  });
-  const jsonUrl = fetchGatewayUrl(metadata.cluster, uploadedJsonUrl);
-  console.debug("# json url: ", jsonUrl);
   callbackHandle?.("Minting SPL Token");
 
   const transaction = transactionBuilder()
-    .add(setComputeUnitLimit(umi, { units: 80000 }))
     .add(setComputeUnitPrice(umi, { microLamports: 50000 }))
     .add(
       createV1(umi, {
@@ -107,7 +112,7 @@ export const mintToken = async (
   const { blockhash, lastValidBlockHeight } =
     await umi.rpc.getLatestBlockhash();
   const res = await transaction.sendAndConfirm(umi, {
-    send: { maxRetries: 5, commitment: "finalized", skipPreflight: true },
+    send: { maxRetries: 5, commitment: "confirmed", skipPreflight: true },
     confirm: {
       strategy: {
         type: "blockhash",

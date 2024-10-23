@@ -53,6 +53,9 @@ const ImageFileUploadUI: FC<ImageFileUploadUIProps> = ({
 
     const reader = new FileReader();
     const file = e.target.files?.[0];
+    if (!file) {
+      throw new Error("Not found file object");
+    }
     file.arrayBuffer().then((buffer) => {
       const genericFile = createGenericFile(new Uint8Array(buffer), file.name);
       setGenericFileBuffer(genericFile);
