@@ -8,6 +8,7 @@ export type TokenMetadata = {
   name: string;
   symbol: string;
   imagePreview?: string;
+  metadataJsonUrl?: string;
   file: GenericFile;
   totalSupply: number;
   decimals: number;

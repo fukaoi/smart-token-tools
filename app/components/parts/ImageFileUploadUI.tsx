@@ -67,7 +67,9 @@ const ImageFileUploadUI: FC<ImageFileUploadUIProps> = ({
 
   const [fileName, setFileName] = useState("");
 
-  const description = "The following file types can be uploaded";
+  const description = `
+        The image file upload component allows users to upload image files.
+    `;
   const example = `
         png,  jpg,  gif,  svg,  bmp,  webp
     `;

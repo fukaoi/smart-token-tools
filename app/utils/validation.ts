@@ -1,22 +1,28 @@
 export const validationRules = {
   name: {
-    required: 'Please enter the required field',
-    maxLength: { value: 32, message: 'Max Length Is 32 Characters' },
+    required: "Please enter the required field",
+    maxLength: { value: 32, message: "Max Length Is 32 Characters" },
   },
   symbol: {
-    required: 'Please enter the required field',
-    maxLength: { value: 10, message: 'Max Length Is 10 Characters' },
+    required: "Please enter the required field",
+    maxLength: { value: 10, message: "Max Length Is 10 Characters" },
   },
   description: {
-    required: 'Please enter the required field',
+    required: "Please enter the required field",
   },
   share: {
-    min: { value: 0, message: 'Minimum value is 0' },
-    max: { value: 100, message: 'Maximum value is 100' },
+    min: { value: 0, message: "Minimum value is 0" },
+    max: { value: 100, message: "Maximum value is 100" },
   },
   royalty: {
-    min: { value: 0, message: 'Minimum value is 0' },
-    max: { value: 100, message: 'Maximum value is 100' },
+    min: { value: 0, message: "Minimum value is 0" },
+    max: { value: 100, message: "Maximum value is 100" },
+  },
+  url: {
+    required: "Please enter url format",
+    validate: (value: string) => {
+      return Validation.isValidUrl(value) || "Please enter a valid URL";
+    },
   },
 };
 
@@ -24,7 +30,7 @@ export namespace Validation {
   const MAX_FILE_SIZE = 100000000; // 100MB Image Size
 
   export const isImagePreviewFileType = (
-    e: React.ChangeEvent<HTMLInputElement> | File,
+    e: React.ChangeEvent<HTMLInputElement> | File
   ): boolean => {
     if (e instanceof File) {
       const fileType = e.type;
@@ -54,9 +60,18 @@ export namespace Validation {
   };
 
   export const isMaxFileSize = (
-    e: React.ChangeEvent<HTMLInputElement>,
+    e: React.ChangeEvent<HTMLInputElement>
   ): boolean => {
     const file = e.target.files![0];
     return file.size > MAX_FILE_SIZE;
+  };
+
+  export const isValidUrl = (url: string): boolean => {
+    try {
+      new URL(url);
+      return true;
+    } catch (e) {
+      return false;
+    }
   };
 }
