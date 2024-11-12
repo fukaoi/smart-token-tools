@@ -58,7 +58,7 @@
     "vite": "^5.4.10",
     "vite-plugin-cjs-interop": "^2.1.5",
     "vite-plugin-node-polyfills": "^0.22.0",
-    "vite-tsconfig-paths": "^5.0.1",
+    "vite-tsconfig-paths": "^5.1.2",
     "vitest": "^2.1.4"
   },
   "engines": {
