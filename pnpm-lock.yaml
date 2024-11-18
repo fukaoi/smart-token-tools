@@ -18,8 +18,8 @@ importers:
         specifier: ^0.2.11
         version: 0.2.11(arweave@1.15.5)(bufferutil@4.0.8)(utf-8-validate@5.0.10)
       '@metaplex-foundation/mpl-token-metadata':
-        specifier: ^3.2.1
-        version: 3.2.1(@metaplex-foundation/umi@0.9.2)
+        specifier: ^3.3.0
+        version: 3.3.0(@metaplex-foundation/umi@0.9.2)
       '@metaplex-foundation/mpl-toolbox':
         specifier: ^0.9.4
         version: 0.9.4(@metaplex-foundation/umi@0.9.2)
@@ -1446,8 +1446,8 @@ packages:
     resolution: {integrity: sha512-yfmE79bRQtnMzarnKfX7AEJBwFTxvTyw3nBQlu/5rmGXrjAeAMltoGxO62TFurxrQAFMNa/fEjIHNvungZp0+g==}
     engines: {node: '>=14.0.0'}
 
-  '@metaplex-foundation/mpl-token-metadata@3.2.1':
-    resolution: {integrity: sha512-26W1NhQwDWmLOg/pBRYut7x/vEs/5kFS2sWVEY5/X0f2jJOLhnd4NaZQcq+5u+XZsXvm1jq2AtrRGPNK43oqWQ==}
+  '@metaplex-foundation/mpl-token-metadata@3.3.0':
+    resolution: {integrity: sha512-t5vO8Wr3ZZZPGrVrGNcosX5FMkwQSgBiVMQMRNDG2De7voYFJmIibD5jdG05EoQ4Y5kZVEiwhYaO+wJB3aO5AA==}
     peerDependencies:
       '@metaplex-foundation/umi': '>= 0.8.2 < 1'
 
@@ -9031,7 +9031,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@metaplex-foundation/mpl-token-metadata@3.2.1(@metaplex-foundation/umi@0.9.2)':
+  '@metaplex-foundation/mpl-token-metadata@3.3.0(@metaplex-foundation/umi@0.9.2)':
     dependencies:
       '@metaplex-foundation/mpl-toolbox': 0.9.4(@metaplex-foundation/umi@0.9.2)
       '@metaplex-foundation/umi': 0.9.2

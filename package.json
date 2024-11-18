@@ -15,7 +15,7 @@
     "@biomejs/biome": "^1.9.4",
     "@emotion/styled": "^11.13.0",
     "@irys/sdk": "^0.2.11",
-    "@metaplex-foundation/mpl-token-metadata": "^3.2.1",
+    "@metaplex-foundation/mpl-token-metadata": "^3.3.0",
     "@metaplex-foundation/mpl-toolbox": "^0.9.4",
     "@metaplex-foundation/umi": "^0.9.2",
     "@metaplex-foundation/umi-bundle-defaults": "^0.9.2",
