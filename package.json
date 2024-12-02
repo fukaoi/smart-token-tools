@@ -44,7 +44,7 @@
     "react-hook-form": "^7.53.2"
   },
   "devDependencies": {
-    "@emotion/cache": "^11.13.1",
+    "@emotion/cache": "^11.13.5",
     "@emotion/react": "^11.13.3",
     "@hookform/devtools": "^4.3.1",
     "@remix-run/dev": "^2.13.1",
