@@ -13,7 +13,7 @@
   },
   "dependencies": {
     "@biomejs/biome": "^1.9.4",
-    "@emotion/styled": "^11.13.5",
+    "@emotion/styled": "^11.14.0",
     "@irys/sdk": "^0.2.11",
     "@metaplex-foundation/mpl-token-metadata": "^3.3.0",
     "@metaplex-foundation/mpl-toolbox": "^0.9.4",
