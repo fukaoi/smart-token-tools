@@ -106,8 +106,8 @@ importers:
         specifier: ^11.13.5
         version: 11.13.5(@types/react@18.3.12)(react@18.3.1)
       '@hookform/devtools':
-        specifier: ^4.3.1
-        version: 4.3.1(@types/react@18.3.12)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        specifier: ^4.3.3
+        version: 4.3.3(@types/react@18.3.12)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@remix-run/dev':
         specifier: ^2.13.1
         version: 2.13.1(@remix-run/react@2.15.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.6.3))(@remix-run/serve@2.15.0(typescript@5.6.3))(@types/node@22.7.8)(babel-plugin-macros@3.1.0)(bufferutil@4.0.8)(terser@5.36.0)(typescript@5.6.3)(utf-8-validate@5.0.10)(vite@5.4.11(@types/node@22.7.8)(terser@5.36.0))
@@ -1330,11 +1330,11 @@ packages:
   '@hapi/topo@5.1.0':
     resolution: {integrity: sha512-foQZKJig7Ob0BMAYBfcJk8d77QtOe7Wo4ox7ff1lQYoNNAb6jwcY1ncdoy2e9wQZzvNy7ODZCYJkK8kzmcAnAg==}
 
-  '@hookform/devtools@4.3.1':
-    resolution: {integrity: sha512-CrWxEoHQZaOXJZVQ8KBgOuAa8p2LI8M0DAN5GTRTmdCieRwFVjVDEmuTAVazWVRRkpEQSgSt3KYp7VmmqXdEnw==}
+  '@hookform/devtools@4.3.3':
+    resolution: {integrity: sha512-W9MipDe6P5y2XLos9coN4/fZhbt0YE2c+PaUx7tiKdc9XNQ2UOWCYTtysCnbj7fipZWEJht8J/UyQmXprWEhgw==}
     peerDependencies:
-      react: ^16.8.0 || ^17 || ^18
-      react-dom: ^16.8.0 || ^17 || ^18
+      react: ^16.8.0 || ^17 || ^18 || ^19
+      react-dom: ^16.8.0 || ^17 || ^18 || ^19
 
   '@irys/arweave@0.0.2':
     resolution: {integrity: sha512-ddE5h4qXbl0xfGlxrtBIwzflaxZUDlDs43TuT0u1OMfyobHul4AA1VEX72Rpzw2bOh4vzoytSqA1jCM7x9YtHg==}
@@ -8803,7 +8803,7 @@ snapshots:
     dependencies:
       '@hapi/hoek': 9.3.0
 
-  '@hookform/devtools@4.3.1(@types/react@18.3.12)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
+  '@hookform/devtools@4.3.3(@types/react@18.3.12)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
       '@emotion/react': 11.13.5(@types/react@18.3.12)(react@18.3.1)
       '@emotion/styled': 11.14.0(@emotion/react@11.13.5(@types/react@18.3.12)(react@18.3.1))(@types/react@18.3.12)(react@18.3.1)
