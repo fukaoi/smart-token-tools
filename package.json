@@ -46,7 +46,7 @@
   "devDependencies": {
     "@emotion/cache": "^11.13.5",
     "@emotion/react": "^11.13.5",
-    "@hookform/devtools": "^4.3.1",
+    "@hookform/devtools": "^4.3.3",
     "@remix-run/dev": "^2.13.1",
     "@types/bs58": "^4.0.4",
     "@types/react": "^18.3.12",
