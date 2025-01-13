@@ -54,7 +54,7 @@
     "autoprefixer": "^10.4.20",
     "postcss": "^8.4.49",
     "sirv-cli": "^3.0.0",
-    "typescript": "^5.7.2",
+    "typescript": "^5.7.3",
     "vite": "^5.4.11",
     "vite-plugin-cjs-interop": "^2.1.6",
     "vite-plugin-node-polyfills": "^0.22.0",
