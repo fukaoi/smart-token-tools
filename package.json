@@ -28,7 +28,7 @@
     "@mui/system": "^7.0.2",
     "@remix-run/node": "^2.16.5",
     "@remix-run/react": "^2.16.5",
-    "@remix-run/serve": "^2.16.5",
+    "@remix-run/serve": "^2.16.6",
     "@solana/wallet-adapter-base": "^0.9.26",
     "@solana/wallet-adapter-react": "^0.15.38",
     "@solana/wallet-adapter-react-ui": "^0.9.38",
