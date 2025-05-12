@@ -25,7 +25,7 @@
     "@mui/base": "5.0.0-beta.69",
     "@mui/icons-material": "^5.17.1",
     "@mui/material": "^5.17.1",
-    "@mui/system": "^7.0.2",
+    "@mui/system": "^7.1.0",
     "@remix-run/node": "^2.16.5",
     "@remix-run/react": "^2.16.5",
     "@remix-run/serve": "^2.16.5",
