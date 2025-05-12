@@ -55,7 +55,7 @@
     "postcss": "^8.5.3",
     "sirv-cli": "^3.0.1",
     "typescript": "^5.8.3",
-    "vite": "^5.4.18",
+    "vite": "^6.3.5",
     "vite-plugin-cjs-interop": "^2.2.0",
     "vite-plugin-node-polyfills": "^0.23.0",
     "vite-tsconfig-paths": "^5.1.4",
