@@ -116,8 +116,8 @@ importers:
         specifier: ^2.16.5
         version: 2.16.5(@remix-run/react@2.16.5(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.8.3))(@remix-run/serve@2.16.8(typescript@5.8.3))(@types/node@24.2.1)(babel-plugin-macros@3.1.0)(bufferutil@4.0.9)(terser@5.43.1)(typescript@5.8.3)(utf-8-validate@5.0.10)(vite@5.4.18(@types/node@24.2.1)(terser@5.43.1))
       '@types/bs58':
-        specifier: ^4.0.4
-        version: 4.0.4
+        specifier: ^5.0.0
+        version: 5.0.0
       '@types/react':
         specifier: ^18.3.20
         version: 18.3.20
@@ -3300,8 +3300,9 @@ packages:
   '@types/acorn@4.0.6':
     resolution: {integrity: sha512-veQTnWP+1D/xbxVrPC3zHnCZRjSrKfhbMUlEA43iMZLu7EsnTtkJklIuwrCPbOi8YkvDQAiW05VQQFvvz9oieQ==}
 
-  '@types/bs58@4.0.4':
-    resolution: {integrity: sha512-0IEpMFXXQi2zXaXl9GJ3sRwQo0uEkD+yFOv+FnAU5lkPtcu6h61xb7jc2CFPEZ5BUOaiP13ThuGc9HD4R8lR5g==}
+  '@types/bs58@5.0.0':
+    resolution: {integrity: sha512-cAw/jKBzo98m6Xz1X5ETqymWfIMbXbu6nK15W4LQYjeHJkVqSmM5PO8Bd9KVHQJ/F4rHcSso9LcjtgCW6TGu2w==}
+    deprecated: This is a stub types definition. bs58 provides its own type definitions, so you do not need this installed.
 
   '@types/cacheable-request@6.0.3':
     resolution: {integrity: sha512-IQ3EbTzGxIigb1I3qPZc1rWJnH0BmSKv5QYTalEwweFvyBDLSAe24zP0le/hyi7ecGfZVlIVAg4BZqb8WBwKqw==}
@@ -12680,10 +12681,9 @@ snapshots:
     dependencies:
       '@types/estree': 1.0.7
 
-  '@types/bs58@4.0.4':
+  '@types/bs58@5.0.0':
     dependencies:
-      '@types/node': 22.15.3
-      base-x: 3.0.11
+      bs58: 6.0.0
 
   '@types/cacheable-request@6.0.3':
     dependencies:
