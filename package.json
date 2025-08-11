@@ -48,7 +48,7 @@
     "@emotion/react": "^11.14.0",
     "@hookform/devtools": "^4.4.0",
     "@remix-run/dev": "^2.16.5",
-    "@types/bs58": "^4.0.4",
+    "@types/bs58": "^5.0.0",
     "@types/react": "^18.3.20",
     "@types/react-dom": "^18.3.6",
     "autoprefixer": "^10.4.21",
