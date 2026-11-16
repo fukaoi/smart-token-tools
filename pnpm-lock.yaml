@@ -21,8 +21,8 @@ importers:
         specifier: ^3.4.0
         version: 3.4.0(@metaplex-foundation/umi@0.9.2)
       '@metaplex-foundation/mpl-toolbox':
-        specifier: ^0.11.5
-        version: 0.11.5(@metaplex-foundation/umi@0.9.2)
+        specifier: ^0.12.0
+        version: 0.12.0(@metaplex-foundation/umi@0.9.2)
       '@metaplex-foundation/umi':
         specifier: ^0.9.2
         version: 0.9.2
@@ -1300,8 +1300,8 @@ packages:
     peerDependencies:
       '@metaplex-foundation/umi': '>= 0.8.2 <= 1'
 
-  '@metaplex-foundation/mpl-toolbox@0.11.5':
-    resolution: {integrity: sha512-LkE9xEg8gyQU7s8MJrwpsQvwyfh42Yild8I9za3iP8UHtvvQwZW9SXYRI6M2ZO+7MAzaytuGXn0FwoJQOcLgog==}
+  '@metaplex-foundation/mpl-toolbox@0.12.0':
+    resolution: {integrity: sha512-Ar5OITCzsIWFCTD8W+5NdkaAkHGp79Hh96FI2xMu1qqTh2JvnXc+fEFs7u8AzUJf5YurT4Yhacm+UW8R+x3ztQ==}
     peerDependencies:
       '@metaplex-foundation/umi': '>= 0.8.2 <= 1'
 
@@ -3303,11 +3303,13 @@ packages:
 
   '@trezor/connect-web@9.7.3':
     resolution: {integrity: sha512-oTI/v9sUJMvLZgLa0seSGyPaumXydRYeAT4OVTQxIaEiL1hOA0yH+UvEfT4WKwxbxOtOqWosD8chP3uuWSArcg==}
+    deprecated: 'Trezor Connect 9 is no longer supported and gets no fixes. Upgrade to Trezor Connect 10: https://connect.trezor.io/10/guides/migrating-to-connect-10/'
     peerDependencies:
       tslib: ^2.6.2
 
   '@trezor/connect@9.7.3':
     resolution: {integrity: sha512-oAOfvJHT8tPqOXTmCOhn8uTZcoqSDuWAiWXQegx7C46tq+NLg+enkYXxUYEHq/9PmfZAOrUT9VMxZDsXM2thkA==}
+    deprecated: 'Trezor Connect 9 is no longer supported and gets no fixes. Upgrade to Trezor Connect 10: https://connect.trezor.io/10/guides/migrating-to-connect-10/'
     peerDependencies:
       tslib: ^2.6.2
 
@@ -8894,7 +8896,7 @@ snapshots:
     dependencies:
       '@metaplex-foundation/umi': 0.9.2
 
-  '@metaplex-foundation/mpl-toolbox@0.11.5(@metaplex-foundation/umi@0.9.2)':
+  '@metaplex-foundation/mpl-toolbox@0.12.0(@metaplex-foundation/umi@0.9.2)':
     dependencies:
       '@metaplex-foundation/umi': 0.9.2
 
